@@ -111,7 +111,7 @@ Access mashling service (service3) behind the proxy as
 
 ## Adding a new mashling app into the mesh
 
-Mashling is a event-driven microgateway application that that can work with a variety of triggers such as REST, KAFKA and MQTT etc. For more info on mashling [see](https://github.com/TIBCOSoftware/mashling-cli)
+Mashling is an event-driven microgateway application that that can work with a variety of triggers such as REST, KAFKA and MQTT etc. For more info on mashling [see](https://github.com/TIBCOSoftware/mashling-cli)
 
 Mashling apps can consume events such as REST endpoint invocation or a message delivered on a KAFKA topic. As a result, deploying a mashling app into the L7 proxy framework such as Lyft/Envoy needs some configuration.
 
@@ -121,7 +121,7 @@ A mashling microgateway app that uses an HTTP trigger can, potentially, expose m
 When such mashling app is deployed on Envoy front-proxy service mesh, we need to consider each rest endpoint exposed by the mashling app and decide whether it needs to be exposed through the envoy front-proxy. If we decide to expose a rest endpoint through envoy front-proxy, we need to create/change the following code artifacts:
 
 1. Make a copy of the mashling-envoy.json. The new file is, e.g., acme-mashling-envoy.json
-2. Change the routes configuration in the acme-mashling-envoy.json file according to the rest endpoint(s) that your mashling microgateway exposes. (highlighted section is an example)
+2. Change the routes configuration in the acme-mashling-envoy.json file according to the rest endpoint(s) that your mashling microgateway exposes.
 
 		   "route_config": {
               "virtual_hosts": [
@@ -139,8 +139,8 @@ When such mashling app is deployed on Envoy front-proxy service mesh, we need to
               ]
             },
 
-3. Change the routes configuration in the acme-mashling-envoy.json file according to the rest endpoint(s) that your mashling microgateway exposes.
-4. Change the cluster information section in the acme-mashling-envoy.json according to the ports your service endpoints work with. (highlighted section is an example)
+
+3. Change the cluster information section in the acme-mashling-envoy.json according to the ports your service endpoints work with. (highlighted section is an example)
 	
 		"cluster_manager": {
 	    "clusters": [
@@ -157,7 +157,7 @@ When such mashling app is deployed on Envoy front-proxy service mesh, we need to
 	      }
 	    ]
 	  }
-5. Open the front-envoy.json file and add your new service routes alongside the other routes (highlighted section is an example)
+4. Open the front-envoy.json file and add your new service routes alongside the other routes (highlighted section is an example)
 		              
 		 "virtual_hosts": [
         {
@@ -183,7 +183,7 @@ When such mashling app is deployed on Envoy front-proxy service mesh, we need to
             }
           ]
         },
-6. Also add your cluster in the cluster manager section in the front-envoy.json 
+5. Also add your cluster in the cluster manager section in the front-envoy.json 
 
 			  "cluster_manager": {
 			    "clusters": [
@@ -225,7 +225,7 @@ When such mashling app is deployed on Envoy front-proxy service mesh, we need to
 			    ]
 			  }
 
-7. Add the new service entry in the docker-compose.yml. Use acme-mashling-envoy.json in mounting the file volume. Make other relevant changes fofr alias, env variable etc.
+6. Add the new service entry in the docker-compose.yml. Use acme-mashling-envoy.json in mounting the file volume. Make other relevant changes fofr alias, env variable etc.
 
 		  service3:
 		    build:
@@ -244,8 +244,8 @@ When such mashling app is deployed on Envoy front-proxy service mesh, we need to
 		    expose:
 		      - "80"
 
-8. Run **docker-compose up --build -d** to spin up new sandbox with your service running as a member of the envoymesh.
-9. That's it! 
+7. Run **docker-compose up --build -d** to spin up new sandbox with your service running as a member of the envoymesh.
+8. That's it! 
  
 
 ## License
