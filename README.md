@@ -140,26 +140,26 @@ When such mashling app is deployed on Envoy front-proxy service mesh, we need to
             },
 
 
-3. Change the cluster information section in the acme-mashling-envoy.json according to the ports your service endpoints work with. (highlighted section is an example)
+3. Change the cluster information section in the acme-mashling-envoy.json according to the ports your service endpoints work with.
 	
 		"cluster_manager": {
-	    "clusters": [
-	      {
-	        "name": "**local_service**",
-	        "connect_timeout_ms": 250,
-	        "type": "strict_dns",
-	        "lb_type": "round_robin",
-	        "hosts": [
-	          {
-	            "url": "tcp://127.0.0.1:9096"
-	          }
-	        ]
-	      }
+		    "clusters": [
+		      {
+		        "name": "**local_service**",
+		        "connect_timeout_ms": 250,
+		        "type": "strict_dns",
+		        "lb_type": "round_robin",
+		        "hosts": [
+		          {
+		            "url": "tcp://127.0.0.1:9096"
+		          }
+		        ]
+		      }
 	    ]
 	  }
-4. Open the front-envoy.json file and add your new service routes alongside the other routes (highlighted section is an example)
+4. Open the front-envoy.json file and add your new service routes alongside the other routes 
 		              
-		 "virtual_hosts": [
+		"virtual_hosts": [
         {
               "name": "backend",
               "domains": ["*"],
