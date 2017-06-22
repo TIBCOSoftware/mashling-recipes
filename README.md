@@ -121,7 +121,7 @@ A mashling microgateway app that uses an HTTP trigger can, potentially, expose m
 When such mashling app is deployed on Envoy front-proxy service mesh, we need to consider each rest endpoint exposed by the mashling app and decide whether it needs to be exposed through the envoy front-proxy. If we decide to expose a rest endpoint through envoy front-proxy, we need to create/change the following code artifacts:
 
 1. Make a copy of the mashling-envoy.json. The new file is, e.g., acme-mashling-envoy.json
-2. Change the routes configuration in the acme-mashling-envoy.json file according to the rest endpoint(s) that your mashling microgateway exposes.
+2. Change the routes configuration in the acme-mashling-envoy.json file according to the rest endpoint(s) that your mashling microgateway exposes. Relevant file section is given below
 
 		   "route_config": {
               "virtual_hosts": [
@@ -140,7 +140,7 @@ When such mashling app is deployed on Envoy front-proxy service mesh, we need to
             },
 
 
-3. Change the cluster information section in the acme-mashling-envoy.json according to the ports your service endpoints work with.
+3. Change the cluster information section in the acme-mashling-envoy.json according to the ports your service endpoints work with. Relevant file section is given below
 	
 		"cluster_manager": {
 		    "clusters": [
@@ -157,7 +157,7 @@ When such mashling app is deployed on Envoy front-proxy service mesh, we need to
 		      }
 	    ]
 	  }
-4. Open the front-envoy.json file and add your new service routes alongside the other routes 
+4. Open the front-envoy.json file and add your new service routes alongside the other routes. Relevant file section is given below 
 		              
 		"virtual_hosts": [
         {
@@ -183,7 +183,7 @@ When such mashling app is deployed on Envoy front-proxy service mesh, we need to
             }
           ]
         },
-5. Also add your cluster in the cluster manager section in the front-envoy.json 
+5. Also add your cluster in the cluster manager section in the front-envoy.json. Relevant file section is given below
 
 			  "cluster_manager": {
 			    "clusters": [
@@ -225,7 +225,7 @@ When such mashling app is deployed on Envoy front-proxy service mesh, we need to
 			    ]
 			  }
 
-6. Add the new service entry in the docker-compose.yml. Use acme-mashling-envoy.json in mounting the file volume. Make other relevant changes fofr alias, env variable etc.
+6. Add the new service entry in the docker-compose.yml. Use acme-mashling-envoy.json in mounting the file volume. Make other relevant changes fofr alias, env variable etc. Relevant file section is given below
 
 		  service3:
 		    build:
