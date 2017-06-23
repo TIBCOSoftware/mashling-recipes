@@ -130,7 +130,7 @@
 								"attributes": [
 									{
 										"name": "code",
-										"value": 0,
+										"value": 200,
 										"required": true,
 										"type": "integer"
 									},
