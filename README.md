@@ -20,18 +20,31 @@ Create a docker-machine
 	docker-machine create --driver virtualbox default
 	eval $(docker-machine env default)
 
-### Create a sample mashling app and deploy it in Envoy front-proxy
+### Create a sample Kafka mashling app and deploy it in Envoy front-proxy
 #### Command
 	$jdoe-machine:front-proxy jdoe$ pwd
 	/Users/jdoe/front-proxy
 	
-	$jdoe-machine:front-proxy jdoe$ ./createMashlingOnEnvoy.sh 
+	$jdoe-machine:front-proxy jdoe$ ./createKafkaMashlingOnEnvoy.sh 
 	
-This will create a sample mashling app named 'sample-mashling-app' under /Users/jdoe/front-proxy/gateway folder.
+This will create a sample mashling app named 'kafka-mashling-app' under /Users/jdoe/front-proxy/gateway folder.
  
-This will also create an envoy front-proxy setup with the 'sample-mashling-app' as a member of the envoy mesh.
+This will also create an envoy front-proxy setup with the 'kafka-mashling-app' as a member of the envoy mesh.
 
-The 'sample-mashling-app' app will expose the endpoint (/pets/1)
+The 'kafka-mashling-app' app will consume the Kakfa topic 'users'.
+
+### Create a sample HTTP mashling app and deploy it in Envoy front-proxy
+#### Command
+	$jdoe-machine:front-proxy jdoe$ pwd
+	/Users/jdoe/front-proxy
+	
+	$jdoe-machine:front-proxy jdoe$ ./createHttpMashlingOnEnvoy.sh 
+	
+This will create a sample mashling app named 'http-mashling-app' under /Users/jdoe/front-proxy/gateway folder.
+ 
+This will also create an envoy front-proxy setup with the 'http-mashling-app' as a member of the envoy mesh.
+
+The 'http-mashling-app' app will expose the endpoint (/pets/1)
 
 Access the mashling service (service3) behind the proxy as
 > curl -v $(docker-machine ip default):8000/pets/1
@@ -41,32 +54,33 @@ Access the mashling service (service3) behind the proxy as
 	$jdoe-machine:front-proxy jdoe$ pwd
 	/Users/jdoe/front-proxy
 	
-	$jdoe-machine:front-proxy jdoe$ ./createMashlingOnEnvoy.sh -n petstoreapp -f ~/Work/mashling/request-response-mashling.json
+	$jdoe-machine:front-proxy jdoe$ ./createHttpMashlingOnEnvoy.sh -n petstoreapp -f ~/Work/mashling/request-response-mashling.json
 
-This will create a sample mashling app named 'sample-mashling-app' under /Users/jdoe/front-proxy/gateway folder.
+This will create a sample mashling app named 'petstoreapp' under /Users/jdoe/front-proxy/gateway folder.
  
-This will also create an envoy front-proxy setup with the 'sample-mashling-app' as a member of the envoy mesh.
-
-The 'sample-mashling-app' app will expose the endpoint (/pets/1)
-Access mashling service (service3) behind the proxy as
-> curl -v $(docker-machine ip default):8000/pets/1
-
+This will also create an envoy front-proxy setup with the 'petstoreapp' as a member of the envoy mesh.
 
 ### Deploy an existing mashling binary in Envoy front-proxy
 #### Command
 	$jdoe-machine:front-proxy jdoe$ pwd
 	/Users/jdoe/front-proxy
-	
-	$jdoe-machine:front-proxy jdoe$ ./setupEnvoyFrontProxy.sh
+
+Example 1 using HTTP compose
+
+	$jdoe-machine:front-proxy jdoe$ echo "ROOT_DIR=$(pwd)" > .env && env $(cat .env | xargs) ./setupEnvoyFrontProxy.sh -f http/docker-compose-http.yml
+
+Example 2 using Kafka compose
+
+	$jdoe-machine:front-proxy jdoe$ echo "ROOT_DIR=$(pwd)" > .env && env $(cat .env | xargs) ./setupEnvoyFrontProxy.sh -f kafka/docker-compose-kafka.yml -n kafka-mashling-app -p ./gateway/sample/kafka
 
 This will prompt for the following user inputs:
 
-1. Name of the mashling app (default is sample-mashling-app)
-2. Path of the mashling app folder (default is ./gateway/sample)
+1. Name of the mashling app (default is http-mashling-app)
+2. Path of the mashling app folder (default is ./gateway/sample/http)
 
-Please note that the default mashling app is available under the ./gateway/sample folder in the source.
+Please note that the default http mashling app is available under the ./gateway/sample/http folder in the source.
 
-The 'sample-mashling-app' app will expose the endpoint (/pets/1)
+The 'http-mashling-app' app will expose the endpoint (/pets/1)
 Access mashling service (service3) behind the proxy as
 > curl -v $(docker-machine ip default):8000/pets/1
 
@@ -85,22 +99,29 @@ The front-envoy.json file should be changed accordingly to keep APIs consistentl
 
 You can also get the envoy mesh up and running with docker-compose directly.
 
+
 > docker-machine create --driver virtualbox default
 
 > eval $(docker-machine env default) 
 
+For HTTP sample,
 > echo "MASHLING_NAME=sample" > .env
 > 
-> env $(cat .env | xargs) docker-compose up --build -d
+> echo "ROOT_DIR=$(pwd)" >> .env && env $(cat .env | xargs) docker-compose -f docker-compose.yml -f kafka/docker-compose-http.yml up --build -d
 
-> docker-compose ps
+or Kafka sample,
+> echo "MASHLING_NAME=kafka-users-consumer" > .env
+> 
+> echo "ROOT_DIR=$(pwd)" >> .env && env $(cat .env | xargs) docker-compose -f docker-compose.yml -f kafka/docker-compose-kafka.yml up --build -d
+
+Check the processes
+> docker-compose -f docker-compose.yml -f kafka/docker-compose-http.yml ps
 
 > 		Name                		State     Ports     
 >---                
 >		frontproxy_front-envoy_1     Up       0.0.0.0:8000->80/tcp, 0.0.0.0:8001->8001/tcp 
 >		frontproxy_service1_1        Up       80/tcp                                       
 >		frontproxy_service2_1        Up       80/tcp                                       
->		frontproxy_service3_1        Up       80/tcp       
 
 Access service1 as
 > curl -v $(docker-machine ip default):8000/service/1
@@ -120,7 +141,7 @@ A mashling microgateway app that uses an HTTP trigger can, potentially, expose m
 
 When such mashling app is deployed on Envoy front-proxy service mesh, we need to consider each rest endpoint exposed by the mashling app and decide whether it needs to be exposed through the envoy front-proxy. If we decide to expose a rest endpoint through envoy front-proxy, we need to create/change the following code artifacts:
 
-1. Make a copy of the mashling-envoy.json. The new file is, e.g., acme-mashling-envoy.json
+1. Make a copy of the http-mashling-envoy.json. The new file is, e.g., acme-mashling-envoy.json
 2. Change the routes configuration in the acme-mashling-envoy.json file according to the rest endpoint(s) that your mashling microgateway exposes. Relevant file section is given below
 
 		   "route_config": {
@@ -225,7 +246,7 @@ When such mashling app is deployed on Envoy front-proxy service mesh, we need to
 			    ]
 			  }
 
-6. Add the new service entry in the docker-compose.yml. Use acme-mashling-envoy.json in mounting the file volume. Make other relevant changes fofr alias, env variable etc. Relevant file section is given below
+6. Add the new service entry in the docker-compose-http.yml. Use acme-mashling-envoy.json in mounting the file volume. Make other relevant changes fofr alias, env variable etc. Relevant file section is given below
 
 		  service3:
 		    build:

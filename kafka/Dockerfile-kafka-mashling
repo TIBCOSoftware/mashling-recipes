@@ -1,0 +1,20 @@
+FROM lyft/envoy:latest
+
+RUN apt-get update && apt-get -q install -y \
+    curl
+
+ARG MASHLING_NAME
+ENV MASHLING_NAME=$MASHLING_NAME
+
+RUN echo 'name=$MASHLING_NAME'
+
+RUN mkdir /apps && mkdir /apps/$MASHLING_NAME && ls /apps
+
+ADD ${ROOT_DIR}/gateway/$MASHLING_NAME/bin/$MASHLING_NAME* /apps/$MASHLING_NAME/$MASHLING_NAME
+ADD ${ROOT_DIR}/gateway/$MASHLING_NAME/bin/flogo.json /apps/$MASHLING_NAME/flogo.json
+
+RUN ls -la /apps/$MASHLING_NAME
+
+ADD ${ROOT_DIR}/kafka/start_kafka_mashling_service.sh /usr/local/bin/start_mashling_service.sh
+RUN chmod u+x /usr/local/bin/start_mashling_service.sh
+ENTRYPOINT /usr/local/bin/start_mashling_service.sh

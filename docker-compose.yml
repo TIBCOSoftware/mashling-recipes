@@ -31,37 +31,5 @@ services:
     expose:
       - "80"
 
-  service2:
-    build:
-      context: .
-      dockerfile: Dockerfile-service
-    volumes:
-      - ./service-envoy.json:/etc/service-envoy.json
-    networks:
-      envoymesh:
-        aliases:
-          - service2
-    environment:
-      - SERVICE_NAME=2
-    expose:
-      - "80"
-
-  service3:
-    build:
-      context: .
-      args:
-        - MASHLING_NAME
-      dockerfile: Dockerfile-mashling
-    volumes:
-      - ./mashling-envoy.json:/etc/service-envoy.json
-    networks:
-      envoymesh:
-        aliases:
-          - service3
-    environment:
-      - SERVICE_NAME=3
-    expose:
-      - "80"
-
 networks:
   envoymesh: {}

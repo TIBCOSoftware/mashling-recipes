@@ -1,0 +1,21 @@
+version: '2'
+services:
+  service2:
+    build:
+      context: .
+      args:
+        - MASHLING_NAME
+      dockerfile: ${ROOT_DIR}/http/Dockerfile-http-mashling
+    volumes:
+      - ${ROOT_DIR}/http/http-mashling-envoy.json:/etc/service-envoy.json
+    networks:
+      envoymesh:
+        aliases:
+          - service2
+    environment:
+      - SERVICE_NAME=2    
+    expose:
+      - "80"
+
+networks:
+  envoymesh: {}
