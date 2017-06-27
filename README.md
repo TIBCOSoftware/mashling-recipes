@@ -21,6 +21,8 @@ Create a docker-machine
 	eval $(docker-machine env default)
 
 ### Create a sample Kafka mashling app and deploy it in Envoy front-proxy
+Please change the **kafka/mashling-kafka-definition.json** file for Kafka cluster details appropriately before running the command to create Kafka based mashling app.
+
 #### Command
 	$jdoe-machine:front-proxy jdoe$ pwd
 	/Users/jdoe/front-proxy
