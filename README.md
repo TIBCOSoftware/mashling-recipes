@@ -65,13 +65,9 @@ This will also create an envoy front-proxy setup with the 'petstoreapp' as a mem
 	$jdoe-machine:front-proxy jdoe$ pwd
 	/Users/jdoe/front-proxy
 
-Example 1 using HTTP compose
+Example 1) using HTTP compose
 
 	$jdoe-machine:front-proxy jdoe$ echo "ROOT_DIR=$(pwd)" > .env && env $(cat .env | xargs) ./setupEnvoyFrontProxy.sh -f http/docker-compose-http.yml
-
-Example 2 using Kafka compose
-
-	$jdoe-machine:front-proxy jdoe$ echo "ROOT_DIR=$(pwd)" > .env && env $(cat .env | xargs) ./setupEnvoyFrontProxy.sh -f kafka/docker-compose-kafka.yml -n kafka-mashling-app -p ./gateway/sample/kafka
 
 This will prompt for the following user inputs:
 
@@ -83,6 +79,10 @@ Please note that the default http mashling app is available under the ./gateway/
 The 'http-mashling-app' app will expose the endpoint (/pets/1)
 Access mashling service (service3) behind the proxy as
 > curl -v $(docker-machine ip default):8000/pets/1
+
+Example 2) using Kafka compose
+
+	$jdoe-machine:front-proxy jdoe$ echo "ROOT_DIR=$(pwd)" > .env && env $(cat .env | xargs) ./setupEnvoyFrontProxy.sh -f kafka/docker-compose-kafka.yml -n kafka-mashling-app -p ./gateway/sample/kafka
 
 
 If the user provides name and path inputs then the script will check if a binary with the given name exists in the <path>/bin folder. If one does not exist, the script will terminate.

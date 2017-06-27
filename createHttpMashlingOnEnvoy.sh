@@ -27,7 +27,7 @@ then
     use_mashling_json_input=false
     if [ "$MASHLING_NAME" == "" ]
     then
-        printf "Using the default app name '$DEFAULT_MASHLING_APP_NAME'"
+        printf "Using the default app name '$DEFAULT_MASHLING_APP_NAME'\n"
         MASHLING_NAME=$DEFAULT_MASHLING_APP_NAME
     fi    
 fi
@@ -46,7 +46,7 @@ fi
 export MASHLING=$MASHLING_NAME
 
 popd > /dev/null
-printf "\nMashling $MASHLING created successfully under $ROOT_DIR/gateway folder\n"
+printf "Mashling $MASHLING created successfully under $ROOT_DIR/gateway folder\n"
 
 chmod u+x setupEnvoyFrontProxy.sh
 
