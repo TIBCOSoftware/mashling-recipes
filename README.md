@@ -36,7 +36,10 @@ Please change the **kafka/mashling-kafka-definition.json** file for Kafka cluste
 #### Command
 	$jdoe-machine:front-proxy jdoe$ pwd
 	/Users/jdoe/front-proxy
-	
+
+	Set the Kafka broker URL according to your setup in the following format <host>:<port>. The following example sets the value to 10.98.200.188:9092.
+
+	$jdoe-machine:front-proxy jdoe$ export KAFKA_BROKER_URL=10.98.200.188:9092
 	$jdoe-machine:front-proxy jdoe$ ./createKafkaMashlingOnEnvoy.sh 
 	
 This will create a sample mashling app named 'kafka-mashling-app' under /Users/jdoe/front-proxy/gateway folder.
@@ -44,6 +47,20 @@ This will create a sample mashling app named 'kafka-mashling-app' under /Users/j
 This will also create an envoy front-proxy setup with the 'kafka-mashling-app' as a member of the envoy mesh.
 
 The 'kafka-mashling-app' app will consume the Kakfa topic 'users'.
+
+You can check the message ingress into mashling consumer by doing the following:
+
+1. Find the service2 container
+
+>docker ps | grep service2
+
+|CONTAINER ID| IMAGE | COMMAND | CREATED | STATUS | PORTS | NAMES |
+|---|---|---|---|---|---|---|
+|__54c3d57b5ce1__| mashlingenvoyfrontproxy_service2|"/bin/sh -c /usr/l..."|2 minutes ago|Up 25 seconds|       80/tcp|mashlingenvoyfrontproxy_service2_1|
+
+2. Tail the logs for the selected container
+>docker logs -f __54c3d57b5ce1__
+
 
 ### Create a sample HTTP mashling app and deploy it in Envoy front-proxy
 #### Command

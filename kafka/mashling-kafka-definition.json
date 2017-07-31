@@ -9,7 +9,7 @@
 				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
 				"description": "Configuration for kafka cluster",
 				"settings": {
-					"BrokerUrl": "10.98.200.118:9092"
+					"BrokerUrl": "${ENV.KAFKA_BROKER_URL}"
 				}
 			}
 		],
