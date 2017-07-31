@@ -3,14 +3,14 @@
 > **Mashling** as a member of the **lyft/envoy** front-proxy mesh
 > 
 > Project Mashling includes recipes that allow Mashling to be deployed as a member of the Lyft Envoy front-proxy mesh.
-
+>
 > These recipes will bring all the benefits Lyft Envoy will bring to your services around resiliency and observability. 
-
+>
 >In addition it complements the lyft/envoy based mesh in the following areas :
-
+>
 >- Event-enabling the mesh
-- API-fying the mesh
-- Providing application-level debug visibility and monitoring
+>- API-fying the mesh
+>- Providing application-level debug visibility and monitoring
 
 ## Installation
 ### Prerequisites
