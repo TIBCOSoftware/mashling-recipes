@@ -33,11 +33,23 @@ Create a docker-machine
 ### Create a sample Kafka mashling app and deploy it in Envoy front-proxy
 Please change the **kafka/mashling-kafka-definition.json** file for Kafka cluster details appropriately before running the command to create Kafka based mashling app.
 
+Set the Kafka broker URL according to your setup in the format \<host_ip>:\<port>
+	The following example sets the value to 10.98.200.188:9092.
+	
+	Note:
+	
+	The envoy service mesh containers will run inside a docker-machine, 
+	whereas the Kafka broker will be running outside the docker-machine
+	on the host machine. 
+	
+	A mashling service container will, therefore not be able to connect to 
+	a Kafka broker using 'localhost:9092' as the broker url. The host IP will 
+	enable the connection from the mashling consumer,running inside the service 
+	mesh, to the Kafka broker.
+
 #### Command
 	$jdoe-machine:front-proxy jdoe$ pwd
 	/Users/jdoe/front-proxy
-
-	Set the Kafka broker URL according to your setup in the following format <host>:<port>. The following example sets the value to 10.98.200.188:9092.
 
 	$jdoe-machine:front-proxy jdoe$ export KAFKA_BROKER_URL=10.98.200.188:9092
 	$jdoe-machine:front-proxy jdoe$ ./createKafkaMashlingOnEnvoy.sh 
