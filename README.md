@@ -10,7 +10,7 @@
 >- API-fying the mesh
 >- Providing application-level debug visibility and monitoring
 
-![Screenshot](mashling-envoy.png)
+![Screenshot](mashling_envoy.png)
 
 
 ## Installation
