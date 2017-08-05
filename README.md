@@ -12,6 +12,8 @@
 >- API-fying the mesh
 >- Providing application-level debug visibility and monitoring
 
+![Screenshot](mashling-envoy.jpg)
+
 ## Installation
 ### Prerequisites
 * Docker tools [docker, compose, machine](https://www.docker.com/products/docker-toolbox) 
