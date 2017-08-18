@@ -37,10 +37,10 @@ pushd gateway > /dev/null
 if $use_mashling_json_input
 then
     printf "Creating Http Mashling $MASHLING_NAME from definition under $ROOT_DIR/gateway folder\n"
-    $GOPATH/bin/mashling create -f $MASHLING_JSON_PATH $MASHLING_NAME
+    export FLOGO_EMBED=false && $GOPATH/bin/mashling create -f $MASHLING_JSON_PATH $MASHLING_NAME
 else
     printf "Creating Http Mashling $MASHLING_NAME under $ROOT_DIR/gateway folder\n"
-    $GOPATH/bin/mashling create $MASHLING_NAME
+    export FLOGO_EMBED=false && $GOPATH/bin/mashling create $MASHLING_NAME
 fi    
 
 export MASHLING=$MASHLING_NAME
