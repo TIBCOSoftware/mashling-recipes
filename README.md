@@ -30,6 +30,7 @@ Create a docker-machine
 
 	docker-machine create --driver virtualbox default
 	eval $(docker-machine env default)
+Note: If you are trying in linux/ubuntu without VM. Use local machine ip instead of $(docker-machine ip default). We have verified on linux/ubuntu.
 
 ### Create a sample Kafka mashling app and deploy it in Envoy front-proxy
 Please change the **kafka/mashling-kafka-definition.json** file for Kafka cluster details appropriately before running the command to create Kafka based mashling app.
@@ -74,6 +75,11 @@ You can check the message ingress into mashling consumer by doing the following:
 2. Tail the logs for the selected container
 >docker logs -f __54c3d57b5ce1__
 
+   Note: In linux/ubuntu, if you encounter server misbehaving error. Stop the kafka server and zookeeper server. Open file 
+   KAFKA-HOME/config/server.properties.
+   Check for listeners section and uncomment the line. Edit the line with system ip 
+   listeners=PLAINTEXT://System-IP:9092.
+   Start zookeeper and kafka server.
 
 ### Create a sample HTTP mashling app and deploy it in Envoy front-proxy
 #### Command
@@ -149,7 +155,7 @@ You can also get the envoy mesh up and running with docker-compose directly.
 For HTTP sample,
 > echo "MASHLING_NAME=sample" > .env
 > 
-> echo "ROOT_DIR=$(pwd)" >> .env && env $(cat .env | xargs) docker-compose -f docker-compose.yml -f kafka/docker-compose-http.yml up --build -d
+> echo "ROOT_DIR=$(pwd)" >> .env && env $(cat .env | xargs) docker-compose -f docker-compose.yml -f http/docker-compose-http.yml up --build -d
 
 or Kafka sample,
 > echo "MASHLING_NAME=kafka-users-consumer" > .env
