@@ -25,12 +25,14 @@
 
 	git clone https://github.com/TIBCOSoftware/mashling-envoy-front-proxy front-proxy
 	cd front-proxy
-	
+
+Note: If you are trying in linux/ubuntu without VM. Use local machine ip instead of $(docker-machine ip default) in subsequent steps. We have verified on linux/ubuntu.
+
 Create a docker-machine
 
 	docker-machine create --driver virtualbox default
 	eval $(docker-machine env default)
-Note: If you are trying in linux/ubuntu without VM. Use local machine ip instead of $(docker-machine ip default). We have verified on linux/ubuntu.
+
 
 ### Create a sample Kafka mashling app and deploy it in Envoy front-proxy
 Please change the **kafka/mashling-kafka-definition.json** file for Kafka cluster details appropriately before running the command to create Kafka based mashling app.
