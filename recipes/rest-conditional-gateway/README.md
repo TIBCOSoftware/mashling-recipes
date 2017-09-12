@@ -1,0 +1,1 @@
+RestTrigger to RestInvoker with conditional dispatch recipe

@@ -2,23 +2,15 @@
 	"recipe_repos": [
 		{
             "provider": "TIBCOSoftware",
-            "type": "gateway",
 			"description": "Mashling gateway recipes from TIBCOSoftware",
             "url": "recipes",
             "publish": "KafkaTrigger-To-KafkaPublsher, KafkaTrigger-To-RestInvoker, RestTrigger-To-KafkaPublisher"
         },
         {
             "provider": "jpark",
-            "type": "gateway",
             "description": "Mashling gateway recipes from jpark",
             "url": "https://github.com/jpark800/my_mashling_recipes",
             "publish": "rest-conditional-gateway"
-        },
-        {
-            "provider": "TIBCOSoftware",
-            "type": "composite",
-			"description": "Envoy and mashling gateway integration",
-			"url": "envoy"
-		}
+        }
 	]
 }

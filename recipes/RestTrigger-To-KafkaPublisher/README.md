@@ -1,0 +1,1 @@
+RestTrigger to KafkaPublisher recipe

@@ -1,0 +1,1 @@
+KafkaTrigger to RestInvoker recipe
