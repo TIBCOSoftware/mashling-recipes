@@ -3,9 +3,9 @@ Sample REST conditional gateway with TLS (Transport Layer Security) is enabled a
 
 ## Recipe usage instructions
 
-Recipe references few environment variables which need to be set before creating recipe binary. They are:<br>
+Recipe references below mentioned environment variables which need to be set before creating recipe binary.<br>
 SERVER_CERT - Server certificate file <br>
-SERVER_KEY - Sever private key <br>
+SERVER_KEY - Sever private key file<br>
 TRUST_STORE - Directory containing trusted CAs <br>
 
 Now create recipe using mashling cli
@@ -17,7 +17,7 @@ export TRUST_STORE=/etc/ssl/truststore
 mashling create -f secure-rest-conditional-gateway.json secureGatewayApp
 ```
 
-### openssl can be used if you would like to try with selfsigned certificates
+#### openssl can be used if you would like to try with selfsigned certificates
 
 ```bash
 openssl req \
@@ -26,9 +26,15 @@ openssl req \
 ```
 
 Navigate to gateway bin folder and run the binary. Now the gateway should be running & listening on 3 ports.<br>
-9096 -> No security enabled
-9097 -> TLS is enabled
-9098 -> TLS with client auth is enabled
+9096 -> No security enabled <br>
+9097 -> TLS is enabled <br>
+9098 -> TLS with client auth is enabled <br>
+
+Use any REST client OR curl to verify the gateway endpoint.
+
+```curl
+curl http://localhost:9096/pets/25
+```
 
 ## If you would like to verify client authentication, use 3rd party go based client - go-mutual-tls
 
