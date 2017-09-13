@@ -4,7 +4,7 @@
             "provider": "TIBCOSoftware",
 			"description": "Mashling gateway recipes from TIBCOSoftware",
             "url": "recipes",
-            "publish": "KafkaTrigger-To-KafkaPublsher, KafkaTrigger-To-RestInvoker, RestTrigger-To-KafkaPublisher"
+            "publish": "KafkaTrigger-To-KafkaPublisher, KafkaTrigger-To-RestInvoker, RestTrigger-To-KafkaPublisher"
         },
         {
             "provider": "jpark",
