@@ -5,14 +5,14 @@ before_install:
   - "echo -e \"machine github.com\n  login ${GITHUB_USER_TOKEN}\" >> ~/.netrc" 
 os: 
   - linux
-#  - osx
-#  - windows
+  - osx
+  - windows
   
 install:
   - go get github.com/constabulary/gb/...
   - go get -u github.com/tools/godep/...
   - cd $GOPATH/src/github.com/TIBCOSoftware
-  - git clone -b testing-godep https://github.com/TIBCOSoftware/mashling.git mashling
+  - git clone https://github.com/TIBCOSoftware/mashling.git mashling
   - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
   - cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling
   - cd mashling
@@ -53,3 +53,4 @@ notifications:
       - lmekala@tibco.com
       - nthota@tibco.com
       - ykalidin@tibco.com
+      - jpark@tibco.com
