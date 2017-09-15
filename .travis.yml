@@ -10,10 +10,17 @@ os:
   
 install:
   - go get github.com/constabulary/gb/...
-  - go get -u github.com/constabulary/gb/...
-  - go get github.com/TIBCOSoftware/mashling/...
-  - cd ..
-  - git clone https://github.com/TIBCOSoftware/mashling-cicd.git
+  - go get -u github.com/tools/godep/...
+  - echo pwd
+  - cd $GOPATH/src/github.com/TIBCOSoftware
+  - git clone https://github.com/TIBCOSoftware/mashling.git mashling
+  - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
+  - cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling
+  - cd mashling
+  - godep restore
+  - go install ./...
+  - mashling help
+  - cd $GOPATH/src/github.com/TIBCOSoftware
   - pushd mashling-cicd/sample-recipes
   - rm -rf builds
   - mkdir -p master-builds/latest builds/latest
