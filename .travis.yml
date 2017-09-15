@@ -11,9 +11,8 @@ os:
 install:
   - go get github.com/constabulary/gb/...
   - go get -u github.com/tools/godep/...
-  - echo pwd
   - cd $GOPATH/src/github.com/TIBCOSoftware
-  - git clone https://github.com/TIBCOSoftware/mashling.git mashling
+  - git clone -b testing-godep https://github.com/TIBCOSoftware/mashling.git mashling
   - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
   - cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling
   - cd mashling
