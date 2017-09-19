@@ -27,4 +27,4 @@ mashling create -f rest-conditional-gateway.json rest-conditional-gateway
 	}]
 }
 
-5)Use "GET" operation and hit the url "http://localhost:9096/pets/16" to check the above added pet details.
+5)Use "GET" operation and hit the url "http://localhost:9096/pets/16" to check the above added pet details. 
