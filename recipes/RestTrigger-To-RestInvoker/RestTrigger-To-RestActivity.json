@@ -1,0 +1,56 @@
+{
+	"mashling_schema": "0.2",
+	"gateway": {
+		"name": "3recipe",
+		"version": "1.0.0",
+		"display_image": "displayImage.svg",
+		"display_name":"restToRest",
+		"description": "This is the first microgateway app",
+		"configurations": [
+			{
+				"name": "kafkaConfig",
+				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
+				"description": "Configuration for kafka cluster",
+				"settings": {
+					"BrokerUrl": "localhost:9092"
+				}
+			}
+		],
+		"triggers": [
+           
+			{
+				"name": "rest_trigger",
+				"description": "The trigger on 'pets' endpoint",
+				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
+				"settings": {
+					"port": "9096",
+					"method": "PUT",
+					"path": "/petEvent",
+					"autoIdReply": "true",
+						"useReplyHandler": "true"
+				}
+            }
+		],
+		"event_handlers": [
+            
+			{
+				"name": "rest_handler",
+				"description": "Handle the user access",
+				"reference": "github.com/ykalidin/sampleRepo/petHandler.json",
+				"params": {
+				}
+			}
+		],
+		"event_links": [
+            
+			{
+				"triggers": ["rest_trigger"],
+				"dispatches": [
+					{
+						"handler": "rest_handler"
+					}
+				]
+			}
+		]
+	}
+}
