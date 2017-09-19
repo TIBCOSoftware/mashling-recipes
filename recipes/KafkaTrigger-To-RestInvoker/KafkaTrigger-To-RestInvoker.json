@@ -3,6 +3,8 @@
 	"gateway": {
 		"name": "3recipe",
 		"version": "1.0.0",
+		"display_name":"KafkaTrigger to RestInvoker",
+		"display_image":"displayImage.svg",
 		"description": "This is the first microgateway app",
 		"configurations": [
 			{

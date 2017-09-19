@@ -7,7 +7,12 @@ os:
   - linux
   - osx
   - windows
-  
+
+branches:
+  only:
+    - master
+    - /^v\d+\.\d+\.\d+(\.\d+)?(-\S*)?$/
+
 install:
   - go get github.com/constabulary/gb/...
   - go get -u github.com/tools/godep/...
@@ -33,14 +38,14 @@ after_script:
   - "[ -f \"${HOME}/.netrc\" ] && rm -f ${HOME}/.netrc"
 
 deploy:
-  on:
-    branch: master
   provider: s3
   access_key_id: $SITE_KEY
   secret_access_key: $SITE_KEY_SECRET
   bucket: $AWS_BUCKET
   region: $AWS_REGION
   skip_cleanup: true
+  on:
+    all_branches: true
   local_dir: $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/sample-recipes/master-builds
   upload-dir: master-builds
 

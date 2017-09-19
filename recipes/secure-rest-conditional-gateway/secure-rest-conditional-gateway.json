@@ -3,6 +3,8 @@
   "gateway": {
     "name": "secureGatewayApp",
     "version": "1.0.0",
+    "display_name":"Secure Rest Conditional Gateway",
+    "display_image":"displayImage.svg",
     "description": "This is the rest based microgateway app with TLS enabled",
     "configurations": [
       {
