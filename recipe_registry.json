@@ -4,13 +4,13 @@
             "provider": "TIBCOSoftware",
 			"description": "Mashling gateway recipes from TIBCOSoftware",
             "url": "recipes",
-            "publish": "KafkaTrigger-To-KafkaPublisher, KafkaTrigger-To-RestInvoker, RestTrigger-To-KafkaPublisher"
+            "publish": "KafkaTrigger-To-KafkaPublisher, KafkaTrigger-To-RestInvoker"
         },
         {
             "provider": "jpark",
             "description": "Mashling gateway recipes from jpark",
-            "url": "https://github.com/jpark800/my_mashling_recipes",
-            "publish": "rest-conditional-gateway"
+            "url": "recipes",
+            "publish": "RestTrigger-To-KafkaPublisher"
         }
 	]
 }
