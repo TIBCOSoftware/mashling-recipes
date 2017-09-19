@@ -15,7 +15,7 @@
         {
             "provider": "Mashling QA",
 			"description": "Mashling gateway recipes from TIBCOSoftware",
-            "url": "recipes1",
+            "url": "QARecipes",
             "publish": "RestTrigger-To-RestInvoker"
         },
         {
