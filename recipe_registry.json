@@ -11,6 +11,12 @@
             "description": "Mashling gateway recipes from jpark",
             "url": "https://github.com/jpark800/my_mashling_recipes",
             "publish": "rest-conditional-gateway"
-        }
+        },
+        {
+            "provider": "Mashling QA",
+			"description": "Mashling gateway recipes from TIBCOSoftware",
+            "url": "recipes",
+            "publish": "RestTrigger-To-RestInvoker"
+        } 
 	]
 }
