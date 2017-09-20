@@ -3,6 +3,7 @@ language :
   - go  
 before_install:
   - "echo -e \"machine github.com\n  login ${GITHUB_USER_TOKEN}\" >> ~/.netrc" 
+
 os: 
   - linux
   - osx
@@ -24,12 +25,12 @@ install:
   - godep restore
   - go install ./...
   - mashling help
+  
+script:
   - cd $GOPATH/src/github.com/TIBCOSoftware
   - pushd mashling-cicd/sample-recipes
   - rm -rf builds
   - mkdir -p master-builds/latest builds/latest
-  
-script:
   - chmod ugo+x ./build-recipes.sh  ./build-registry-recipes.sh
   - ./build-registry-recipes.sh
   - popd
