@@ -4,7 +4,7 @@ This readme contains instructions for installing an example mashling into Istio.
 The mashling has distributed tracing enabled and uses the Istio distributed tracing service.
 
 ## Installation
-* Docker tools [docker, compose, machine](https://www.docker.com/products/docker-toolbox)
+* Docker [docker](https://www.docker.com)
 * Mashling [CLI](https://github.com/TIBCOSoftware/mashling-cli)
 * Minikube [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
 
@@ -41,21 +41,26 @@ Continue with the Istio installation.
 
 ### Setup distributed tracing for Istio
 
-Follow these [instructions](https://istio.io/docs/tasks/distributed-tracing.htmlhttps://istio.io/docs/tasks/distributed-tracing.html) to setup Zipkin distributed tracing.
+Follow these [instructions](https://istio.io/docs/tasks/distributed-tracing.html) to setup Zipkin distributed tracing.
 
 ### Create a mashling
 
 ```
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/istio/mashling-istio-tracing
-mashling create mashling -f mashling.json
+mashling create -f mashling.json mashling
 ```
 
 ### Build a docker image
 
 ```
 cp Dockerfile mashling/bin
-cd mashling/bin
+cd mashling
+mashling build
+rm bin/mashling
+GOOS=linux gb build
+cd bin
+mv mashling-linux-amd64 mashling
 docker login
 docker build -t <YOUR DOCKER USER>/mashling .
 docker push <YOUR DOCKER USER>/mashling

@@ -1,6 +1,6 @@
 {
 	"gateway": {
-		"name": "dockerApp",
+		"name": "mashling",
 		"version": "1.0.0",
 		"description": "This is the first microgateway app",
 		"configurations": [
