@@ -16,7 +16,7 @@ A recipe should contained in its own folder under mashling-recipes/recipes folde
 		"version": "1.0.0",
 		"display_name":"KafkaTrigger to KafkaPublisher",
 		"display_image":"displayImage.svg",
-    ...
+		"..."
   }
 }
 ```
