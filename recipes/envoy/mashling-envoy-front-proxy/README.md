@@ -4,7 +4,7 @@
 > 
 > Project Mashling includes recipes that allow Mashling to be deployed as a member of the Lyft Envoy front-proxy mesh.
 > These recipes will bring all the benefits Lyft Envoy will bring to your services around resiliency and observability. 
->In addition it complements the lyft/envoy based mesh in the following areas :
+>In addition, it complements the lyft/envoy-based mesh in the following areas:
 >
 >- Event-enabling the mesh
 >- API-fying the mesh
@@ -26,7 +26,7 @@
 	git clone https://github.com/TIBCOSoftware/mashling-recipes
 	cd mashling-recipes\recipes\envoy\mashling-envoy-front-proxy
 
-Note: If you are trying in linux/ubuntu without VM. Use local machine ip instead of $(docker-machine ip default) in subsequent steps. We have verified on linux/ubuntu.
+Note: If you are trying in linux/ubuntu without VM, use local machine ip instead of $(docker-machine ip default) in subsequent steps. We have verified on linux/ubuntu.
 
 Create a docker-machine
 
@@ -35,7 +35,7 @@ Create a docker-machine
 
 
 ### Create a sample Kafka mashling app and deploy it in Envoy front-proxy
-Please change the **kafka/mashling-kafka-definition.json** file for Kafka cluster details appropriately before running the command to create Kafka based mashling app.
+Please change the **kafka/mashling-kafka-definition.json** file for Kafka cluster details appropriately before running the command to create Kafka-based mashling app.
 
 Set the Kafka broker URL according to your setup in the format \<host_ip>:\<port>
 	The following example sets the value to 10.98.200.188:9092.
@@ -46,9 +46,9 @@ Set the Kafka broker URL according to your setup in the format \<host_ip>:\<port
 	whereas the Kafka broker will be running outside the docker-machine
 	on the host machine. 
 	
-	A mashling service container will, therefore not be able to connect to 
+	A mashling service container will therefore not be able to connect to 
 	a Kafka broker using 'localhost:9092' as the broker url. The host IP will 
-	enable the connection from the mashling consumer,running inside the service 
+	enable the connection from the mashling consumer, running inside the service 
 	mesh, to the Kafka broker.
 
 #### Command
@@ -135,7 +135,7 @@ Example 2) using Kafka compose
 	$jdoe-machine:front-proxy jdoe$ echo "ROOT_DIR=$(pwd)" > .env && env $(cat .env | xargs) ./setupEnvoyFrontProxy.sh -f kafka/docker-compose-kafka.yml -n kafka-mashling-app -p ./gateway/sample/kafka
 
 
-If the user provides name and path inputs then the script will check if a binary with the given name exists in the <path>/bin folder. If one does not exist, the script will terminate.
+If the user provides name and path inputs, then the script will check if a binary with the given name exists in the <path>/bin folder. If one does not exist, the script will terminate.
 
 Using this script, you can deploy an existing mashling app into the Envoy front-proxy. 
 
@@ -182,12 +182,12 @@ Access mashling service (service3) behind the proxy as
 
 ## Adding a new mashling app into the mesh
 
-Mashling is an event-driven microgateway application that that can work with a variety of triggers such as REST, KAFKA and MQTT etc. For more info on mashling [see](https://github.com/TIBCOSoftware/mashling-cli)
+Mashling is an event-driven microgateway application that can work with a variety of triggers such as REST, KAFKA and MQTT etc. For more info on mashling [see](https://github.com/TIBCOSoftware/mashling-cli)
 
 Mashling apps can consume events such as REST endpoint invocation or a message delivered on a KAFKA topic. As a result, deploying a mashling app into the L7 proxy framework such as Lyft/Envoy needs some configuration.
 
 ### Mashling microgateway app using an HTTP trigger
-A mashling microgateway app that uses an HTTP trigger can, potentially, expose multiple rest endpoint routes that front different backend microservices.
+A mashling microgateway app that uses an HTTP trigger can potentially expose multiple rest endpoint routes that front different backend microservices.
 
 When such mashling app is deployed on Envoy front-proxy service mesh, we need to consider each rest endpoint exposed by the mashling app and decide whether it needs to be exposed through the envoy front-proxy. If we decide to expose a rest endpoint through envoy front-proxy, we need to create/change the following code artifacts:
 
@@ -296,7 +296,7 @@ When such mashling app is deployed on Envoy front-proxy service mesh, we need to
 			    ]
 			  }
 
-6. Add the new service entry in the docker-compose-http.yml. Use acme-mashling-envoy.json in mounting the file volume. Make other relevant changes fofr alias, env variable etc. Relevant file section is given below
+6. Add the new service entry in the docker-compose-http.yml. Use acme-mashling-envoy.json in mounting the file volume. Make other relevant changes for alias, env variable etc. Relevant file section is given below
 
 		  service3:
 		    build:
