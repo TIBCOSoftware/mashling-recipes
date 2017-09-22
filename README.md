@@ -25,7 +25,24 @@ If "display_name" field is present in the json, its value is used as the recipe 
 
 ### Publishing a recipe
 
-recipe_registry.json contains the list of recipe providers and the recipes to publish. The recipe folder name should be added to the "publish" field for the recipe to be made available in mashling.io. 
+recipe_registry.json contains the list of recipe providers and the recipes to publish. The recipe folder name should be added to the "publish" field for the recipe to be made available in mashling.io. For example, KafkaTrigger-To-KafkaPublisher recipe gateway binaries are built and made downloadable from mashling.io given the following recipe_registry.json:
+
+```json
+{
+	"recipe_repos": [
+		{
+            "provider": "TIBCOSoftware Engineering",
+	    "description": "Mashling gateway recipes from TIBCOSoftware Engineering",
+            "publish": "KafkaTrigger-To-KafkaPublisher, KafkaTrigger-To-RestInvoker"
+        },
+        {
+            "provider": "TIBCOSoftware Services",
+            "description": "Mashling gateway recipes from TIBCO Services",
+            "publish": ""
+        }
+	]
+}
+```
 
 ### Support
 You can post your questions via [GitHub issues](https://github.com/TIBCOSoftware/mashling/issues)
