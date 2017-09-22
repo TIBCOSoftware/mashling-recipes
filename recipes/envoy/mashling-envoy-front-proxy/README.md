@@ -182,7 +182,7 @@ Access mashling service (service3) behind the proxy as
 
 ## Adding a new mashling app into the mesh
 
-Mashling is an event-driven microgateway application that can work with a variety of triggers such as REST, KAFKA and MQTT etc. For more info on mashling [see](https://github.com/TIBCOSoftware/mashling-cli)
+Mashling is an event-driven microgateway application that can work with a variety of triggers such as REST, KAFKA and MQTT etc. For more info on mashling [see](https://github.com/TIBCOSoftware/mashling)
 
 Mashling apps can consume events such as REST endpoint invocation or a message delivered on a KAFKA topic. As a result, deploying a mashling app into the L7 proxy framework such as Lyft/Envoy needs some configuration.
 
