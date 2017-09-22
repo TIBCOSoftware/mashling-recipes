@@ -1,14 +1,14 @@
 {
-	"recipe_repos": [
-		{
+    "recipe_repos": [
+	{
             "provider": "TIBCOSoftware Engineering",
 	    "description": "Mashling gateway recipes from TIBCOSoftware Engineering",
-            "publish": "KafkaTrigger-To-KafkaPublisher, KafkaTrigger-To-RestInvoker"
+            "publish": "KafkaTrigger-To-KafkaPublisher, KafkaTrigger-To-RestInvoker, KafkaTrigger-To-KafkaPublisher"
         },
         {
             "provider": "TIBCOSoftware Services",
             "description": "Mashling gateway recipes from TIBCO Services",
-            "publish": "RestTrigger-To-KafkaPublisher"
+            "publish": ""
         }
-	]
+    ]
 }
