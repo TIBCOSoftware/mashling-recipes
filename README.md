@@ -6,7 +6,7 @@ A recipe is a pre-configured mashling json file which can be customized or used 
 ## How to contribute a recipe to mashling-recipes
 
 ### Adding a recipe
-A recipe should contain in its own folder under mashling-recipes/recipes folder. The recipe folder should have the mashling json file, README.md and an optional icon image file. In the absense of the icon image file, the default mashling icon is used in mashling.io for the recipe. When the icon image file is present, the mashling json file should have an icon image file field as follows:
+A recipe should be contained in its own folder under mashling-recipes/recipes folder. The recipe folder should have the mashling json file, README.md and an optional icon image file. In the absence of the icon image file, the default mashling icon is used in mashling.io for the recipe. When the icon image file is present, the mashling json file should have an icon image file field as follows:
 
 ```json
 {
@@ -21,7 +21,7 @@ A recipe should contain in its own folder under mashling-recipes/recipes folder.
 }
 ```
 
-If "display_name" field is present in the json, its value used as the recipe name in mashling.io. Otherwise, the value of "name" field is used.
+If "display_name" field is present in the json, its value is used as the recipe name in mashling.io. Otherwise, the value of "name" field is used.
 
 ### Publishing a recipe
 
