@@ -3,14 +3,14 @@ Sample REST conditional gateway with TLS (Transport Layer Security) is enabled.
 
 ## Recipe usage instructions
 
-1. Create gateway
+1. Create gateway.
 ```bash
 mashling create -f secure-rest-conditional-gateway.json secureGwApp
 ```
 
 2. Copy gateway.crt & gateway.key into secureGwApp/bin folder.<br>
 3. Create new directory secureGwApp/bin/truststore abd copy client.crt & apiserver.crt into secureGwApp/bin/truststore folder. <br>
-4. Run gateway
+4. Run gateway.
 
 ```bash
 cd secureGwApp/bin
