@@ -29,8 +29,8 @@ recipe_registry.json contains the list of recipe providers and the recipes to pu
 
 ```json
 {
-	"recipe_repos": [
-		{
+    "recipe_repos": [
+	{
             "provider": "TIBCOSoftware Engineering",
 	    "description": "Mashling gateway recipes from TIBCOSoftware Engineering",
             "publish": "KafkaTrigger-To-KafkaPublisher, KafkaTrigger-To-RestInvoker"
@@ -40,7 +40,7 @@ recipe_registry.json contains the list of recipe providers and the recipes to pu
             "description": "Mashling gateway recipes from TIBCO Services",
             "publish": ""
         }
-	]
+    ]
 }
 ```
 
