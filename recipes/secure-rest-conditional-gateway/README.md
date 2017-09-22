@@ -17,7 +17,7 @@ cd secureGwApp/bin
 ./securegwapp
 ```
 
-Note: For testing purpose certificates are made available in utils folder. You can also generate self signed certificates your self by using open ssl.
+Note: For testing purposes, certificates are made available in utils folder. You can also generate self-signed certificates yourself by using open ssl.
 ```bash
 openssl req \
        -newkey rsa:2048 -nodes -keyout server.key \
