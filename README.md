@@ -1,4 +1,31 @@
 # mashling-recipes
-Recipes for Mashling
+> Recipes for Mashling
 
-recipe_registry.json contains the list of recipes repos and folders. If the URL points to a remote location where root directory doesn't contain recipes.json, the recipe json files that conforms to mashling gateway-schema.json are expected at the root level of the URL. If recipes.json exists at the root level of the remote URL, recipes.json is used to locate the recipes folder the URL. 
+A recipe is a pre-configured mashling json file which can be customized or used as is for a specific use case. The pre-compiled recipe binaries along with the json files are available in mashling.io website.
+
+## How to contribute a recipe to mashling-recipes
+
+### Adding a recipe
+A recipe should contained in its own folder under mashling-recipes/recipes folder. The recipe folder should have the mashling json file, README.md and an optional icon image file. In the absense of the icon image file, the default mashling icon is used in mashling.io for the recipe. When the icon image file is present, the mashling json file should have an icon image file field as follows:
+
+```json
+{
+	"mashling_schema": "0.2",
+	"gateway": {
+		"name": "allRecipe",
+		"version": "1.0.0",
+		"display_name":"KafkaTrigger to KafkaPublisher",
+		"display_image":"displayImage.svg",
+    ...
+  }
+}
+```
+
+If "display_name" field is present in the json, its value used as the recipe name in mashling.io. Otherwise, the value of "name" field is used.
+
+### Publishing a recipe
+
+recipe_registry.json contains the list of recipe providers and the recipes to publish. The recipe folder name should be added to the "publish" field for the recipe to be made available in mashling.io. 
+
+### Support
+You can post your questions via [GitHub issues](https://github.com/TIBCOSoftware/mashling/issues)
