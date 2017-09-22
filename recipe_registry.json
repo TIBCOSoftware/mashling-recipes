@@ -3,13 +3,11 @@
 		{
             "provider": "TIBCOSoftware",
 			"description": "Mashling gateway recipes from TIBCOSoftware",
-            "url": "recipes",
             "publish": "KafkaTrigger-To-KafkaPublisher, KafkaTrigger-To-RestInvoker"
         },
         {
             "provider": "jpark",
             "description": "Mashling gateway recipes from jpark",
-            "url": "recipes",
             "publish": "RestTrigger-To-KafkaPublisher"
         }
 	]
