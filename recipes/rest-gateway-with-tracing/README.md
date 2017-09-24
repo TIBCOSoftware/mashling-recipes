@@ -5,6 +5,7 @@ distributed tracing.
 
 ## Installation
 * Docker [docker](https://www.docker.com)
+* Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
 * Zipkin [zipkin](http://zipkin.io/pages/quickstart)
 
 ## Setup
