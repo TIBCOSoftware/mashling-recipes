@@ -1,0 +1,58 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mashling
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mashling
+    spec:
+      containers:
+      - name: mashling
+        image: docker.io/<YOUR DOCKER USER>/mashling
+        ports:
+        - containerPort: 9096
+#      imagePullSecrets:
+#      - name: regsecret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mashling
+  labels:
+    app: mashling
+spec:
+  ports:
+  - name: http
+    port: 9096
+  selector:
+    app: mashling
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gateway
+  annotations:
+    kubernetes.io/ingress.class: "istio"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /.*
+        backend:
+          serviceName: mashling
+          servicePort: 9096
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: petstore
+spec:
+ type: ExternalName
+ externalName: petstore.swagger.io
+ ports:
+ - port: 80
+   # important to set protocol name
+   name: http
