@@ -3,7 +3,7 @@
 	{
             "provider": "TIBCOSoftware Engineering",
 	    "description": "Mashling gateway recipes from TIBCOSoftware Engineering",
-            "publish": "KafkaTrigger-To-KafkaPublisher, rest-conditional-gateway, KafkaTrigger-To-RestInvoker, RestTrigger-To-KafkaPublisher"
+            "publish": "KafkaTrigger-To-KafkaPublisher, sample-rest-conditional-gateway, KafkaTrigger-To-RestInvoker, RestTrigger-To-KafkaPublisher"
         },
         {
             "provider": "TIBCOSoftware Services",
