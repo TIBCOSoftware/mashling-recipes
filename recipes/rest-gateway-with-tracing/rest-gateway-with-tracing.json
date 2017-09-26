@@ -1,8 +1,9 @@
 {
+  "mashling_schema": "0.2",
   "gateway": {
     "name": "rest-gateway-with-tracing",
     "version": "1.0.0",
-    "description": "This is the first microgateway app",
+    "description": "This is a microgateway with tracing",
     "configurations": [
       {
         "name": "restConfig",
@@ -30,211 +31,9 @@
     ],
     "event_handlers": [
       {
-        "name": "get_pet_success_handler",
+        "name": "get_pet_handler",
         "description": "Handle the user access",
-        "definition": {
-          "data": {
-            "flow": {
-              "explicitReply": true,
-              "type": 1,
-              "attributes": [],
-              "rootTask": {
-                "id": 1,
-                "type": 1,
-                "tasks": [
-                  {
-                    "id": 2,
-                    "type": 1,
-                    "activityRef": "github.com/TIBCOSoftware/mashling/ext/flogo/activity/tracer",
-                    "name": "logging",
-                    "attributes": [
-                      {
-                        "name": "tracing",
-                        "value": null
-                      }
-                    ],
-                    "inputMappings": [
-                      {
-                        "type": 1,
-                        "value": "{T.tracing}",
-                        "mapTo": "tracing"
-                      }
-                    ]
-                  },
-                  {
-                    "id": 3,
-                    "name": "Log Message",
-                    "description": "Simple Log Activity",
-                    "type": 1,
-                    "activityType": "github-com-tibco-software-flogo-contrib-activity-log",
-                    "activityRef": "github.com/TIBCOSoftware/flogo-contrib/activity/log",
-                    "attributes": [
-                      {
-                        "name": "message",
-                        "value": null,
-                        "required": false,
-                        "type": "string"
-                      },
-                      {
-                        "name": "flowInfo",
-                        "value": "false",
-                        "required": false,
-                        "type": "boolean"
-                      },
-                      {
-                        "name": "addToFlow",
-                        "value": "false",
-                        "required": false,
-                        "type": "boolean"
-                      }
-                    ],
-                    "inputMappings": [
-                      {
-                        "type": 1,
-                        "value": "{T.pathParams}.petId",
-                        "mapTo": "message"
-                      }
-                    ]
-                  },
-                  {
-                    "id": 4,
-                    "type": 1,
-                    "activityRef": "github.com/TIBCOSoftware/mashling/ext/flogo/activity/tracer",
-                    "name": "logging-done",
-                    "attributes": [
-                      {
-                        "name": "span",
-                        "value": null
-                      }
-                    ],
-                    "inputMappings": [
-                      {
-                        "type": 1,
-                        "value": "{A2.span}",
-                        "mapTo": "span"
-                      }
-                    ]
-                  },
-                  {
-                    "id": 5,
-                    "name": "Invoke REST Service",
-                    "description": "Simple REST Activity",
-                    "type": 1,
-                    "activityType": "tibco-rest",
-                    "activityRef": "github.com/TIBCOSoftware/mashling/ext/flogo/activity/rest",
-                    "attributes": [
-                      {
-                        "name": "method",
-                        "value": "GET",
-                        "required": true,
-                        "type": "string"
-                      },
-                      {
-                        "name": "uri",
-                        "value": "http://petstore.swagger.io/v2/pet/:petId",
-                        "required": true,
-                        "type": "string"
-                      },
-                      {
-                        "name": "pathParams",
-                        "value": null,
-                        "required": false,
-                        "type": "params"
-                      },
-                      {
-                        "name": "queryParams",
-                        "value": null,
-                        "required": false,
-                        "type": "params"
-                      },
-                      {
-                        "name": "content",
-                        "value": null,
-                        "required": false,
-                        "type": "any"
-                      },
-                      {
-                        "name": "tracing",
-                        "value": null,
-                        "type": "any"
-                      }
-                    ],
-                    "inputMappings": [
-                      {
-                        "type": 1,
-                        "value": "{T.pathParams}",
-                        "mapTo": "pathParams"
-                      },
-                      {
-                        "type": 1,
-                        "value": "{A2.tracing}",
-                        "mapTo": "tracing"
-                      }
-                    ]
-                  },
-                  {
-                    "id": 6,
-                    "name": "Reply To Trigger",
-                    "description": "Simple Reply Activity",
-                    "type": 1,
-                    "activityType": "tibco-reply",
-                    "activityRef": "github.com/TIBCOSoftware/flogo-contrib/activity/reply",
-                    "attributes": [
-                      {
-                        "name": "code",
-                        "value": 200,
-                        "required": true,
-                        "type": "integer"
-                      },
-                      {
-                        "name": "data",
-                        "value": null,
-                        "required": false,
-                        "type": "any"
-                      }
-                    ],
-                    "inputMappings": [
-                      {
-                        "type": 1,
-                        "value": "{A5.result}",
-                        "mapTo": "data"
-                      }
-                    ]
-                  }
-                ],
-                "links": [
-                  {
-                    "id": 1,
-                    "from": 2,
-                    "to": 3,
-                    "type": 0
-                  },
-                  {
-                    "id": 2,
-                    "from": 3,
-                    "to": 4,
-                    "type": 0
-                  },
-                  {
-                    "id": 3,
-                    "from": 4,
-                    "to": 5,
-                    "type": 0
-                  },
-                  {
-                    "id": 4,
-                    "from": 5,
-                    "to": 6,
-                    "type": 0
-                  }
-                ],
-                "attributes": []
-              }
-            }
-          },
-          "id": "ss",
-          "ref": "github.com/TIBCOSoftware/flogo-contrib/action/flow"
-        }
+        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/Tracing.json"
       }
     ],
     "event_links": [
@@ -244,7 +43,7 @@
         ],
         "dispatches": [
           {
-            "handler": "get_pet_success_handler"
+            "handler": "get_pet_handler"
           }
         ]
       }
