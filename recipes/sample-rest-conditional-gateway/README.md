@@ -3,11 +3,11 @@ Sample RestTrigger to RestInvoker with conditional dispatch recipe
 Instructions:
 
 1)Place the json in folder and create the app using the below command:
-mashling create -f rest-conditional-gateway.json rest-conditional-gateway
+mashling create -f sample-rest-conditional-gateway.json sample-rest-conditional-gateway
 
-2)Go to the path: cd rest-conditional-gateway/bin
+2)Go to the path: cd sample-rest-conditional-gateway/bin
 
-3)Run the app using command: ./rest-conditional-gateway
+3)Run the app using command: ./sample-rest-conditional-gateway
 
 4)Use "PUT" operation and hit the url "http://localhost:9096/pets" with the below sample payload:
 {
