@@ -44,5 +44,8 @@ recipe_registry.json contains the list of recipe providers and the recipes to pu
 }
 ```
 
-### Support
-You can post your questions via [GitHub issues](https://github.com/TIBCOSoftware/mashling/issues)
+## License
+mashling-recipes is licensed under a BSD-type license. See license text [here](https://github.com/TIBCOSoftware/mashling-recipes/blob/master/TIBCO%20LICENSE.txt).
+
+## Support
+You can post your questions via [GitHub issues](https://github.com/TIBCOSoftware/mashling-recipes/issues).
