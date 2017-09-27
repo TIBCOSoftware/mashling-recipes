@@ -31,7 +31,7 @@ openssl req \
 5. Get go based sample client & server applications.
 
 ```bash
-go get github.com/levigross/go-mutual-tls
+go get -u github.com/levigross/go-mutual-tls/...
 ```
 
 6. Copy client.crt, client.key & gateway.crt from utils folder to $GOPATH\src\github.com\levigross\go-mutual-tls and edit $GOPATH\src\github.com\levigross\go-mutual-tls\client\client.go as mentioned below.<br>
@@ -81,13 +81,13 @@ log.Println(httpServer.ListenAndServeTLS("../cert.pem", "../key.pem")) --> log.P
 8. Open one terminal and run server.go<br>
 
 ```bash
-cd $GOPATH\src\github.com\levigross\go-mutual-tls\server
+cd $GOPATH/src/github.com/levigross/go-mutual-tls/server
 go run server.go
 ```
 
 9. Open another terminal and run client.go<br>
 ```bash
-cd $GOPATH\src\github.com\levigross\go-mutual-tls\client
+cd $GOPATH/src/github.com/levigross/go-mutual-tls/client
 go run client.go
 ```
 10. Now you should see following response logged on the client terminal.<br>
