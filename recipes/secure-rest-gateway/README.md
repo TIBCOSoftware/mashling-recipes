@@ -34,19 +34,63 @@ openssl req \
 go get github.com/levigross/go-mutual-tls
 ```
 
-6. Copy utils folder from this recipe to your working directory and run server application.
+6. Copy client.crt, client.key & gateway.crt from utils folder to $GOPATH\src\github.com\levigross\go-mutual-tls and edit $GOPATH\src\github.com\levigross\go-mutual-tls\client\client.go as mentioned below.<br>
+
+Change1:
+```bash
+cert, err := tls.LoadX509KeyPair("../cert.pem", "../key.pem") --> cert, err := tls.LoadX509KeyPair("../client.crt", "../client.key")
+```
+
+Change2:
+```bash
+clientCACert, err := ioutil.ReadFile("../cert.pem") --> clientCACert, err := ioutil.ReadFile("../gateway.crt")
+```
+Change3:
+```bash
+resp, err := grequests.Get("https://localhost:8080", ro) --> resp, err := grequests.Get("https://localhost:9098/pets/25", ro)
+```
+
+7. Copy apiserver.crt, apiserver.key & gateway.crt from utils folder to $GOPATH\src\github.com\levigross\go-mutual-tls and edit $GOPATH\src\github.com\levigross\go-mutual-tls\server\server.go as mentioned below.<br>
+
+Change1:
+Replace the line reads as
+```bash
+fmt.Fprintf(w, "Hello %v! \n", req.TLS.PeerCertificates[0].EmailAddresses[0])
+```
+with below 2 lines
+```bash
+w.Header().Set("Content-Type", "application/json")
+w.Write([]byte(`{"Hobbies":["snowboarding","programming"],"Name":"Alex"}`))
+```
+
+Change2:
+```bash
+certBytes, err := ioutil.ReadFile("../cert.pem") --> certBytes, err := ioutil.ReadFile("../gateway.crt")
+```
+
+Change3:
+```bash
+CipherSuites: []uint16{tls.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384}, --> CipherSuites: []uint16{tls.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256},
+```
+
+Change4:
+```bash
+log.Println(httpServer.ListenAndServeTLS("../cert.pem", "../key.pem")) --> log.Println(httpServer.ListenAndServeTLS("../apiserver.crt", "../apiserver.key"))
+```
+
+8. Open one terminal and run server.go<br>
 
 ```bash
-cd utils
+cd $GOPATH\src\github.com\levigross\go-mutual-tls\server
 go run server.go
 ```
-7. Open another terminal and run client application.
 
+9. Open another terminal and run client.go<br>
 ```bash
+cd $GOPATH\src\github.com\levigross\go-mutual-tls\client
 go run client.go
 ```
-
-8. Now you should see following response logged on the client terminal.
+10. Now you should see following response logged on the client terminal.<br>
 
 ```json
 {"Hobbies":["snowboarding","programming"],"Name":"Alex"}
