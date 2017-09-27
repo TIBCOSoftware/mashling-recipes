@@ -70,6 +70,11 @@ certBytes, err := ioutil.ReadFile("../cert.pem") --> certBytes, err := ioutil.Re
 
 Change3:
 ```bash
+CipherSuites: []uint16{tls.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384}, --> CipherSuites: []uint16{tls.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256},
+```
+
+Change4:
+```bash
 log.Println(httpServer.ListenAndServeTLS("../cert.pem", "../key.pem")) --> log.Println(httpServer.ListenAndServeTLS("../apiserver.crt", "../apiserver.key"))
 ```
 
