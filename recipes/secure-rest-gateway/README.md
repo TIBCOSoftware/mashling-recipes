@@ -1,5 +1,5 @@
-# Secure REST Gateway Recipe
-Sample REST gateway with mutual TLS (Transport Layer Security) enabled.
+# Mutual SSL HTTP Microgateway
+This is the HTTP based microgateway app with mutual TLS enabled.
 
 ## Recipe usage instructions
 
