@@ -1,5 +1,5 @@
-# KafkaTrigger to RestInvoker with conditional dispatch
-This recipe routes kafka messages to corresponding REST handlers based kafka message content.
+# Event Dispatcher And Router
+This recipe is an Apache Kafka based event dispatcher that conditionally routes events to various handlers based on content
 
 ## Installation
 * Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
@@ -21,5 +21,5 @@ mashling create -f event-dispatcher-router-mashling.json event-dispatcher-router
 
 Message:
 ```json
-{"country":"USA"}
+{"id":15,"country":"USA","category":{"id":0,"name":"string"},"name":"doggie","photoUrls":["string"],"tags":[{"id":0,"name":"string"}],"status":"available"}
 ```
