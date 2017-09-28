@@ -1,17 +1,20 @@
-KafkaTrigger to KafkaPublisher recipe
+# KafkaTrigger to KafkaPublisher recipe
+This recipe publishes kafka messages from one topic to the other.
 
-Prerequisites:
-Run the kafka producer with topic "publishpet" and the consumer with topic "subscribepet".
+## Installation
+* Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
+* Apache [Kafka](https://kafka.apache.org/quickstart)
 
-Instructions:
-
-1)Place the json in folder and create the app using the below command:
+## Setup
+```
+git clone https://github.com/TIBCOSoftware/mashling-recipes
+cd mashling-recipes/recipes/KafkaTrigger-To-KafkaPublisher
 mashling create -f KafkaTrigger-To-KafkaPublisher.json KafkaTrigger-To-KafkaPublisher
+```
+## Testing
 
-2)Go to the path: cd KafkaTrigger-To-KafkaPublisher/bin
-
-3)Run the app using command: ./KafkaTrigger-To-KafkaPublisher
-
-4)Enter any message in "publishpet" producer, the message gets published in "subscribepet" consumer.
-
-
+* Start Kafka Zookeeper & Broker in separate terminals.
+* Start the producer with the "publishpet" topic in another terminal.
+* Start the consumer with the "subscribepet" topic in another terminal.
+* Start KafkaTrigger-To-KafkaPublisher/bin/KafkaTrigger-To-KafkaPublisher
+* Post any message to the "publishpet" Topic and the message gets published to "subscribepet" Topic.
