@@ -3,9 +3,9 @@
   "gateway": {
     "name": "mutualTLSGatewayApp",
     "version": "1.0.0",
-    "display_name":"Secure Rest Conditional Gateway",
+    "display_name":"Mutual SSL HTTP Microgateway",
     "display_image":"displayImage.svg",
-    "description": "This is the rest based microgateway app with TLS enabled",
+    "description": "This is the HTTP based microgateway app with mutual SSL enabled",
     "configurations": [
       {
         "name": "secureConfig",
