@@ -15,11 +15,10 @@ mashling create -f rest-conditional-gateway.json rest-conditional-gateway
 In a saparate terminal start rest-conditional-gateway/bin/rest-conditional-gateway
 and test below scenarios.
 
-* Content based routing
-* Header based routing
-* Simple GET operation
+* Content based routing<br>
+For birds handler to pickup use below payload.
 
-4)Use "PUT" operation and hit the url "http://localhost:9096/pets" with the below sample payload:
+```json
 {
 	"category": {
 		"id": 16,
@@ -36,5 +35,14 @@ and test below scenarios.
 		"name": "string"
 	}]
 }
+```
+Curl command
+```curl
+curl 
+```
+* Header based routing
+* Simple GET operation
+
+
 
 5)Use "GET" operation and hit the url "http://localhost:9096/pets/16" to check the above added pet details.
