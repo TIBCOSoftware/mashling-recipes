@@ -15,9 +15,12 @@ mashling create -f rest-conditional-gateway.json rest-conditional-gateway
 In a saparate terminal start rest-conditional-gateway/bin/rest-conditional-gateway
 and test below scenarios.
 
-* Content based routing<br>
-For birds handler to pickup use below payload.
+### Content based routing
+Request would be routed to corresponding handler as per the dispatch condition mentioned in the gateway descriptor.
 
+Example: HTTP PUT request with the below payload would be routed through birds_handler
+
+Payload
 ```json
 {
 	"category": {
@@ -38,11 +41,13 @@ For birds handler to pickup use below payload.
 ```
 Curl command
 ```curl
-curl 
+curl -X PUT "http://localhost:9096/pets" -H "accept: application/xml" -H "Content-Type: application/json" -d '{"category":{"id":16,"name":"Animals"},"id":16,"name":"SPARROW","photoUrls":["string"],"status":"sold","tags":[{"id":0,"name":"string"}]}'
 ```
-* Header based routing
-* Simple GET operation
 
+### Simple GET operation
 
+Use below curl command to try GET request
 
-5)Use "GET" operation and hit the url "http://localhost:9096/pets/16" to check the above added pet details.
+```
+curl --request GET http://localhost:9096/pets/17
+```
