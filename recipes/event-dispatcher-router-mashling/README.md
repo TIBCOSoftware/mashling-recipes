@@ -14,7 +14,7 @@ mashling create -f event-dispatcher-router-mashling.json event-dispatcher-router
 
 ## Testing
 
-* Start Kafka Zookeeper & Broker in saparate terminals
+* Start Kafka Zookeeper & Broker in separate terminals
 * Start the producer with the "users" topic
 * Start event-dispatcher-router-mashling/bin/event-dispatcher-router-mashling
 * The below message can be posted to Kafka "users" topic to pick "usa_users_topic_handler" handler
