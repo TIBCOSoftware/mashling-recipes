@@ -1,17 +1,31 @@
-KafkaTrigger to KafkaPublisher recipe
+# KafkaTrigger to RestInvoker with conditional dispatch recipe
 
-Prerequisites:
-Run the kafka producer with topic "publishpet" and the consumer with topic "subscribepet".
+## Installation
+* Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
 
-Instructions:
+## Setup
+```
+git clone https://github.com/TIBCOSoftware/mashling-recipes
+cd mashling-recipes/recipes/event-dispatcher-router-mashling
+mashling create -f event-dispatcher-router-mashling.json event-dispatcher-router-mashling
+```
 
-1)Place the json in folder and create the app using the below command:
-mashling create -f KafkaTrigger-To-KafkaPublisher.json KafkaTrigger-To-KafkaPublisher
+## Testing
 
-2)Go to the path: cd KafkaTrigger-To-KafkaPublisher/bin
+In a separate terminal start event-dispatcher-router-mashling/bin/event-dispatcher-router-mashling
+and test below scenarios.
 
-3)Run the app using command: ./KafkaTrigger-To-KafkaPublisher
+* Content based routing<br>
+For picking the usa_users_topic_handler handler use below payload.
 
-4)Enter any message in "publishpet" producer, the message gets published in "subscribepet" consumer.
+```json
+{
+	"country": "USA"
+}
+```
+Message for the topic:
+```json
+{"country":"USA"}
+```
 
-
+Publish the above message in the Kafka "users" topic. The message payload can be changed according to the condition to pick other handlers.
