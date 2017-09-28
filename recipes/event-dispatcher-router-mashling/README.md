@@ -9,7 +9,7 @@ This recipe is an Apache Kafka based event dispatcher that conditionally routes 
 ```
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/event-dispatcher-router-mashling
-mashling create -f event-dispatcher-router-mashling.json event-dispatcher-router-mashling
+mashling create -f event-dispatcher-router-mashling.json <directory name for output>
 ```
 
 ## Testing
