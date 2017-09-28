@@ -1,4 +1,5 @@
 # RestTrigger to RestInvoker with conditional dispatch recipe
+This recipe routes the http request to corresponding handler based on the content.
 
 ## Installation
 * Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
