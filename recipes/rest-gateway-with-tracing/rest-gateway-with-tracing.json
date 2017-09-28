@@ -3,7 +3,9 @@
   "gateway": {
     "name": "rest-gateway-with-tracing",
     "version": "1.0.0",
-    "description": "This is a microgateway with tracing",
+    "display_name":"Distributed Tracing",
+    "display_image":"displayImage.svg",
+    "description": "A microgateway with distributed tracing configured with Zipkin as the tracer",
     "configurations": [
       {
         "name": "restConfig",
