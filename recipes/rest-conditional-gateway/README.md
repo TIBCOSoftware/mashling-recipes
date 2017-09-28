@@ -1,4 +1,4 @@
-# RestTrigger to RestInvoker with conditional dispatch recipe
+# RestTrigger to RestInvoker with conditional dispatch
 This recipe routes the http request to corresponding handler based on the content.
 
 ## Installation
