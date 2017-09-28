@@ -12,18 +12,14 @@ mashling create -f event-dispatcher-router-mashling.json event-dispatcher-router
 
 ## Testing
 
-In a separate terminal start event-dispatcher-router-mashling/bin/event-dispatcher-router-mashling
+* Start the Kafka Zookeeper.
+* Start the Kafka Broker in another terminal.
+* In a separate terminal start event-dispatcher-router-mashling/bin/event-dispatcher-router-mashling
+* Start the producer with the "users" topic.
+* The below message can be posted to Kafka "users" topic to pick "usa_users_topic_handler" handler.
 
-For picking the usa_users_topic_handler handler use below payload.
-
-```json
-{
-	"country": "USA"
-}
-```
 Message for the topic:
 ```json
 {"country":"USA"}
 ```
-
-Publish the above message in the Kafka "users" topic. The message payload can be changed according to the condition to pick other handlers.
+The message payload can be changed according to the condition to pick other handlers.
