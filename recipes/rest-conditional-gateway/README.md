@@ -1,13 +1,23 @@
-RestTrigger to RestInvoker with conditional dispatch recipe
+# RestTrigger to RestInvoker with conditional dispatch recipe
 
-Instructions:
+## Installation
+* Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
 
-1)Place the json in folder and create the app using the below command:
+## Setup
+```
+git clone https://github.com/TIBCOSoftware/mashling-recipes
+cd mashling-recipes/recipes/rest-conditional-gateway
 mashling create -f rest-conditional-gateway.json rest-conditional-gateway
+```
 
-2)Go to the path: cd rest-conditional-gateway/bin
+## Testing
 
-3)Run the app using command: ./rest-conditional-gateway
+In a saparate terminal start rest-conditional-gateway/bin/rest-conditional-gateway
+and test below scenarios.
+
+* Content based routing
+* Header based routing
+* Simple GET operation
 
 4)Use "PUT" operation and hit the url "http://localhost:9096/pets" with the below sample payload:
 {
