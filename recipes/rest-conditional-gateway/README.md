@@ -1,15 +1,28 @@
-RestTrigger to RestInvoker with conditional dispatch recipe
+# RestTrigger to RestInvoker with conditional dispatch
+This recipe routes the http request to corresponding handler based on the content.
 
-Instructions:
+## Installation
+* Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
 
-1)Place the json in folder and create the app using the below command:
+## Setup
+```
+git clone https://github.com/TIBCOSoftware/mashling-recipes
+cd mashling-recipes/recipes/rest-conditional-gateway
 mashling create -f rest-conditional-gateway.json rest-conditional-gateway
+```
 
-2)Go to the path: cd rest-conditional-gateway/bin
+## Testing
 
-3)Run the app using command: ./rest-conditional-gateway
+In a saparate terminal start rest-conditional-gateway/bin/rest-conditional-gateway
+and test below scenarios.
 
-4)Use "PUT" operation and hit the url "http://localhost:9096/pets" with the below sample payload:
+### Content based routing
+Request would be routed to corresponding handler as per the dispatch condition mentioned in the gateway descriptor.
+
+Example: HTTP PUT request with the below payload would be routed through birds_handler
+
+Payload
+```json
 {
 	"category": {
 		"id": 16,
@@ -26,5 +39,16 @@ mashling create -f rest-conditional-gateway.json rest-conditional-gateway
 		"name": "string"
 	}]
 }
+```
+Curl command
+```curl
+curl -X PUT "http://localhost:9096/pets" -H "accept: application/xml" -H "Content-Type: application/json" -d '{"category":{"id":16,"name":"Animals"},"id":16,"name":"SPARROW","photoUrls":["string"],"status":"sold","tags":[{"id":0,"name":"string"}]}'
+```
 
-5)Use "GET" operation and hit the url "http://localhost:9096/pets/16" to check the above added pet details.
+### Simple GET operation
+
+Use below curl command to try GET request
+
+```
+curl --request GET http://localhost:9096/pets/17
+```
