@@ -1,12 +1,12 @@
 # mashling-recipes
 > Recipes for Mashling
 
-A recipe is a pre-configured mashling json file which can be customized or used as is for a specific gateway use case. The pre-compiled recipe binaries along with the json files are available in [mashling.io](https://mashling.io) website.
+A recipe is a pre-configured Mashling json file which can be customized or used as is for a specific gateway use case. The pre-compiled recipe binaries along with the json files are available in [mashling.io](https://mashling.io) website.
 
 ## How to contribute a recipe to mashling-recipes
 
 ### Adding a recipe
-A recipe should be contained in its own folder under mashling-recipes/recipes folder. The recipe folder should have the mashling json file, README.md and an optional icon image file. In the absence of the icon image file, the default mashling icon is used in mashling.io for the recipe. When the icon image file is present, the mashling json file should have an icon image file field as follows:
+A recipe should be contained in its own folder under 'recipes' folder. The recipe folder should have a Mashling json file, README.md and an optional icon image file. In the absence of the icon image file, the default Mashling icon image is used by mashling.io for the recipe. When the icon image file is present, the Mashling json file should have an icon image file field as follows:
 
 ```json
 {
