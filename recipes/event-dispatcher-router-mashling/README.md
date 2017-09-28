@@ -1,4 +1,5 @@
 # KafkaTrigger to RestInvoker with conditional dispatch
+This recipe routes kafka messages to corresponding REST handlers based kafka message content.
 
 ## Installation
 * Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
