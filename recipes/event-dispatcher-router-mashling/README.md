@@ -1,4 +1,4 @@
-# KafkaTrigger to RestInvoker with conditional dispatch recipe
+# KafkaTrigger to RestInvoker with conditional dispatch
 
 ## Installation
 * Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
@@ -13,9 +13,7 @@ mashling create -f event-dispatcher-router-mashling.json event-dispatcher-router
 ## Testing
 
 In a separate terminal start event-dispatcher-router-mashling/bin/event-dispatcher-router-mashling
-and test below scenarios.
 
-* Content based routing<br>
 For picking the usa_users_topic_handler handler use below payload.
 
 ```json
