@@ -24,7 +24,7 @@
 ### Get the source code
 
 	git clone https://github.com/TIBCOSoftware/mashling-recipes
-	cd mashling-recipes\recipes\envoy\mashling-envoy-front-proxy
+	cd mashling-recipes/recipes/envoy/mashling-envoy-front-proxy
 
 Note: If you are trying in linux/ubuntu without VM, use local machine ip instead of $(docker-machine ip default) in subsequent steps. We have verified on linux/ubuntu.
 
