@@ -1,5 +1,5 @@
 # Mutual SSL HTTP Microgateway
-This is the HTTP based microgateway app with mutual TLS enabled.
+This recipe is a HTTP based microgateway with mutual TLS enabled.
 
 ## Recipe usage instructions
 
