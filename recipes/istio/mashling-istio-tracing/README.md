@@ -10,7 +10,7 @@ The mashling has distributed tracing enabled and uses the Istio distributed trac
 
 ## Setup
 ### Install Istio on Kubernetes (minikube)
-Follow [these instructions](https://istio.io/docs/setup/install-kubernetes.html) with one slight change. After extracting Istio, edit install/kubernetes/istio.yaml. Uncomment the nodePort directive in the istio-ingress service controller:
+Follow [these instructions](https://istio.io/docs/setup/kubernetes/quick-start.html) with one slight change. After extracting Istio, edit install/kubernetes/istio.yaml. Uncomment the nodePort directive in the istio-ingress service controller:
 
 ```yaml
 apiVersion: v1
@@ -41,7 +41,7 @@ Continue with the Istio installation.
 
 ### Setup distributed tracing for Istio
 
-Follow these [instructions](https://istio.io/docs/tasks/distributed-tracing.html) to setup Zipkin distributed tracing.
+Follow these [instructions](https://istio.io/docs/tasks/telemetry/distributed-tracing.html) to setup Zipkin distributed tracing.
 
 ### Create a mashling
 
@@ -56,17 +56,19 @@ mashling create -f mashling.json mashling
 ```
 cp Dockerfile mashling/bin
 cd mashling
-mashling build
-rm bin/mashling
-GOOS=linux gb build
+GOOS=linux mashling build
 cd bin
-mv mashling-linux-amd64 mashling
+mv mashling-linux-amd64 mashling (if on a non-linux system)
 docker login
 docker build -t <YOUR DOCKER USER>/mashling .
 docker push <YOUR DOCKER USER>/mashling
 ```
 
 ### Deploy docker image to Kubernetes/Istio
+
+```
+cp ../../deployment.yaml ./
+```
 
 Add your docker user to the deployment.yaml file:
 
@@ -112,7 +114,7 @@ Get the minikube ip address:
 minikube ip
 ```
 
-Then execute the bellow with the address:
+Wait ~5 minutes, and then execute the bellow with the address:
 
 ```
 curl http://<minikube IP address>:32000/pets/1
