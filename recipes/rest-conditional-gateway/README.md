@@ -13,7 +13,7 @@ mashling create -f rest-conditional-gateway.json rest-conditional-gateway
 
 ## Testing
 
-In a saparate terminal start rest-conditional-gateway/bin/rest-conditional-gateway
+In a separate terminal start rest-conditional-gateway/bin/rest-conditional-gateway
 and test below scenarios.
 
 ### Content based routing
