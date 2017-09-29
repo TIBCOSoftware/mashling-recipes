@@ -1,5 +1,5 @@
 # mashling-recipes
-> Recipes for Mashling
+> Recipes for Project Mashling<sup>TM</sup>
 
 A recipe is a pre-configured Mashling json file which can be customized or used as is for a specific gateway use case. The pre-compiled recipe binaries along with the json files are available in [mashling.io](https://mashling.io) website.
 
