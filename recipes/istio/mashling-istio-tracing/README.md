@@ -66,6 +66,10 @@ docker push <YOUR DOCKER USER>/mashling
 
 ### Deploy docker image to Kubernetes/Istio
 
+```
+cp ../../deployment.yaml ./
+```
+
 Add your docker user to the deployment.yaml file:
 
 ```yaml
