@@ -3,9 +3,9 @@
   "gateway": {
     "name": "demoRestGw",
     "version": "1.0.0",
-    "display_name":"Rest Conditional Gateway",
+    "display_name":"Content-based HTTP Router",
 		"display_image":"displayImage.svg",
-    "description": "This is the rest based microgateway app",
+    "description": "A conditional HTTP router that routes requests based on content",
     "configurations": [
       {
         "name": "restConfig",
