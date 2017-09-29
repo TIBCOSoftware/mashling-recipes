@@ -1,5 +1,5 @@
-# RestTrigger to RestInvoker with conditional dispatch
-This recipe routes the http request to corresponding handler based on the content.
+# Content-based HTTP Router
+This recipe is a conditional HTTP router that routes requests based on content
 
 ## Installation
 * Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
