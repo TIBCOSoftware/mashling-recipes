@@ -110,7 +110,7 @@ Get the minikube ip address:
 minikube ip
 ```
 
-Then execute the bellow with the address:
+Wait ~5 minutes, and then execute the bellow with the address:
 
 ```
 curl http://<minikube IP address>:32000/pets/1
