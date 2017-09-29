@@ -1,5 +1,5 @@
 # Event Dispatcher And Router
-This recipe is an Apache Kafka based event dispatcher that conditionally routes events to various handlers based on content
+This recipe is an Apache Kafka<sup>TM</sup> based event dispatcher that conditionally routes events to various handlers based on content
 
 ## Installation
 * Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
