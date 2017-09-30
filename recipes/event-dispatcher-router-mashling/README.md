@@ -17,7 +17,8 @@ mashling create -f event-dispatcher-router-mashling.json <directory name for out
 * Start Kafka Zookeeper & Broker in separate terminals
 * Start the producer with the "users" topic
 * Start event-dispatcher-router-mashling/bin/event-dispatcher-router-mashling
-* The below message can be posted to Kafka "users" topic to pick "usa_users_topic_handler" handler
+* Send below sample message via Kafka producer on the "users" topic 
+* "usa_users_topic_handler" processes this message
 
 Message:
 ```json
