@@ -6,8 +6,6 @@ before_install:
 
 os: 
   - linux
-  - osx
-  - windows
 
 branches:
   only:
