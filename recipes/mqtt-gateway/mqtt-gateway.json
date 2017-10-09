@@ -17,7 +17,7 @@
       },
       {
         "name": "mqttConfig",
-        "type": "github.com/pointlander/scratch/ext/flogo/trigger/mqtt",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/mqtt",
         "description": "Configuration for mqtt",
         "settings": {
           "broker": "tcp://localhost:1883",
@@ -33,7 +33,7 @@
     "triggers": [
       {
         "name": "get_mqtt",
-        "type": "github.com/pointlander/scratch/ext/flogo/trigger/mqtt",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/mqtt",
         "settings": {
           "config": "${configurations.mqttConfig}",
           "topic": "get",
@@ -42,7 +42,7 @@
       },
       {
         "name": "put_mqtt",
-        "type": "github.com/pointlander/scratch/ext/flogo/trigger/mqtt",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/mqtt",
         "settings": {
           "config": "${configurations.mqttConfig}",
           "topic": "put",
