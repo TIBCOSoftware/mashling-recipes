@@ -20,7 +20,7 @@
            
 			{
 				"name": "kafka_trigger",
-				"description": "The trigger on kafka 'users' topic",
+				"description": "The trigger on kafka 'syslog' topic",
 				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
 				"settings": {
 					"Topic": "syslog",
