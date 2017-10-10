@@ -1,0 +1,130 @@
+{
+  "mashling_schema": "0.2",
+  "gateway": {
+    "name": "mqtt-gateway",
+    "version": "1.0.0",
+    "display_name": "Content-based MQTT and HTTP Router",
+    "display_image": "displayImage.svg",
+    "description": "A conditional MQTT and HTTP router that routes requests based on content",
+    "configurations": [
+      {
+        "name": "restConfig",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "description": "Configuration for rest trigger",
+        "settings": {
+          "port": "9096"
+        }
+      },
+      {
+        "name": "mqttConfig",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/mqtt",
+        "description": "Configuration for mqtt",
+        "settings": {
+          "broker": "tcp://localhost:1883",
+          "id": "flogo",
+          "user": "",
+          "password": "",
+          "store": "",
+          "qos": "0",
+          "cleansess": "false"
+        }
+      }
+    ],
+    "triggers": [
+      {
+        "name": "get_mqtt",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/mqtt",
+        "settings": {
+          "config": "${configurations.mqttConfig}",
+          "topic": "get",
+          "optimize": "true"
+        }
+      },
+      {
+        "name": "put_mqtt",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/mqtt",
+        "settings": {
+          "config": "${configurations.mqttConfig}",
+          "topic": "put",
+          "optimize": "true"
+        }
+      },
+      {
+        "name": "animals_rest_trigger",
+        "description": "Animals rest trigger - PUT animal details",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "settings": {
+          "config": "${configurations.restConfig}",
+          "method": "PUT",
+          "path": "/pets",
+          "optimize": "true"
+        }
+      },
+      {
+        "name": "get_animals_rest_trigger",
+        "description": "Animals rest trigger - get animal details",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "settings": {
+          "config": "${configurations.restConfig}",
+          "method": "GET",
+          "path": "/pets/{petId}",
+          "optimize": "true"
+        }
+      }
+    ],
+    "event_handlers": [
+      {
+        "name": "mammals_handler",
+        "description": "Handle mammals",
+        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/RestTriggerToRestPutActivity.json"
+      },
+      {
+        "name": "birds_handler",
+        "description": "Handle birds",
+        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/RestTriggerToRestPutActivity.json"
+      },
+      {
+        "name": "animals_handler",
+        "description": "Handle other animals",
+        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/RestTriggerToRestPutActivity.json"
+      },
+      {
+        "name": "animals_get_handler",
+        "description": "Handle other animals",
+        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/RestTriggerToRestGetActivity.json"
+      }
+    ],
+    "event_links": [
+      {
+        "triggers": [
+          "animals_rest_trigger",
+          "put_mqtt"
+        ],
+        "dispatches": [
+          {
+            "if": "${trigger.content.name in (ELEPHANT,CAT)}",
+            "handler": "mammals_handler"
+          },
+          {
+            "if": "${trigger.content.name == SPARROW}",
+            "handler": "birds_handler"
+          },
+          {
+            "handler": "animals_handler"
+          }
+        ]
+      },
+      {
+        "triggers": [
+          "get_animals_rest_trigger",
+          "get_mqtt"
+        ],
+        "dispatches": [
+          {
+            "handler": "animals_get_handler"
+          }
+        ]
+      }
+    ]
+  }
+}
