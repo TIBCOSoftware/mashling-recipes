@@ -16,7 +16,7 @@
           "recipe":"rest-gateway-with-tracing",
           "featured":true
         },
-        {  
+        {
           "recipe":"secure-rest-gateway",
           "featured":false
         }
