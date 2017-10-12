@@ -3,8 +3,12 @@
 	{
             "provider": "TIBCOSoftware Engineering",
 	    "description": "Mashling gateway recipes from TIBCOSoftware Engineering",
-            "publish": "event-dispatcher-router-mashling, rest-conditional-gateway, rest-gateway-with-tracing, secure-rest-gateway",
-            "featured": "event-dispatcher-router-mashling, rest-conditional-gateway"
+            "publish": [
+					  {"recipe": "event-dispatcher-router-mashling", "featured":true},
+					  {"recipe": "rest-conditional-gateway", "featured":true},
+					  {"recipe": "rest-gateway-with-tracing", "featured":true},
+					  {"recipe": "secure-rest-gateway"},
+					]
         },
         {
             "provider": "TIBCOSoftware Services",
