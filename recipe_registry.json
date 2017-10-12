@@ -7,7 +7,7 @@
 					  {"recipe": "event-dispatcher-router-mashling", "featured":true},
 					  {"recipe": "rest-conditional-gateway", "featured":true},
 					  {"recipe": "rest-gateway-with-tracing", "featured":true},
-					  {"recipe": "secure-rest-gateway"},
+					  {"recipe": "secure-rest-gateway"}
 					]
         },
         {
