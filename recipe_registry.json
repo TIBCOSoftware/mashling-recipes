@@ -16,15 +16,16 @@
           "recipe":"rest-gateway-with-tracing",
           "featured":true
         },
-        {  
-          "recipe":"secure-rest-gateway"
+        {
+          "recipe":"secure-rest-gateway",
+          "featured":false
         }
       ]
     },
     {  
       "provider":"TIBCOSoftware Services",
       "description":"Mashling gateway recipes from TIBCO Services",
-      "publish":""
+      "publish":[]
     }
   ]
 }
