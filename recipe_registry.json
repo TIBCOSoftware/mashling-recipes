@@ -10,7 +10,7 @@
         },
         {  
           "recipe":"rest-conditional-gateway",
-          "featured":true
+          "featured":false
         },
         {  
           "recipe":"rest-gateway-with-tracing",
@@ -18,6 +18,10 @@
         },
         {
           "recipe":"secure-rest-gateway",
+          "featured":true
+        },
+        {
+          "recipe":"mqtt-gateway",
           "featured":false
         }
       ]
