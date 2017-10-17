@@ -25,18 +25,18 @@ mosquitto_sub -t "abc123"
 Finally run the below:
 
 ```
-mosquitto_pub -m '{"pathParams": {"petId": "1"}, "replyTo": "abc123"}' -t 'get'
+mosquitto_pub -m "{\"pathParams\":{\"petId\":\"1\"},\"replyTo\":\"abc123\"}" -t "get"
 ```
 
 The response will be printed in the terminal with the mosquitto_sub command.
 If there isn't a response try running:
 
 ```
-mosquitto_pub -m '{"id":1,"name":"SPARROW","photoUrls":[],"tags":[]}' -t 'put'
+mosquitto_pub -m "{\"name\":\"SPARROW\",\"id\":1,\"photoUrls\":[],\"tags\":[]}" -t "put"
 ```
 
 Then run:
 
 ```
-mosquitto_pub -m '{"pathParams": {"petId": "1"}, "replyTo": "abc123"}' -t 'get'
+mosquitto_pub -m "{\"pathParams\":{\"petId\":\"1\"},\"replyTo\":\"abc123\"}" -t "get"
 ```
