@@ -1,0 +1,65 @@
+{
+  "mashling_schema": "0.2",
+  "gateway": {
+    "name": "MQTT FaaS Dispatcher",
+    "version": "1.0.0",
+    "display_name":"AWS Lambda",
+    "display_image":"displayImage.svg",
+    "description": "MQTT trigger that content routes to either a AWS Lambda function or an endpoint for Live Apps case creation",
+    "configurations": [
+      {
+        "name": "mqttConfig",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/mqtt",
+        "description": "Configuration for MQTT",
+        "settings": {
+          "broker": "tcp://localhost:1883",
+          "id": "flogo",
+          "user": "",
+          "password": "",
+          "store": "",
+          "qos": "0",
+          "cleansess": "false"
+        }
+      }
+    ],
+    "triggers": [
+      {
+        "name": "MQTT_Trigger",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/mqtt",
+        "settings": {
+          "config": "${configurations.mqttConfig}",
+          "topic": "alert",
+          "optimize": "true"
+        }
+      }
+    ],
+    "event_handlers": [
+      {
+        "name": "Predictive_Maintenance",
+        "description": "Lambda function - predictive maintenance",
+        "reference": "github.com/pointlander/lambda/lib/flow/Lambda.json"
+      },
+      {
+        "name": "Call_Field_OPS",
+        "description": "Live Apps case - Field Ops",
+        "reference": "github.com/raji-narayanan/mashlingflows/mqtt-to-http-flow.json"
+      }
+    ],
+    "event_links": [
+      {
+        "triggers": [
+          "MQTT_Trigger"
+        ],
+        "dispatches": [
+          {
+            "if": "${trigger.content.type in (urgent,critical)}",
+            "handler": "Call_Field_OPS"
+          },
+          {
+            "handler": "Predictive_Maintenance"
+          }
+        ]
+      }
+    ]
+  }
+}
