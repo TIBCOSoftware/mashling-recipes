@@ -3,9 +3,9 @@
 	"gateway": {
 		"name": "3recipe",
 		"version": "1.0.0",
-		"display_name":"RestTrigger to KafkaPublisher",
+		"display_name":"HTTP Trigger to Kafka Publisher",
 		"display_image":"displayImage.svg",
-		"description": "This is the first microgateway app",
+		"description": "This is a simple recipe that illustrates receiving messages on a HTTP trigger and publishing it via Kafka ",
 		"configurations": [
 			{
 				"name": "kafkaConfig",
