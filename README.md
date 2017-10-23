@@ -1,5 +1,7 @@
 # Recipes for Project Mashling<sup>TM</sup> 
 
+[![Build Status](https://travis-ci.org/TIBCOSoftware/mashling-recipes.svg?branch=master)](https://travis-ci.org/TIBCOSoftware/mashling-recipes)
+
 A recipe is a pre-configured Mashling json file which can be customized or used as is for a specific gateway use case. The pre-compiled recipe binaries along with the json files are available in [mashling.io](https://mashling.io) website.
 
 ## How to contribute a recipe
