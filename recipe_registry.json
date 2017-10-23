@@ -14,7 +14,7 @@
         },
         {  
           "recipe":"rest-gateway-with-tracing",
-          "featured":true
+          "featured":false
         },
         {
           "recipe":"mqtt-lambda-tci",
@@ -22,7 +22,7 @@
         },
         {
           "recipe":"secure-rest-gateway",
-          "featured":false
+          "featured":true
         },
         {
           "recipe":"mqtt-gateway",
