@@ -37,6 +37,7 @@ script:
 
 after_script:
   - "[ -f \"${HOME}/.netrc\" ] && rm -f ${HOME}/.netrc"
+  - "[ -f \"${HOME}/.aws\" ] && rm -f ${HOME}/.aws"
 
 deploy:
   provider: s3
