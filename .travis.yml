@@ -2,7 +2,8 @@ sudo: required
 language : 
   - go  
 before_install:
-  - "echo -e \"machine github.com\n  login ${GITHUB_USER_TOKEN}\" >> ~/.netrc" 
+  - "echo -e \"machine github.com\n  login ${GITHUB_USER_TOKEN}\" >> ~/.netrc"
+  - pip install --user awscli 
 
 os: 
   - linux
@@ -29,12 +30,14 @@ script:
   - pushd mashling-cicd/sample-recipes
   - rm -rf builds
   - mkdir -p master-builds/latest builds/latest
-  - chmod ugo+x ./build-recipes.sh  ./build-registry-recipes.sh
+  - chmod ugo+x ./build-registry-recipes.sh ./s3-clean.sh
   - ./build-registry-recipes.sh
+  - ./s3-clean.sh
   - popd
 
 after_script:
   - "[ -f \"${HOME}/.netrc\" ] && rm -f ${HOME}/.netrc"
+  - "[ -f \"${HOME}/.aws\" ] && rm -f ${HOME}/.aws"
 
 deploy:
   provider: s3
