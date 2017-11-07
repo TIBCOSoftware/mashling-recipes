@@ -16,7 +16,7 @@
 ## Installation
 ### Prerequisites
 * Docker tools [docker, compose, machine](https://www.docker.com/products/docker-toolbox) 
-* Mashling [CLI](https://github.com/TIBCOSoftware/mashling-cli)
+* Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
 
 
 ## Getting Started
