@@ -1,0 +1,50 @@
+{
+  "mashling_schema": "0.2",
+  "gateway": {
+    "name": "demoMQTTProducer",
+    "version": "1.0.0",
+    "display_name":"MQTT Producer",
+		"display_image":"displayImage.svg",
+    "description": "A HTTP to MQTT adapter",
+    "configurations": [
+      {
+        "name": "restConfig",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "description": "Configuration for rest trigger",
+        "settings": {
+          "port": "9096"
+        }
+      }
+    ],
+    "triggers": [
+      {
+        "name": "rest_trigger",
+        "description": "Rest trigger",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "settings": {
+          "config": "${configurations.restConfig}",
+          "method": "POST",
+		      "path": "/test",
+          "optimize":"true"
+        }
+      }
+    ],
+    "event_handlers": [
+      {
+        "name": "mqtt_handler",
+        "description": "Send the MQTT message",
+        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/MQTTProducer.json"
+      }
+    ],
+    "event_links": [
+      {
+        "triggers": ["rest_trigger"],
+        "dispatches": [
+          {
+            "handler": "mqtt_handler"
+          }
+        ]
+      }
+    ]
+  }
+}
