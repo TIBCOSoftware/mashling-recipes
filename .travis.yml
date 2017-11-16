@@ -16,6 +16,9 @@ branches:
 install:
   - go get github.com/constabulary/gb/...
   - go get -u github.com/tools/godep/...
+  - sudo apt-add-repository ppa:duggan/jo --yes
+  - sudo apt-get update -q
+  - sudo apt-get install jo
   - cd $GOPATH/src/github.com/TIBCOSoftware
   - git clone https://github.com/TIBCOSoftware/mashling.git mashling
   - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
@@ -29,7 +32,7 @@ script:
   - cd $GOPATH/src/github.com/TIBCOSoftware
   - pushd mashling-cicd/sample-recipes
   - rm -rf builds
-  - mkdir -p master-builds/latest builds/latest
+  - mkdir -p master-builds/latest/temp builds/latest
   - chmod ugo+x ./build-registry-recipes.sh ./s3-clean.sh
   - ./build-registry-recipes.sh
   - ./s3-clean.sh
