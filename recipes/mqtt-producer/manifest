@@ -36,28 +36,28 @@
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/action/flow",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "ff19608f26b12a2c5aaeb99b86523be5ba4be432",
+			"revision": "bf071412b7a2eb0a59981c5d31f5efc5be60cd90",
 			"branch": "master",
 			"path": "/action/flow"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/model/simple",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "ff19608f26b12a2c5aaeb99b86523be5ba4be432",
+			"revision": "bf071412b7a2eb0a59981c5d31f5efc5be60cd90",
 			"branch": "master",
 			"path": "/model/simple"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest/cors",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "ff19608f26b12a2c5aaeb99b86523be5ba4be432",
+			"revision": "bf071412b7a2eb0a59981c5d31f5efc5be60cd90",
 			"branch": "master",
 			"path": "/trigger/rest/cors"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-lib",
 			"repository": "https://github.com/TIBCOSoftware/flogo-lib",
-			"revision": "5c07dd803be7a4379453a19494cce8a03daa3009",
+			"revision": "7e77da4e61670433757713ac04518d817c9b99af",
 			"branch": "master"
 		},
 		{
@@ -202,7 +202,7 @@
 		{
 			"importpath": "github.com/lightstep/lightstep-tracer-go",
 			"repository": "https://github.com/lightstep/lightstep-tracer-go",
-			"revision": "0b1008d189003437ec6a614f8acdc2b058bae07f",
+			"revision": "663f1354a3e7af88e7ad55eecd1a491f5526bf7d",
 			"branch": "master"
 		},
 		{
@@ -323,6 +323,13 @@
 			"revision": "bf42f188b9bc6f2cf5b8ee5a912ef1aedd0eba4c",
 			"branch": "master",
 			"path": "/unix"
+		},
+		{
+			"importpath": "golang.org/x/sys/windows",
+			"repository": "https://go.googlesource.com/sys",
+			"revision": "bf42f188b9bc6f2cf5b8ee5a912ef1aedd0eba4c",
+			"branch": "master",
+			"path": "/windows"
 		},
 		{
 			"importpath": "golang.org/x/text/secure/bidirule",
