@@ -36,69 +36,69 @@
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/action/flow",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "95e55195e5ccd79e223f33f4d8be20142cb67cef",
+			"revision": "bf071412b7a2eb0a59981c5d31f5efc5be60cd90",
 			"branch": "master",
 			"path": "/action/flow"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/activity/log",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "95e55195e5ccd79e223f33f4d8be20142cb67cef",
+			"revision": "bf071412b7a2eb0a59981c5d31f5efc5be60cd90",
 			"branch": "master",
 			"path": "/activity/log"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/activity/reply",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "95e55195e5ccd79e223f33f4d8be20142cb67cef",
+			"revision": "bf071412b7a2eb0a59981c5d31f5efc5be60cd90",
 			"branch": "master",
 			"path": "/activity/reply"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/activity/rest",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "95e55195e5ccd79e223f33f4d8be20142cb67cef",
+			"revision": "bf071412b7a2eb0a59981c5d31f5efc5be60cd90",
 			"branch": "master",
 			"path": "/activity/rest"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/model/simple",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "95e55195e5ccd79e223f33f4d8be20142cb67cef",
+			"revision": "bf071412b7a2eb0a59981c5d31f5efc5be60cd90",
 			"branch": "master",
 			"path": "/model/simple"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest/cors",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "95e55195e5ccd79e223f33f4d8be20142cb67cef",
+			"revision": "bf071412b7a2eb0a59981c5d31f5efc5be60cd90",
 			"branch": "master",
 			"path": "/trigger/rest/cors"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-lib",
 			"repository": "https://github.com/TIBCOSoftware/flogo-lib",
-			"revision": "75de5f80caa52d4460854ceb400d53c7b05ce8a9",
+			"revision": "7e77da4e61670433757713ac04518d817c9b99af",
 			"branch": "master"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
 			"repository": "https://github.com/TIBCOSoftware/mashling",
-			"revision": "84f9be34eb8401dda4c9d65f88a041564bbfc8bf",
+			"revision": "cfb8798e2b1ad7ace187059b92723f285267a115",
 			"branch": "master",
 			"path": "/ext/flogo/trigger/gorillamuxtrigger"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/mashling/lib/conditions",
 			"repository": "https://github.com/TIBCOSoftware/mashling",
-			"revision": "84f9be34eb8401dda4c9d65f88a041564bbfc8bf",
+			"revision": "cfb8798e2b1ad7ace187059b92723f285267a115",
 			"branch": "master",
 			"path": "/lib/conditions"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/mashling/lib/util",
 			"repository": "https://github.com/TIBCOSoftware/mashling",
-			"revision": "84f9be34eb8401dda4c9d65f88a041564bbfc8bf",
+			"revision": "cfb8798e2b1ad7ace187059b92723f285267a115",
 			"branch": "master",
 			"path": "/lib/util"
 		},
@@ -210,7 +210,7 @@
 		{
 			"importpath": "github.com/lightstep/lightstep-tracer-go",
 			"repository": "https://github.com/lightstep/lightstep-tracer-go",
-			"revision": "0b1008d189003437ec6a614f8acdc2b058bae07f",
+			"revision": "ba38bae1f0ec1ece9092d35bbecbb497ee344cbc",
 			"branch": "master"
 		},
 		{
@@ -272,51 +272,58 @@
 		{
 			"importpath": "golang.org/x/net/context",
 			"repository": "https://go.googlesource.com/net",
-			"revision": "a337091b0525af65de94df2eb7e98bd9962dcbe2",
+			"revision": "9dfe39835686865bff950a07b394c12a98ddc811",
 			"branch": "master",
 			"path": "/context"
 		},
 		{
 			"importpath": "golang.org/x/net/http2",
 			"repository": "https://go.googlesource.com/net",
-			"revision": "a337091b0525af65de94df2eb7e98bd9962dcbe2",
+			"revision": "9dfe39835686865bff950a07b394c12a98ddc811",
 			"branch": "master",
 			"path": "/http2"
 		},
 		{
 			"importpath": "golang.org/x/net/idna",
 			"repository": "https://go.googlesource.com/net",
-			"revision": "a337091b0525af65de94df2eb7e98bd9962dcbe2",
+			"revision": "9dfe39835686865bff950a07b394c12a98ddc811",
 			"branch": "master",
 			"path": "/idna"
 		},
 		{
 			"importpath": "golang.org/x/net/internal/timeseries",
 			"repository": "https://go.googlesource.com/net",
-			"revision": "a337091b0525af65de94df2eb7e98bd9962dcbe2",
+			"revision": "9dfe39835686865bff950a07b394c12a98ddc811",
 			"branch": "master",
 			"path": "/internal/timeseries"
 		},
 		{
 			"importpath": "golang.org/x/net/lex/httplex",
 			"repository": "https://go.googlesource.com/net",
-			"revision": "a337091b0525af65de94df2eb7e98bd9962dcbe2",
+			"revision": "9dfe39835686865bff950a07b394c12a98ddc811",
 			"branch": "master",
 			"path": "/lex/httplex"
 		},
 		{
 			"importpath": "golang.org/x/net/trace",
 			"repository": "https://go.googlesource.com/net",
-			"revision": "a337091b0525af65de94df2eb7e98bd9962dcbe2",
+			"revision": "9dfe39835686865bff950a07b394c12a98ddc811",
 			"branch": "master",
 			"path": "/trace"
 		},
 		{
 			"importpath": "golang.org/x/sys/unix",
 			"repository": "https://go.googlesource.com/sys",
-			"revision": "665f6529cca930e27b831a0d1dafffbe1c172924",
+			"revision": "0dd5e194bbf5eb84a39666eb4c98a4d007e4203a",
 			"branch": "master",
 			"path": "/unix"
+		},
+		{
+			"importpath": "golang.org/x/sys/windows",
+			"repository": "https://go.googlesource.com/sys",
+			"revision": "0dd5e194bbf5eb84a39666eb4c98a4d007e4203a",
+			"branch": "master",
+			"path": "/windows"
 		},
 		{
 			"importpath": "golang.org/x/text/secure/bidirule",
@@ -363,7 +370,7 @@
 		{
 			"importpath": "google.golang.org/grpc",
 			"repository": "https://github.com/grpc/grpc-go",
-			"revision": "409fd8e23b1b48140bc8dc73950f762063baa859",
+			"revision": "d6cc72862b0b65125e2dbb02e207bacfad792e69",
 			"branch": "master"
 		},
 		{
