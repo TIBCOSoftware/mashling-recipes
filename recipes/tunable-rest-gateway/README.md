@@ -30,7 +30,7 @@ curl --request GET http://localhost:9096/id/17
 ### Query UserStore end-point
 
 ```
-export API_CONTEXT=USER
+export API_CONTEXT=USERS
 ./tunable-rest-gateway
 ```
 In a saparate terminal run below curl command to try GET user# 17 details.
