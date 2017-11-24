@@ -49,7 +49,7 @@
             }
           },
           {
-            "if": "${env.API_CONTEXT == USER}",
+            "if": "${env.API_CONTEXT == USERS}",
             "handler": "get_handler",
             "inputParams":{
               "id":"${pathParams.id}",
