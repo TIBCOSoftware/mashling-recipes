@@ -33,6 +33,10 @@
           "featured":false
         },
         {
+          "recipe":"secure-rest-gateway-with-basic-auth",
+          "featured":false
+        },
+        {
           "recipe":"mqtt-producer",
           "featured":false
         }

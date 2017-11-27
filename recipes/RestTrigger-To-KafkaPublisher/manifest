@@ -4,7 +4,7 @@
 		{
 			"importpath": "github.com/Shopify/sarama",
 			"repository": "https://github.com/Shopify/sarama",
-			"revision": "b305748200a6396c34b89fe5dacc768cb1a7ea69",
+			"revision": "240fd146ce68bcafb034cc5dc977229ffbafa8ea",
 			"branch": "master"
 		},
 		{
@@ -16,42 +16,42 @@
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/action/flow",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "25de619324ef7cc9f5037f5dbf3d06cbe9e73fb6",
+			"revision": "bf071412b7a2eb0a59981c5d31f5efc5be60cd90",
 			"branch": "master",
 			"path": "/action/flow"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/activity/kafkapub",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "25de619324ef7cc9f5037f5dbf3d06cbe9e73fb6",
+			"revision": "bf071412b7a2eb0a59981c5d31f5efc5be60cd90",
 			"branch": "master",
 			"path": "/activity/kafkapub"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/activity/log",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "25de619324ef7cc9f5037f5dbf3d06cbe9e73fb6",
+			"revision": "bf071412b7a2eb0a59981c5d31f5efc5be60cd90",
 			"branch": "master",
 			"path": "/activity/log"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/model/simple",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "25de619324ef7cc9f5037f5dbf3d06cbe9e73fb6",
+			"revision": "bf071412b7a2eb0a59981c5d31f5efc5be60cd90",
 			"branch": "master",
 			"path": "/model/simple"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "25de619324ef7cc9f5037f5dbf3d06cbe9e73fb6",
+			"revision": "bf071412b7a2eb0a59981c5d31f5efc5be60cd90",
 			"branch": "master",
 			"path": "/trigger/rest"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-lib",
 			"repository": "https://github.com/TIBCOSoftware/flogo-lib",
-			"revision": "ce3e309b0456f61b352f46c466c82413b5074eef",
+			"revision": "7e77da4e61670433757713ac04518d817c9b99af",
 			"branch": "master"
 		},
 		{
@@ -120,16 +120,23 @@
 		{
 			"importpath": "golang.org/x/crypto/ssh/terminal",
 			"repository": "https://go.googlesource.com/crypto",
-			"revision": "687d4b818545e443c8ba223cbef20b1721afd4db",
+			"revision": "9f005a07e0d31d45e6656d241bb5c0f2efd4bc94",
 			"branch": "master",
 			"path": "/ssh/terminal"
 		},
 		{
 			"importpath": "golang.org/x/sys/unix",
 			"repository": "https://go.googlesource.com/sys",
-			"revision": "75813c647272dd855bda156405bf844a5414f5bf",
+			"revision": "0dd5e194bbf5eb84a39666eb4c98a4d007e4203a",
 			"branch": "master",
 			"path": "/unix"
+		},
+		{
+			"importpath": "golang.org/x/sys/windows",
+			"repository": "https://go.googlesource.com/sys",
+			"revision": "0dd5e194bbf5eb84a39666eb4c98a4d007e4203a",
+			"branch": "master",
+			"path": "/windows"
 		}
 	]
 }
