@@ -39,6 +39,10 @@
         {
           "recipe":"mqtt-producer",
           "featured":false
+        },        
+        {
+          "recipe":"tunable-rest-gateway",
+          "featured":false
         }
       ]
     },
