@@ -26,6 +26,7 @@ install:
   - cd mashling
   - godep restore
   - go install ./...
+  - make all
   - mashling help
   
 script:
