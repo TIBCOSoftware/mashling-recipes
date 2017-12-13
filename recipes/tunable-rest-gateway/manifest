@@ -22,83 +22,83 @@
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-cli/env",
 			"repository": "https://github.com/TIBCOSoftware/flogo-cli",
-			"revision": "7db24e0eb12a6a9388f4c764d9895d4029d6421f",
+			"revision": "b3863a308988827a218160861c3f2ed77b8a5b1e",
 			"branch": "master",
 			"path": "/env"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-cli/util",
 			"repository": "https://github.com/TIBCOSoftware/flogo-cli",
-			"revision": "7db24e0eb12a6a9388f4c764d9895d4029d6421f",
+			"revision": "b3863a308988827a218160861c3f2ed77b8a5b1e",
 			"branch": "master",
 			"path": "/util"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/action/flow",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "97616f43240249bf52cd2b15162db8201b1de104",
+			"revision": "7e7102b51995f5fcbe01b60cb3ec84abd755a99f",
 			"branch": "master",
 			"path": "/action/flow"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/activity/log",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "97616f43240249bf52cd2b15162db8201b1de104",
+			"revision": "7e7102b51995f5fcbe01b60cb3ec84abd755a99f",
 			"branch": "master",
 			"path": "/activity/log"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/activity/reply",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "97616f43240249bf52cd2b15162db8201b1de104",
+			"revision": "7e7102b51995f5fcbe01b60cb3ec84abd755a99f",
 			"branch": "master",
 			"path": "/activity/reply"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/activity/rest",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "97616f43240249bf52cd2b15162db8201b1de104",
+			"revision": "7e7102b51995f5fcbe01b60cb3ec84abd755a99f",
 			"branch": "master",
 			"path": "/activity/rest"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/model/simple",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "97616f43240249bf52cd2b15162db8201b1de104",
+			"revision": "7e7102b51995f5fcbe01b60cb3ec84abd755a99f",
 			"branch": "master",
 			"path": "/model/simple"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest/cors",
 			"repository": "https://github.com/TIBCOSoftware/flogo-contrib",
-			"revision": "97616f43240249bf52cd2b15162db8201b1de104",
+			"revision": "7e7102b51995f5fcbe01b60cb3ec84abd755a99f",
 			"branch": "master",
 			"path": "/trigger/rest/cors"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/flogo-lib",
 			"repository": "https://github.com/TIBCOSoftware/flogo-lib",
-			"revision": "ce3e309b0456f61b352f46c466c82413b5074eef",
+			"revision": "2b1f7ceb4becc2a3bde3fe5e97e4c6aa33b2c10b",
 			"branch": "master"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
 			"repository": "https://github.com/TIBCOSoftware/mashling",
-			"revision": "3ff29e4d5cc5fdf361be509923ea9df19edbd772",
+			"revision": "0be857625323d0a6302cbf7d210da0dcdc50644b",
 			"branch": "master",
 			"path": "/ext/flogo/trigger/gorillamuxtrigger"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/mashling/lib/conditions",
 			"repository": "https://github.com/TIBCOSoftware/mashling",
-			"revision": "3ff29e4d5cc5fdf361be509923ea9df19edbd772",
+			"revision": "0be857625323d0a6302cbf7d210da0dcdc50644b",
 			"branch": "master",
 			"path": "/lib/conditions"
 		},
 		{
 			"importpath": "github.com/TIBCOSoftware/mashling/lib/util",
 			"repository": "https://github.com/TIBCOSoftware/mashling",
-			"revision": "3ff29e4d5cc5fdf361be509923ea9df19edbd772",
+			"revision": "0be857625323d0a6302cbf7d210da0dcdc50644b",
 			"branch": "master",
 			"path": "/lib/util"
 		},
