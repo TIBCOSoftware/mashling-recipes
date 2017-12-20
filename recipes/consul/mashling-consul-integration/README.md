@@ -25,9 +25,9 @@ mashling publish -r -consul <consul host address> -f <mashling gateway json>
 ```
 
 ## Health Check
-create a gateway app using mashling.json. Register it with consul using mashling cli.
+create a gateway app using any mashling.json from available recipies and register it with consul using mashling cli.
 
-to do --including health check details into consul--
+to do --include health check details into consul--
 
 Run the gateway binary. Open URL to check the service health.
 https://localhost:8500/ui
