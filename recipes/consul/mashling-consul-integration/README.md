@@ -24,11 +24,10 @@ de-register a mashling gateway app from consul
 mashling publish -r -consul <consul host address> -f <mashling gateway json>
 ```
 
-##Health Check
+## Health Check
 create a gateway app using mashling.json. Register it with consul using mashling cli.
 
 to do --including health check details into consul--
 
 Run the gateway binary. Open URL to check the service health.
 https://localhost:8500/ui
-
