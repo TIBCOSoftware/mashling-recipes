@@ -17,11 +17,11 @@ consul members
 
 register a mashling gateway app into consul
 ```
-mashling publish -consul -f <mashling gateway json> -t <security token> -a
+mashling publish -consul -f <mashling gateway json> -t <security token> -h <consul agent ip:port> -a
 ```
 de-register a mashling gateway app from consul
 ```
-mashling publish -consul -f <mashling gateway json> -t <security token> -r
+mashling publish -consul -f <mashling gateway json> -t <security token> -h <consul agent ip:port> -r
 ```
 
 ## Health Check
@@ -30,4 +30,4 @@ create a gateway app using any mashling.json from available recipies and registe
 to do --include health check details into consul--
 
 Run the gateway binary. Open URL to check the service health.
-https://localhost:8500/ui
+http://<CONSUL IP : PORT>/ui
