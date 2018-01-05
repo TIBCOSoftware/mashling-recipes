@@ -17,11 +17,11 @@ consul members
 
 register a mashling gateway app into consul
 ```
-mashling publish -a -consul <consul host address> -f <mashling gateway json>
+mashling publish -consul -f <mashling gateway json> -t <security token> -a
 ```
 de-register a mashling gateway app from consul
 ```
-mashling publish -r -consul <consul host address> -f <mashling gateway json>
+mashling publish -consul -f <mashling gateway json> -t <security token> -r
 ```
 
 ## Health Check
