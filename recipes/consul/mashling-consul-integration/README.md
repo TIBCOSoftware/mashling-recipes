@@ -9,6 +9,11 @@ start consul agent service
 ```
 consul agent -dev
 ```
+NOTE: if agent needs to be run in secure mode and also bind it to host ip run the agent as below. Additional configuration details found [here](https://www.consul.io/docs/guides/acl.html)
+
+```
+agent -dev -client <host ip> -config-dir=<secure payload directory>
+```
 
 check members in consul cluster
 ```
@@ -26,8 +31,6 @@ mashling publish -consul -f <mashling gateway json> -t <security token> -h <cons
 
 ## Health Check
 create a gateway app using any mashling.json from available recipies and register it with consul using mashling cli.
-
-to do --include health check details into consul--
 
 Run the gateway binary. Open URL to check the service health.
 http://<CONSUL IP : PORT>/ui
