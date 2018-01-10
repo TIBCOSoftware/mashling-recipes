@@ -15,29 +15,29 @@ NOTE: Agent can be run in secure mode and also bind it to host ip, Use below com
 consul agent -dev -client <host ip> -config-dir=<configuration files dir>
 ```
 
-## Registering and De-Registering mashling gateway
+## Register and De-Register mashling gateway
 
 Provided mashling-gateway-consul.json includes three triggers or services running on different ports.
 Flags '-a' and '-r' used to register and de-register.
 
-register a mashling gateway app into consul
+Register a mashling gateway app into consul
 ```
 mashling publish -consul -a -f <mashling gateway json> -t <security token> -h <consul agent ip:port>
 ```
 
 Check the services registered using consul UI.
-1) open consul UI http://[CONSUL IP:PORT]/ui
-2) click on services tab
-3) All the triggers/services provided in gateway json are registered with consul
+1) Open consul UI http://[CONSUL IP:PORT]/ui
+2) Click on services tab
+3) All the triggers/services provided in gateway json are listed there.
 
 
-de-register a mashling gateway app from consul
+De-Register a mashling gateway app from consul
 ```
 mashling publish -consul -r -f <mashling gateway json> -t <security token> -h <consul agent ip:port>
 ```
 Check the services de-registered using consul UI.
-1) open consul UI http://[CONSUL IP:PORT]/ui
-2) click on services tab
+1) Open consul UI http://[CONSUL IP:PORT]/ui
+2) Click on services tab
 3) All the triggers/services provided in gateway json are de-registered/removed from consul
 
 ## Health Check
@@ -49,3 +49,20 @@ Run the gateway binary. Open URL to check the service health.
 3) on right side we can see all the registered services highlited in green / orange colour.
 
 Green represents good health and Orange represent critical health.
+
+## Using service defination folder flag
+mashling cli is designed to support service defination folder flag. This will generate consul service defination payload and stores it in user specified path.
+
+NOTE: Consul agent should be present on local machine to load the services from created directory.
+
+Register services
+```
+mashling publish -consul -a -f <mashling gateway json> -t <security token> -d <service defination directory>
+```
+Check the services in consul UI.
+
+De-Register services
+```
+mashling publish -consul -r -f <mashling gateway json> -t <security token> -d <service defination directory>
+```
+Check the services in consul UI.
