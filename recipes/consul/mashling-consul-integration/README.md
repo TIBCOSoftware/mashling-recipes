@@ -33,7 +33,7 @@ consul agent -dev -client <HOSTIP> -config-dir <CONFIG DIRECTORY PATH>
 Provided mashling-gateway-consul.json includes three triggers or services running on different ports.
 Options '-a' and '-r' is used to register and de-register. Both are mutually exclusive.
 
-Register gateway app into consul
+Register gateway app into consul:
 ```
 mashling publish -consul -a -f mashling-gateway-consul.json -t b1gs33cr3t -h 127.0.0.1:8500
 ```
@@ -44,7 +44,7 @@ Check the services registered using consul UI.
 3) All the triggers/services provided in gateway json are listed there.
 
 
-De-Register gateway app from consul
+De-Register gateway app from consul:
 ```
 mashling publish -consul -r -f mashling-gateway-consul.json -t b1gs33cr3t -h 127.0.0.1:8500
 ```
@@ -53,7 +53,7 @@ Check the services de-registered using consul UI.
 2) Click on services tab
 3) All the triggers/services provided in gateway json are de-registered/removed from consul
 
-### Health Check
+#### Health Check
 create a gateway app using any mashling.json from available recipies and register it with consul using mashling cli.
 
 Run the gateway binary. Open URL to check the service health.
@@ -68,13 +68,21 @@ Mashling cli is designed to support service defination folder option. This will 
 
 NOTE: Consul agent should be present on local machine to load the services from created directory.
 
-Register services
+Register services:
 ```
 mashling publish -consul -a -f mashling-gateway-consul.json -t b1gs33cr3t -d <service defination directory>
 ```
-Check the services in consul UI or curl command.
+Check the services using curl command.
+```
+curl  --header  "X-Consul-Token: b1gs33cr3t"   http://localhost:8500/v1/agent/services
+```
+#### Health Check
+Check the services health using curl command.
+```
+curl  --header  "X-Consul-Token: b1gs33cr3t"   http://localhost:8500/v1/agent/checks
+```
 
-De-Register services
+De-Register services:
 ```
 mashling publish -consul -r -f mashling-gateway-consul.json -t b1gs33cr3t -d <service defination directory>
 ```
