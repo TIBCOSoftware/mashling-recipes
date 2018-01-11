@@ -31,9 +31,9 @@ consul agent -dev -client <HOSTIP> -config-dir <CONFIG DIRECTORY PATH>
 ### Register and De-Register gateway service
 
 Provided mashling-gateway-consul.json includes three triggers or services running on different ports.
-Options '-a' and '-r' is used to register and de-register. Both are mutually exclusive.
+Options '-a' and '-r' mutually exclusive used to register and de-register services.
 
-Register gateway app into consul:
+Register service with consul:
 ```
 mashling publish -consul -a -f mashling-gateway-consul.json -t b1gs33cr3t -h 127.0.0.1:8500
 ```
@@ -41,17 +41,17 @@ mashling publish -consul -a -f mashling-gateway-consul.json -t b1gs33cr3t -h 127
 Check the services registered using consul UI.
 1) Open consul UI http://127.0.0.1:8500/ui
 2) Click on services tab
-3) All the triggers/services provided in gateway json are listed there.
+3) All the services provided in gateway json are listed there.
 
 
-De-Register gateway app from consul:
+De-Register service with consul:
 ```
 mashling publish -consul -r -f mashling-gateway-consul.json -t b1gs33cr3t -h 127.0.0.1:8500
 ```
 Check the services de-registered using consul UI.
 1) Open consul UI http://127.0.0.1:8500/ui
 2) Click on services tab
-3) All the triggers/services provided in gateway json are de-registered/removed from consul
+3) All the services provided in gateway json are de-registered/removed from consul
 
 #### Health Check
 create a gateway app using any mashling.json from available recipies and register it with consul using mashling cli.
@@ -63,7 +63,7 @@ Run the gateway binary. Open URL to check the service health.
 
 Green represents good health and Orange represent critical health.
 
-### Using service defination folder flag
+### Using service defination folder option
 Mashling cli is designed to support service defination folder option. This will generate consul service defination payload and stores it in user specified path.
 
 NOTE: Consul agent should be present on local machine to load the services from created directory.
