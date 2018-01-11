@@ -1,4 +1,4 @@
-# Mashling integration with consul
+# Publish to Consul
 
 This is a recipe to publish HTTP triggers in the gateway.json into Consul.
 
