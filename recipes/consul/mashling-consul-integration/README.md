@@ -7,7 +7,7 @@ Download [consul](https://www.consul.io/downloads.html) binary and register in p
 
 ## Setup
 
-Run consul agent using below command. Consul agent can be accessed from different machine by hosting consul using '-client <HOSTIP>' option.
+Consul agent can be accessed from different machine by hosting consul using '-client' option. Run consul agent using below command.
 ```
 consul agent -dev -client <HOSTIP>
 ```
@@ -21,7 +21,7 @@ Agent can be run in secure mode also. Additional configuration details found [he
   "acl_down_policy": "extend-cache"
 }
 ```
-Place the above authentication.json in a separate configuration folder and provide path to '-config-dir <CONFIG DIRECTORY PATH>' option.
+Place the above authentication.json in a separate configuration folder and provide path to '-config-dir' option.
 ```
 consul agent -dev -client <HOSTIP> -config-dir <CONFIG DIRECTORY PATH>
 ```
