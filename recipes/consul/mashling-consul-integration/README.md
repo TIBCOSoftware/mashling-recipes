@@ -1,18 +1,18 @@
 # Mashling integration with consul
 
-This readme contains instructions for integrating mashling gateway app into consul.
+This is a recipe to publish HTTP triggers in the gateway.json into Consul.
 
 ## Install
-Download [consul](https://www.consul.io/downloads.html) binary and register in path.
+Download [consul](https://www.consul.io/downloads.html) binary and update PATH environment variable to include consul binary.
 
 ## Setup
 
-Consul agent can be accessed from different machine by hosting consul using '-client' option. Run consul agent using below command.
+Run consul agent using below command.
 ```
 consul agent -dev -client <HOSTIP>
 ```
-
-Agent can be run in secure mode also. Additional configuration details found [here](https://www.consul.io/docs/guides/acl.html). Sample authentication json looks like.
+Note: Consul agent can be run in secure mode by providing authentication token in a configuration file while launching the agent.<br>
+Sample configuration json file content:
 ```json
 {
   "acl_datacenter": "dc1",
@@ -21,7 +21,9 @@ Agent can be run in secure mode also. Additional configuration details found [he
   "acl_down_policy": "extend-cache"
 }
 ```
-Place the above authentication.json in a separate configuration folder and provide path to '-config-dir' option.
+Additional configuration details found [here](https://www.consul.io/docs/guides/acl.html)
+
+Command to run consul agent with the directory containing configuration json file.
 ```
 consul agent -dev -client <HOSTIP> -config-dir <CONFIG DIRECTORY PATH>
 ```
