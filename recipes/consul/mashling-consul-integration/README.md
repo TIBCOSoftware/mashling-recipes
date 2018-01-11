@@ -86,4 +86,3 @@ De-Register services:
 ```
 mashling publish -consul -r -f mashling-gateway-consul.json -t b1gs33cr3t -d <service defination directory>
 ```
-Check the services in consul UI or curl command.
