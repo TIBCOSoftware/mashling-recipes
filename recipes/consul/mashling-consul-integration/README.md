@@ -72,17 +72,17 @@ Register services:
 ```
 mashling publish -consul -a -f mashling-gateway-consul.json -t b1gs33cr3t -d <service defination directory>
 ```
-Check the services using curl command.
-```
-curl  --header  "X-Consul-Token: b1gs33cr3t"   http://localhost:8500/v1/agent/services
-```
-#### Health Check
-Check the services health using curl command.
-```
-curl  --header  "X-Consul-Token: b1gs33cr3t"   http://localhost:8500/v1/agent/checks
-```
 
 De-Register services:
 ```
 mashling publish -consul -r -f mashling-gateway-consul.json -t b1gs33cr3t -d <service defination directory>
+```
+
+Check the services using curl command:
+```
+curl  --header  "X-Consul-Token: b1gs33cr3t"   http://localhost:8500/v1/agent/services
+```
+Check the services health using curl command.
+```
+curl  --header  "X-Consul-Token: b1gs33cr3t"   http://localhost:8500/v1/agent/checks
 ```
