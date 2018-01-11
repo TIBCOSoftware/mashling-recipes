@@ -5,47 +5,69 @@ This readme contains instructions for integrating mashling gateway app into cons
 ## Setup
 Download [consul](https://www.consul.io/downloads.html) binary and register in path.
 
-start consul agent service
+Agent can be run in secure mode and also bind it to host ip. Additional configuration details found [here](https://www.consul.io/docs/guides/acl.html). Sample authentication json looks like.
+```json
+{
+  "acl_datacenter": "dc1",
+  "acl_master_token": "b1gs33cr3t",
+  "acl_default_policy": "deny",
+  "acl_down_policy": "extend-cache"
+}
 ```
-consul agent -dev
+Place the above authentication.json in a separate configuration folder and provide path to -config-dir option. Consul agent can be accessed from different machine by hosting consul using -client <HOSTIP> option.
 ```
-NOTE: Agent can be run in secure mode and also bind it to host ip, Use below command. Additional configuration details found [here](https://www.consul.io/docs/guides/acl.html)
+consul agent -dev -client <HOSTIP> -config-dir=<CONFIG DIRECTORY PATH>
+```
+NOTE: If authentication is not needed. Run the agent in normal mode without -client and -config-dir options.
 
-```
-consul agent -dev -client <host ip> -config-dir=<configuration files dir>
-```
-
-## Registering and De-Registering mashling gateway
+## Register and De-Register gateway service
 
 Provided mashling-gateway-consul.json includes three triggers or services running on different ports.
-Flags '-a' and '-r' used to register and de-register.
+Options '-a' and '-r' is used to register and de-register. Both are mutually exclusive.
 
-register a mashling gateway app into consul
+Register gateway app into consul
 ```
-mashling publish -consul -a -f <mashling gateway json> -t <security token> -h <consul agent ip:port>
+mashling publish -consul -a -f mashling-gateway-consul.json -t b1gs33cr3t -h 127.0.0.1:8500
 ```
 
 Check the services registered using consul UI.
-1) open consul UI http://[CONSUL IP:PORT]/ui
-2) click on services tab
-3) All the triggers/services provided in gateway json are registered with consul
+1) Open consul UI http://127.0.0.1:8500/ui
+2) Click on services tab
+3) All the triggers/services provided in gateway json are listed there.
 
 
-de-register a mashling gateway app from consul
+De-Register gateway app from consul
 ```
-mashling publish -consul -r -f <mashling gateway json> -t <security token> -h <consul agent ip:port>
+mashling publish -consul -r -f mashling-gateway-consul.json -t b1gs33cr3t -h 127.0.0.1:8500
 ```
 Check the services de-registered using consul UI.
-1) open consul UI http://[CONSUL IP:PORT]/ui
-2) click on services tab
+1) Open consul UI http://127.0.0.1:8500/ui
+2) Click on services tab
 3) All the triggers/services provided in gateway json are de-registered/removed from consul
 
 ## Health Check
 create a gateway app using any mashling.json from available recipies and register it with consul using mashling cli.
 
 Run the gateway binary. Open URL to check the service health.
-1) open consul ui url http://[CONSUL IP:PORT]/ui
-2) click on nodes, selct respective agent node
-3) on right side we can see all the registered services highlited in green / orange colour.
+1) open consul ui url http://127.0.0.1:8500/ui
+2) click on nodes, select respective agent node
+3) Right side we can see all the registered services highlited in green / orange colour.
 
 Green represents good health and Orange represent critical health.
+
+## Using service defination folder flag
+Mashling cli is designed to support service defination folder option. This will generate consul service defination payload and stores it in user specified path.
+
+NOTE: Consul agent should be present on local machine to load the services from created directory.
+
+Register services
+```
+mashling publish -consul -a -f mashling-gateway-consul.json -t b1gs33cr3t -d <service defination directory>
+```
+Check the services in consul UI / agent logs.
+
+De-Register services
+```
+mashling publish -consul -r -f mashling-gateway-consul.json -t b1gs33cr3t -d <service defination directory>
+```
+Check the services in consul UI / agent logs.
