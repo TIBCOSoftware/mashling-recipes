@@ -2,6 +2,7 @@
   "recipe_repos":[
     {
       "provider":"TIBCOSoftware Engineering",
+      "url":"recipes",
       "description":"Mashling gateway recipes from TIBCOSoftware Engineering",
       "publish":[
         {
