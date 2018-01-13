@@ -34,8 +34,9 @@ script:
   - pushd mashling-cicd/sample-recipes
   - rm -rf builds
   - mkdir -p master-builds/latest/temp builds/latest
-  - chmod ugo+x ./build-reciperegistry.sh ./s3-clean.sh
+  - chmod ugo+x ./build-reciperegistry.sh ./s3-clean.sh ./sanity-test.sh
   - ./build-reciperegistry.sh OPTIMIZE=${OPTIMIZE}
+  - ./sanity-test.sh
   - ./s3-clean.sh
   - popd
 
