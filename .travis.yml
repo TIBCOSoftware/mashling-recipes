@@ -3,7 +3,17 @@ language :
   - go  
 before_install:
   - "echo -e \"machine github.com\n  login ${GITHUB_USER_TOKEN}\" >> ~/.netrc"
-  - pip install --user awscli 
+  - pip install --user awscli
+  - sudo apt-get install zookeeperd 
+  - go get github.com/constabulary/gb/...
+  - go get -u github.com/tools/godep/...
+  - sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa --yes
+  - sudo apt-add-repository ppa:duggan/jo --yes
+  - sudo apt-get update -q
+  - sudo apt-get install mosquitto
+  - sudo apt-get install libmosquitto-dev
+  - sudo apt-get install mosquitto-clients
+  - sudo apt-get install jo
 
 os: 
   - linux
@@ -12,13 +22,13 @@ branches:
   only:
     - master
     - /^v\d+\.\d+\.\d+(\.\d+)?(-\S*)?$/
+    - feature-enablesanitytests
 
 install:
-  - go get github.com/constabulary/gb/...
-  - go get -u github.com/tools/godep/...
-  - sudo apt-add-repository ppa:duggan/jo --yes
-  - sudo apt-get update -q
-  - sudo apt-get install jo
+  - cd $GOPATH
+  - wget http://www-eu.apache.org/dist/kafka/1.0.0/kafka_2.11-1.0.0.tgz -O $GOPATH/kafka.tgz
+  - mkdir -p $GOPATH/kafka && cd $GOPATH/kafka
+  - tar -xvzf $GOPATH/kafka.tgz --strip 1 > /tmp/kafka.log   
   - cd $GOPATH/src/github.com/TIBCOSoftware
   - git clone https://github.com/TIBCOSoftware/mashling.git mashling
   - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
