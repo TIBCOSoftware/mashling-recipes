@@ -1,0 +1,81 @@
+{
+  "mashling_schema": "0.2",
+  "gateway": {
+    "name": "gateway",
+    "version": "1.0.0",
+    "display_name": "HTTP Router Gateway",
+    "display_image": "displayImage.svg",
+    "description": "This gateway queries different endpoints based on path parameters where the endpoint URLs are supplied as environment parameters.",
+    "configurations": [
+      {
+        "name": "restConfig",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "description": "Configuration for the REST triggers",
+        "settings": {
+          "port": "9096"
+        }
+      }
+    ],
+    "triggers": [
+      {
+        "name": "hello_trigger",
+        "description": "REST trigger for Hello flows",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "settings": {
+          "config": "${configurations.restConfig}",
+          "method": "GET",
+          "path": "/hello/{name}",
+          "optimize": "true"
+        }
+      },
+      {
+        "name": "bye_trigger",
+        "description": "REST trigger for Bye flows",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "settings": {
+          "config": "${configurations.restConfig}",
+          "method": "GET",
+          "path": "/bye/{name}",
+          "optimize": "true"
+        }
+      }
+    ],
+    "event_handlers": [
+      {
+        "name": "get_handler",
+        "description": "Handle REST GET call",
+        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/TunableRestInvoker.json"
+      }
+    ],
+    "event_links": [
+      {
+        "triggers": [
+          "hello_trigger"
+        ],
+        "dispatches": [
+          {
+            "handler": "get_handler",
+            "inputParams": {
+              "id": "${pathParams.name}",
+              "endPoint": "${env.HELLO_API_ENDPOINT}"
+            }
+          }
+        ]
+      },
+      {
+        "triggers": [
+          "bye_trigger"
+        ],
+        "dispatches": [
+          {
+            "handler": "get_handler",
+            "inputParams": {
+              "id": "${pathParams.name}",
+              "endPoint": "${env.BYE_API_ENDPOINT}"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
