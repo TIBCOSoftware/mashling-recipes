@@ -7,6 +7,23 @@ For this scenario to work you'll need the following prerequisites installed:
 * A Kubernetes environment (for example minikube)
 * The Mashling CLI
 
+### Docker
+For this scenario we'll make use of [Docker Hub](https://hub.docker.com) to push the images to so that the Kubernetes cluster can access them. To make sure you can push your images to Docker Hub you'll need to:
+* Register at [Docker Hub](https://hub.docker.com/), which is free
+* Log in from your terminal so the Docker client knows where to push images to using `docker login`
+
+_Note that while this scenario uses Docker Hub, you can also leverage other container registries, including private ones, as long as your Kubernetes cluster is able to connect to it_
+
+### Minikube
+If you haven’t set up your own Kubernetes cluster yet, you might want to look at [minikube](https://github.com/kubernetes/minikube). The team has made an amazing effort to make it super easy to run your own cluster locally with minimal installation effort. The [readme](https://github.com/kubernetes/minikube/blob/master/README.md) is an excellent place to get started, including installing your own Kubernetes cluster. In this scenario we'll use a few minikube commands:
+* `minikube start` -> Start your minikube cluster
+* `minikube ip` -> Get the public IP address of your cluster
+
+_All commands are very well documented on the minikube repos_
+
+### Mashling CLI
+To install the Mashling CLI run `go get -u github.com/TIBCOSoftware/mashling/...`. This will install the latest version of the CLI on your machine, including any updates to the underlying dependencies (like [Project Flogo](https://github.com/TIBCOSoftware/flogo))
+
 ## Preparing the gateway
 The gateway for this scenario is based on the [tunable-rest-gateway](https://github.com/TIBCOSoftware/mashling-recipes/tree/master/recipes/tunable-rest-gateway), but there are a few key differences:
 * There are two triggers, each with their own path 
@@ -20,7 +37,7 @@ $ mashling create -f gateway.json gateway
 ```
 
 ## Building the gateway
-To build a gateway from this recipe that can run in an `alpine` docker container on Kubernetes we need to compile the gateway to work with linux:
+To build a gateway from this recipe that can run in an `alpine` docker container on Kubernetes we need to compile the gateway to work with linux. To do that, you'll need to add `env GOOS=linux` to your command to instruct the compiler to build for Linux operating systems:
 ```
 $ cd gateway
 $ env GOOS=linux mashling build
@@ -31,36 +48,55 @@ This command will create an executable called `gateway-linux-amd64` and will als
 Now that the executable is built, you can create a Docker image using `alpine` to keep the size of the app as low as possible. To do that copy the `Dockerfile` to the bin directory and execute
 ```
 ## Build image
-docker build . -t <your username>/gateway-app
-
+$ docker build . -t <your username>/gateway-app
+```
+To make your image available on Docker Hub you can execute the below command. Just be sure that you're logged in to your Docker Hub account using the `docker login` command.
+```
 ## Push to hub.docker.com
-docker push <your username>/gateway-app:latest
+$ docker push <your username>/gateway-app:latest
 ```
 
 ## Intermezzo
-Awesome! You just created a Docker images from your gateway and you could run it as a Docker image as well. To do that, you can use the `docker run` command:
+Awesome! You just created a Docker images from your gateway and you could run it as a Docker image as well. To do that we'll also need to have a few apps that will return some data to you. For this scenario you can make use of [TIBCO Cloud Integration](https://cloud.tibco.com) to create mock apps. The source code in this repo contains two Swagger files:
+* SwaggerFileAppOne.json
+* SwaggerFileAppTwo.json
+
+You can import these Swagger files in the API Modeler of TIBCO Cloud Integration:
+* Click on **API Specs** in the main menu of TIBCO Cloud Integration
+* Click on the upload icon
+* Select both Swagger files
+
+After that you can use them to create mock apps. To do that move the mouse pointer over an API specification and click > Create Mock app. After you've created the mock apps you can get the URLs for them by clicking on `View and Test 1 Endpoint` and selecting `copy`. These are the endpoints that we'll use later on as well for `<URL1>` and `<URL2>`
+
+To run your Mashling gateway as a docker container, you can use the `docker run` command:
 ```
-$ ## Run
-docker run --env HELLO_API_ENDPOINT=<URL1> --env BYE_API_ENDPOINT=<URL2> -p 9096:9096 <your username>/gateway-app
+$ docker run --env HELLO_API_ENDPOINT=<URL1> --env BYE_API_ENDPOINT=<URL2> -p 9096:9096 <your username>/gateway-app
 ```
-To spin up a few mock apps, you can make use of [TIBCO Cloud Integration](https://cloud.tibco.com) and import the two Swagger files and create Mock apps out of them
 
 ## Kubernetes
 Right, and now back to Kubernetes! To run the gateway on K8s you need to create a `deployment` and a `service` (the latter exposes the Mashling app to the outside world). You can use the accompanying `kube-deployment` and `kube-service` files, though make sure you change the variables for the Docker image and the URLs. After that, execute:
 ```
+## Start minikube if you haven't done that yet, or skip this step if you're not using minikube
+minikube start
+
 ## Create K8s deployment
 kubectl apply -f kube-deployment.yml
 
 ## Create K8s service
 kubectl apply -f kube-service.yml
 ```
+_Note that you do need to have your Kubernetes cluster running for this to work. If you haven't installed a Kubernetes cluster yet, you can check the prerequisites section for instructions for minikube_
 
 ## Testing
 You can now test the gateway app by simply executing a cURL command:
 ```
-$ curl --request http://<K8s>:30061/hello/world
+$ curl --request http://<K8s external IP>:30061/hello/world
 ```
-_note: you'll need to use the external IP address of your Kubernetes cluster_
+
+If you're using minikube to follow along this scenario you can get the external IP address by running
+```
+$ minikube ip
+```
 
 ## Changing the URLs after deployment
 If you want to change the URLs after you deployed your Mashling to Kubernetes you can simply edit the deployment and make changes to the environment variables.
