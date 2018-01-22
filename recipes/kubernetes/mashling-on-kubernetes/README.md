@@ -74,7 +74,7 @@ $ docker run --env HELLO_API_ENDPOINT=<URL1> --env BYE_API_ENDPOINT=<URL2> -p 90
 ```
 
 ## Kubernetes
-Right, and now back to Kubernetes! To run the gateway on K8s you need to create a `deployment` and a `service` (the latter exposes the Mashling app to the outside world). You can use the accompanying `kube-deployment` and `kube-service` files, though make sure you change the variables for the Docker image and the URLs. After that, execute:
+Right, and now back to Kubernetes! To run the gateway on K8s you need to create a deployment and a service (the latter exposes the Mashling app to the outside world). You can build them yourself or you can use the accompanying kube-deployment and kube-service files. If you do use the provided files, please make sure to change the variables for the Docker image and the URLs in kube-deployment. After that, execute:
 ```
 ## Start minikube if you haven't done that yet, or skip this step if you're not using minikube
 minikube start
