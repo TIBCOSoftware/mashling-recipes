@@ -66,7 +66,18 @@ You can import these Swagger files in the API Modeler of TIBCO Cloud Integration
 * Click on the upload icon
 * Select both Swagger files
 
-After that you can use them to create mock apps. To do that move the mouse pointer over an API specification and click > Create Mock app. After you've created the mock apps you can get the URLs for them by clicking on `View and Test 1 Endpoint` and selecting `copy`. These are the endpoints that we'll use later on as well for `<URL1>` and `<URL2>`
+After that you can use them to create mock apps. To do that move the mouse pointer over an API specification and click > Create Mock app. After you've created the mock apps you can get the URLs for them by clicking on `View and Test 1 Endpoint` and selecting `copy`. These are the endpoints that we'll use later on as well for `<URL1>` and `<URL2>`. The two Swagger files contain path parameters (`{name}`), to make sure the Mashling understand it should take that as a parameter as well you'll need to add `:id` at the end of the copied URL. The `id` is referenced in gateway.json (line [59](./gateway.json#L59) and [73](../gateway.json#L59)) where it substitutes the parameter for the actual value you supplied.
+
+As an example:
+
+**URL you have copied**
+
+`https://integration.cloud.tibcoapps.com:443/<uuid>/greeting`  
+
+**URL you need to use**
+
+`https://integration.cloud.tibcoapps.com:443/<uuid>/greeting/:id`
+
 
 To run your Mashling gateway as a docker container, you can use the `docker run` command:
 ```
@@ -90,7 +101,7 @@ _Note that you do need to have your Kubernetes cluster running for this to work.
 ## Testing
 You can now test the gateway app by simply executing a cURL command:
 ```
-$ curl --request http://<K8s external IP>:30061/hello/world
+$ curl http://<K8s external IP>:30061/hello/world
 ```
 
 If you're using minikube to follow along this scenario you can get the external IP address by running
