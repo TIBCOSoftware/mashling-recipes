@@ -31,7 +31,7 @@ install:
   - tar -xvzf $GOPATH/kafka.tgz --strip 1 > /tmp/kafka.log   
   - cd $GOPATH/src/github.com/TIBCOSoftware
   - git clone https://github.com/TIBCOSoftware/mashling.git mashling
-  - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
+  - git clone -b enhancement-recipeinfojson https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
   - cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling
   - cd mashling
   - godep restore
