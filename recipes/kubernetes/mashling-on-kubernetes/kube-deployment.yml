@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gwdeployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gateway-router
+    spec:
+      containers:
+      - name: gateway-router
+        image: <your username>/gateway-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9096
+        env:
+          - name: HELLO_API_ENDPOINT
+            value: "<URL1>"
+          - name: BYE_API_ENDPOINT
+            value: "<URL2>"
