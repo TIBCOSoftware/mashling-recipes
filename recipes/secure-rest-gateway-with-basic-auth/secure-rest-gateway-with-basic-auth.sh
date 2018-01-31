@@ -36,7 +36,7 @@ export BASIC_AUTH_FILE=$GOPATH/pswd.txt
 pId=$!
 response=$(curl --request GET http://foo:badpass@localhost:9096/pets/3 --write-out '%{http_code}' --silent --output /dev/null)
 kill -9 $pId
-if [ $response -eq 200  ] 
+if [ $response -eq 403  ] 
     then 
         echo "PASS"
     else
