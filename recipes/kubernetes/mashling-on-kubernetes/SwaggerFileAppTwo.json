@@ -1,0 +1,58 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "NodejsApp",
+    "x-lastModified": "Jan 17, 2018 08:27AM PST",
+    "description": "This API spec will be the base for my Node.js App 1.0.0"
+  },
+  "paths": {
+    "/farewell/{name}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/GiveNewSchemaNameHere"
+            },
+            "examples": {
+              "application/json": {
+                "name": "Leon",
+                "greeting": "Hello Leon"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": ""
+          }
+        ],
+        "operationId": "getGreeting_name"
+      }
+    }
+  },
+  "definitions": {
+    "GiveNewSchemaNameHere": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "default": "Leon"
+        },
+        "greeting": {
+          "type": "string",
+          "default": "Bye Leon"
+        }
+      }
+    }
+  }
+}
