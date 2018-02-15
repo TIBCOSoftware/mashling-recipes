@@ -14,6 +14,10 @@ func main() {
 		}
 		log.Println(r.RequestURI)
 		log.Println(string(body))
+		_, err = w.Write(body)
+		if err != nil {
+			log.Println(err)
+		}
 	}
 	http.HandleFunc("/a", handler)
 	http.HandleFunc("/b", handler)
