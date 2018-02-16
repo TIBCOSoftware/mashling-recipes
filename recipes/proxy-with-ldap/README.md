@@ -7,7 +7,6 @@ LDAP based Basic Auth.
 * Docker [docker](https://www.docker.com)
 * Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
 * Zipkin [zipkin](http://zipkin.io/pages/quickstart)
-* OpenLDAP [openldap](https://help.ubuntu.com/lts/serverguide/openldap-server.html) Follow the instructions in the following sections: Installation, Modifying/Populating your Database, and TLS.
 
 ## Setup
 ```
@@ -19,6 +18,10 @@ cp key.pem proxy-with-ldap/
 ```
 
 ## Testing
+Start the LDAP server:
+```
+docker run -d -p 1234:389 pointlander/ldap
+```
 Start the proxy:
 ```
 cd proxy-with-ldap
