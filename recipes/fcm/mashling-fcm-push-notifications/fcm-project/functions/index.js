@@ -8,6 +8,7 @@ admin.initializeApp(functions.config().firebase);
  * Sends push notifications to all mashling followers.
  */
 exports.sendPushNotification = functions.https.onRequest((req, res) => {
+  const notificationMessage = req.body.message;
   return admin.database().ref('/mashlingfollowers').once('value', function(snapshot){
     //get all mashling followers user ids
     if(!snapshot.hasChildren()) {
@@ -36,8 +37,8 @@ exports.sendPushNotification = functions.https.onRequest((req, res) => {
           //create notification payload
           const payload = {
             notification: {
-              title: 'Notification from Mashling !!',
-              body: `Hello - ${mashlingFollowerClientName}`,
+              title: `Hello - ${mashlingFollowerClientName} !!`,
+              body: `${notificationMessage}`,
               icon: 'mashling.png',
             },
           };
