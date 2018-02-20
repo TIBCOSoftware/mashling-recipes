@@ -51,3 +51,10 @@ _testmain.go
 
 tags
 .vscode/*
+
+## FCM
+**/node_modules/*
+**/.firebaserc
+*/npm-debug.log
+*~
+service-account-credentials.json
