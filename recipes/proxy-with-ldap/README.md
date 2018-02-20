@@ -13,7 +13,7 @@ LDAP based Basic Auth.
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/proxy-with-ldap
 mashling create -f proxy-with-ldap.json proxy-with-ldap
-cp -r cert/ proxy-with-ldap/
+cp -r cert proxy-with-ldap/
 cp key.pem proxy-with-ldap/
 ```
 
