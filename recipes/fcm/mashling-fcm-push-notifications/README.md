@@ -60,7 +60,7 @@ Screenshot for reference:
 curl -X POST localhost:9096/notification -d '{"message":"Message from gateway !!"}'
 `
 7. You should see desktop nofication when chrome browser window is minimized.<br>
-Notification screenshot for reference:
+Notification screenshot for reference:<br>
 ![Screenshot](notification_screenshot.png)
 
 ## License
