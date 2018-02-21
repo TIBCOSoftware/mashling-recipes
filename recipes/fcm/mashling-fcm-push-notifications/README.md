@@ -5,6 +5,13 @@ This recipe demonstrates how **Mashling** can laverage FCM cloud function, realt
 Pictorial representation of the recipe solution.
 ![Screenshot](mashling_fcm.png)
 
+* STEP 1: Client [Desktop web app / mobile] application registers itself with FCM.
+* STEP 2: FCM generates registration id for the client.
+* STEP 3: Client subscribes to receive push notifications from Mashling by sending registration id to cloud function.
+* STEP 4: Mashling triggers push notification by invokding cloud function.
+* STEP 5: Cloud function invokes FCM to send push notifications to registred users by providing notification payload + client registration ids.
+* STEP 6: FCM sends push notification to clients & Client shows notification to user.
+
 ## Installation
 ### Prerequisites
 * Node.js SDK [npm, node](https://nodejs.org/en/download/)
@@ -14,7 +21,7 @@ Pictorial representation of the recipe solution.
 Solution consists of two projects.
 * fcm-project
     * Web application for user to subscribe Mashling push notifications.
-    * Cloud function to send push notifications to registered uses using FCM messaging service.
+    * Cloud function to send push notifications to registered users using FCM messaging service.
 * gateway-project - Mashling gateway descriptor with one HTTP trigger & FCM cloud function invoke handler.
 
 ### Source code
@@ -27,7 +34,7 @@ Solution consists of two projects.
 2. Enable Google Provider in the Auth section (Firebase Console -> Authentication -> SIGN-IN METHOD).
 3. Navigate to fcm-project directory by running: `cd fcm-project`.
 4. You must have the Firebase CLI installed. If you don't have it install it with `npm install -g firebase-tools` and then configure it with `firebase login`.
-5. Configure the CLI locally by using `firebase use --add` and select your project in the list.
+5. Configure the CLI locally by using `firebase use --add` and select your project (created in step-1) in the list.
 6. Install dependencies locally by running: `cd functions; npm install; cd -`
 7. Deploy your project using `firebase deploy`
 8. Capture `Hosting URL` & cloud `Function URL` from the console.<br>
@@ -38,7 +45,7 @@ Screenshot for reference:
 ### Create Mashling gateway
 
 1. Navigate to gateway-projct directory `cd ../gateway-project/`
-2. Update `endPoint` value in gateway.json with cloud `Function URL` captured in previous secion.
+2. Update `endPoint` value in gateway.json with cloud `Function URL` captured in previous section.
 3. Create Mashling gateway by running `mashling create -f gateway.json gateway`.
 
 ## testing
@@ -48,7 +55,7 @@ Screenshot for reference:
 3. Accept security confirmation to receive notifications.
 4. Enable `Mashling gateway push notifications` preference.
 5. Run the Mashling gateway app by using `cd gateway/bin; ./gateway`
-6. Perform HTTP POST call using
+6. Open another terminal & Perform HTTP POST call using
 `
 curl -X POST localhost:9096/notification -d '{"message":"Message from gateway !!"}'
 `
