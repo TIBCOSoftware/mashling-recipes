@@ -55,9 +55,9 @@ Screenshot for reference:
 3. Accept security confirmation to receive notifications.
 4. Enable `Mashling gateway push notifications` preference.
 5. Run the Mashling gateway app by using `cd gateway/bin; ./gateway`
-6. Open another terminal & Perform HTTP POST call using
+6. Open another terminal & Perform HTTP POST call using <br>
 `
-curl -X POST localhost:9096/notification -d '{"message":"Message from gateway !!"}'
+curl -X POST localhost:9096/notification -d '{"messageType":"push","message":"Message from gateway !!"}'
 `
 7. You should see desktop nofication when chrome browser window is minimized.<br>
 Notification screenshot for reference:<br>
