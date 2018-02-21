@@ -30,7 +30,10 @@ Solution consists of two projects.
 5. Configure the CLI locally by using `firebase use --add` and select your project in the list.
 6. Install dependencies locally by running: `cd functions; npm install; cd -`
 7. Deploy your project using `firebase deploy`
-8. Capture `Hosting URL` & cloud `Function URL` from the console.
+8. Capture `Hosting URL` & cloud `Function URL` from the console.<br>
+Screenshot for reference:
+![Screenshot](cli_screenshot.png)
+
 
 ### Create Mashling gateway
 
@@ -47,9 +50,11 @@ Solution consists of two projects.
 5. Run the Mashling gateway app by using `cd gateway/bin; ./gateway`
 6. Perform HTTP POST call using
 `
-curl -X POST localhost:9096/notification -d '{"message":"how are you?"}'
+curl -X POST localhost:9096/notification -d '{"message":"Message from gateway !!"}'
 `
-7. You should see desktop nofication when chrome browser window is minimized.
+7. You should see desktop nofication when chrome browser window is minimized.<br>
+Notification screenshot for reference:
+![Screenshot](notification_screenshot.png)
 
 ## License
 mashling is licensed under a BSD-type license. See TIBCO LICENSE.txt for license text.
