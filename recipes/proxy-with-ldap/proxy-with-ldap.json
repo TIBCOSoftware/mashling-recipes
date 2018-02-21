@@ -19,6 +19,7 @@
           "serverKey": "./key.pem",
           "enableClientAuth": "true",
           "trustStore": "./cert/",
+          "ldapHost": "localhost",
           "ldapPort": "1234",
           "ldapBase": "dc=nodomain"
         }
