@@ -19,9 +19,10 @@ Pictorial representation of the recipe solution.
 
 ## Getting Started
 Solution consists of two projects.
-* fcm-project
-    * Web application for user to subscribe Mashling push notifications.
-    * Cloud function to send push notifications to registered users using FCM messaging service.
+* fcm-project - Node.js based project consists of 3 modules.
+    * Web application - Based on FCM hosting service. It provides browser based user interface through which user can subscribe to receive push notifications from Mashling gateway.
+    * Database - Based on FCM realtime database. Responsible for maintaining registred users & Mashling followers records.
+    * Cloud function - Based on FCM Functions. When it is invoked, It sends push notifications to registered users using FCM messaging service.
 * gateway-project - Mashling gateway descriptor with one HTTP trigger & FCM cloud function invoke handler.
 
 ### Source code
