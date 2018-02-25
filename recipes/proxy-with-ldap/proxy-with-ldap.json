@@ -50,6 +50,16 @@
         "triggers": ["rest_trigger"],
         "dispatches": [
           {
+            "if": "${trigger.content._body[0]._name == test}",
+            "handler": "rest_handler",
+            "inputParams": {
+              "method": "POST",
+              "uri": "http://localhost:8080/c",
+              "content": "${content}",
+              "tracing": "${tracing}"
+            }
+          },
+          {
             "if": "${trigger.header.SOAPAction == test}",
             "handler": "rest_handler",
             "inputParams": {
