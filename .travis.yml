@@ -6,7 +6,7 @@ before_install:
   - pip install --user awscli
   - sudo apt-get install zookeeperd 
   - go get github.com/constabulary/gb/...
-  - go get -u github.com/tools/godep/...
+  - go get -u github.com/golang/dep/cmd/dep
   - sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa --yes
   - sudo apt-add-repository ppa:duggan/jo --yes
   - sudo apt-get update -q
@@ -31,10 +31,8 @@ install:
   - cd $GOPATH/src/github.com/TIBCOSoftware
   - git clone https://github.com/TIBCOSoftware/mashling.git mashling
   - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
-  - cp -r $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/dependency-config/* $GOPATH/src/github.com/TIBCOSoftware/mashling
   - cd mashling
-  - godep restore
-  - go install ./...
+  - dep ensure
   - make all
   - mashling help
   
