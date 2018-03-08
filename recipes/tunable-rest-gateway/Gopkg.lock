@@ -250,7 +250,7 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "91a49db82a88618983a78a06c1cbd4e00ab749ab"
+  revision = "85f98707c97e11569271e4d9b3d397e079c4f4d0"
 
 [[projects]]
   branch = "master"
@@ -264,7 +264,7 @@
     "lex/httplex",
     "trace"
   ]
-  revision = "d25186b37f34ebdbbea8f488ef055638dfab272d"
+  revision = "07e8617a6db2368fa55d4616f371ee1b1403c817"
 
 [[projects]]
   branch = "master"
@@ -273,7 +273,7 @@
     "unix",
     "windows"
   ]
-  revision = "dd2ff4accc098aceecb86b36eaa7829b2a17b1c9"
+  revision = "349b81fb5c64ec1734eb6ee148df25459ea48517"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -348,6 +348,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "7dcc830f80fc1ef4c3173ea0754648d3aa44e96d9fd3e853e896eb56d57662d7"
+  inputs-digest = "7eebe569f67a33f962194304f11267d2b676639ea64564f7cf4270b19be0fcc0"
   solver-name = "gps-cdcl"
   solver-version = 1
