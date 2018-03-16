@@ -1,21 +1,11 @@
 {
   "mashling_schema": "0.2",
   "gateway": {
-    "name": "secure-rest-gateway-with-basic-auth",
+    "name": "eftl-producer",
     "version": "1.0.0",
-    "display_name":"EFTL Gateway",
+    "display_name":"EFTL Producer",
     "description": "This is the EFTL based microgateway app",
     "configurations": [
-      {
-        "name": "eftlConfig",
-        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/eftl",
-        "description": "Configuration for rest trigger",
-        "settings": {
-          "url": "ws://localhost:9191/channel",
-          "tracer": "zipkin",
-          "tracerEndpoint": "http://localhost:9411/api/v1/spans"
-        }
-      },
       {
         "name": "restConfig",
         "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
@@ -28,16 +18,6 @@
       }
     ],
     "triggers": [
-      {
-        "name": "eftl_trigger",
-        "description": "EFTL trigger",
-        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/eftl",
-        "settings": {
-          "config": "${configurations.eftlConfig}",
-          "dest": "sample",
-          "optimize":"true"
-        }
-      },
       {
         "name": "rest_trigger",
         "description": "POST trigger",
@@ -52,31 +32,12 @@
     ],
     "event_handlers": [
       {
-        "name": "rest_handler",
-        "description": "Handle rest",
-        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/Proxy.json"
-      },
-      {
         "name": "eftl_handler",
         "description": "Handle EFTL",
         "reference": "github.com/TIBCOSoftware/mashling/lib/flow/EFTLProducer.json"
       }
     ],
     "event_links": [
-      {
-        "triggers": ["eftl_trigger"],
-        "dispatches": [
-          {
-            "handler": "rest_handler",
-            "inputParams": {
-              "method": "POST",
-              "uri": "http://localhost:8181/a",
-              "content": "${content}",
-              "tracing": "${tracing}"
-            }
-          }
-        ]
-      },
       {
         "triggers": ["rest_trigger"],
         "dispatches": [

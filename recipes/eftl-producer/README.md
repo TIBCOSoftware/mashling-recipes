@@ -1,5 +1,5 @@
-# MQTT Producer
-This recipe demonstrates the use of EFTL
+# EFTL Producer
+This recipe demonstrates the use of the EFTL activity to generate EFTL messages from HTTP requests.
 
 ## Installation
 * Docker [docker](https://www.docker.com)
@@ -13,8 +13,9 @@ Follow the installation instructions for your platform [here](https://docs.tibco
 ## Setup
 ```
 git clone https://github.com/TIBCOSoftware/mashling-recipes
-cd mashling-recipes/recipes/eftl-gateway
-mashling create -f eftl-gateway.json eftl-gateway
+cd mashling-recipes/recipes/eftl-producer
+mashling create -f eftl-producer.json eftl-producer
+go install github.com/gorilla/websocket
 ```
 
 To start the EFTL server run step_1.sh and then in another terminal run step_2.sh
@@ -22,12 +23,12 @@ To start the EFTL server run step_1.sh and then in another terminal run step_2.s
 ## Testing
 Open a terminal and run:
 ```
-eftl-gateway/bin/eftl-gateway
+eftl-producer/bin/eftl-producer
 ```
 
-Then open another terminal and run:
+Then open another terminal and run the EFTL client:
 ```
-go run target/main.go
+go run client/main.go
 ```
 
 Open another terminal and run:
@@ -35,4 +36,4 @@ Open another terminal and run:
 curl -d "{\"message\": \"hello world\"}" http://localhost:9096
 ```
 
-The target service should log a request.
+The EFTL client should log a message.
