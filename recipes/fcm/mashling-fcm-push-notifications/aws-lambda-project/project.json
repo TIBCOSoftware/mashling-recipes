@@ -1,0 +1,8 @@
+{
+  "name": "mashling-fcm",
+  "description": "Send Push Notifications",
+  "memory": 128,
+  "timeout": 5,
+  "role": "arn:aws:iam::780910597740:role/mashling-fcm_lambda_function",
+  "environment": {}
+}
