@@ -18,7 +18,15 @@ mashling create -f eftl-producer.json eftl-producer
 go install github.com/gorilla/websocket
 ```
 
-To start the EFTL server run step_1.sh and then in another terminal run step_2.sh
+To start the EFTL server run:
+```
+go run helper/main.go -ftl
+```
+
+Then in another terminal run:
+```
+go run helper/main.go -eftl
+```
 
 ## Testing
 Open a terminal and run:
