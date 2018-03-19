@@ -1,13 +1,13 @@
 # Mashling Push Notifications using FCM
 
-This recipe demonstrates how **Mashling** can laverage FCM cloud function, realtime databe & messaging services to send push notifications to its registred users.
+This recipe demonstrates how **Mashling** can send push notifications to its registred desktop chrome clients using Firebase. This solution can be easily extended to other clients like - Android, iOS, etc.
 
 Pictorial representation of the recipe solution.
 ![Screenshot](mashling_fcm.png)
 
-* STEP 1: Client [Desktop web app / mobile] application registers itself with FCM.
+* STEP 1: Chrome web application (Client) registers itself with FCM.
 * STEP 2: FCM generates registration id for the client.
-* STEP 3: Client subscribes to receive push notifications from Mashling by sending registration id to cloud function.
+* STEP 3: Client application sends registration id to cloud function.
 * STEP 4: Mashling triggers push notification by invokding cloud function.
 * STEP 5: Cloud function invokes FCM to send push notifications to registred users by providing notification payload + client registration ids.
 * STEP 6: FCM sends push notification to clients & Client shows notification to user.
