@@ -1,0 +1,6 @@
+organization = Example Company
+cn = ldap01.example.com
+tls_www_server
+encryption_key
+signing_key
+expiration_days = 3650

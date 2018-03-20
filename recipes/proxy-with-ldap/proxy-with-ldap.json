@@ -1,0 +1,85 @@
+{
+  "mashling_schema": "0.2",
+  "gateway": {
+    "name": "proxy-with-ldap",
+    "version": "1.0.0",
+    "display_name":"Proxy with LDAP",
+    "description": "Mashling Proxy with LDAP",
+    "configurations": [
+      {
+        "name": "restConfig",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "description": "Configuration for rest trigger",
+        "settings": {
+          "port": "9096",
+          "tracer": "zipkin",
+          "tracerEndpoint": "http://localhost:9411/api/v1/spans",
+          "enableTLS": "true",
+          "serverCert": "./cert/cert.pem",
+          "serverKey": "./key.pem",
+          "enableClientAuth": "true",
+          "trustStore": "./cert/",
+          "ldapHost": "localhost",
+          "ldapPort": "1234",
+          "ldapBase": "dc=nodomain"
+        }
+      }
+    ],
+    "triggers": [
+      {
+        "name": "rest_trigger",
+        "description": "POST trigger",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "settings": {
+          "config": "${configurations.restConfig}",
+          "method": "POST",
+          "path": "/",
+          "optimize":"true"
+        }
+      }
+    ],
+    "event_handlers": [
+      {
+        "name": "rest_handler",
+        "description": "Handle XML",
+        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/Proxy.json"
+      }
+    ],
+    "event_links": [
+      {
+        "triggers": ["rest_trigger"],
+        "dispatches": [
+          {
+            "if": "${trigger.content._body[0]._name == test}",
+            "handler": "rest_handler",
+            "inputParams": {
+              "method": "POST",
+              "uri": "http://localhost:8080/c",
+              "content": "${content}",
+              "tracing": "${tracing}"
+            }
+          },
+          {
+            "if": "${trigger.header.SOAPAction == test}",
+            "handler": "rest_handler",
+            "inputParams": {
+              "method": "POST",
+              "uri": "http://localhost:8080/a",
+              "content": "${content}",
+              "tracing": "${tracing}"
+            }
+          },
+          {
+            "handler": "rest_handler",
+            "inputParams": {
+              "method": "POST",
+              "uri": "http://localhost:8080/b",
+              "content": "${content}",
+              "tracing": "${tracing}"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
