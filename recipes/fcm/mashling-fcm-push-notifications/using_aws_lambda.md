@@ -34,12 +34,12 @@ Screenshot for reference:
 2. Install dependencies locally by running: `npm install`
 3. Edit index.js by updating Firebase project access credentials (`projectId, clientEmail, privateKey and databaseURL`). <br>
 Firebase project credentials can be generated from [Firebase console](https://console.firebase.google.com/) -> Your Firebase Project -> Service Accounts tab -> Firebase Admin SDK section -> Generate New Private Key <br>
-databaseURL can be found at - [Firebase console](https://console.firebase.google.com/) -> Your Firebase Project -> Database page 
+databaseURL can be found at - [Firebase console](https://console.firebase.google.com/) -> Your Firebase Project -> Database page -> Get started -> Realtime database
 4. Create a deployment package by using zip utility `zip -r ../sendPushNotification.zip .`
 5. Login to https://aws.amazon.com/console/ and navigate to Services -> Lambda -> Create function with name `test`
 Screenshot for reference:
 ![Screenshot](lambda_creation.png)
-6. Upload function package - sendPushNotification.zip under configuration section.
+6. Upload function package - sendPushNotification.zip under configuration tab -> select "test" function -> Function code -> Code entry type -> select dropdown "Upload a .ZIP file"
 Note: Increase function Timeout 1 min to avoid time-out issues.
 
 
@@ -54,7 +54,7 @@ Note: Increase function Timeout 1 min to avoid time-out issues.
 2. Login with your google account.
 3. Accept security confirmation to receive notifications.
 4. Enable `Mashling gateway push notifications` preference.
-5. Set AWS IAM user access credentials as environment variables. `export accessKey=AWS_ACCESS_KEY` AND `export secretKey=AWS_SECRET_KEY`
+5. Set AWS IAM user access credentials as environment variables. `export access=AWS_ACCESS_KEY` AND `export secret=AWS_SECRET_KEY`
 6. Run the Mashling gateway app by using `cd gateway_lambda/bin; ./gateway_lambda`
 7. Open another terminal & Perform HTTP POST call using <br>
 `
