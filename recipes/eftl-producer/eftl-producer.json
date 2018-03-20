@@ -1,0 +1,58 @@
+{
+  "mashling_schema": "0.2",
+  "gateway": {
+    "name": "eftl-producer",
+    "version": "1.0.0",
+    "display_name":"EFTL Producer",
+    "description": "This is the EFTL based microgateway app",
+    "configurations": [
+      {
+        "name": "restConfig",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "description": "Configuration for rest trigger",
+        "settings": {
+          "port": "9096",
+          "tracer": "zipkin",
+          "tracerEndpoint": "http://localhost:9411/api/v1/spans"
+        }
+      }
+    ],
+    "triggers": [
+      {
+        "name": "rest_trigger",
+        "description": "POST trigger",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "settings": {
+          "config": "${configurations.restConfig}",
+          "method": "POST",
+          "path": "/",
+          "optimize":"true"
+        }
+      }
+    ],
+    "event_handlers": [
+      {
+        "name": "eftl_handler",
+        "description": "Handle EFTL",
+        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/EFTLProducer.json"
+      }
+    ],
+    "event_links": [
+      {
+        "triggers": ["rest_trigger"],
+        "dispatches": [
+          {
+            "handler": "eftl_handler",
+            "inputParams": {
+              "content": "${content}",
+              "dest": "sample",
+              "url": "ws://localhost:9191/channel",
+              "id": "mashling_client",
+              "tracing": "${tracing}"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

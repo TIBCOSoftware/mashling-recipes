@@ -1,0 +1,56 @@
+{
+  "mashling_schema": "0.2",
+  "gateway": {
+    "name": "eftl-consumer",
+    "version": "1.0.0",
+    "display_name":"EFTL Consumer",
+    "description": "This is the EFTL based microgateway app",
+    "configurations": [
+      {
+        "name": "eftlConfig",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/eftl",
+        "description": "Configuration for rest trigger",
+        "settings": {
+          "url": "ws://localhost:9191/channel",
+          "tracer": "zipkin",
+          "tracerEndpoint": "http://localhost:9411/api/v1/spans"
+        }
+      }
+    ],
+    "triggers": [
+      {
+        "name": "eftl_trigger",
+        "description": "EFTL trigger",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/eftl",
+        "settings": {
+          "config": "${configurations.eftlConfig}",
+          "dest": "sample",
+          "optimize":"true"
+        }
+      }
+    ],
+    "event_handlers": [
+      {
+        "name": "rest_handler",
+        "description": "Handle rest",
+        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/Proxy.json"
+      }
+    ],
+    "event_links": [
+      {
+        "triggers": ["eftl_trigger"],
+        "dispatches": [
+          {
+            "handler": "rest_handler",
+            "inputParams": {
+              "method": "POST",
+              "uri": "http://localhost:8181/a",
+              "content": "${content}",
+              "tracing": "${tracing}"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
