@@ -50,7 +50,7 @@
             "handler": "invoke_fcm_cloud_function",
             "inputParams":{
               "content":"${content}",
-              "endPoint":"https://us-central1-test-8cdf6.cloudfunctions.net/sendPushNotification"
+              "endPoint":"TO_BE_UPDATED_BY_RECIPE_USER"
             }
           },
           {

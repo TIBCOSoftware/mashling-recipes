@@ -1,0 +1,63 @@
+{
+    "mashling_schema": "0.2",
+    "gateway": {
+      "name": "gwPushNotifications",
+      "version": "1.0.0",
+      "display_name":"Mashling Push Notifications",
+      "display_image":"displayImage.svg",
+      "description": "This gateway that content routes to FCM cloud functions which sends notification messages or data messages to registered client devices.",
+      "configurations": [
+        {
+          "name": "restConfig",
+          "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+          "description": "Configuration for rest trigger",
+          "settings": {
+            "port": "9096"
+          }
+        }
+      ],
+      "triggers": [
+        {
+          "name": "rest_trigger",
+          "description": "Rest trigger",
+          "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+          "settings": {
+            "config": "${configurations.restConfig}",
+            "method": "POST",
+            "path": "/notification",
+            "optimize":"true"
+          }
+        }
+      ],
+      "event_handlers": [
+        {
+            "name": "invoke_aws_lambda",
+            "description": "Lambda function - Sends push notifications to registered client devices.",
+            "reference": "github.com/pointlander/lambda/lib/flow/Lambda.json"
+        },
+        {
+          "name": "default_handler",
+          "description": "Default handler.",
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/TunableRestInvokerPost.json"
+        }
+      ],
+      "event_links": [
+        {
+          "triggers": ["rest_trigger"],
+          "dispatches": [
+            {
+              "if":"${trigger.content.messageType == push}",
+              "handler": "invoke_aws_lambda"
+            },
+            {
+              "handler": "default_handler",
+              "inputParams":{
+                "content":"${content}",
+                "endPoint":"https://postman-echo.com/post"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
