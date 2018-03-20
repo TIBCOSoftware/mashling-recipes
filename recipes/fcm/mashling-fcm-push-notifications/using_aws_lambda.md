@@ -37,6 +37,8 @@ Firebase project credentials can be generated from [Firebase console](https://co
 databaseURL can be found at - [Firebase console](https://console.firebase.google.com/) -> Your Firebase Project -> Database page 
 4. Create a deployment package by using zip utility `zip -r ../sendPushNotification.zip .`
 5. Login to https://aws.amazon.com/console/ and navigate to Services -> Lambda -> Create function with name `test`
+Screenshot for reference:
+![Screenshot](lambda_creation.png)
 6. Upload function package - sendPushNotification.zip under configuration section.
 Note: Increase function Timeout 1 min to avoid time-out issues.
 
