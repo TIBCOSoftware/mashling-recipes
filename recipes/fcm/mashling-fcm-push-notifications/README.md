@@ -1,8 +1,8 @@
-# Mashling Push Notifications using FCM
+# Mashling Push Notifications using Firebase
 
 This recipe demonstrates how **Mashling** can send push notifications to its registred desktop chrome clients using Firebase.
 
-Pictorial representation of the recipe solution.
+Pictorial representation of the recipe solution:
 ![Screenshot](mashling_fcm.png)
 
 * STEP 1: Open Mashling push notification web application using Chrome.
@@ -23,4 +23,4 @@ Please follow below steps based on where you want to deploy serverless function:
 ## License
 mashling is licensed under a BSD-type license. See TIBCO LICENSE.txt for license text.
 
-fcm-project is licenced under Apache-2.0 license.
+fcm-project and aws-lambda-project licenced under Apache-2.0 license.
