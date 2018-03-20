@@ -3,8 +3,7 @@
 exports.handler = (e, ctx, cb) => {
     ctx.callbackWaitsForEmptyEventLoop = false;
 
-    var eventJsonBody = e['body-json'];
-    const notificationMessage = eventJsonBody.message;
+    const notificationMessage = e['message'];
 
     var admin = require('firebase-admin');
     admin.initializeApp({
@@ -21,7 +20,8 @@ exports.handler = (e, ctx, cb) => {
         if (!snapshot.hasChildren()) {
             admin.app('[DEFAULT]').delete();
             console.log("{There are no mashling followers.}");
-            cb(null, "{There are no mashling followers.}");
+            var response = {"Status":"There are no mashling followers"};
+            cb(null, response);
         } else {
             //list mashling follower user ids.
             const mashlingFllowersUids = [];
@@ -63,15 +63,18 @@ exports.handler = (e, ctx, cb) => {
                     admin.messaging().sendToDevice(mashlingFollowerClientTokens, payload)
                         .then(function (fcmResp) {
                             admin.app('[DEFAULT]').delete();
-                            cb(null, "{Push notification sent successfully}");
+                            var response = {"Status":"Push notification sent successfully"};
+                            cb(null, response);
                         })
                         .catch(function (fcmError) {
                             admin.app('[DEFAULT]').delete();
-                            cb(null, "{error while sending push notification}");
+                            var response = {"Status":"error while sending push notification"};
+                            cb(null, response);
                         });
                 } else {
                     admin.app('[DEFAULT]').delete();
-                    cb(null, "{There are no mashling followers.}");
+                    var response = {"Status":"There are no mashling followers"};
+                    cb(null, response);
                 }
             });
         }
