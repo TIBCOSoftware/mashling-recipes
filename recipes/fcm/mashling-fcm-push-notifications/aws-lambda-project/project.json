@@ -1,0 +1,7 @@
+{
+  "name": "mashling-fcm",
+  "description": "Send Push Notifications",
+  "memory": 128,
+  "timeout": 60,
+  "environment": {}
+}

@@ -1,0 +1,69 @@
+html, body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+}
+.mdl-grid {
+  max-width: 1024px;
+  margin: auto;
+}
+.mdl-card {
+  min-height: 0;
+  padding-bottom: 5px;
+}
+.mdl-layout__header-row {
+  padding: 0;
+}
+h3 {
+  padding: 5px;
+  background: url('mascot-mashling.svg') no-repeat;
+  background-size: 35px;
+  padding-left: 35px;
+}
+#demo-signed-out-card,
+#demo-signed-in-card {
+  display: none;
+}
+#demo-profile-pic {
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;
+  margin-left: calc(50% - 30px);
+  margin-top: 10px;
+}
+#demo-name-container {
+  font-weight: bold;
+}
+#demo-fcm-error-container {
+  margin-bottom: 20px;
+}
+#demo-delete-button {
+  margin-left: 20px;
+}
+#demo-all-users-list {
+  margin-bottom: -5px;
+}
+.demo-user-container {
+  position: relative;
+}
+.demo-user-container:HOVER {
+  background-color: #eee;
+}
+.demo-profile-pic {
+  height: 50px;
+  width: 50px;
+}
+.demo-name {
+  margin-left: 15px;
+}
+.mdl-switch {
+  display: inline-block;
+  right: 0;
+  position: absolute;
+  width: auto;
+  padding-right: 40px;
+  top: 13px;
+}
+.demo-notifications-enabled {
+  color: #aaa;
+  font-size: 80%;
+  display: none;
+}

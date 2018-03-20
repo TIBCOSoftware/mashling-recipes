@@ -1,0 +1,16 @@
+{
+  "rules": {
+    "mashlingusers": {
+      ".read": true,
+      "$uid": {
+        ".write": "auth.uid === $uid"
+      }
+    },
+    "mashlingfollowers": {
+      ".read": true,
+      "$uid": {
+        ".write": "auth.uid === $uid"
+      }
+    }
+  }
+}
