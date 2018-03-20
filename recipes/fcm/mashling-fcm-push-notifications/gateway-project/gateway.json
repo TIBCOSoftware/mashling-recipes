@@ -33,12 +33,12 @@
       {
         "name": "invoke_fcm_cloud_function",
         "description": "FCM cloud function - Sends push notifications to registered client devices.",
-        "reference": "github.com/rameshpolishetti/demoJSON/flow/tunableRESTInvokerPOST.json"
+        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/TunableRestInvokerPost.json"
       },
       {
         "name": "default_handler",
         "description": "Default handler.",
-        "reference": "github.com/rameshpolishetti/demoJSON/flow/tunableRESTInvokerPOST.json"
+        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/TunableRestInvokerPost.json"
       }
     ],
     "event_links": [
