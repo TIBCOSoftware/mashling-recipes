@@ -29,6 +29,7 @@
     "activity/log",
     "activity/reply",
     "activity/rest",
+    "activity/kafkapub",
     "model/simple",
     "trigger/rest/cors"
   ]
