@@ -31,7 +31,7 @@
     "trigger/rest",
     "trigger/rest/cors"
   ]
-  revision = "be72f907e3908b6b986715739e8a4d022129da37"
+  revision = "b9a1275df489a54ef85f1628949ceedefefd65c1"
 
 [[projects]]
   name = "github.com/TIBCOSoftware/flogo-lib"
@@ -49,7 +49,7 @@
     "logger",
     "util"
   ]
-  revision = "7e77da4e61670433757713ac04518d817c9b99af"
+  revision = "14ecc2c23809d781ec0855fa72725fe4517f84c1"
 
 [[projects]]
   name = "github.com/davecgh/go-spew"
