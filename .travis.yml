@@ -32,7 +32,7 @@ install:
   - git clone https://github.com/TIBCOSoftware/mashling.git mashling
   - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
   - cd mashling
-  - dep ensure
+  - dep ensure -vendor-only
   - make all
   - mashling help
   
