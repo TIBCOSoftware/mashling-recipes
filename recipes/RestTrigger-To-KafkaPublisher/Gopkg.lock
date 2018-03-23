@@ -31,7 +31,8 @@
     "activity/rest",
     "activity/kafkapub",
     "model/simple",
-    "trigger/rest"
+    "trigger/rest",
+    "trigger/rest/cors"
   ]
   revision = "be72f907e3908b6b986715739e8a4d022129da37"
 
