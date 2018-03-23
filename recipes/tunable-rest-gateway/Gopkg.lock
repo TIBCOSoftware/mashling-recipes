@@ -2,10 +2,10 @@
 
 
 [[projects]]
-  name = "github.com/NodePrime/jsonpath"
+  branch = "master"
+  name = "github.com/jeffreybozek/jsonpath"
   packages = ["."]
-  revision = "ca9b3047327088b5f077121538284ac9bbf0e868"
-  version = "v0.3.1"
+  revision = "b631f61225a86d0536ff26d530bd811ba83d56b6"
 
 [[projects]]
   name = "github.com/Shopify/sarama"
@@ -69,14 +69,14 @@
   version = "v0.5.1"
 
 [[projects]]
+  branch = "master"
   name = "github.com/TIBCOSoftware/mashling"
   packages = [
     "ext/flogo/trigger/gorillamuxtrigger",
     "lib/conditions",
     "lib/util"
   ]
-  revision = "5e1c0134550a2df183e2b551c505ab915448c2cd"
-  version = "v0.3.1"
+  revision = "68697665b343bf3f753b868d1600b7253650f36f"
 
 [[projects]]
   name = "github.com/apache/thrift"
@@ -344,6 +344,30 @@
     "opentracing"
   ]
   revision = "2cc67fd647551af94593ecaaa89fe4e5b2940a3e"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/jtblin/go-ldap-client"
+  packages = ["."]
+  revision = "b73f66626b33ca4ac4fd6558efbb062c4fe4e52c"
+
+[[projects]]
+  name = "gopkg.in/asn1-ber.v1"
+  packages = ["."]
+  revision = "379148ca0225df7a432012b8df0355c2a2063ac0"
+  version = "v1.2"
+
+[[projects]]
+  name = "gopkg.in/ldap.v2"
+  packages = ["."]
+  revision = "bb7a9ca6e4fbc2129e3db588a34bc970ffe811a9"
+  version = "v2.5.1"
+
+[[projects]]
+  name = "gopkg.in/yaml.v2"
+  packages = ["."]
+  revision = "7f97868eec74b32b0982dd158a51a446d1da7eb5"
+  version = "v2.1.1"
 
 [solve-meta]
   analyzer-name = "dep"
