@@ -19,15 +19,17 @@
   revision = "89742aefa4b206dcf400792f3bd35b542998eb3b"
 
 [[projects]]
+  branch = "master"
   name = "github.com/TIBCOSoftware/flogo-cli"
   packages = [
+    "config",
     "env",
     "util"
   ]
-  revision = "7db24e0eb12a6a9388f4c764d9895d4029d6421f"
-  version = "v0.5.0"
+  revision = "acb086b11e5f9cf35ab213e0e6a595e08d1ac839"
 
 [[projects]]
+  branch = "master"
   name = "github.com/TIBCOSoftware/flogo-contrib"
   packages = [
     "action/flow",
@@ -42,10 +44,11 @@
     "action/flow/tester",
     "activity/log",
     "activity/reply",
+    "activity/rest",
     "model/simple",
     "trigger/rest/cors"
   ]
-  revision = "bf071412b7a2eb0a59981c5d31f5efc5be60cd90"
+  revision = "be72f907e3908b6b986715739e8a4d022129da37"
 
 [[projects]]
   name = "github.com/TIBCOSoftware/flogo-lib"
@@ -56,14 +59,14 @@
     "core/activity",
     "core/data",
     "core/mapper",
-    "core/property",
     "core/trigger",
     "engine",
     "engine/runner",
     "logger",
     "util"
   ]
-  revision = "7e77da4e61670433757713ac04518d817c9b99af"
+  revision = "2b805c0105ea1c260484a671b0afcafe3c7b83a5"
+  version = "v0.5.1"
 
 [[projects]]
   name = "github.com/TIBCOSoftware/mashling"
