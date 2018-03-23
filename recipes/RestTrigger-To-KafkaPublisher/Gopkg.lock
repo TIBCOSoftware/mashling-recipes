@@ -25,50 +25,35 @@
     "action/flow/service",
     "action/flow/support",
     "action/flow/tester",
-    "action/flow/linker",
-    "action/flow/model/simple",
-    "action/flow/util",
-    "activity/kafkapub",
     "activity/log",
+    "activity/reply",
+    "activity/rest",
+    "activity/kafkapub",
     "model/simple",
     "model/simple/behaviors",
     "trigger/rest",
     "trigger/rest/cors"
   ]
-  revision = "b9a1275df489a54ef85f1628949ceedefefd65c1"
+  revision = "757754f73368d90d8dcc4f7d1073d3200d037786"
+  version = "v0.5.1"
 
 [[projects]]
   name = "github.com/TIBCOSoftware/flogo-lib"
   packages = [
     "app",
-    "app/resource",
     "config",
     "core/action",
     "core/activity",
     "core/data",
     "core/mapper",
-    "core/mapper/exprmapper",
-    "core/mapper/exprmapper/expression",
-    "core/mapper/exprmapper/expression/function",
-    "core/mapper/exprmapper/expression/expr",
-    "core/mapper/exprmapper/expression/gocc/lexer",
-    "core/mapper/exprmapper/expression/gocc/parser",
-    "core/mapper/exprmapper/expression/direction",
-    "core/mapper/exprmapper/expression/gocc/errors",
-    "core/mapper/exprmapper/expression/gocc/token",
-    "core/mapper/exprmapper/funcexprtype",
-    "core/mapper/exprmapper/json",
-    "core/mapper/exprmapper/json/field",
-    "core/mapper/exprmapper/ref",
-    "core/property",
     "core/trigger",
     "engine",
     "engine/runner",
     "logger",
-    "util",
-    "util/managed"
+    "util"
   ]
-  revision = "14ecc2c23809d781ec0855fa72725fe4517f84c1"
+  revision = "2b805c0105ea1c260484a671b0afcafe3c7b83a5"
+  version = "v0.5.1"
 
 [[projects]]
   name = "github.com/davecgh/go-spew"
