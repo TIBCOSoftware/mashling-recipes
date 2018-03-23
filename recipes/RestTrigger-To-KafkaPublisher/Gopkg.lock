@@ -25,9 +25,13 @@
     "action/flow/service",
     "action/flow/support",
     "action/flow/tester",
+    "action/flow/linker",
+    "action/flow/model/simple",
+    "action/flow/util",
     "activity/kafkapub",
     "activity/log",
     "model/simple",
+    "model/simple/behaviors",
     "trigger/rest",
     "trigger/rest/cors"
   ]
@@ -37,17 +41,20 @@
   name = "github.com/TIBCOSoftware/flogo-lib"
   packages = [
     "app",
+    "app/resource",
     "config",
     "core/action",
     "core/activity",
     "core/data",
     "core/mapper",
+    "core/mapper/exprmapper",
     "core/property",
     "core/trigger",
     "engine",
     "engine/runner",
     "logger",
-    "util"
+    "util",
+    "util/managed"
   ]
   revision = "14ecc2c23809d781ec0855fa72725fe4517f84c1"
 
