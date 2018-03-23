@@ -2,10 +2,10 @@
 
 
 [[projects]]
-  name = "github.com/NodePrime/jsonpath"
+  branch = "master"
+  name = "github.com/jeffreybozek/jsonpath"
   packages = ["."]
-  revision = "ca9b3047327088b5f077121538284ac9bbf0e868"
-  version = "v0.3.1"
+  revision = "b631f61225a86d0536ff26d530bd811ba83d56b6"
 
 [[projects]]
   name = "github.com/Shopify/sarama"
@@ -86,7 +86,7 @@
     "ext/flogo/trigger",
     "lib"
   ]
-  revision = "7febd234fdb4ad37fb422422cd480d087d8abd4e"
+  revision = "68697665b343bf3f753b868d1600b7253650f36f"
 
 [[projects]]
   name = "github.com/apache/thrift"

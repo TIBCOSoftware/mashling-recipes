@@ -3,9 +3,9 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/NodePrime/jsonpath"
+  name = "github.com/jeffreybozek/jsonpath"
   packages = ["."]
-  revision = "84403ded544328c99be3472727667179eef23a91"
+  revision = "b631f61225a86d0536ff26d530bd811ba83d56b6"
 
 [[projects]]
   name = "github.com/Shopify/sarama"
@@ -19,15 +19,17 @@
   revision = "89742aefa4b206dcf400792f3bd35b542998eb3b"
 
 [[projects]]
+  branch = "master"
   name = "github.com/TIBCOSoftware/flogo-cli"
   packages = [
+    "config",
     "env",
     "util"
   ]
-  revision = "7db24e0eb12a6a9388f4c764d9895d4029d6421f"
-  version = "v0.5.0"
+  revision = "acb086b11e5f9cf35ab213e0e6a595e08d1ac839"
 
 [[projects]]
+  branch = "master"
   name = "github.com/TIBCOSoftware/flogo-contrib"
   packages = [
     "action/flow",
@@ -42,10 +44,11 @@
     "action/flow/tester",
     "activity/log",
     "activity/reply",
+    "activity/rest",
     "model/simple",
     "trigger/rest/cors"
   ]
-  revision = "bf071412b7a2eb0a59981c5d31f5efc5be60cd90"
+  revision = "be72f907e3908b6b986715739e8a4d022129da37"
 
 [[projects]]
   name = "github.com/TIBCOSoftware/flogo-lib"
@@ -56,14 +59,14 @@
     "core/activity",
     "core/data",
     "core/mapper",
-    "core/property",
     "core/trigger",
     "engine",
     "engine/runner",
     "logger",
     "util"
   ]
-  revision = "7e77da4e61670433757713ac04518d817c9b99af"
+  revision = "2b805c0105ea1c260484a671b0afcafe3c7b83a5"
+  version = "v0.5.1"
 
 [[projects]]
   name = "github.com/TIBCOSoftware/mashling"
@@ -74,7 +77,7 @@
     "lib/conditions",
     "lib/util"
   ]
-  revision = "cfb8798e2b1ad7ace187059b92723f285267a115"
+  revision = "68697665b343bf3f753b868d1600b7253650f36f"
 
 [[projects]]
   name = "github.com/apache/thrift"
@@ -324,6 +327,30 @@
     "opentracing"
   ]
   revision = "f9a4336c02542ebbfa01c37949bd7152fb0f659c"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/jtblin/go-ldap-client"
+  packages = ["."]
+  revision = "b73f66626b33ca4ac4fd6558efbb062c4fe4e52c"
+
+[[projects]]
+  name = "gopkg.in/asn1-ber.v1"
+  packages = ["."]
+  revision = "379148ca0225df7a432012b8df0355c2a2063ac0"
+  version = "v1.2"
+
+[[projects]]
+  name = "gopkg.in/ldap.v2"
+  packages = ["."]
+  revision = "bb7a9ca6e4fbc2129e3db588a34bc970ffe811a9"
+  version = "v2.5.1"
+
+[[projects]]
+  name = "gopkg.in/yaml.v2"
+  packages = ["."]
+  revision = "7f97868eec74b32b0982dd158a51a446d1da7eb5"
+  version = "v2.1.1"
 
 [solve-meta]
   analyzer-name = "dep"

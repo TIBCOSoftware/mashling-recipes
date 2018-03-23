@@ -3,9 +3,9 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/NodePrime/jsonpath"
+  name = "github.com/jeffreybozek/jsonpath"
   packages = ["."]
-  revision = "84403ded544328c99be3472727667179eef23a91"
+  revision = "b631f61225a86d0536ff26d530bd811ba83d56b6"
 
 [[projects]]
   branch = "master"
@@ -78,7 +78,7 @@
     "lib/conditions",
     "lib/util"
   ]
-  revision = "0c839e1215b115eaf68f204c8515ec97faffdc8c"
+  revision = "68697665b343bf3f753b868d1600b7253650f36f"
 
 [[projects]]
   branch = "master"
@@ -346,6 +346,30 @@
     "opentracing"
   ]
   revision = "2cc67fd647551af94593ecaaa89fe4e5b2940a3e"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/jtblin/go-ldap-client"
+  packages = ["."]
+  revision = "b73f66626b33ca4ac4fd6558efbb062c4fe4e52c"
+
+[[projects]]
+  name = "gopkg.in/asn1-ber.v1"
+  packages = ["."]
+  revision = "379148ca0225df7a432012b8df0355c2a2063ac0"
+  version = "v1.2"
+
+[[projects]]
+  name = "gopkg.in/ldap.v2"
+  packages = ["."]
+  revision = "bb7a9ca6e4fbc2129e3db588a34bc970ffe811a9"
+  version = "v2.5.1"
+
+[[projects]]
+  name = "gopkg.in/yaml.v2"
+  packages = ["."]
+  revision = "7f97868eec74b32b0982dd158a51a446d1da7eb5"
+  version = "v2.1.1"
 
 [solve-meta]
   analyzer-name = "dep"
