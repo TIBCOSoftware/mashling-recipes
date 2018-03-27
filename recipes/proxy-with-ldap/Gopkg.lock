@@ -20,7 +20,6 @@
   version = "v1.0.5"
 
 [[projects]]
-  branch = "master"
   name = "github.com/TIBCOSoftware/flogo-cli"
   packages = [
     "app",
@@ -30,7 +29,8 @@
     "env",
     "util"
   ]
-  revision = "14872ccbb357378b90a1ec4ca08657979028ac32"
+  revision = "ef81ce0f77529aa17d58749979b9e4df19bdeb8c"
+  version = "v0.5.2"
 
 [[projects]]
   name = "github.com/TIBCOSoftware/flogo-contrib"
@@ -44,11 +44,10 @@
     "action/flow/util",
     "trigger/rest/cors"
   ]
-  revision = "8dea1ab327b9680cbc493657273eca60a061fe5e"
-  version = "v0.5.2-rc3"
+  revision = "b9a1275df489a54ef85f1628949ceedefefd65c1"
+  version = "v0.5.2"
 
 [[projects]]
-  branch = "master"
   name = "github.com/TIBCOSoftware/flogo-lib"
   packages = [
     "app",
@@ -76,7 +75,8 @@
     "util",
     "util/managed"
   ]
-  revision = "f3988b95d914f98704fbeb9bb1c845ea21153b56"
+  revision = "14ecc2c23809d781ec0855fa72725fe4517f84c1"
+  version = "v0.5.2"
 
 [[projects]]
   branch = "master"
