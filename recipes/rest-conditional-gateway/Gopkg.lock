@@ -22,10 +22,11 @@
   name = "github.com/TIBCOSoftware/flogo-cli"
   packages = [
     "env",
-    "util"
+    "util",
+    "config"
   ]
-  revision = "c815acfd0602f124feff4e60b6eca5db121b02f3"
-  version = "v0.5.1"
+  revision = "ef81ce0f77529aa17d58749979b9e4df19bdeb8c"
+  version = "v0.5.2"
 
 [[projects]]
   name = "github.com/TIBCOSoftware/flogo-contrib"
@@ -44,10 +45,14 @@
     "activity/reply",
     "activity/rest",
     "model/simple",
-    "trigger/rest/cors"
+    "trigger/rest/cors",
+    "action/flow/linker",
+    "action/flow/model/simple",
+    "action/flow/util",
+    "model/simple/behaviors"
   ]
-  revision = "757754f73368d90d8dcc4f7d1073d3200d037786"
-  version = "v0.5.1"
+  revision = "b9a1275df489a54ef85f1628949ceedefefd65c1"
+  version = "v0.5.2"
 
 [[projects]]
   name = "github.com/TIBCOSoftware/flogo-lib"
@@ -62,10 +67,25 @@
     "engine",
     "engine/runner",
     "logger",
-    "util"
+    "util",
+    "app/resource",
+    "core/mapper/exprmapper",
+    "util/managed",
+    "core/mapper/exprmapper/expression",
+    "core/mapper/exprmapper/expression/function",
+    "core/mapper/exprmapper/json",
+    "core/mapper/exprmapper/json/field",
+    "core/mapper/exprmapper/ref",
+    "core/mapper/exprmapper/expression/expr",
+    "core/mapper/exprmapper/expression/gocc/lexer",
+    "core/mapper/exprmapper/expression/gocc/parser",
+    "core/mapper/exprmapper/funcexprtype",
+    "core/mapper/exprmapper/expression/direction",
+    "core/mapper/exprmapper/expression/gocc/errors",
+    "core/mapper/exprmapper/expression/gocc/token"
   ]
-  revision = "2b805c0105ea1c260484a671b0afcafe3c7b83a5"
-  version = "v0.5.1"
+  revision = "14ecc2c23809d781ec0855fa72725fe4517f84c1"
+  version = "v0.5.2"
 
 [[projects]]
   name = "github.com/TIBCOSoftware/mashling"

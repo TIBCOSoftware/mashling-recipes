@@ -1,7 +1,7 @@
 {
   "mashling_schema": "0.2",
   "gateway": {
-    "name": "gwTunables",
+    "name": "tunable-rest-gateway",
     "version": "1.0.0",
     "display_name":"Tunable HTTP Router",
     "display_image":"displayImage.svg",

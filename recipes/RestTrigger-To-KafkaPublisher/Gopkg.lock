@@ -36,6 +36,7 @@
     "trigger/rest/cors"
   ]
   revision = "b9a1275df489a54ef85f1628949ceedefefd65c1"
+  version = "v0.5.2"
 
 [[projects]]
   name = "github.com/TIBCOSoftware/flogo-lib"
@@ -69,6 +70,7 @@
     "util/managed"
   ]
   revision = "14ecc2c23809d781ec0855fa72725fe4517f84c1"
+  version = "v0.5.2"
   
 [[projects]]
   name = "github.com/davecgh/go-spew"
