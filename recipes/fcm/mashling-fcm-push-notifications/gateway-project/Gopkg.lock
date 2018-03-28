@@ -2,55 +2,36 @@
 
 
 [[projects]]
-  branch = "master"
-  name = "github.com/jeffreybozek/jsonpath"
-  packages = ["."]
-  revision = "b631f61225a86d0536ff26d530bd811ba83d56b6"
-
-[[projects]]
-  branch = "master"
   name = "github.com/Shopify/sarama"
   packages = ["."]
-  revision = "3d1fae12e48b5ef9b6a06a32c2451268345a0d00"
+  revision = "f7be6aa2bc7b2e38edf816b08b582782194a1c02"
+  version = "v1.16.0"
 
 [[projects]]
-  branch = "master"
   name = "github.com/Sirupsen/logrus"
   packages = ["."]
-  revision = "8c0189d9f6bbf301e5d055d34268156b317016af"
-
-[[projects]]
-  name = "github.com/TIBCOSoftware/flogo-cli"
-  packages = [
-    "config",
-    "env",
-    "util"
-  ]
-  revision = "ef81ce0f77529aa17d58749979b9e4df19bdeb8c"
-  version = "v0.5.2"
+  revision = "c155da19408a8799da419ed3eeb0cb5db0ad5dbc"
+  version = "v1.0.5"
 
 [[projects]]
   name = "github.com/TIBCOSoftware/flogo-contrib"
   packages = [
     "action/flow",
     "action/flow/definition",
-    "action/flow/extension",
     "action/flow/instance",
+    "action/flow/linker",
     "action/flow/model",
-    "action/flow/provider",
-    "action/flow/script/fggos",
+    "action/flow/model/simple",
     "action/flow/service",
     "action/flow/support",
     "action/flow/tester",
+    "action/flow/util",
     "activity/log",
     "activity/reply",
     "activity/rest",
     "model/simple",
-    "trigger/rest/cors",
-    "action/flow/linker",
-    "action/flow/model/simple",
-    "action/flow/util",
-    "model/simple/behaviors"
+    "model/simple/behaviors",
+    "trigger/rest/cors"
   ]
   revision = "b9a1275df489a54ef85f1628949ceedefefd65c1"
   version = "v0.5.2"
@@ -59,31 +40,31 @@
   name = "github.com/TIBCOSoftware/flogo-lib"
   packages = [
     "app",
+    "app/resource",
     "config",
     "core/action",
     "core/activity",
     "core/data",
     "core/mapper",
+    "core/mapper/exprmapper",
+    "core/mapper/exprmapper/expression",
+    "core/mapper/exprmapper/expression/direction",
+    "core/mapper/exprmapper/expression/expr",
+    "core/mapper/exprmapper/expression/function",
+    "core/mapper/exprmapper/expression/gocc/errors",
+    "core/mapper/exprmapper/expression/gocc/lexer",
+    "core/mapper/exprmapper/expression/gocc/parser",
+    "core/mapper/exprmapper/expression/gocc/token",
+    "core/mapper/exprmapper/funcexprtype",
+    "core/mapper/exprmapper/json",
+    "core/mapper/exprmapper/json/field",
+    "core/mapper/exprmapper/ref",
     "core/trigger",
     "engine",
     "engine/runner",
     "logger",
     "util",
-    "app/resource",
-    "core/mapper/exprmapper",
-    "util/managed",
-    "core/mapper/exprmapper/expression",
-    "core/mapper/exprmapper/expression/function",
-    "core/mapper/exprmapper/json",
-    "core/mapper/exprmapper/json/field",
-    "core/mapper/exprmapper/ref",
-    "core/mapper/exprmapper/expression/expr",
-    "core/mapper/exprmapper/expression/gocc/lexer",
-    "core/mapper/exprmapper/expression/gocc/parser",
-    "core/mapper/exprmapper/funcexprtype",
-    "core/mapper/exprmapper/expression/direction",
-    "core/mapper/exprmapper/expression/gocc/errors",
-    "core/mapper/exprmapper/expression/gocc/token"
+    "util/managed"
   ]
   revision = "14ecc2c23809d781ec0855fa72725fe4517f84c1"
   version = "v0.5.2"
@@ -92,31 +73,80 @@
   branch = "master"
   name = "github.com/TIBCOSoftware/mashling"
   packages = [
-    "ext/flogo/activity/rest",
     "ext/flogo/trigger/gorillamuxtrigger",
     "lib/conditions",
     "lib/util"
   ]
-  revision = "68697665b343bf3f753b868d1600b7253650f36f"
+  revision = "3f468547f8461d8997428e46436685c0ef8a4a5f"
 
 [[projects]]
-  branch = "master"
   name = "github.com/apache/thrift"
   packages = ["lib/go/thrift"]
-  revision = "d907cc92db5b93e699a4282e979d097ea863215a"
+  revision = "327ebb6c2b6df8bf075da02ef45a2a034e9b79ba"
+  version = "0.11.0"
 
 [[projects]]
-  branch = "master"
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
-  revision = "87df7c60d5820d0f8ae11afede5aa52325c09717"
+  revision = "346938d642f2ec3594ed81d874461961cd0faa76"
+  version = "v1.1.0"
 
 [[projects]]
-  branch = "master"
   name = "github.com/eapache/go-resiliency"
   packages = ["breaker"]
-  revision = "ef9aaa7ea8bd2448429af1a77cf41b2b3b34bdd6"
+  revision = "ea41b0fad31007accc7f806884dcdf3da98b79ce"
+  version = "v1.1.0"
 
+[[projects]]
+  name = "github.com/aws/aws-sdk-go"
+  packages = [
+    "aws",
+    "aws/awserr",
+    "aws/awsutil",
+    "aws/client",
+    "aws/client/metadata",
+    "aws/corehandlers",
+    "aws/credentials",
+    "aws/credentials/ec2rolecreds",
+    "aws/credentials/endpointcreds",
+    "aws/credentials/stscreds",
+    "aws/defaults",
+    "aws/ec2metadata",
+    "aws/endpoints",
+    "aws/request",
+    "aws/session",
+    "aws/signer/v4",
+    "internal/shareddefaults",
+    "private/protocol",
+    "private/protocol/json/jsonutil",
+    "private/protocol/jsonrpc",
+    "private/protocol/query",
+    "private/protocol/query/queryutil",
+    "private/protocol/rest",
+    "private/protocol/restjson",
+    "private/protocol/xml/xmlutil",
+    "service/lambda",
+    "service/sts"
+  ]
+  revision = "d325de1b1d98b7781edfd8b2c6e7bedfbc79715e"
+  
+[[projects]]
+  branch = "master"
+  name = "github.com/pointlander/lambda"
+  packages = ["ext/flogo/activity/lambda"]
+  revision = "9348ccbfddb4fa81feea7d65de75dffabec0fe3a"
+
+[[projects]]
+  name = "github.com/go-ini/ini"
+  packages = ["."]
+  revision = "7e7da451323b6766da368f8a1e8ec9a88a16b4a0"
+  version = "v1.31.1"
+
+[[projects]]
+  name = "github.com/jmespath/go-jmespath"
+  packages = ["."]
+  revision = "0b12d6b5"
+  
 [[projects]]
   branch = "master"
   name = "github.com/eapache/go-xerial-snappy"
@@ -136,16 +166,15 @@
   version = "v0.3.0"
 
 [[projects]]
-  branch = "master"
   name = "github.com/gogo/protobuf"
   packages = [
     "io",
     "proto"
   ]
-  revision = "b75782e777cfa7ca469bc46cc313ddd26e6e9d1c"
+  revision = "1adfc126b41513cc696b209667c8656ea7aac67c"
+  version = "v1.0.0"
 
 [[projects]]
-  branch = "master"
   name = "github.com/golang/protobuf"
   packages = [
     "proto",
@@ -155,7 +184,8 @@
     "ptypes/duration",
     "ptypes/timestamp"
   ]
-  revision = "bbd03ef6da3a115852eaf24c8a1c46aeb39aa175"
+  revision = "925541529c1fa6821df4e44ce2723319eb2be768"
+  version = "v1.0.0"
 
 [[projects]]
   branch = "master"
@@ -170,22 +200,28 @@
   version = "v1.1"
 
 [[projects]]
-  branch = "master"
   name = "github.com/gorilla/mux"
   packages = ["."]
-  revision = "c0091a029979286890368b4c7b301261e448e242"
+  revision = "53c1911da2b537f792e7cafcb446b05ffe33b996"
+  version = "v1.6.1"
 
 [[projects]]
   branch = "master"
-  name = "github.com/japm/goScript"
+  name = "github.com/jeffreybozek/jsonpath"
   packages = ["."]
-  revision = "caab90145b05376536bbab332312f4812123e197"
+  revision = "b631f61225a86d0536ff26d530bd811ba83d56b6"
+
+[[projects]]
+  name = "github.com/jtblin/go-ldap-client"
+  packages = ["."]
+  revision = "ad9f2ea47a83452873c01f1dc6960aedb9ff7e0e"
+  version = "0.0.3"
 
 [[projects]]
   branch = "master"
   name = "github.com/julienschmidt/httprouter"
   packages = ["."]
-  revision = "e1b9828bc9e5904baec057a154c09ca40fe7fae0"
+  revision = "d1898390779332322e6b5ca5011da4bf249bb056"
 
 [[projects]]
   branch = "master"
@@ -194,7 +230,6 @@
   revision = "b84e30acd515aadc4b783ad4ff83aff3299bdfe0"
 
 [[projects]]
-  branch = "master"
   name = "github.com/lightstep/lightstep-tracer-go"
   packages = [
     ".",
@@ -203,7 +238,8 @@
     "lightsteppb",
     "thrift_0_9_2/lib/go/thrift"
   ]
-  revision = "d4a33999738dbeb740fe8a5d7ab3c9bfd5c65924"
+  revision = "f9f54d495e5c6752b58fae6b66a5cb1107e17b29"
+  version = "v0.15.2"
 
 [[projects]]
   branch = "master"
@@ -212,13 +248,13 @@
   revision = "a52f2342449246d5bcc273e65cbdcfa5f7d6c63c"
 
 [[projects]]
-  branch = "master"
   name = "github.com/opentracing/basictracer-go"
   packages = [
     ".",
     "wire"
   ]
-  revision = "7be4bbce182d33e50e45b8dd991014c9a7afaad4"
+  revision = "1b32af207119a14b1b231d451df3ed04a72efebf"
+  version = "v1.0.0"
 
 [[projects]]
   name = "github.com/opentracing/opentracing-go"
@@ -231,7 +267,6 @@
   version = "v1.0.2"
 
 [[projects]]
-  branch = "master"
   name = "github.com/openzipkin/zipkin-go-opentracing"
   packages = [
     ".",
@@ -242,24 +277,25 @@
     "wire"
   ]
   revision = "4c9fbcbd6d73a644fd17214fe475296780c68fb5"
+  version = "v0.3.3"
 
 [[projects]]
-  branch = "master"
   name = "github.com/pierrec/lz4"
   packages = ["."]
-  revision = "ed8d4cc3b461464e69798080a0092bd028910298"
+  revision = "2fcda4cb7018ce05a25959d2fe08c83e3329f169"
+  version = "v1.1"
 
 [[projects]]
-  branch = "master"
   name = "github.com/pierrec/xxHash"
   packages = ["xxHash32"]
-  revision = "a0006b13c722f7f12368c00a3d3c2ae8a999a0c6"
+  revision = "f051bb7f1d1aaf1b5a665d74fb6b0217712c69f7"
+  version = "v0.1.1"
 
 [[projects]]
-  branch = "master"
   name = "github.com/pkg/errors"
   packages = ["."]
-  revision = "30136e27e2ac8d167177e8a583aa4c3fea5be833"
+  revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
+  version = "v0.8.0"
 
 [[projects]]
   branch = "master"
@@ -271,7 +307,7 @@
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  revision = "432090b8f568c018896cd8a0fb0345872bbac6ce"
+  revision = "88942b9c40a4c9d203b82b3731787b672d6e809b"
 
 [[projects]]
   branch = "master"
@@ -285,7 +321,7 @@
     "lex/httplex",
     "trace"
   ]
-  revision = "cbe0f9307d0156177f9dd5dc85da1a31abc5f2fb"
+  revision = "6078986fec03a1dcc236c34816c71b0e05018fda"
 
 [[projects]]
   branch = "master"
@@ -294,10 +330,9 @@
     "unix",
     "windows"
   ]
-  revision = "37707fdb30a5b38865cfb95e5aab41707daec7fd"
+  revision = "13d03a9a82fba647c21a0ef8fba44a795d0f0835"
 
 [[projects]]
-  branch = "master"
   name = "golang.org/x/text"
   packages = [
     "collate",
@@ -315,7 +350,8 @@
     "unicode/norm",
     "unicode/rangetable"
   ]
-  revision = "4e4a3210bb54bb31f6ab2cdca2edcc0b50c420c1"
+  revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
+  version = "v0.3.0"
 
 [[projects]]
   branch = "master"
@@ -324,7 +360,7 @@
     "googleapis/api/annotations",
     "googleapis/rpc/status"
   ]
-  revision = "2b5a72b8730b0b16380010cfe5286c42108d88e7"
+  revision = "ab0870e398d5dd054b868c0db1481ab029b9a9f2"
 
 [[projects]]
   name = "google.golang.org/grpc"
@@ -353,24 +389,8 @@
     "tap",
     "transport"
   ]
-  revision = "8e4536a86ab602859c20df5ebfd0bd4228d08655"
-  version = "v1.10.0"
-
-[[projects]]
-  branch = "master"
-  name = "sourcegraph.com/sourcegraph/appdash"
-  packages = [
-    ".",
-    "internal/wire",
-    "opentracing"
-  ]
-  revision = "2cc67fd647551af94593ecaaa89fe4e5b2940a3e"
-  
-[[projects]]
-  branch = "master"
-  name = "github.com/jtblin/go-ldap-client"
-  packages = ["."]
-  revision = "b73f66626b33ca4ac4fd6558efbb062c4fe4e52c"
+  revision = "afc05b9e1d36f289ea16ba294894486a3e458246"
+  version = "v1.11.0"
 
 [[projects]]
   name = "gopkg.in/asn1-ber.v1"
@@ -385,14 +405,18 @@
   version = "v2.5.1"
 
 [[projects]]
-  name = "gopkg.in/yaml.v2"
-  packages = ["."]
-  revision = "7f97868eec74b32b0982dd158a51a446d1da7eb5"
-  version = "v2.1.1"
- 
+  branch = "master"
+  name = "sourcegraph.com/sourcegraph/appdash"
+  packages = [
+    ".",
+    "internal/wire",
+    "opentracing"
+  ]
+  revision = "2cc67fd647551af94593ecaaa89fe4e5b2940a3e"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "00e0d565dfa3dcd537aca976926ce385054371356af61a6c902972ebd862473e"
+  inputs-digest = "aa85a26ee61e29e73eeaf5880ec3fefd947df67a9c5695ec1a1093d1dd7c3f6d"
   solver-name = "gps-cdcl"
   solver-version = 1
