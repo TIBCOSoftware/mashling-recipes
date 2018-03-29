@@ -28,9 +28,14 @@
     "activity/log",
     "activity/rest",
     "model/simple",
-    "trigger/kafkasub"
+    "trigger/kafkasub",
+    "action/flow/linker",
+    "action/flow/model/simple",
+    "action/flow/util",
+    "model/simple/behaviors"
   ]
-  revision = "bf071412b7a2eb0a59981c5d31f5efc5be60cd90"
+  revision = "b9a1275df489a54ef85f1628949ceedefefd65c1"
+  version = "v0.5.2"
 
 [[projects]]
   name = "github.com/TIBCOSoftware/flogo-lib"
@@ -46,9 +51,25 @@
     "engine",
     "engine/runner",
     "logger",
-    "util"
+    "util",
+    "app/resource",
+    "core/mapper/exprmapper",
+    "util/managed",
+    "core/mapper/exprmapper/expression",
+    "core/mapper/exprmapper/expression/function",
+    "core/mapper/exprmapper/json",
+    "core/mapper/exprmapper/json/field",
+    "core/mapper/exprmapper/ref",
+    "core/mapper/exprmapper/expression/expr",
+    "core/mapper/exprmapper/expression/gocc/lexer",
+    "core/mapper/exprmapper/expression/gocc/parser",
+    "core/mapper/exprmapper/funcexprtype",
+    "core/mapper/exprmapper/expression/direction",
+    "core/mapper/exprmapper/expression/gocc/errors",
+    "core/mapper/exprmapper/expression/gocc/token"
   ]
-  revision = "7e77da4e61670433757713ac04518d817c9b99af"
+  revision = "14ecc2c23809d781ec0855fa72725fe4517f84c1"
+  version = "v0.5.2"
 
 [[projects]]
   name = "github.com/davecgh/go-spew"
