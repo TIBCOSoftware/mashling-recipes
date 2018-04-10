@@ -3,18 +3,6 @@ language :
   - go  
 before_install:
   - "echo -e \"machine github.com\n  login ${GITHUB_USER_TOKEN}\" >> ~/.netrc"
-  - pip install --user awscli
-  - sudo apt-get install zookeeperd 
-  - go get github.com/constabulary/gb/...
-  - go get -u github.com/golang/dep/cmd/dep
-  - sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa --yes
-  - sudo apt-add-repository ppa:duggan/jo --yes
-  - sudo apt-get update -q
-  - sudo apt-get install mosquitto
-  - sudo apt-get install libmosquitto-dev
-  - sudo apt-get install mosquitto-clients
-  - sudo apt-get install jo
-
 os: 
   - linux
 
@@ -24,27 +12,14 @@ branches:
     - /^v\d+\.\d+\.\d+(\.\d+)?(-\S*)?$/
 
 install:
-  - cd $GOPATH
-  - wget http://www-eu.apache.org/dist/kafka/1.0.0/kafka_2.11-1.0.0.tgz -O $GOPATH/kafka.tgz
-  - mkdir -p $GOPATH/kafka && cd $GOPATH/kafka
-  - tar -xvzf $GOPATH/kafka.tgz --strip 1 > /tmp/kafka.log   
+  - go get -u github.com/golang/dep/cmd/dep
   - cd $GOPATH/src/github.com/TIBCOSoftware
-  - git clone https://github.com/TIBCOSoftware/mashling.git mashling
   - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
-  - cd mashling
-  - dep ensure -vendor-only
-  - make all
-  - mashling help
   
 script:
-  - cd $GOPATH/src/github.com/TIBCOSoftware
-  - pushd mashling-cicd/sample-recipes
-  - rm -rf builds
-  - mkdir -p master-builds/latest/temp builds/latest
-  - chmod ugo+x ./build-reciperegistry.sh ./s3-clean.sh ./sanity-test.sh
-  - ./build-reciperegistry.sh OPTIMIZE=${OPTIMIZE} || travis_terminate 1
-  - ./sanity-test.sh
-  - ./s3-clean.sh
+  - pushd mashling-cicd/sample-recipes/scripts
+  - chmod ugo+x ./init.sh
+  - ./init.sh
   - popd
 
 after_script:

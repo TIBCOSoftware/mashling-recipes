@@ -19,9 +19,9 @@ function testcase1 {
     popd
 	
     #executing the gateway binary
-    ./resttrigger-to-kafkapublisher  1> /tmp/output.log 2>&1 &  
+    $GOPATH/src/github.com/TIBCOSoftware/mashling/bin/mashling-gateway -c RestTrigger-To-KafkaPublisher.json  1> /tmp/output.log 2>&1 &  
     pId3=$!
-    sleep 20
+    sleep 40
 
     cd $GOPATH/kafka
 	
@@ -45,5 +45,4 @@ function testcase1 {
     sleep 5
     kill -SIGINT $pId4
     rm -f /tmp/test.log /tmp/kafka.log
-	cd C:/Users/lmekala/Desktop/Info/mashling-recipes/recipes/RestTrigger-To-KafkaPublisher/gw/bin
 }

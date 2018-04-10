@@ -6,7 +6,7 @@ function get_test_cases {
 }
 function testcase1 {
 
-./mqtt-producer &
+$GOPATH/src/github.com/TIBCOSoftware/mashling/bin/mashling-gateway -c mqtt-producer.json > /tmp/gw1.log 2>&1 &
 pId=$!
 echo "$pId"
 #starting mosquitto_sub in background and copying logs into temp file
@@ -21,7 +21,7 @@ echo $var
 kill -9 $pId
 kill -9 $pId1
 
-if [[ "$var" == "{\"message\":\"hello-world\"}" ]]
+if [[ "$var" == "{\"message\":\"hello-world\"}" ]] && [[ "echo $(cat /tmp/gw1.log)" =~ "Completed" ]]
         then 
             echo "PASS"
             

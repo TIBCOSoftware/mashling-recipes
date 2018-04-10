@@ -5,12 +5,13 @@ function get_test_cases {
     echo "${my_list[@]}"
 }
 function testcase1 {
-		export API_CONTEXT=PETS
-./tunable-rest-gateway &
+export API_CONTEXT=PETS
+$GOPATH/src/github.com/TIBCOSoftware/mashling/bin/mashling-gateway -c tunable-rest-gateway.json > /tmp/tunable1.log 2>&1 &
 pId=$!
-response=$(curl --request GET http://localhost:9096/id/17 --write-out '%{http_code}' --silent --output /dev/null)
+sleep 15;
+response=$(curl --request GET http://localhost:9096/id/1 --write-out '%{http_code}' --silent --output /dev/null)
 kill -9 $pId
-if [ $response -eq 200  ] 
+if [ $response -eq 200  ] && [[ "echo $(cat /tmp/tunable1.log)" =~ "Completed" ]]
     then 
         echo "PASS"
     else
@@ -19,11 +20,12 @@ fi
 }
 function testcase2 {
 export API_CONTEXT=USERS
-./tunable-rest-gateway &
+$GOPATH/src/github.com/TIBCOSoftware/mashling/bin/mashling-gateway -c tunable-rest-gateway.json > /tmp/tunable2.log 2>&1 &
 pId=$!
-response=$(curl --request GET http://localhost:9096/id/17 --write-out '%{http_code}' --silent --output /dev/null)
+sleep 15
+response=$(curl --request GET http://localhost:9096/id/1 --write-out '%{http_code}' --silent --output /dev/null)
 kill -9 $pId
-if [ $response -eq 200  ] 
+if [ $response -eq 200  ] && [[ "echo $(cat /tmp/tunable2.log)" =~ "Completed" ]]
     then 
         echo "PASS"
     else

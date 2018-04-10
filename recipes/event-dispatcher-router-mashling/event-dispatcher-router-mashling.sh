@@ -25,7 +25,7 @@ function testcase1 {
     popd
 	
     #executing the gateway binary
-    ./event-dispatcher-router-mashling 1> /tmp/test.log 2>&1 &
+    $GOPATH/src/github.com/TIBCOSoftware/mashling/bin/mashling-gateway -c event-dispatcher-router-mashling.json 1> /tmp/test.log 2>&1 &
     pId4=$!
     sleep 20
 

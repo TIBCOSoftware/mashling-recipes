@@ -12,9 +12,10 @@ tom:jerry
 EOL
 
 export BASIC_AUTH_FILE=$GOPATH/pswd.txt	
-./secure-rest-gateway-with-basic-auth &
+$GOPATH/src/github.com/TIBCOSoftware/mashling/bin/mashling-gateway -c secure-rest-gateway-with-basic-auth.json > /tmp/gw1.log 2>&1 &
 pId=$!
-response=$(curl --request GET http://foo:bar@localhost:9096/pets/3 --write-out '%{http_code}' --silent --output /dev/null)
+sleep 15
+response=$(curl --request GET http://foo:bar@localhost:9096/pets/1 --write-out '%{http_code}' --silent --output /dev/null)
 kill -9 $pId
 if [ $response -eq 200  ] 
     then 
@@ -32,9 +33,10 @@ EOL
 
 export BASIC_AUTH_FILE=$GOPATH/pswd.txt	
 
-./secure-rest-gateway-with-basic-auth &
+$GOPATH/src/github.com/TIBCOSoftware/mashling/bin/mashling-gateway -c secure-rest-gateway-with-basic-auth.json > /tmp/gw2.log 2>&1 &
 pId=$!
-response=$(curl --request GET http://foo:badpass@localhost:9096/pets/3 --write-out '%{http_code}' --silent --output /dev/null)
+sleep 15
+response=$(curl --request GET http://foo:badpass@localhost:9096/pets/1 --write-out '%{http_code}' --silent --output /dev/null)
 kill -9 $pId
 if [ $response -eq 403  ] 
     then 
@@ -54,9 +56,10 @@ EOL
 
 export BASIC_AUTH_FILE=$GOPATH/pswd.txt	
 
-./secure-rest-gateway-with-basic-auth &
+$GOPATH/src/github.com/TIBCOSoftware/mashling/bin/mashling-gateway -c secure-rest-gateway-with-basic-auth.json > /tmp/gw3.log 2>&1 &
 pId=$!
-response=$(curl --request GET http://tom:jerry@localhost:9096/pets/3 --write-out '%{http_code}' --silent --output /dev/null)
+sleep 15
+response=$(curl --request GET http://tom:jerry@localhost:9096/pets/1 --write-out '%{http_code}' --silent --output /dev/null)
 kill -9 $pId
 if [ $response -eq 200  ] 
     then 
