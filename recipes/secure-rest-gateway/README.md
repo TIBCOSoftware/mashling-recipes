@@ -2,11 +2,13 @@
 This recipe is a HTTP based microgateway with mutual TLS enabled.
 
 ## Recipe usage instructions
-
-1. Create gateway.
-```bash
-mashling create -f secure-rest-gateway.json secureGwApp
+1. Download the Mashling-Gateway Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)	
+2. Setup:
 ```
+   git clone https://github.com/TIBCOSoftware/mashling-recipes
+   cd mashling-recipes/recipes/secure-rest-gateway
+```
+   Place the Downloaded Mashling-Gateway binary in secure-rest-gateway folder.
 
 2. Copy gateway.crt & gateway.key into local directory (example: $HOME/gatewaycerts).<br>
 3. Copy client.crt & apiserver.crt into local trust store directory (example: $HOME/truststore).<br>
@@ -17,8 +19,8 @@ export SERVER_CERT=$HOME/gatewaycerts/gateway.crt
 export SERVER_KEY=$HOME/gatewaycerts/gateway.key
 export TRUST_STORE=$HOME/truststore
 export ENDPOINT_URL=https://localhost:8080
-cd secureGwApp/bin
-./securegwapp
+cd secure-rest-gateway
+./mashling-gateway -c secure-rest-gateway.json
 ```
 
 Note: For testing purposes, certificates are made available in utils folder. You can also generate self-signed certificates yourself by using open ssl.

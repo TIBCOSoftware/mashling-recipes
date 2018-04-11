@@ -2,20 +2,24 @@
 This recipe uses kafka messages as input to the rest put operation.
 
 ## Installation
-* Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
+* Download the Mashling-Gateway Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 * Apache [Kafka](https://kafka.apache.org/quickstart)
 
 ## Setup
 ```
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/KafkaTrigger-To-RestInvoker
-mashling create -f KafkaTrigger-To-RestInvoker.json KafkaTrigger-To-RestInvoker
 ```
+Place the Downloaded Mashling-Gateway binary in KafkaTrigger-To-RestInvoker folder.
+
 ## Testing
 
 * Start Kafka Zookeeper & Broker in separate terminals.
 * Start the producer with the "syslog" topic in another terminal.
-* Start KafkaTrigger-To-RestInvoker/bin/KafkaTrigger-To-RestInvoker
+* Start the gateway:
+```
+./mashling-gateway -c KafkaTrigger-To-RestInvoker.json
+```
 * Post the below message to the "syslog" Topic and the message payload gets updated to the swagger petstore.
 
 ```json

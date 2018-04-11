@@ -2,20 +2,24 @@
 This recipe publishes the Rest Trigger content payload to Kafka Topic as message.
 
 ## Installation
-* Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
+* Download the Mashling-Gateway Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 * Apache [Kafka](https://kafka.apache.org/quickstart)
 
 ## Setup
 ```
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/RestTrigger-To-KafkaPublisher
-mashling create -f RestTrigger-To-KafkaPublisher.json RestTrigger-To-KafkaPublisher
 ```
+Place the Downloaded Mashling-Gateway binary in RestTrigger-To-KafkaPublisher folder.
+
 ## Testing
 
 * Start Kafka Zookeeper & Broker in separate terminals.
 * Start the consumer with the "syslog" topic in another terminal.
-* Start RestTrigger-To-KafkaPublisher/bin/RestTrigger-To-KafkaPublisher
+* Start RestTrigger-To-KafkaPublisher
+```
+./mashling-gateway -c RestTrigger-To-KafkaPublisher.json
+```
 * Use "PUT" operation and hit the url "http://localhost:9096/petEvent" with the below sample payload:
 
 ```json
