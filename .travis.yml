@@ -15,7 +15,7 @@ branches:
 install:
   - go get -u github.com/golang/dep/cmd/dep
   - cd $GOPATH/src/github.com/TIBCOSoftware
-  - git clone https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
+  - git clone -b feature-v2-model-cicd https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
   
 script:
   - pushd mashling-cicd/sample-recipes/scripts
