@@ -1,69 +1,108 @@
 {
-  "mashling_schema": "0.2",
+  "mashling_schema": "1.0",
   "gateway": {
-    "name": "tunable-rest-gateway",
+    "name": "MyProxy",
     "version": "1.0.0",
-    "display_name":"Tunable HTTP Router",
-    "display_image":"displayImage.svg",
-    "description": "This gateway queries different end-points based on the context supplied as environment flag.",
-    "configurations": [
-      {
-        "name": "restConfig",
-        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
-        "description": "Configuration for rest trigger",
-        "settings": {
-          "port": "9096"
-        }
-      }
-    ],
+    "description": "This is a simple proxy.",
     "triggers": [
       {
-        "name": "get_rest_trigger",
-        "description": "Rest trigger",
+        "name": "MyProxy",
+        "description": "Animals rest trigger - PUT animal details",
         "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
         "settings": {
-          "config": "${configurations.restConfig}",
-          "method": "GET",
-          "path": "/id/{id}",
-          "optimize":"true"
-        }
-      }
-    ],
-    "event_handlers": [
-      {
-        "name": "get_handler",
-        "description": "Handle REST GET call",
-        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/TunableRestInvoker.json"
-      }
-    ],
-    "event_links": [
-      {
-        "triggers": ["get_rest_trigger"],
-        "dispatches": [
+          "port": "9096"
+        },
+        "handlers": [
           {
-            "if": "${env.API_CONTEXT == PETS}",
-            "handler": "get_handler",
-            "inputParams":{
-              "id":"${pathParams.id}",
-              "endPoint":"http://petstore.swagger.io/v2/pet/:id"
-            }
-          },
-          {
-            "if": "${env.API_CONTEXT == USERS}",
-            "handler": "get_handler",
-            "inputParams":{
-              "id":"${pathParams.id}",
-              "endPoint":"http://petstore.swagger.io/v2/user/:id"
-            }
-          },
-          {
-            "handler": "get_handler",
-            "inputParams":{
-              "id":"${pathParams.id}",
-              "endPoint":"http://petstore.swagger.io/v2/pet/:id"
+            "dispatch": "Pets",
+            "settings": {
+              "autoIdReply": "false",
+              "method": "GET",
+              "path": "/id/{id}",
+              "useReplyHandler": "false"
             }
           }
         ]
+      }
+    ],
+    "dispatches": [
+      { 
+        "name": "Pets",
+        "routes": [
+          { 
+            "if": "env.API_CONTEXT == 'USERS'",
+            "steps": [
+              { 
+                "service": "FlogoRestGetFlow",
+                "input": {
+                  "inputs.id": "${payload.pathParams.id}",
+                  "inputs.endPoint": "http://petstore.swagger.io/v2/user/:id"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "if": "JSON.parse(FlogoRestGetFlow.response.outputs.code) != 200",
+                "error": true,
+                "output": {
+                  "code": 403,
+                  "format": "json",
+                  "body": "User is not available."
+                }
+              },
+              {
+                "if": "JSON.parse(FlogoRestGetFlow.response.outputs.code) == 200",
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "format": "json",
+                  "body": "${FlogoRestGetFlow.response.outputs.data}"
+                }
+              }
+            ]
+          },
+          { 
+            "steps": [
+              { 
+                "service": "FlogoRestGetFlow",
+                "input": {
+                  "inputs.id": "${payload.pathParams.id}",
+                  "inputs.endPoint": "http://petstore.swagger.io/v2/pet/:id"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "if": "JSON.parse(FlogoRestGetFlow.response.outputs.code) != 200",
+                "error": true,
+                "output": {
+                  "code": 403,
+                  "format": "json",
+                  "body": "Pet is not available."
+                }
+              },
+              {
+                "if": "JSON.parse(FlogoRestGetFlow.response.outputs.code) == 200",
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "format": "json",
+                  "body": "${FlogoRestGetFlow.response.outputs.data}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "FlogoRestGetFlow",
+        "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
+        "type": "flogoFlow",
+        "settings": {
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/TunableRestInvoker.json"
+        }
       }
     ]
   }

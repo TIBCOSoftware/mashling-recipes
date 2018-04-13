@@ -1,60 +1,93 @@
 {
-	"mashling_schema": "0.2",
-	"gateway": {
-		"name": "event-dispatcher-router-mashling",
-		"version": "1.0.0",
-		"display_name":"Event Dispatcher And Router",
-		"display_image":"displayImage.svg",
-		"description": "Apache Kafka based event dispatcher that conditionally routes events to various handlers based on content",
-		"configurations": [
-			{
-				"name": "kafkaConfig",
-				"type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/kafkasubrouter",
-				"description": "Configuration for kafka cluster",
-				"settings": {
-					"BrokerUrl": "localhost:9092"
-				}
-			}
-		],
-		"triggers": [
-            
-			{
-				"name": "users_trigger",
-				"description": "The trigger on kafka 'users' topic",
-				"type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/kafkasubrouter",
-				"settings": {
-					"Topic": "users",
-					"config": "${configurations.kafkaConfig}"
-				}
-			}
-		],
-		"event_handlers": [
-            
-            {
-                "name": "usa_users_topic_handler",
-                "description": "Handle the user access for USA users",
-                "reference": "github.com/TIBCOSoftware/mashling/lib/flow/kafkaFlow.json"
-              },
+  "mashling_schema": "1.0",
+  "gateway": {
+    "name": "MyProxy",
+    "version": "1.0.0",
+    "description": "This is a simple proxy.",
+    "triggers": [
+      {
+        "name": "MyProxy",
+        "description": "The trigger on kafka 'publishpet' topic",
+        "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
+        "settings": {
+          "BrokerUrl": "localhost:9092"
+        },
+        "handlers": [
+          {
+            "dispatch": "kafka_trigger",
+            "settings": {
+              "Topic": "users"
+            }
+          }
+        ]
+      }
+    ],
+    "dispatches": [
+      {
+        "name": "kafka_trigger",
+        "routes": [
+          { 
+            "if": "JSON.parse(payload.message).country == 'USA'",
+            "steps": [
+              { 
+                "service": "FlogoKafkaUsaFlow",
+                "input": {
+                  "inputs.message": "${payload.message}"
+                }
+              }
+            ],
+            "responses": [
               {
-                "name": "asia_users_topic_handler",
-                "description": "Handle the user access for asia users",
-                "reference": "github.com/TIBCOSoftware/mashling/lib/flow/kafkaFlow.json"
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "format": "json",
+                  "body.pet": "${FlogoKafkaUsaFlow.response.outputs.data}"
+                }
               }
-		],
-		"event_links": [
-            {
-                "triggers": ["users_trigger"],
-                "dispatches": [
-                  {
-                    "if": "${trigger.content.country == USA}",
-                    "handler": "usa_users_topic_handler"
-                  },
-                  {
-                    "if": "${trigger.content.country in (IND,CHN,JPN)}",
-                    "handler": "asia_users_topic_handler"
-                  }
-                ]
+            ]
+          },
+          { 
+            "if": "JSON.parse(payload.message).country == 'IND' || JSON.parse(payload.message).country == 'JPN' || JSON.parse(payload.message).country == 'CHN'",
+            "steps": [
+              { 
+                "service": "FlogoKafkaAsiaFlow",
+                "input": {
+                  "inputs.message": "${payload.message}"
+                }
               }
-		]
-	}
+            ],
+            "responses": [
+              {
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "format": "json",
+                  "body.pet": "${FlogoKafkaAsiaFlow.response.outputs.data}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "FlogoKafkaUsaFlow",
+        "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
+        "type": "flogoFlow",
+        "settings": {
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/kafkaFlow.json"
+        }
+      },
+      {
+        "name": "FlogoKafkaAsiaFlow",
+        "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
+        "type": "flogoFlow",
+        "settings": {
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/kafkaFlow.json"
+        }
+      }
+    ]
+  }
 }

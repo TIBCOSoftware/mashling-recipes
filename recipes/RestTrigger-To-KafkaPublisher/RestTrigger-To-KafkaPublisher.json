@@ -1,56 +1,66 @@
 {
-	"mashling_schema": "0.2",
-	"gateway": {
-		"name": "3recipe",
-		"version": "1.0.0",
-		"display_name":"HTTP Trigger to Kafka Publisher",
-		"display_image":"displayImage.svg",
-		"description": "This is a simple recipe that illustrates receiving messages on a HTTP trigger and publishing it via Kafka ",
-		"configurations": [
-			{
-				"name": "kafkaConfig",
-				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
-				"description": "Configuration for kafka cluster",
-				"settings": {
-					"BrokerUrl": "localhost:9092"
-				}
-			}
-		],
-		"triggers": [
-            {
-				"name": "rest_trigger4",
-				"description": "The trigger on 'pets' endpoint",
-				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/rest",
-				"settings": {
-					"port": "9096",
-					"method": "PUT",
-					"path": "/petEvent",
-					"autoIdReply": "true",
-						"useReplyHandler": "true"
-				}
+  "mashling_schema": "1.0",
+  "gateway": {
+    "name": "MyProxy",
+    "version": "1.0.0",
+    "description": "This is a simple proxy.",
+    "triggers": [
+      {
+        "name": "MyProxy",
+        "description": "Animals rest trigger - PUT animal details",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "settings": {
+          "port": "9096"
+        },
+        "handlers": [
+          {
+            "dispatch": "Pets1",
+            "settings": {
+              "autoIdReply": "false",
+              "method": "PUT",
+              "path": "/petEvent",
+              "useReplyHandler": "false"
             }
-		],
-		"event_handlers": [
-            {
-				"name": "get_pet_handler4",
-				"description": "Handle the user access",
-				"reference": "github.com/TIBCOSoftware/mashling/lib/flow/RestTriggerToKafkaActivity.json",
-				"params": {
-					"uri": "petstore.swagger.io/v2/pet/3"
-				}
-			}
-		],
-		"event_links": [
-            {
-				"triggers": [
-					"rest_trigger4"
-				],
-				"dispatches": [
-					{
-						"handler": "get_pet_handler4"
-					}
-				]
-			}
-		]
-	}
+          }
+        ]
+      }
+    ],
+    "dispatches": [
+      {
+        "name": "Pets1",
+        "routes": [
+          {
+            "steps": [
+              {
+                "service": "FlogoRestPutFlow",
+                "input": {
+                  "inputs.content": "${payload.content}"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "format": "json",
+                  "body": "Success"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "FlogoRestPutFlow",
+        "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
+        "type": "flogoFlow",
+        "settings": {
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/RestTriggerToKafkaActivity.json"
+        }
+      }
+    ]
+  }
 }

@@ -1,49 +1,54 @@
 {
-  "mashling_schema": "0.2",
+  "mashling_schema": "1.0",
   "gateway": {
-    "name": "demoMQTTProducer",
+    "name": "MyProxy",
     "version": "1.0.0",
-    "display_name":"MQTT Producer",
-		"display_image":"displayImage.svg",
-    "description": "A HTTP to MQTT adapter",
-    "configurations": [
-      {
-        "name": "restConfig",
-        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
-        "description": "Configuration for rest trigger",
-        "settings": {
-          "port": "9096"
-        }
-      }
-    ],
+    "description": "This is a simple proxy.",
     "triggers": [
       {
-        "name": "rest_trigger",
-        "description": "Rest trigger",
+        "name": "MyProxy1",
+        "description": "Animals MQTT trigger - PUT animal details",
         "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
         "settings": {
-          "config": "${configurations.restConfig}",
-          "method": "POST",
+          "port": "9096"
+        },
+        "handlers": [
+          {
+            "dispatch": "Mqtt_Producer",
+            "settings": {
+              "method": "POST",
 		      "path": "/test",
           "optimize":"true"
-        }
-      }
-    ],
-    "event_handlers": [
-      {
-        "name": "mqtt_handler",
-        "description": "Send the MQTT message",
-        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/MQTTProducer.json"
-      }
-    ],
-    "event_links": [
-      {
-        "triggers": ["rest_trigger"],
-        "dispatches": [
-          {
-            "handler": "mqtt_handler"
+            }
           }
         ]
+      }
+    ],
+    "dispatches": [
+      {
+        "name": "Mqtt_Producer",
+        "routes": [
+          {
+            "steps": [
+              {
+                "service": "mqtt_producer",
+                "input": {
+                  "inputs.content": "${payload.content}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "mqtt_producer",
+        "description": "Make PUT calls against a remote HTTP service using a Flogo flow.",
+        "type": "flogoFlow",
+        "settings": {
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/MQTTProducer.json"
+        }
       }
     ]
   }
