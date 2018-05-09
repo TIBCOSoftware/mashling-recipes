@@ -6,7 +6,7 @@ function get_test_cases {
 }
 function testcase1 {
 
-$GOPATH/src/github.com/TIBCOSoftware/mashling/bin/mashling-gateway -c mqtt-producer.json > /tmp/gw1.log 2>&1 &
+mashling-gateway -c mqtt-producer.json > /tmp/gw1.log 2>&1 &
 pId=$!
 echo "$pId"
 #starting mosquitto_sub in background and copying logs into temp file

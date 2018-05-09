@@ -19,7 +19,7 @@ function testcase1 {
 	echo $ENDPOINT_URL $SERVER_CERT $SERVER_KEY $TRUST_STORE
 	
 	# chmod 777 secure-rest-gateway
-	$GOPATH/src/github.com/TIBCOSoftware/mashling/bin/mashling-gateway -c secure-rest-gateway.json > /tmp/gw.log 2>&1 &  pId2=$!
+	mashling-gateway -c secure-rest-gateway.json > /tmp/gw.log 2>&1 &  pId2=$!
 	echo $pId2
 	
 	go get -u github.com/levigross/go-mutual-tls/...
