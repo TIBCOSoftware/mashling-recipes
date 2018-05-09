@@ -79,7 +79,7 @@
             ],
             "responses": [
               {
-                "if": "JSON.parse(FlogoRestGetFlow.response.outputs.code) != 200",
+                "if": "FlogoRestGetFlow.response.outputs.code != 200",
                 "error": true,
                 "output": {
                   "code": 403,
@@ -88,7 +88,7 @@
                 }
               },
               {
-                "if": "JSON.parse(FlogoRestGetFlow.response.outputs.code) == 200",
+                "if": "FlogoRestGetFlow.response.outputs.code == 200",
                 "error": false,
                 "output": {
                   "code": 200,
@@ -115,7 +115,7 @@
             ],
             "responses": [
               {
-                "if": "JSON.parse(birds_put.response.outputs.code) != 200",
+                "if": "birds_put.response.outputs.code != 200",
                 "error": true,
                 "output": {
                   "code": 403,
@@ -124,7 +124,7 @@
                 }
               },
               {
-                "if": "JSON.parse(birds_put.response.outputs.code) == 200",
+                "if": "birds_put.response.outputs.code == 200",
                 "error": false,
                 "output": {
                   "code": 200,
@@ -146,7 +146,7 @@
             ],
             "responses": [
               {
-                "if": "JSON.parse(mammals_put.response.outputs.code) != 200",
+                "if": "mammals_put.response.outputs.code != 200",
                 "error": true,
                 "output": {
                   "code": 403,
@@ -155,7 +155,7 @@
                 }
               },
               {
-                "if": "JSON.parse(mammals_put.response.outputs.code) == 200",
+                "if": "mammals_put.response.outputs.code == 200",
                 "error": false,
                 "output": {
                   "code": 200,
@@ -176,7 +176,7 @@
             ],
             "responses": [
               {
-                "if": "JSON.parse(animals_put.response.outputs.code) != 200",
+                "if": "animals_put.response.outputs.code != 200",
                 "error": true,
                 "output": {
                   "code": 403,
@@ -185,7 +185,7 @@
                 }
               },
               {
-                "if": "JSON.parse(animals_put.response.outputs.code) == 200",
+                "if": "animals_put.response.outputs.code == 200",
                 "error": false,
                 "output": {
                   "code": 200,
