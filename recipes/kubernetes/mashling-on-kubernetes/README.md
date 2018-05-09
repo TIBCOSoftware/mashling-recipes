@@ -37,17 +37,16 @@ $ mashling create -f gateway.json gateway
 ```
 
 ## Building the gateway
-To build a gateway from this recipe that can run in an `alpine` docker container on Kubernetes we need to compile the gateway to work with linux. To do that, you'll need to add `env GOOS=linux` to your command to instruct the compiler to build for Linux operating systems:
-```
-$ cd gateway
-$ env GOOS=linux mashling build
-```
-This command will create an executable called `gateway-linux-amd64` and will also create a bin folder.
+To build a gateway from this recipe that can run in an `alpine` docker container on Kubernetes we need to compile the gateway to work with linux.
+Download the Mashling-Gateway Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
+PLace the downloaded Binary in new folder(Ex: gateway) and name the binary `gateway-linux-amd64`.
 
 ## Creating a Docker image
-Now that the executable is built, you can create a Docker image using `alpine` to keep the size of the app as low as possible. To do that copy the `Dockerfile` to the bin directory and execute
+Now that the executable is built, you can create a Docker image using `alpine` to keep the size of the app as low as possible. To do that copy the `Dockerfile` and the `gateway.json` to the gateway directory.
+
 ```
 ## Build image
+$ cd gateway
 $ docker build . -t <your username>/gateway-app
 ```
 To make your image available on Docker Hub you can execute the below command. Just be sure that you're logged in to your Docker Hub account using the `docker login` command.
@@ -66,17 +65,25 @@ You can import these Swagger files in the API Modeler of TIBCO Cloud Integration
 * Click on the upload icon
 * Select both Swagger files
 
-After that you can use them to create mock apps. To do that move the mouse pointer over an API specification and click > Create Mock app. After you've created the mock apps you can get the URLs for them by clicking on `View and Test 1 Endpoint` and selecting `copy`. These are the endpoints that we'll use later on as well for `<URL1>` and `<URL2>`. The two Swagger files contain path parameters (`{name}`), to make sure the Mashling understand it should take that as a parameter as well you'll need to add `:id` at the end of the copied URL. The `id` is referenced in gateway.json (line [59](./gateway.json#L59) and [73](../gateway.json#L59)) where it substitutes the parameter for the actual value you supplied.
+After that you can use them to create mock apps. To do that move the mouse pointer over an API specification and click > Create Mock app. After you've created the mock apps you can get the URLs for them by clicking on `View and Test 1 Endpoint` and selecting `copy`. These are the endpoints that we'll use later on as well for `<URL1>` and `<URL2>`. The two Swagger files contain path parameters (`{name}`), to make sure the Mashling understand it should take that as a parameter as well you'll need to add `greeting/:id` at the end of the copied URL for URL1 and `farewell/:id` at the end of the copied URL for URL2. The `id` is referenced in gateway.json (line [59](./gateway.json#L59) and [73](../gateway.json#L59)) where it substitutes the parameter for the actual value you supplied.
 
 As an example:
 
-**URL you have copied**
+**URL1 you have copied**
 
-`https://integration.cloud.tibcoapps.com:443/<uuid>/greeting`  
+`https://integration.cloud.tibcoapps.com:443/<uuid>/`  
 
-**URL you need to use**
+**URL1 you need to use**
 
 `https://integration.cloud.tibcoapps.com:443/<uuid>/greeting/:id`
+
+**URL2 you have copied**
+
+`https://integration.cloud.tibcoapps.com:443/<uuid>/`  
+
+**URL2 you need to use**
+
+`https://integration.cloud.tibcoapps.com:443/<uuid>/farewell/:id`
 
 
 To run your Mashling gateway as a docker container, you can use the `docker run` command:

@@ -1,63 +1,115 @@
 {
-    "mashling_schema": "0.2",
-    "gateway": {
-      "name": "gwPushNotifications",
-      "version": "1.0.0",
-      "display_name":"Mashling Push Notifications",
-      "display_image":"displayImage.svg",
-      "description": "This gateway that content routes to FCM cloud functions which sends notification messages or data messages to registered client devices.",
-      "configurations": [
-        {
-          "name": "restConfig",
-          "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
-          "description": "Configuration for rest trigger",
-          "settings": {
-            "port": "9096"
-          }
-        }
-      ],
-      "triggers": [
-        {
-          "name": "rest_trigger",
-          "description": "Rest trigger",
-          "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
-          "settings": {
-            "config": "${configurations.restConfig}",
-            "method": "POST",
-            "path": "/notification",
-            "optimize":"true"
-          }
-        }
-      ],
-      "event_handlers": [
-        {
-            "name": "invoke_aws_lambda",
-            "description": "Lambda function - Sends push notifications to registered client devices.",
-            "reference": "github.com/pointlander/lambda/lib/flow/Lambda.json"
+  "mashling_schema": "1.0",
+  "gateway": {
+    "name": "MyProxy",
+    "version": "1.0.0",
+    "description": "This is a simple proxy.",
+    "triggers": [
+      {
+        "name": "MyProxy",
+        "description": "Animals rest trigger - PUT animal details",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "settings": {
+          "port": "9096"
         },
-        {
-          "name": "default_handler",
-          "description": "Default handler.",
+        "handlers": [
+          {
+            "dispatch": "Pets",
+            "settings": {
+              "autoIdReply": "false",
+              "method": "POST",
+              "path": "/notification",
+              "optimize": "true"
+            }
+          }
+        ]
+      }
+    ],
+    "dispatches": [
+      {
+        "name": "Pets",
+        "routes": [
+          {
+            "if": "payload.content.messageType == 'push'",
+            "steps": [
+              {
+                "service": "invoke_aws_lambda",
+                "input": {
+                }
+              }
+            ],
+            "responses": [
+              {
+                "if": "invoke_aws_lambda.response.outputs.code != 200",
+                "error": true,
+                "output": {
+                  "code": 403,
+                  "format": "json",
+                  "body": "User is not available."
+                }
+              },
+              {
+                "if": "invoke_aws_lambda.response.outputs.code == 200",
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "format": "json",
+                  "body": "${invoke_aws_lambda.response.outputs.data}"
+                }
+              }
+            ]
+          },
+          {
+            "steps": [
+              {
+                "service": "default_handler",
+                "input": {
+                  "inputs.content": "${payload.content}",
+                  "inputs.endPoint": "https://postman-echo.com/post"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "if": "default_handler.response.outputs.code != 200",
+                "error": true,
+                "output": {
+                  "code": 403,
+                  "format": "json",
+                  "body": "Pet is not available."
+                }
+              },
+              {
+                "if": "default_handler.response.outputs.code == 200",
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "format": "json",
+                  "body": "${default_handler.response.outputs.data}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "invoke_aws_lambda",
+        "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
+        "type": "flogoFlow",
+        "settings": {
+          "reference": "github.com/pointlander/lambda/lib/flow/Lambda.json"
+        }
+      },
+      {
+        "name": "default_handler",
+        "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
+        "type": "flogoFlow",
+        "settings": {
           "reference": "github.com/TIBCOSoftware/mashling/lib/flow/TunableRestInvokerPost.json"
         }
-      ],
-      "event_links": [
-        {
-          "triggers": ["rest_trigger"],
-          "dispatches": [
-            {
-              "if":"${trigger.content.messageType == push}",
-              "handler": "invoke_aws_lambda"
-            },
-            {
-              "handler": "default_handler",
-              "inputParams":{
-                "content":"${content}",
-                "endPoint":"https://postman-echo.com/post"
-              }
-            }
-          ]
-        }
-      ]
-    }
+      }
+    ]
   }
+}

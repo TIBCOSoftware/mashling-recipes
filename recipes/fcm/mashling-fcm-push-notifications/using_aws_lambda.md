@@ -2,6 +2,7 @@
 ### Prerequisites
 * Node.js SDK [npm, node](https://nodejs.org/en/download/)
 * Firebase account [fcm](https://firebase.google.com/)
+* Download the Mashling-Gateway Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 
 ## Getting Started
 Solution consists of three projects.
@@ -45,8 +46,8 @@ Note: Increase function Timeout 1 min to avoid time-out issues.
 
 ### Create Mashling gateway
 
-1. Navigate to gateway-projct directory `cd ../../../gateway-project/`
-2. Create Mashling gateway by running `mashling create -f gateway_lambda.json gateway_lambda`.
+1. Navigate to gateway-project directory `cd ../../../gateway-project/`
+2. Place the downloaded mashling-gateway binary in the gateway-project folder.
 
 ## Testing
 
@@ -55,7 +56,11 @@ Note: Increase function Timeout 1 min to avoid time-out issues.
 3. Accept security confirmation to receive notifications.
 4. Enable `Mashling gateway push notifications` preference.
 5. Set AWS IAM user access credentials as environment variables. `export access=AWS_ACCESS_KEY` AND `export secret=AWS_SECRET_KEY`
-6. Run the Mashling gateway app by using `cd gateway_lambda/bin; ./gateway_lambda`
+6. Run the Mashling gateway app by running the below command:
+```
+
+./mashling-gateway -c gateway_lambda.json
+```
 7. Open another terminal & Perform HTTP POST call using <br>
 `
 curl -X POST localhost:9096/notification -d '{"messageType":"push","message":"Message from gateway !!"}'
