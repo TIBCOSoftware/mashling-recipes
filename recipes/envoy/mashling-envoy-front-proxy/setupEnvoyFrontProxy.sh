@@ -40,8 +40,14 @@ export MASHLING_NAME=$NAME
 export MASHLING_LOC=$DIR
 
 # check if the mashling by the specified name exists in the app location
-if ! ls $MASHLING_LOC/bin/$MASHLING_NAME* 1> /dev/null 2>&1; then
-    printf "Mashling $MASHLING_NAME does not exist in $MASHLING_LOC/bin folder!!\n"
+#if ! ls $MASHLING_LOC/$MASHLING_NAME* 1> /dev/null 2>&1; then
+#    printf "Mashling $MASHLING_NAME does not exist in $MASHLING_LOC folder!!\n"
+#    exit 1
+#fi
+
+# check if the mashling binary exists in the app location
+if ! ls $MASHLING_LOC/mashling-gateway* 1> /dev/null 2>&1; then
+    printf "Mashling Binary does not exist in $MASHLING_LOC folder!!\n"
     exit 1
 fi
 
@@ -49,15 +55,15 @@ if $new_app
 then
     # create the temp directory for the mashling app
     printf "Creating $ROOT_DIR/gateway/$MASHLING_NAME temp directory\n"
-    rm -rf $ROOT_DIR/gateway/$MASHLING_NAME && mkdir $ROOT_DIR/gateway/$MASHLING_NAME && mkdir $ROOT_DIR/gateway/$MASHLING_NAME/bin
+    rm -rf $ROOT_DIR/gateway/$MASHLING_NAME && mkdir $ROOT_DIR/gateway/$MASHLING_NAME
 
+    # copy the mashling descriptor file to the temp directory
+    printf "Copying $MASHLING_NAME mashling binary into the ./gateway/$MASHLING_NAME folder\n"
+    cp $MASHLING_LOC/$MASHLING_NAME* $ROOT_DIR/gateway/$MASHLING_NAME
+    
     # copy the mashling binary to the temp directory
     printf "Copying $MASHLING_NAME mashling binary into the ./gateway/$MASHLING_NAME folder\n"
-    cp $MASHLING_LOC/bin/$MASHLING_NAME $ROOT_DIR/gateway/$MASHLING_NAME/bin
-
-    # copy the mashling flogo.json file to the temp directory
-    printf "Copying flogo.json into the $ROOT_DIR/gateway/$MASHLING_NAME folder\n"
-    cp $MASHLING_LOC/bin/flogo.json $ROOT_DIR/gateway/$MASHLING_NAME/bin/flogo.json
+    cp $MASHLING_LOC/mashling-gateway* $ROOT_DIR/gateway/$MASHLING_NAME
 fi
 
 # export the env var under the .env file. please check https://docs.docker.com/compose/environment-variables/ for details.
