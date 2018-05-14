@@ -10,12 +10,11 @@ branches:
   only:
     - master
     - /^v\d+\.\d+\.\d+(\.\d+)?(-\S*)?$/
-    - feature-v2-model-cicd
 
 install:
   - go get -u github.com/golang/dep/cmd/dep
   - cd $GOPATH/src/github.com/TIBCOSoftware
-  - git clone -b feature-v2-model-cicd https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
+  - git clone -b feature-v2-model https://github.com/TIBCOSoftware/mashling-cicd.git mashling-cicd
   
 script:
   - pushd mashling-cicd/sample-recipes/scripts
