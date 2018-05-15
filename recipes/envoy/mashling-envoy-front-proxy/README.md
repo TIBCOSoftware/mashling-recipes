@@ -16,7 +16,7 @@
 ## Installation
 ### Prerequisites
 * Docker tools [docker, compose, machine](https://www.docker.com/products/docker-toolbox) 
-* Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
+* Download the Mashling-Gateway Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 
 
 ## Getting Started
@@ -26,6 +26,7 @@
 	git clone https://github.com/TIBCOSoftware/mashling-recipes
 	cd mashling-recipes/recipes/envoy/mashling-envoy-front-proxy
 
+Place the Downloaded Mashling Gateway binary in the current mashling-envoy-front-proxy folder.
 Note: If you are trying in linux/ubuntu without VM, use local machine ip instead of $(docker-machine ip default) in subsequent steps. We have verified on linux/ubuntu.
 
 Create a docker-machine
