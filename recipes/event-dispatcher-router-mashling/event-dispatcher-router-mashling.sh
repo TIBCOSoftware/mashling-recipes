@@ -8,7 +8,7 @@ function testcase1 {
 
     pushd $GOPATH/kafka
     # starting zookeeper in background
-    bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/kafka.log &
+    bin/zookeeper-server-start.sh config/zookeeper.properties > /tmp/zookeeper.log &
     pId=$!
     sleep 10
 
@@ -25,7 +25,7 @@ function testcase1 {
     popd
 	
     #executing the gateway binary
-    mashling-gateway -c event-dispatcher-router-mashling.json 1> /tmp/test.log 2>&1 &
+    mashling-gateway -c event-dispatcher-router-mashling.json > /tmp/test.log 2>&1 &
     pId4=$!
     sleep 20
 
@@ -33,8 +33,7 @@ function testcase1 {
     current_time=$(date "+%Y.%m.%d-%H.%M.%S")
 
     #passing message from kafka producer
-    output="{\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}"
-	echo "$output" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic users &  pId3=$!    
+	echo "{\"id\":15,\"country\":\"USA\",\"category\":{\"id\":0,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic users &  pId3=$!    
     sleep 2
 	
 	

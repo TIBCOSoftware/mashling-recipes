@@ -15,6 +15,7 @@ export BASIC_AUTH_FILE=$GOPATH/pswd.txt
 mashling-gateway -c secure-rest-gateway-with-basic-auth.json > /tmp/gw1.log 2>&1 &
 pId=$!
 sleep 15
+curl -X PUT "http://localhost:9096/pets" -H "accept: application/xml" -H "Content-Type: application/json" -d '{"category":{"id":16,"name":"Animals"},"id":16,"name":"SPARROW","photoUrls":["string"],"status":"sold","tags":[{"id":0,"name":"string"}]}'
 response=$(curl --request GET http://foo:bar@localhost:9096/pets/16 --write-out '%{http_code}' --silent --output /dev/null)
 kill -9 $pId
 if [ $response -eq 200  ] 
