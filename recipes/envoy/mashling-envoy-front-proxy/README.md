@@ -35,8 +35,8 @@ Create a docker-machine
 	eval $(docker-machine env default)
 
 
-### Create a sample Kafka mashling app and deploy it in Envoy front-proxy
-Please change the **kafka/mashling-kafka-definition.json** file for Kafka cluster details appropriately before running the command to create Kafka-based mashling app.
+### Deploy Kafka mashling app in Envoy front-proxy
+Please change the **kafka/mashling-kafka-definition.json** file for Kafka cluster details appropriately before running the command to deploy Kafka-based mashling app.
 
 Set the Kafka broker URL according to your setup in the format \<host_ip>:\<port>
 	The following example sets the value to 10.98.200.188:9092.
@@ -84,7 +84,7 @@ You can check the message ingress into mashling consumer by doing the following:
    listeners=PLAINTEXT://System-IP:9092.
    Start zookeeper and kafka server.
 
-### Create a sample HTTP mashling app and deploy it in Envoy front-proxy
+### Deploy a HTTP mashling app in Envoy front-proxy
 #### Command
 	$jdoe-machine:front-proxy jdoe$ pwd
 	/Users/jdoe/front-proxy
@@ -99,46 +99,6 @@ The 'http-mashling-app' app will expose the endpoint (/pets/1)
 
 Access the mashling service (service3) behind the proxy as
 > curl -v $(docker-machine ip default):8000/pets/1
-
-### Create a mashling app using a mashling json descriptor and deploy it in Envoy front-proxy
-#### Command
-	$jdoe-machine:front-proxy jdoe$ pwd
-	/Users/jdoe/front-proxy
-	
-	$jdoe-machine:front-proxy jdoe$ ./createHttpMashlingOnEnvoy.sh -n petstoreapp -f ~/Work/mashling/request-response-mashling.json
-
-This will create a sample mashling app named 'petstoreapp' under /Users/jdoe/front-proxy/gateway folder.
- 
-This will also create an envoy front-proxy setup with the 'petstoreapp' as a member of the envoy mesh.
-
-### Deploy an existing mashling binary in Envoy front-proxy
-#### Command
-	$jdoe-machine:front-proxy jdoe$ pwd
-	/Users/jdoe/front-proxy
-
-Example 1) using HTTP compose
-
-	$jdoe-machine:front-proxy jdoe$ echo "ROOT_DIR=$(pwd)" > .env && env $(cat .env | xargs) ./setupEnvoyFrontProxy.sh -f http/docker-compose-http.yml
-
-This will prompt for the following user inputs:
-
-1. Name of the mashling app (default is http-mashling-app)
-2. Path of the mashling app folder (default is ./gateway/sample/http)
-
-Please note that the default http mashling app is available under the ./gateway/sample/http folder in the source.
-
-The 'http-mashling-app' app will expose the endpoint (/pets/1)
-Access mashling service (service3) behind the proxy as
-> curl -v $(docker-machine ip default):8000/pets/1
-
-Example 2) using Kafka compose
-
-	$jdoe-machine:front-proxy jdoe$ echo "ROOT_DIR=$(pwd)" > .env && env $(cat .env | xargs) ./setupEnvoyFrontProxy.sh -f kafka/docker-compose-kafka.yml -n kafka-mashling-app -p ./gateway/sample/kafka
-
-
-If the user provides name and path inputs, then the script will check if a binary with the given name exists in the <path>/bin folder. If one does not exist, the script will terminate.
-
-Using this script, you can deploy an existing mashling app into the Envoy front-proxy. 
 
 ### Changes in the Envoy front-proxy for a non-sample mashling app
 
