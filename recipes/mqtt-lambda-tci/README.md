@@ -2,19 +2,23 @@
 MQTT trigger that content routes to either a AWS Lambda function or an endpoint for Live Apps case creation
 
 ## Installation
-* Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
+* Download the Mashling-Gateway Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 * Mosquitto [mosquitto](https://mosquitto.org/download/)
 
 ## Setup
 ```
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/mqtt-lambda-tci
-mashling create -f mqtt-lambda-tci.json <directory name for output>
 ```
+Place the Downloaded Mashling-Gateway binary in mqtt-lambda-tci folder.
 
 ## Testing
 
-In a terminal start mqtt-lambda-tci/bin/mqtt-lambda-tci.
+Start gateway:
+```
+./mashling-gateway -c mqtt-lambda-tci.json
+```
+
 Then open another terminal and run:
 ```
 mosquitto_sub -t "abc123"

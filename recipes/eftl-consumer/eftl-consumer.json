@@ -1,55 +1,78 @@
 {
-  "mashling_schema": "0.2",
+  "mashling_schema": "1.0",
   "gateway": {
-    "name": "eftl-consumer",
+    "name": "MyProxy",
     "version": "1.0.0",
-    "display_name":"EFTL Consumer",
-    "description": "This is the EFTL based microgateway app",
-    "configurations": [
+    "description": "This is a simple proxy.",
+    "triggers": [
       {
-        "name": "eftlConfig",
+        "name": "MyProxy",
+        "description": "Animals rest trigger - PUT animal details",
         "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/eftl",
-        "description": "Configuration for rest trigger",
         "settings": {
           "url": "ws://localhost:9191/channel",
           "tracer": "zipkin",
           "tracerEndpoint": "http://localhost:9411/api/v1/spans"
-        }
-      }
-    ],
-    "triggers": [
-      {
-        "name": "eftl_trigger",
-        "description": "EFTL trigger",
-        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/eftl",
-        "settings": {
-          "config": "${configurations.eftlConfig}",
-          "dest": "sample",
-          "optimize":"true"
-        }
-      }
-    ],
-    "event_handlers": [
-      {
-        "name": "rest_handler",
-        "description": "Handle rest",
-        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/Proxy.json"
-      }
-    ],
-    "event_links": [
-      {
-        "triggers": ["eftl_trigger"],
-        "dispatches": [
+        },
+        "handlers": [
           {
-            "handler": "rest_handler",
-            "inputParams": {
-              "method": "POST",
-              "uri": "http://localhost:8181/a",
-              "content": "${content}",
-              "tracing": "${tracing}"
+            "dispatch": "Pets",
+            "settings": {
+              "dest": "sample",
+              "optimize":"true"
             }
           }
         ]
+      }
+    ],
+    "dispatches": [
+      {
+        "name": "Pets",
+        "routes": [
+          {
+            "steps": [
+              {
+                "service": "FlogoRestGetFlow",
+                "input": {
+                  "inputs.content": "${payload.content}",
+                  "inputs.tracing": "${payload.tracing}",
+		  "inputs.method": "POST",
+		  "inputs.uri": "http://localhost:8181/a"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "if": "FlogoRestGetFlow.response.outputs.code != 200",
+                "error": true,
+                "output": {
+                  "code": 403,
+                  "format": "json",
+                  "body": "Failure"
+                }
+              },
+              {
+                "if": "FlogoRestGetFlow.response.outputs.code == 200",
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "format": "json",
+                  "body": "${FlogoRestGetFlow.response.outputs.data}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "FlogoRestGetFlow",
+        "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
+        "type": "flogoFlow",
+        "settings": {
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/Proxy.json"
+        }
       }
     ]
   }

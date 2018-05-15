@@ -1,50 +1,55 @@
 {
-	"mashling_schema": "0.2",
-	"gateway": {
-		"name": "kafka",
-		"version": "1.0.0",
-		"display_name":"Mashling Kafka Definition",
-		"display_image":"displayImage.svg",
-		"description": "This is the kafka based mashling app",
-		"configurations": [
-			{
-				"name": "kafkaConfig",
-				"type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/kafkasubrouter",
-				"description": "Configuration for kafka cluster",
-				"settings": {
-					"BrokerUrl": "${env.KAFKA_BROKER_URL}"
-				}
-			}
-		],
-		"triggers": [
-			{
-				"name": "kafka_trigger",
-				"description": "The trigger on kafka 'users' topic",
-				"type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/kafkasubrouter",
-				"settings": {
-					"Topic": "users",
-					"config": "${configurations.kafkaConfig}"
-				}
-			}
-		],
-		"event_handlers": [
-			{
-				"name": "user_topic_handler",
-				"description": "Handle the user access",
-				"reference": "github.com/TIBCOSoftware/mashling/lib/flow/kafkaFlow.json",
-				"params": {
-				}
-			}
-		],
-		"event_links": [
-			{
-				"triggers": ["kafka_trigger"],
-				"dispatches": [
-					{
-						"handler": "user_topic_handler"
-					}
-				]
-			}
-		]
-	}
+  "mashling_schema": "1.0",
+  "gateway": {
+    "name": "MyProxy",
+    "version": "1.0.0",
+    "description": "This is a simple proxy.",
+    "triggers": [
+      {
+        "name": "MyProxy",
+        "description": "The trigger on kafka 'publishpet' topic",
+        "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
+        "settings": {
+          "BrokerUrl": "${env.KAFKA_BROKER_URL}"
+        },
+        "handlers": [
+          {
+            "dispatch": "kafka_trigger",
+            "settings": {
+              "Topic": "users"
+            }
+          }
+        ]
+      }
+    ],
+    "dispatches": [
+      {
+        "name": "kafka_trigger",
+        "routes": [
+          { 
+            "steps": [
+              { 
+                "service": "FlogoKafkaUsaFlow",
+                "input": {
+                  "inputs.message": "${payload.message}"
+                }
+              }
+            ],
+            "responses": [
+            ]
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "FlogoKafkaUsaFlow",
+        "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
+        "type": "flogoFlow",
+        "settings": {
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/kafkaFlow.json"
+        }
+      }
+    ]
+  }
 }

@@ -2,6 +2,7 @@
 ### Prerequisites
 * Node.js SDK [npm, node](https://nodejs.org/en/download/)
 * Firebase account [fcm](https://firebase.google.com/)
+* Download the Mashling-Gateway Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 
 ## Getting Started
 Solution consists of two projects.
@@ -33,7 +34,7 @@ Screenshot for reference:
 
 1. Navigate to gateway-projct directory `cd ../gateway-project/`
 2. Update `endPoint` value in gateway_fcm.json with cloud `Function URL` captured in previous section.
-3. Create Mashling gateway by running `mashling create -f gateway_fcm.json gateway_fcm`.
+3. Place the downloaded mashling-gateway binary in the gateway-project folder.
 
 ## Testing
 
@@ -41,7 +42,12 @@ Screenshot for reference:
 2. Login with your google account.
 3. Accept security confirmation to receive notifications.
 4. Enable `Mashling gateway push notifications` preference.
-5. Run the Mashling gateway app by using `cd gateway_fcm/bin; ./gateway_fcm`
+5. Run the Mashling gateway app by running the below command.
+```
+
+./mashling-gateway -c gateway_fcm.json
+
+```
 6. Open another terminal & Perform HTTP POST call using <br>
 `
 curl -X POST localhost:9096/notification -d '{"messageType":"push","message":"Message from gateway !!"}'

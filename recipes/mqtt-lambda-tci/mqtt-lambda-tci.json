@@ -1,16 +1,14 @@
 {
-  "mashling_schema": "0.2",
+  "mashling_schema": "1.0",
   "gateway": {
-    "name": "MQTT FaaS Dispatcher",
+    "name": "MyProxy",
     "version": "1.0.0",
-    "display_name":"MQTT FaaS Dispatcher",
-    "display_image":"displayImage.svg",
-    "description": "MQTT trigger that content routes to either a AWS Lambda function or an endpoint for Live Apps case creation",
-    "configurations": [
+    "description": "This is a simple proxy.",
+    "triggers": [
       {
-        "name": "mqttConfig",
+        "name": "MyProxy1",
+        "description": "Animals MQTT trigger - PUT animal details",
         "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/mqtt",
-        "description": "Configuration for MQTT",
         "settings": {
           "broker": "tcp://localhost:1883",
           "id": "flogo",
@@ -20,47 +18,79 @@
           "qos": "0",
           "cleansess": "false",
           "tracer": "zipkin",
-          "tracerEndpoint": "http://localhost:9411/api/v1/spans"
-        }
-      }
-    ],
-    "triggers": [
-      {
-        "name": "MQTT_Trigger",
-        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/mqtt",
-        "settings": {
-          "config": "${configurations.mqttConfig}",
+          "tracerEndpoint": "http://localhost:9411/api/v1/spans",
           "topic": "alert",
           "optimize": "true"
-        }
-      }
-    ],
-    "event_handlers": [
-      {
-        "name": "Predictive_Maintenance",
-        "description": "Lambda function - predictive maintenance",
-        "reference": "github.com/pointlander/lambda/lib/flow/Lambda.json"
-      },
-      {
-        "name": "Call_Field_OPS",
-        "description": "Live Apps case - Field Ops",
-        "reference": "github.com/raji-narayanan/mashlingflows/mqtt-to-http-flow.json"
-      }
-    ],
-    "event_links": [
-      {
-        "triggers": [
-          "MQTT_Trigger"
-        ],
-        "dispatches": [
+        },
+        "handlers": [
           {
-            "if": "${trigger.content.type in (urgent,critical)}",
-            "handler": "Call_Field_OPS"
-          },
-          {
-            "handler": "Predictive_Maintenance"
+            "dispatch": "Pets",
+            "settings": {
+              "topic": "get",
+              "optimize": "true"
+            }
           }
         ]
+      }
+    ],
+    "dispatches": [
+      {
+        "name": "Pets",
+        "routes": [
+          {
+            "if": "${trigger.content.type in (urgent,critical)}",
+            "steps": [
+              {
+                "service": "Call_Field_OPS"
+              }
+            ]
+          },
+          {
+            "steps": [
+              {
+                "service": "Predictive_Maintenance"
+              }
+            ],
+            "responses": [
+              {
+                "if": "Predictive_Maintenance.response.outputs.code != 200",
+                "error": true,
+                "output": {
+                  "code": 403,
+                  "format": "json",
+                  "body": "Pet is not added."
+                }
+              },
+              {
+                "if": "Predictive_Maintenance.response.outputs.code == 200",
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "format": "json",
+                  "body.pet": "${Predictive_Maintenance.response.outputs.data}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "Call_Field_OPS",
+        "description": "Make PUT calls against a remote HTTP service using a Flogo flow.",
+        "type": "flogoFlow",
+        "settings": {
+          "reference": "github.com/raji-narayanan/mashlingflows/mqtt-to-http-flow.json"
+        }
+      },
+      {
+        "name": "Predictive_Maintenance",
+        "description": "Make PUT calls against a remote HTTP service using a Flogo flow.",
+        "type": "flogoFlow",
+        "settings": {
+          "reference": "github.com/pointlander/lambda/lib/flow/Lambda.json"
+        }
       }
     ]
   }

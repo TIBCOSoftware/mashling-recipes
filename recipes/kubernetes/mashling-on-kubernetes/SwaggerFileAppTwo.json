@@ -21,7 +21,7 @@
             "examples": {
               "application/json": {
                 "name": "Leon",
-                "greeting": "Hello Leon"
+                "greeting": "Bye Leon"
               }
             }
           }

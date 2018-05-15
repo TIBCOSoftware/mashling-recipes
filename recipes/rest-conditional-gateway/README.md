@@ -2,18 +2,21 @@
 This recipe is a conditional HTTP router that routes requests based on content
 
 ## Installation
-* Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
+* Download the Mashling-Gateway Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 
 ## Setup
 ```
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/rest-conditional-gateway
-mashling create -f rest-conditional-gateway.json rest-conditional-gateway
 ```
+Place the Downloaded Mashling-Gateway binary in rest-conditional-gateway folder.
 
 ## Testing
 
-In a separate terminal start rest-conditional-gateway/bin/rest-conditional-gateway
+Start the gateway:
+```
+./mashling-gateway -c rest-conditional-gateway.json
+```
 and test below scenarios.
 
 ### Content based routing

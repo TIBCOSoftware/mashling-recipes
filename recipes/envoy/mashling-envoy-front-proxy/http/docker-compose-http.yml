@@ -2,10 +2,11 @@ version: '2'
 services:
   service2:
     build:
-      context: .
+      context: ./http
       args:
         - MASHLING_NAME
-      dockerfile: ${ROOT_DIR}/http/Dockerfile-http-mashling
+        - ROOT_DIR
+      dockerfile: Dockerfile-http-mashling
     volumes:
       - ${ROOT_DIR}/http/http-mashling-envoy.json:/etc/service-envoy.json
     networks:
