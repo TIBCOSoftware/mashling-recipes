@@ -25,7 +25,7 @@ function testcase1 {
     popd
 
     #executing the gateway binary
-    ./kafkatrigger-to-kafkapublisher &
+    mashling-gateway -c kafkatrigger-to-kafkapublisher.json > /tmp/kafka1.log &
     pId4=$!
     sleep 20
 
