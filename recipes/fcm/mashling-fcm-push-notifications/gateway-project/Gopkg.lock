@@ -77,7 +77,7 @@
     "lib/conditions",
     "lib/util"
   ]
-  revision = "3f468547f8461d8997428e46436685c0ef8a4a5f"
+  revision = "f1dbdd9bde6fdfcea794c9f63f8678d6dc4f8892"
 
 [[projects]]
   name = "github.com/apache/thrift"
@@ -207,9 +207,9 @@
 
 [[projects]]
   branch = "master"
-  name = "github.com/jeffreybozek/jsonpath"
+  name = "github.com/oliveagle/jsonpath"
   packages = ["."]
-  revision = "b631f61225a86d0536ff26d530bd811ba83d56b6"
+  revision = "46faf33da13527c9ef82205c0ee188f6fc98b13e"
 
 [[projects]]
   name = "github.com/jtblin/go-ldap-client"
