@@ -22,7 +22,6 @@ If you haven’t set up your own Kubernetes cluster yet, you might want to look 
 _All commands are very well documented on the minikube repos_
 
 ### Mashling CLI
-To install the Mashling CLI run `go get -u github.com/TIBCOSoftware/mashling/...`. This will install the latest version of the CLI on your machine, including any updates to the underlying dependencies (like [Project Flogo](https://github.com/TIBCOSoftware/flogo))
 
 ## Preparing the gateway
 The gateway for this scenario is based on the [tunable-rest-gateway](https://github.com/TIBCOSoftware/mashling-recipes/tree/master/recipes/tunable-rest-gateway), but there are a few key differences:
@@ -30,11 +29,6 @@ The gateway for this scenario is based on the [tunable-rest-gateway](https://git
 * There is one common event handler, used by both triggers
 * There are two event links that link the triggers to the event handler
 * Both event links make use of an environment variable to specify the endpoint (for example `${env.HELLO_API_ENDPOINT}`)
-
-To create the folder structure and download the required files, execute:
-```
-$ mashling create -f gateway.json gateway
-```
 
 ## Building the gateway
 To build a gateway from this recipe that can run in an `alpine` docker container on Kubernetes we need to compile the gateway to work with linux.
