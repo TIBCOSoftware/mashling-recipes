@@ -53,3 +53,9 @@ tags
 .vscode/*
 **/**/.cache/*
 
+## FCM
+**/node_modules/*
+**/.firebaserc
+*/npm-debug.log
+*~
+service-account-credentials.json
