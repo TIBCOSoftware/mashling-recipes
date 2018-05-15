@@ -71,7 +71,7 @@
         "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
         "type": "flogoFlow",
         "settings": {
-          "reference": "github.com/ykalidin/JsonChanges/tracing.json"
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/Tracing.json"
         }
       }
     ]
