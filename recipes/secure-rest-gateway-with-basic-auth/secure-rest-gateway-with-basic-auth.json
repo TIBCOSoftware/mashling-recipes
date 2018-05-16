@@ -3,6 +3,7 @@
   "gateway": {
     "name": "MyProxy",
     "version": "1.0.0",
+    "display_name":"Rest Conditional Gateway",
     "description": "This is a simple proxy.",
     "triggers": [
       {
