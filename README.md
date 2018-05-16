@@ -2,12 +2,12 @@
 
 [![Build Status](https://travis-ci.org/TIBCOSoftware/mashling-recipes.svg?branch=master)](https://travis-ci.org/TIBCOSoftware/mashling-recipes)
 
-A recipe is a pre-configured Mashling json file which can be customized or used as is for a specific gateway use case. The pre-compiled recipe binaries along with the json files are available in [mashling.io](https://mashling.io) website.
+A recipe is a pre-configured Mashling json file which can be customized or used as is for a specific gateway use case. The recipes and the gateway binaries to run them are available in [mashling.io](https://mashling.io) website.
 
 ## How to contribute a recipe
 
 ### Creating a recipe
-A recipe can be created by [mashling CLI tool](https://github.com/TIBCOSoftware/mashling/tree/master/cli) or customizing an existing recipe in [mashling.io](https://mashling.io).
+A recipe can be created by customizing an existing recipe in [mashling.io](https://mashling.io) or by using an editor such as [VS Code](https://code.visualstudio.com/) enabled with [mashling extension](https://github.com/TIBCOSoftware/vscode-extension-mashling). 
 
 ### Adding a recipe
 A recipe should be contained in its own folder under 'recipes' folder. The recipe folder is composed of a gateway json file, README.md, an optional icon image file, optional Gopkg.lock and Gopkg.toml files. In the absence of the icon image file, the default Mashling icon image is used by mashling.io for the recipe. When the icon image file is present, the Mashling json file should have an icon image file field as follows:
