@@ -3,6 +3,8 @@
   "gateway": {
     "name": "MyProxy",
     "version": "1.0.0",
+    "display_name":"MQTT Producer",
+		"display_image":"displayImage.svg",
     "description": "This is a simple proxy.",
     "triggers": [
       {

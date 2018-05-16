@@ -3,6 +3,8 @@
   "gateway": {
     "name": "MyProxy",
     "version": "1.0.0",
+    "display_name":"HTTP Trigger to Kafka Publisher",
+		"display_image":"displayImage.svg",
     "description": "This is a simple proxy.",
     "triggers": [
       {
