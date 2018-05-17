@@ -28,7 +28,7 @@
           {
             "dispatch": "Pets",
             "settings": {
-              "topic": "get",
+              "topic": "alert",
               "optimize": "true"
             }
           }
@@ -40,17 +40,36 @@
         "name": "Pets",
         "routes": [
           {
-            "if": "${trigger.content.type in (urgent,critical)}",
+            "if": "payload.content.type == 'urgent' || payload.content.type == 'critical'",
             "steps": [
               {
-                "service": "Call_Field_OPS"
+                "service": "Call_Field_OPS",
+                "input": {
+                  "inputs.pathParams": "${payload.pathParams}",
+                  "inputs.content": "${payload.content}",
+                  "inputs.tracing": "${payload.tracing}"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "format": "json",
+                  "body": "${Call_Field_OPS.response.outputs.data}"
+                }
               }
             ]
           },
           {
             "steps": [
               {
-                "service": "Predictive_Maintenance"
+                "service": "Predictive_Maintenance",
+                "input": {
+                  "inputs.content": "${payload.content}",
+                  "inputs.tracing": "${payload.tracing}"
+                }
               }
             ],
             "responses": [
@@ -83,7 +102,7 @@
         "description": "Make PUT calls against a remote HTTP service using a Flogo flow.",
         "type": "flogoFlow",
         "settings": {
-          "reference": "github.com/raji-narayanan/mashlingflows/mqtt-to-http-flow.json"
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/MQTTToHTTPFlow.json"
         }
       },
       {
@@ -91,7 +110,7 @@
         "description": "Make PUT calls against a remote HTTP service using a Flogo flow.",
         "type": "flogoFlow",
         "settings": {
-          "reference": "github.com/pointlander/lambda/lib/flow/Lambda.json"
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/Lambda.json"
         }
       }
     ]
