@@ -10,6 +10,7 @@ branches:
   only:
     - master
     - /^v\d+\.\d+\.\d+(\.\d+)?(-\S*)?$/
+    - feature-v2-model
 
 install:
   - go get -u github.com/golang/dep/cmd/dep
