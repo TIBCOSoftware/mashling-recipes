@@ -9,8 +9,8 @@ Pictorial representation of the recipe solution:
 * STEP 2: Chrome web application (Client) registers itself with FCM.
 * STEP 3: FCM generates registration id for the client.
 * STEP 4: Client application stores registration id in Firebase Realtime Database.
-* STEP 5: Mashling triggers push notification by invokding cloud function.
-* STEP 6: Cloud function retrives client registraion ids from Firebase Realtime Database, Notification message from Mashling request and invokes FCM to send push notification.
+* STEP 5: Mashling triggers push notification by invoking cloud function.
+* STEP 6: Cloud function retrives client registration ids from Firebase Realtime Database, Notification message from Mashling request and invokes FCM to send push notification.
 * STEP 7: FCM sends push notification to clients & Client shows notification to user.
 
 ## Getting Started
