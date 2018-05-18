@@ -3,8 +3,8 @@
   "gateway": {
     "name": "MyProxy",
     "version": "1.0.0",
-    "display_name": "Content-based MQTT and HTTP Router",
-    "display_image": "displayImage.svg",
+    "display_name":"Event Dispatcher And Router",
+		"display_image":"displayImage.svg",
     "description": "This is a simple proxy.",
     "triggers": [
       {
