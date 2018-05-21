@@ -2,15 +2,15 @@
 
 [![Build Status](https://travis-ci.org/TIBCOSoftware/mashling-recipes.svg?branch=master)](https://travis-ci.org/TIBCOSoftware/mashling-recipes)
 
-A recipe is a pre-configured Mashling json file which can be customized or used as is for a specific gateway use case. The pre-compiled recipe binaries along with the json files are available in [mashling.io](https://mashling.io) website.
+A recipe is a pre-configured Mashling json file which can be customized or used as is for a specific gateway use case. The recipes and the gateway binaries to run them are available in [mashling.io](https://mashling.io) website.
 
 ## How to contribute a recipe
 
 ### Creating a recipe
-A recipe can be created by [mashling CLI tool](https://github.com/TIBCOSoftware/mashling/tree/master/cli) or customizing an existing recipe in [mashling.io](https://mashling.io).
+A recipe can be created by customizing an existing recipe in [mashling.io](https://mashling.io) or by using an editor such as [VS Code](https://code.visualstudio.com/) enabled with [mashling extension](https://github.com/TIBCOSoftware/vscode-extension-mashling). 
 
 ### Adding a recipe
-A recipe should be contained in its own folder under 'recipes' folder. The recipe folder is composed of a gateway json file, README.md, an optional icon image file, optional Gopkg.lock and Gopkg.toml files. In the absence of the icon image file, the default Mashling icon image is used by mashling.io for the recipe. When the icon image file is present, the Mashling json file should have an icon image file field as follows:
+A recipe should be contained in its own folder under 'recipes' folder. The recipe folder is composed of a gateway json file, README.md and optional icon image file. In the absence of the icon image file, the default Mashling icon image is used by mashling.io for the recipe. When the icon image file is present, the Mashling json file should have an icon image file field as follows:
 
 ```json
 {
@@ -26,8 +26,6 @@ A recipe should be contained in its own folder under 'recipes' folder. The recip
 ```
 
 If "display_name" field is present in the json, its value is used as the recipe name in mashling.io. Otherwise, the value of "name" field is used.
-
-The Gopkg.lock and Gopkg.toml contains the specific dependent library versions to be used during the recipe binary compilation. In the abasence of those files, the latest versions of the dependent libraries are to be used. For more information about the dependencies versioning, refer to the [Mashling CLI documentation](https://github.com/TIBCOSoftware/mashling/blob/master/cli/docs/gateway.md).
 
 ### Publishing a recipe
 

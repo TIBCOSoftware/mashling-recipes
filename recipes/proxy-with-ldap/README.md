@@ -5,14 +5,15 @@ LDAP based Basic Auth.
 
 ## Installation
 * Docker [docker](https://www.docker.com)
-* Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
+* Download the Mashling-Gateway Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 * Zipkin [zipkin](http://zipkin.io/pages/quickstart)
 
 ## Setup
 ```
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/proxy-with-ldap
-mashling create -f proxy-with-ldap.json proxy-with-ldap
+mkdir proxy-with-ldap
+cp proxy-with-ldap.json proxy-with-ldap/
 cp -r cert proxy-with-ldap/
 cp key.pem proxy-with-ldap/
 ```
@@ -25,7 +26,7 @@ docker run -d -p 1234:389 pointlander/ldap
 Start the proxy:
 ```
 cd proxy-with-ldap
-bin/proxy-with-ldap
+./mashling-gateway -c proxy-with-ldap.json
 ```
 In a new terminal run the following:
 ```

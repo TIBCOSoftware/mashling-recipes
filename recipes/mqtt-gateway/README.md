@@ -4,18 +4,21 @@ This readme contains instructions for creating a mashling with support for condi
 MQTT and HTTP routing.
 
 ## Installation
-* Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
+* Download the Mashling-Gateway Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 * Mosquitto [mosquitto](https://mosquitto.org/download/)
 
 ## Setup
 ```
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/mqtt-gateway
-mashling create -f mqtt-gateway.json mqtt-gateway
 ```
+Place the Downloaded Mashling-Gateway binary in mqtt-gateway folder.
 
 ## Testing
-In another terminal start mqtt-gateway/bin/mqtt-gateway.
+Start gateway:
+```
+./mashling-gateway -c mqtt-gateway.json
+```
 Then open another terminal and run:
 
 ```

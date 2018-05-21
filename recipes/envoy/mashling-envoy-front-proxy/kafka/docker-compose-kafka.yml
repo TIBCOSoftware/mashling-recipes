@@ -2,10 +2,11 @@ version: '2'
 services:
   service2:
     build:
-      context: .
+      context: ./kafka
       args:
         - MASHLING_NAME
-      dockerfile: ${ROOT_DIR}/kafka/Dockerfile-kafka-mashling
+        - ROOT_DIR
+      dockerfile: Dockerfile-kafka-mashling
     volumes:
       - ${ROOT_DIR}/kafka/kafka-mashling-envoy.json:/etc/service-envoy.json
     networks:

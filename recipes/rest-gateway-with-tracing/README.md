@@ -5,22 +5,27 @@ distributed tracing.
 
 ## Installation
 * Docker [docker](https://www.docker.com)
-* Mashling [CLI](https://github.com/TIBCOSoftware/mashling)
 * Zipkin [zipkin](http://zipkin.io/pages/quickstart)
+* Download the Mashling-Gateway Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 
 ## Setup
 ```
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/rest-gateway-with-tracing
-mashling create -f rest-gateway-with-tracing.json rest-gateway-with-tracing
 ```
+Place the Downloaded Mashling-Gateway binary in rest-gateway-with-tracing folder.
 
 ## Testing
-In another terminal start rest-gateway-with-tracing/bin/rest-gateway-with-tracing
-and then test with:
+Start the Gateway:
+
+```
+./mashling-gateway -c rest-gateway-with-tracing.json
+```
+
+Test with:
 
 ```
 curl http://localhost:9096/pets/1
 ```
 
-Then point your browser to http://localhost:9411
+For tracing point your browser to http://localhost:9411

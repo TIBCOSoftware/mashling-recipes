@@ -1,84 +1,129 @@
 {
-  "mashling_schema": "0.2",
+  "mashling_schema": "1.0",
   "gateway": {
-    "name": "proxy-with-ldap",
+    "name": "MyProxy",
     "version": "1.0.0",
     "display_name":"Proxy with LDAP",
-    "description": "Mashling Proxy with LDAP",
-    "configurations": [
+    "description": "This is a simple proxy.",
+    "triggers": [
       {
-        "name": "restConfig",
+        "name": "MyProxy",
+        "description": "Animals rest trigger - PUT animal details",
         "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
-        "description": "Configuration for rest trigger",
         "settings": {
           "port": "9096",
           "tracer": "zipkin",
           "tracerEndpoint": "http://localhost:9411/api/v1/spans",
-          "enableTLS": "true",
           "serverCert": "./cert/cert.pem",
           "serverKey": "./key.pem",
-          "enableClientAuth": "true",
           "trustStore": "./cert/",
-          "ldapHost": "localhost",
-          "ldapPort": "1234",
-          "ldapBase": "dc=nodomain"
-        }
-      }
-    ],
-    "triggers": [
-      {
-        "name": "rest_trigger",
-        "description": "POST trigger",
-        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
-        "settings": {
-          "config": "${configurations.restConfig}",
-          "method": "POST",
-          "path": "/",
-          "optimize":"true"
-        }
-      }
-    ],
-    "event_handlers": [
-      {
-        "name": "rest_handler",
-        "description": "Handle XML",
-        "reference": "github.com/TIBCOSoftware/mashling/lib/flow/Proxy.json"
-      }
-    ],
-    "event_links": [
-      {
-        "triggers": ["rest_trigger"],
-        "dispatches": [
+          "enableTLS": "true",
+          "enableClientAuth": "true"
+        },
+        "handlers": [
           {
-            "if": "${trigger.content._body[0]._name == test}",
-            "handler": "rest_handler",
-            "inputParams": {
+            "dispatch": "Pets",
+            "settings": {
               "method": "POST",
-              "uri": "http://localhost:8080/c",
-              "content": "${content}",
-              "tracing": "${tracing}"
-            }
-          },
-          {
-            "if": "${trigger.header.SOAPAction == test}",
-            "handler": "rest_handler",
-            "inputParams": {
-              "method": "POST",
-              "uri": "http://localhost:8080/a",
-              "content": "${content}",
-              "tracing": "${tracing}"
-            }
-          },
-          {
-            "handler": "rest_handler",
-            "inputParams": {
-              "method": "POST",
-              "uri": "http://localhost:8080/b",
-              "content": "${content}",
-              "tracing": "${tracing}"
+              "path": "/",
+              "optimize": "true",
+              "ldapHost": "localhost",
+              "ldapPort": "1234",
+              "ldapBase": "dc=nodomain"
             }
           }
         ]
+      }
+    ],
+    "dispatches": [
+      {
+        "name": "Pets",
+        "routes": [
+          {
+            "if": "payload.content._body[0]._name == 'xml'",
+            "steps": [
+              {
+                "service": "FlogoRestGetFlow",
+                "input": {
+                  "inputs.tracing": "${payload.tracing}",
+                  "inputs.method": "POST",
+                  "inputs.uri": "http://localhost:8080/c",
+                  "inputs.content": "${payload.content}"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "if": "FlogoRestGetFlow.response.outputs.code == 200",
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "format": "json",
+                  "body": "${FlogoRestGetFlow.response.outputs.data}"
+                }
+              }
+            ]
+          },
+          {
+            "if": "payload.header.Soapaction == 'test'",
+            "steps": [
+              {
+                "service": "FlogoRestGetFlow",
+                "input": {
+                  "inputs.tracing": "${payload.tracing}",
+                  "inputs.method": "POST",
+                  "inputs.uri": "http://localhost:8080/a",
+                  "inputs.content": "${payload.content}"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "if": "FlogoRestGetFlow.response.outputs.code == 200",
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "format": "json",
+                  "body": "${FlogoRestGetFlow.response.outputs.data}"
+                }
+              }
+            ]
+          },
+          {
+            "steps": [
+              {
+                "service": "FlogoRestGetFlow",
+                "input": {
+                  "inputs.tracing": "${payload.tracing}",
+                  "inputs.method": "POST",
+                  "inputs.uri": "http://localhost:8080/b",
+                  "inputs.content": "${payload.content}"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "if": "FlogoRestGetFlow.response.outputs.code == 200",
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "format": "json",
+                  "body": "${FlogoRestGetFlow.response.outputs.data}"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "FlogoRestGetFlow",
+        "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
+        "type": "flogoFlow",
+        "settings": {
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/Proxy.json"
+        }
       }
     ]
   }

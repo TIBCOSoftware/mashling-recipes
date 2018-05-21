@@ -51,6 +51,7 @@ _testmain.go
 
 tags
 .vscode/*
+**/**/.cache/*
 
 ## FCM
 **/node_modules/*

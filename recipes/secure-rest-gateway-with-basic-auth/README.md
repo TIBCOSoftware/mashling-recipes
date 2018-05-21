@@ -3,12 +3,13 @@
 This is a recipe to secure the microgateway with basic authentication.
 
 Instructions:
-
-1) Place the secure-rest-gateway-with-basic-auth.json in a folder and create the app using the command below:
-
-```bash
-mashling create -f secure-rest-gateway-with-basic-auth.json gwWithBasicAuth
+1) Download the Mashling-Gateway Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage) 
+2) Setup:
 ```
+   git clone https://github.com/TIBCOSoftware/mashling-recipes
+   cd mashling-recipes/recipes/secure-rest-gateway-with-basic-auth
+```
+Place the Downloaded Mashling-Gateway binary in secure-rest-gateway-with-basic-auth folder.
 
 Note the setting:
 ```
@@ -17,7 +18,7 @@ Note the setting:
 
 This is used to specify the environment variable to pass into the microgateway.
 
-2) Start the microgateway with the BASIC_AUTH_FILE set to the full path to where your 
+3) Start the microgateway with the BASIC_AUTH_FILE set to the full path to where your 
 password file is located. The password file can be of the following form:
 
 Plain (username:password):
@@ -34,10 +35,11 @@ foo:5VvmQnTXZ10wGZu_Gkjb8umfUPIOQTQ3p1YFadAWTl8=:6267beb3f851b7fee14011f6aa23655
 Start the microgateway:
 
 ```bash
-BASIC_AUTH_FILE=/path/to/passwd.txt gwWithBasicAuth
+export BASIC_AUTH_FILE=/path/to/passwd.txt
+./mashling-gateway -c secure-rest-gateway-with-basic-auth.json
 ```
 
-3) Test basic authentication with:
+4) Test basic authentication with:
 ```bash
 curl -X GET http://foo:bar@localhost:9096/pets/3
 ```

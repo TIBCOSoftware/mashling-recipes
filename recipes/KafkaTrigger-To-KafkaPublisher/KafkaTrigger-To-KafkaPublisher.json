@@ -1,53 +1,65 @@
 {
-	"mashling_schema": "0.2",
-	"gateway": {
-		"name": "allRecipe",
-		"version": "1.0.0",
-		"display_name":"KafkaTrigger to KafkaPublisher",
+  "mashling_schema": "1.0",
+  "gateway": {
+    "name": "MyProxy",
+    "version": "1.0.0",
+    "display_name":"KafkaTrigger to KafkaPublisher",
 		"display_image":"displayImage.svg",
-		"description": "This is the first microgateway app",
-		"configurations": [
-			{
-				"name": "kafkaConfig",
-				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
-				"description": "Configuration for kafka cluster",
-				"settings": {
-					"BrokerUrl": "localhost:9092"
-				}
-			}
-		],
-		"triggers": [
-            
-			{
-				"name": "kafka_trigger1",
-				"description": "The trigger on kafka 'users' topic",
-				"type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
-				"settings": {
-					"Topic": "publishpet",
-					"config": "${configurations.kafkaConfig}"
-				}
-			}
-		],
-		"event_handlers": [
-            
-			{
-				"name": "kafka_handler1",
-				"description": "Handle the user access",
-				"reference": "github.com/TIBCOSoftware/mashling/lib/flow/KafkaTriggerToKafkaActivity.json",
-				"params": {
-				}
-			}
-		],
-		"event_links": [
-            
-			{
-				"triggers": ["kafka_trigger1"],
-				"dispatches": [
-					{
-						"handler": "kafka_handler1"
-					}
-				]
-			}
-		]
-	}
+    "description": "This is a simple proxy.",
+    "triggers": [
+      {
+        "name": "MyProxy",
+        "description": "The trigger on kafka 'publishpet' topic",
+        "type": "github.com/TIBCOSoftware/flogo-contrib/trigger/kafkasub",
+        "settings": {
+          "BrokerUrl": "localhost:9092"
+        },
+        "handlers": [
+          {
+            "dispatch": "kafka_trigger",
+            "settings": {
+              "Topic": "publishpet"
+            }
+          }
+        ]
+      }
+    ],
+    "dispatches": [
+      {
+        "name": "kafka_trigger",
+        "routes": [
+          {
+            "steps": [
+              {
+                "service": "FlogoRestPutFlow",
+                "input": {
+                  "inputs.message": "${payload.message}"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "format": "json",
+                  "body": "Success"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "FlogoRestPutFlow",
+        "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
+        "type": "flogoFlow",
+        "settings": {
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/KafkaTriggerToKafkaActivity.json"
+        }
+      }
+    ]
+  }
 }

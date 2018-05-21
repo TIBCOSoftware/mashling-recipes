@@ -9,6 +9,8 @@ export ROOT_DIR=$(pwd)
 pushd $ROOT_DIR > /dev/null
 
 DEFAULT_MASHLING_APP_NAME='http-mashling-app'
+DEFAULT_MASHLING_DEFINITION=$ROOT_DIR/http/mashling-http-definition.json
+DEFAULT_MASHLING_BINARY=$ROOT_DIR/mashling-gateway
 
 while getopts n:f: option
 do
@@ -37,11 +39,17 @@ pushd gateway > /dev/null
 if $use_mashling_json_input
 then
     printf "Creating Http Mashling $MASHLING_NAME from definition under $ROOT_DIR/gateway folder\n"
-    export FLOGO_EMBED=false && $GOPATH/bin/mashling create -f $MASHLING_JSON_PATH $MASHLING_NAME
+    mkdir -m777 $MASHLING_NAME
+    cp -fr /$MASHLING_JSON_PATH $ROOT_DIR/gateway/$MASHLING_NAME
+    cp -fr /$DEFAULT_MASHLING_BINARY $ROOT_DIR/gateway/$MASHLING_NAME
 else
     printf "Creating Http Mashling $MASHLING_NAME under $ROOT_DIR/gateway folder\n"
-    export FLOGO_EMBED=false && $GOPATH/bin/mashling create $MASHLING_NAME
+    mkdir -m777 $MASHLING_NAME
+    cp -R /$DEFAULT_MASHLING_DEFINITION $ROOT_DIR/gateway/$MASHLING_NAME
+    cp -R /$DEFAULT_MASHLING_BINARY $ROOT_DIR/gateway/$MASHLING_NAME
 fi    
+
+cp -r $MASHLING_NAME/ $ROOT_DIR/http/$MASHLING_NAME
 
 export MASHLING=$MASHLING_NAME
 

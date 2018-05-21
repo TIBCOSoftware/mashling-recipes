@@ -5,7 +5,6 @@ function get_test_cases {
     echo "${my_list[@]}"
 }
 function testcase1 {
-
 	
 	mkdir -p $HOME/gatewaycerts $HOME/truststore
 	cp $GOPATH/src/github.com/TIBCOSoftware/mashling-recipes/recipes/secure-rest-gateway/utils/gateway.crt $HOME/gatewaycerts
@@ -19,8 +18,8 @@ function testcase1 {
 	export ENDPOINT_URL=https://localhost:8080
 	echo $ENDPOINT_URL $SERVER_CERT $SERVER_KEY $TRUST_STORE
 	
-	chmod 777 secure-rest-gateway
-	./secure-rest-gateway 1> /tmp/gw.log 2>&1 &  pId2=$!
+	# chmod 777 secure-rest-gateway
+	mashling-gateway -c secure-rest-gateway.json > /tmp/gw.log 2>&1 &  pId2=$!
 	echo $pId2
 	
 	go get -u github.com/levigross/go-mutual-tls/...
@@ -39,23 +38,16 @@ function testcase1 {
 	sed -i s/'log.Println(httpServer.ListenAndServeTLS("..\/cert.pem", "..\/key.pem"))/log.Println(httpServer.ListenAndServeTLS("..\/apiserver.crt", "..\/apiserver.key"))'/g server.go
 	sed -i s/'"fmt"/\/\/"fmt"'/g server.go
 	
-	echo "123"
 	go run server.go > /tmp/server.log & pId=$!
 	cd ../client
 	sleep 20
-	echo "456"
 	# go run client.go > /tmp/client.log 'sleep 5' & pId1=$!
 	go run client.go 1> /tmp/client.log 2>&1
-	echo ================
-	cat /tmp/client.log
-	echo ================
-	cat /tmp/gw.log
-	echo ================
 	#output=$(cat /tmp/client.log)
 	input="{"Hobbies":["snowboarding","programming"],"Name":"Alex"}"
 	#output=Hobbies
 	
-	if [[ "echo $(cat /tmp/client.log)" =~ '{"Hobbies":["snowboarding","programming"],"Name":"Alex"}' ]] 
+	if [[ "echo $(cat /tmp/client.log)" =~ "snowboarding" ]] && [[ "echo $(cat /tmp/gw.log)" =~ "Completed" ]]
         then 
             echo "PASS"
             
@@ -66,7 +58,7 @@ function testcase1 {
 	popd
 	
 	rm -f /tmp/client.log /tmp/gw.log
-	kill -SIGINT $pId
-	kill -SIGINT $pId2
+	kill -9 $pId
+	kill -9 $pId2
 	
 }
