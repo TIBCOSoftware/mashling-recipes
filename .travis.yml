@@ -36,7 +36,7 @@ deploy:
   on:
     all_branches: true
   local_dir: $GOPATH/src/github.com/TIBCOSoftware/mashling-cicd/sample-recipes/master-builds
-  upload-dir: master-builds
+  upload-dir: TIBCOSoftware/mashling-recipes
 
 notifications: 
   email: 
