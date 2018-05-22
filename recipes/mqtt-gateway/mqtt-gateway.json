@@ -85,8 +85,9 @@
                 "error": true,
                 "output": {
                   "code": 403,
-                  "format": "json",
-                  "body": "Pet is not available."
+                  "data": {
+                    "error": "Pet is not available."
+                  }
                 }
               },
               {
@@ -94,8 +95,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body": "${FlogoRestGetFlow.response.outputs.data}"
+                  "data": "${FlogoRestGetFlow.response.outputs.data}"
                 }
               }
             ]
@@ -121,8 +121,9 @@
                 "error": true,
                 "output": {
                   "code": 403,
-                  "format": "json",
-                  "body": "Pet is not added."
+                  "data": {
+                    "error": "Pet is not added."
+                  }
                 }
               },
               {
@@ -130,8 +131,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body.pet": "${birds_put.response.outputs.data}"
+                  "data": "${birds_put.response.outputs.data}"
                 }
               }
             ]
@@ -152,8 +152,9 @@
                 "error": true,
                 "output": {
                   "code": 403,
-                  "format": "json",
-                  "body": "Pet is not added."
+                  "data": {
+                    "error": "Pet is not added."
+                  }
                 }
               },
               {
@@ -161,8 +162,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body.pet": "${mammals_put.response.outputs.data}"
+                  "data": "${mammals_put.response.outputs.data}"
                 }
               }
             ]
@@ -182,8 +182,9 @@
                 "error": true,
                 "output": {
                   "code": 403,
-                  "format": "json",
-                  "body": "Pet is not added."
+                  "data": {
+                    "error": "Pet is not added."
+                  }
                 }
               },
               {
@@ -191,8 +192,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body.pet": "${animals_put.response.outputs.data}"
+                  "data": "${animals_put.response.outputs.data}"
                 }
               }
             ]

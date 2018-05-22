@@ -56,8 +56,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body": "${Call_Field_OPS.response.outputs.data}"
+                  "data": "${Call_Field_OPS.response.outputs.data}"
                 }
               }
             ]
@@ -78,8 +77,9 @@
                 "error": true,
                 "output": {
                   "code": 403,
-                  "format": "json",
-                  "body": "Pet is not added."
+                  "data": {
+                    "error": "Pet is not added."
+                  }
                 }
               },
               {
@@ -87,8 +87,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body.pet": "${Predictive_Maintenance.response.outputs.data}"
+                  "data": "${Predictive_Maintenance.response.outputs.data}"
                 }
               }
             ]

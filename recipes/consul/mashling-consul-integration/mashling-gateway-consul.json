@@ -77,8 +77,9 @@
                 "error": true,
                 "output": {
                   "code": 403,
-                  "format": "json",
-                  "body": "Pet is not available."
+                  "data": {
+                    "error": "Pet is not available."
+                  }
                 }
               },
               {
@@ -86,8 +87,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body": "${FlogoRestGetFlow.response.outputs.data}"
+                  "data": "${FlogoRestGetFlow.response.outputs.data}"
                 }
               }
             ]
@@ -113,8 +113,9 @@
                 "error": true,
                 "output": {
                   "code": 403,
-                  "format": "json",
-                  "body": "Pet is not available."
+                  "data": {
+                    "error": "Pet is not available."
+                  }
                 }
               },
               {
@@ -122,8 +123,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body": "${mammals_handler.response.outputs.data}"
+                  "data": "${mammals_handler.response.outputs.data}"
                 }
               }
             ]
@@ -144,8 +144,9 @@
                 "error": true,
                 "output": {
                   "code": 403,
-                  "format": "json",
-                  "body": "Pet is not available."
+                  "data": {
+                    "error": "Pet is not available."
+                  }
                 }
               },
               {
@@ -153,8 +154,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body": "${birds_handler.response.outputs.data}"
+                  "data": "${birds_handler.response.outputs.data}"
                 }
               }
             ]
@@ -174,8 +174,9 @@
                 "error": true,
                 "output": {
                   "code": 403,
-                  "format": "json",
-                  "body": "Pet is not available."
+                  "data": {
+                    "error": "Pet is not available."
+                  }
                 }
               },
               {
@@ -183,8 +184,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body": "${animals_handler.response.outputs.data}"
+                  "data": "${animals_handler.response.outputs.data}"
                 }
               }
             ]
@@ -209,8 +209,9 @@
                 "error": true,
                 "output": {
                   "code": 403,
-                  "format": "json",
-                  "body": "Pet is not available."
+                  "data": {
+                    "error": "Pet is not available."
+                  }
                 }
               },
               {
@@ -218,8 +219,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body": "${animals_get_handler1.response.outputs.data}"
+                  "data": "${animals_get_handler1.response.outputs.data}"
                 }
               }
             ]

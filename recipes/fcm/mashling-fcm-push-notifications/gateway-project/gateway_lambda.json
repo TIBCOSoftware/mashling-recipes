@@ -44,8 +44,9 @@
                 "error": true,
                 "output": {
                   "code": 403,
-                  "format": "json",
-                  "body": "User is not available."
+                  "data": {
+                    "error": "User is not available."
+                  }
                 }
               },
               {
@@ -53,8 +54,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body": "${invoke_aws_lambda.response.outputs.data}"
+                  "data": "${invoke_aws_lambda.response.outputs.data}"
                 }
               }
             ]
@@ -75,8 +75,9 @@
                 "error": true,
                 "output": {
                   "code": 403,
-                  "format": "json",
-                  "body": "Pet is not available."
+                  "data": {
+                    "error": "Pet is not available."
+                  }
                 }
               },
               {
@@ -84,8 +85,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body": "${default_handler.response.outputs.data}"
+                  "data": "${default_handler.response.outputs.data}"
                 }
               }
             ]
