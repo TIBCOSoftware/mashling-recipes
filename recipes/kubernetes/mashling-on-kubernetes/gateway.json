@@ -52,8 +52,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body": "${get_handler.response.outputs.data}"
+                  "data": "${get_handler.response.outputs.data}"
                 }
               }
             ]
@@ -79,8 +78,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body": "${get_handler.response.outputs.data}"
+                  "data": "${get_handler.response.outputs.data}"
                 }
               }
             ]

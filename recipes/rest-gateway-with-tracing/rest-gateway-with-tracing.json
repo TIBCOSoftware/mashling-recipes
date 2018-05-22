@@ -49,8 +49,9 @@
                 "error": true,
                 "output": {
                   "code": 403,
-                  "format": "json",
-                  "body": "Failure"
+                  "data": {
+                    "error": "Failure"
+                  }
                 }
               },
               {
@@ -58,8 +59,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body": "${FlogoRestGetFlow.response.outputs.data}"
+                  "data": "${FlogoRestGetFlow.response.outputs.data}"
                 }
               }
             ]

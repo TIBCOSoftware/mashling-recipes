@@ -48,8 +48,9 @@
                 "error": true,
                 "output": {
                   "code": 403,
-                  "format": "json",
-                  "body": "User is not available."
+                  "data": {
+                    "error": "User is not available."
+                  }
                 }
               },
               {
@@ -57,8 +58,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body": "${FlogoRestGetFlow.response.outputs.data}"
+                  "data": "${FlogoRestGetFlow.response.outputs.data}"
                 }
               }
             ]
@@ -79,8 +79,9 @@
                 "error": true,
                 "output": {
                   "code": 403,
-                  "format": "json",
-                  "body": "Pet is not available."
+                  "data": {
+                    "error": "Pet is not available."
+                  }
                 }
               },
               {
@@ -88,8 +89,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body": "${FlogoRestGetFlow.response.outputs.data}"
+                  "data": "${FlogoRestGetFlow.response.outputs.data}"
                 }
               }
             ]

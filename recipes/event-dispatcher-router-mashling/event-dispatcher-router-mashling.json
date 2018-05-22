@@ -43,8 +43,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body.pet": "${FlogoKafkaUsaFlow.response.outputs.data}"
+                  "data": "${FlogoKafkaUsaFlow.response.outputs.data}"
                 }
               }
             ]
@@ -64,8 +63,7 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body.pet": "${FlogoKafkaAsiaFlow.response.outputs.data}"
+                  "data": "${FlogoKafkaAsiaFlow.response.outputs.data}"
                 }
               }
             ]

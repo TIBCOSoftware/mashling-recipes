@@ -45,8 +45,9 @@
                 "error": false,
                 "output": {
                   "code": 200,
-                  "format": "json",
-                  "body": "Success"
+                  "data": {
+                    "status": "Success"
+                  }
                 }
               }
             ]
