@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/TIBCOSoftware/mashling-recipes.svg?branch=master)](https://travis-ci.org/TIBCOSoftware/mashling-recipes)
 
-A recipe is a pre-configured Mashling json file which can be customized or used as is for a specific gateway use case. The recipes and the gateway binaries to run them are available in [mashling.io](https://mashling.io) website.
+A recipe is a pre-configured Mashling json file which can be customized or used as is for a specific gateway use case. The recipes and the gateway binaries to run them are available in [mashling.io](https://www.mashling.io) website.
 
 ## How to contribute a recipe
 
@@ -57,7 +57,7 @@ If "display_name" field is present in the json, its value is used as the recipe 
 }
 ```
 ### Submitting a new/updated recipe
-[Create a pull request](https://help.github.com/articles/creating-a-pull-request/) for the recipe to be reviewed and merged into this repository. To publish/unpublish a recipe on [mashling.io](https://mashling.io), create a pull request for the updated [recipe_registry.json](https://github.com/TIBCOSoftware/mashling-recipes/blob/master/recipe_registry.json).
+[Create a pull request](https://help.github.com/articles/creating-a-pull-request/) for the recipe to be reviewed and merged into this repository. To publish/unpublish a recipe on [mashling.io](https://www.mashling.io), create a pull request for the updated [recipe_registry.json](https://github.com/TIBCOSoftware/mashling-recipes/blob/master/recipe_registry.json).
 
 ## License
 mashling-recipes is licensed under a BSD-type license. See license text [here](https://github.com/TIBCOSoftware/mashling-recipes/blob/master/TIBCO%20LICENSE.txt).
