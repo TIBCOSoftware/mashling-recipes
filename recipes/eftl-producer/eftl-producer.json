@@ -43,7 +43,17 @@
                 }
               }
             ],
-            "responses": []
+            "responses": [
+              {
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "data": {
+                    "status": "Success"
+                  }
+                }
+              }
+            ]
           }
         ]
       }
