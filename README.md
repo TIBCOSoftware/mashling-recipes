@@ -7,7 +7,7 @@ A recipe is a pre-configured Mashling json file which can be customized or used 
 ## How to contribute a recipe
 
 ### Creating a recipe
-A recipe can be created by customizing an existing recipe in [mashling.io](https://mashling.io) or by using an editor such as [VS Code](https://code.visualstudio.com/) enabled with [mashling extension](https://github.com/TIBCOSoftware/vscode-extension-mashling). 
+A recipe can be created by customizing an existing recipe in [mashling.io](https://www.mashling.io) or by using an editor such as [VS Code](https://code.visualstudio.com/) enabled with [mashling extension](https://github.com/TIBCOSoftware/vscode-extension-mashling). 
 
 ### Adding a recipe
 A recipe should be contained in its own folder under 'recipes' folder. The recipe folder is composed of a gateway json file, README.md and optional icon image file. In the absence of the icon image file, the default Mashling icon image is used by mashling.io for the recipe. When the icon image file is present, the Mashling json file should have an icon image file field as follows:
@@ -29,7 +29,7 @@ If "display_name" field is present in the json, its value is used as the recipe 
 
 ### Publishing a recipe
 
-[recipe_registry.json](https://github.com/TIBCOSoftware/mashling-recipes/blob/master/recipe_registry.json) contains the list of recipe providers and the recipes to publish. The recipe folder name should be added to the "publish" field for the recipe to be made available in mashling.io. For example, "event-dispatcher-router-mashling" and "rest-conditional-gateway" recipes binaries are built and made downloadable from mashling.io given the following recipe_registry.json. Setting "featured" to "true" adds the recipe to the featured recipe list in [mashling.io](https://mashling.io).
+[recipe_registry.json](https://github.com/TIBCOSoftware/mashling-recipes/blob/master/recipe_registry.json) contains the list of recipe providers and the recipes to publish. The recipe folder name should be added to the "publish" field for the recipe to be made available in mashling.io. For example, "event-dispatcher-router-mashling" and "rest-conditional-gateway" recipes binaries are built and made downloadable from mashling.io given the following recipe_registry.json. Setting "featured" to "true" adds the recipe to the featured recipe list in [mashling.io](https://www.mashling.io).
 
 ```json
 {  
