@@ -26,9 +26,11 @@
 	git clone https://github.com/TIBCOSoftware/mashling-recipes
 	cd mashling-recipes/recipes/envoy/mashling-envoy-front-proxy
 
-Place the Downloaded Mashling Gateway binary in the current mashling-envoy-front-proxy folder.
+Note:
+1)Rename the Downloaded Mashling Gateway binary to "mashling-gateway" in the current mashling-envoy-front-proxy folder.
+Create a new folder in current mashling-envoy-front-proxy folder and name it as "gateway".
 
-Note: If you are trying in linux/ubuntu without VM, use local machine ip instead of $(docker-machine ip default) in subsequent steps. We have verified on linux/ubuntu.
+2)If you are trying in linux/ubuntu without VM, use local machine ip instead of $(docker-machine ip default) in subsequent steps. We have verified on linux/ubuntu.
 
 Create a docker-machine
 
