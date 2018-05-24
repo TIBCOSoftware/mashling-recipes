@@ -99,7 +99,7 @@
         "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
         "type": "flogoFlow",
         "settings": {
-          "reference": "github.com/pointlander/lambda/lib/flow/Lambda.json"
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/Lambda.json"
         }
       },
       {
