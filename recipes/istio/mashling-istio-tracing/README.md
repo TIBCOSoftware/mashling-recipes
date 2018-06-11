@@ -6,7 +6,7 @@ The mashling has distributed tracing enabled and uses the Istio distributed trac
 ## Installation
 * Docker [docker](https://www.docker.com)
 * Minikube [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
-* Download the Mashling-Gateway Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
+* Download the Mashling-Gateway Binary for Linux from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 
 ## Setup
 ### Install Istio on Kubernetes (minikube)
@@ -54,6 +54,7 @@ Create a folder mashling and place the downloaded mashling-gateway and mashling.
 
 ```
 cp Dockerfile mashling
+cp IstioTracing.json mashling
 cd mashling
 docker login
 docker build -t <YOUR DOCKER USER>/mashling .
