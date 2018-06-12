@@ -1,11 +1,11 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyProxy",
-    "version": "1.0.0",
-    "display_name":"KafkaTrigger to RestInvoker",
+    "name": "3recipe",
+		"version": "1.0.0",
+		"display_name":"KafkaTrigger to RestInvoker",
 		"display_image":"displayImage.svg",
-    "description": "This is a simple proxy.",
+		"description": "This is the first microgateway app",
     "triggers": [
       {
         "name": "MyProxy",

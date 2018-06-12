@@ -1,11 +1,11 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyProxy",
+    "name": "rest-gateway-with-tracing",
     "version": "1.0.0",
     "display_name":"Distributed Tracing",
     "display_image":"displayImage.svg",
-    "description": "This is a simple proxy.",
+    "description": "A microgateway with distributed tracing configured with Zipkin as the tracer",
     "triggers": [
       {
         "name": "MyProxy",

@@ -1,11 +1,11 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyProxy",
+    "name": "mqtt-gateway",
     "version": "1.0.0",
     "display_name": "Content-based MQTT and HTTP Router",
     "display_image": "displayImage.svg",
-    "description": "This is a simple proxy.",
+    "description": "A conditional MQTT and HTTP router that routes requests based on content",
     "triggers": [
       {
         "name": "MyProxy",

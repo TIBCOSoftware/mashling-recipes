@@ -1,9 +1,11 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyProxy",
-    "version": "1.0.0",
-    "description": "This is a simple proxy.",
+    "name": "kafka",
+		"version": "1.0.0",
+		"display_name":"Mashling Kafka Definition",
+		"display_image":"displayImage.svg",
+		"description": "This is the kafka based mashling app",
     "triggers": [
       {
         "name": "MyProxy",

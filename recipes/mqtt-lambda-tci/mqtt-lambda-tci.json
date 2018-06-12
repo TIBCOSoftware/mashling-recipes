@@ -1,11 +1,11 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyProxy",
+    "name": "MQTT FaaS Dispatcher",
     "version": "1.0.0",
     "display_name":"MQTT FaaS Dispatcher",
     "display_image":"displayImage.svg",
-    "description": "This is a simple proxy.",
+    "description": "MQTT trigger that content routes to either a AWS Lambda function or an endpoint for Live Apps case creation",
     "triggers": [
       {
         "name": "MyProxy1",

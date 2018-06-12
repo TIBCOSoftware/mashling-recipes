@@ -1,9 +1,11 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyProxy",
+    "name": "gwPushNotifications",
     "version": "1.0.0",
-    "description": "This is a simple proxy.",
+    "display_name":"Mashling Push Notifications",
+    "display_image":"displayImage.svg",
+    "description": "This gateway that content routes to FCM cloud functions which sends notification messages or data messages to registered client devices.",
     "triggers": [
       {
         "name": "MyProxy",

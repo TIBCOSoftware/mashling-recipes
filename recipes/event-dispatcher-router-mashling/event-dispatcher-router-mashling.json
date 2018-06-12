@@ -1,11 +1,11 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyProxy",
-    "version": "1.0.0",
-    "display_name":"Event Dispatcher And Router",
+    "name": "event-dispatcher-router-mashling",
+		"version": "1.0.0",
+		"display_name":"Event Dispatcher And Router",
 		"display_image":"displayImage.svg",
-    "description": "This is a simple proxy.",
+		"description": "Apache Kafka based event dispatcher that conditionally routes events to various handlers based on content",
     "triggers": [
       {
         "name": "MyProxy",

@@ -1,11 +1,11 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyProxy",
-    "version": "1.0.0",
-    "display_name":"KafkaTrigger to KafkaPublisher",
+    "name": "allRecipe",
+		"version": "1.0.0",
+		"display_name":"KafkaTrigger to KafkaPublisher",
 		"display_image":"displayImage.svg",
-    "description": "This is a simple proxy.",
+		"description": "This is the first microgateway app",
     "triggers": [
       {
         "name": "MyProxy",
