@@ -1,11 +1,11 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyProxy",
-    "version": "1.0.0",
-    "display_name":"HTTP Trigger to Kafka Publisher",
+    "name": "RestTrigger-To-Kafkapublisher",
+		"version": "1.0.0",
+		"display_name":"HTTP Trigger to Kafka Publisher",
 		"display_image":"displayImage.svg",
-    "description": "This is a simple proxy.",
+		"description": "This recipe uses REST payload as a input message to Kafka topic",
     "triggers": [
       {
         "name": "MyProxy",

@@ -1,9 +1,11 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyProxy",
+    "name": "newrestconditional",
     "version": "1.0.0",
-    "description": "This is a simple proxy.",
+    "display_name": "Rest Conditional Gateway",
+    "display_image": "displayImage.svg",
+    "description": "This is a recipe to publish HTTP triggers into consul",
     "triggers": [
       {
         "name": "restConfig",

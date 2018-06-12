@@ -1,11 +1,11 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyProxy",
+    "name": "tunable-rest-gateway",
     "version": "1.0.0",
     "display_name":"Tunable HTTP Router",
     "display_image":"displayImage.svg",
-    "description": "This is a simple proxy.",
+    "description": "This gateway queries different end-points based on the context supplied as environment flag",
     "triggers": [
       {
         "name": "MyProxy",

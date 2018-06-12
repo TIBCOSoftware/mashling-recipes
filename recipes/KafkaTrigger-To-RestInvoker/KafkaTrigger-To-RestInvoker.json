@@ -1,11 +1,11 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyProxy",
-    "version": "1.0.0",
-    "display_name":"KafkaTrigger to RestInvoker",
+    "name": "KafkaTrigger-To-RestInvoker",
+		"version": "1.0.0",
+		"display_name":"KafkaTrigger to RestInvoker",
 		"display_image":"displayImage.svg",
-    "description": "This is a simple proxy.",
+		"description": "This recipe uses Kafka messages as input content to REST put operation",
     "triggers": [
       {
         "name": "MyProxy",

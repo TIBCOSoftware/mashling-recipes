@@ -1,9 +1,10 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyProxy",
+    "name": "eftl-consumer",
     "version": "1.0.0",
-    "description": "This is a simple proxy.",
+    "display_name":"EFTL Consumer",
+    "description": "This is the EFTL based microgateway app",
     "triggers": [
       {
         "name": "MyProxy",

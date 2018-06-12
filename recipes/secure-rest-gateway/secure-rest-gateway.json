@@ -1,11 +1,11 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyProxy",
+    "name": "secure-rest-gateway",
     "version": "1.0.0",
     "display_name":"Mutual SSL HTTP Microgateway",
     "display_image":"displayImage.svg",
-    "description": "This is a simple proxy.",
+    "description": "This is the HTTP based microgateway app with mutual SSL enabled",
     "triggers": [
       {
         "name": "MyProxy",

@@ -1,9 +1,11 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyProxy",
+    "name": "mashling-on-kubernetes",
     "version": "1.0.0",
-    "description": "This is a simple proxy.",
+    "display_name": "HTTP Router Gateway",
+    "display_image": "displayImage.svg",
+    "description": "This gateway queries different endpoints based on path parameters where the endpoint URLs are supplied as environment parameters",
     "triggers": [
       {
         "name": "MyProxy",
