@@ -4,7 +4,7 @@
     "name": "proxy-with-ldap",
     "version": "1.0.0",
     "display_name":"Proxy with LDAP",
-    "description": "Mashling Proxy with LDAP",
+    "description": "Mashling proxy with LDAP",
     "triggers": [
       {
         "name": "MyProxy",

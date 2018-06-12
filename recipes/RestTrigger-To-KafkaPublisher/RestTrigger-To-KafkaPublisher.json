@@ -5,7 +5,7 @@
 		"version": "1.0.0",
 		"display_name":"HTTP Trigger to Kafka Publisher",
 		"display_image":"displayImage.svg",
-		"description": "This recipe publishes the Rest Trigger content payload to Kafka Topic as message.",
+		"description": "This recipe uses REST payload as a input message to Kafka topic",
     "triggers": [
       {
         "name": "MyProxy",

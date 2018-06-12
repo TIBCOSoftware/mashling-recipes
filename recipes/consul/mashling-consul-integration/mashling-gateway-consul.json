@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "display_name": "Rest Conditional Gateway",
     "display_image": "displayImage.svg",
-    "description": "This is a recipe to publish HTTP triggers into Consul.",
+    "description": "This is a recipe to publish HTTP triggers into consul",
     "triggers": [
       {
         "name": "restConfig",
