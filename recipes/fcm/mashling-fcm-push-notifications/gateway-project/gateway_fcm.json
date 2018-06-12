@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "display_name":"Mashling Push Notifications",
     "display_image":"displayImage.svg",
-    "description": "This gateway that content routes to FCM cloud functions which sends notification messages or data messages to registered client devices.",
+    "description": "This gateway sends push notifications to its registered desktop chrome clients using Firebase.",
     "triggers": [
       {
         "name": "MyProxy",

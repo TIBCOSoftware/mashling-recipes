@@ -1,7 +1,7 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "gateway",
+    "name": "mashling-on-kubernetes",
     "version": "1.0.0",
     "display_name": "HTTP Router Gateway",
     "display_image": "displayImage.svg",

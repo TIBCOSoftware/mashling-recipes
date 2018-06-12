@@ -1,9 +1,9 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "mashling",
+    "name": "mashling-istio-tracing",
     "version": "1.0.0",
-    "description": "This is a microgateway with tracing",
+    "description": "This is a microgateway with distributed istio tracing",
     "triggers": [
       {
         "name": "MyProxy",

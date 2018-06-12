@@ -1,11 +1,11 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "3recipe",
+    "name": "RestTrigger-To-Kafkapublisher",
 		"version": "1.0.0",
 		"display_name":"HTTP Trigger to Kafka Publisher",
 		"display_image":"displayImage.svg",
-		"description": "This is a simple recipe that illustrates receiving messages on a HTTP trigger and publishing it via Kafka ",
+		"description": "This recipe publishes the Rest Trigger content payload to Kafka Topic as message.",
     "triggers": [
       {
         "name": "MyProxy",
