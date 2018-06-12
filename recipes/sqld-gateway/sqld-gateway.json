@@ -47,7 +47,7 @@
                 }
               },
               {
-                "if": "SQLSecurity.attack == false",
+                "if": "SQLSecurity.attack < 80",
                 "service": "PetStorePetsUpdate",
                 "input": {
                   "method": "PUT",
@@ -57,7 +57,7 @@
             ],
             "responses": [
               {
-                "if": "SQLSecurity.attack == false",
+                "if": "SQLSecurity.attack < 80",
                 "error": false,
                 "output": {
                   "code": 200,
@@ -65,7 +65,7 @@
                 }
               },
               {
-                "if": "SQLSecurity.attack == true",
+                "if": "SQLSecurity.attack > 80",
                 "error": true,
                 "output": {
                   "code": 403,
@@ -90,7 +90,7 @@
                 }
               },
               {
-                "if": "SQLSecurity.attack == false",
+                "if": "SQLSecurity.attack < 80",
                 "service": "PetStorePets",
                 "input": {
                   "method": "GET",
@@ -134,7 +134,7 @@
                 }
               },
               {
-                "if": "SQLSecurity.attack == true",
+                "if": "SQLSecurity.attack > 80",
                 "error": true,
                 "output": {
                   "code": 403,
