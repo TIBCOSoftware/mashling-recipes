@@ -114,6 +114,16 @@
             ],
             "responses": [
               {
+                "if": "SQLSecurity.attack > 80",
+                "error": true,
+                "output": {
+                  "code": 403,
+                  "data": {
+                    "error": "hack attack!"
+                  }
+                }
+              },
+              {
                 "if": "payload.pathParams.petId == 13",
                 "error": true,
                 "output": {
@@ -130,16 +140,6 @@
                   "code": 403,
                   "data": {
                     "error": "Pet is unavailable"
-                  }
-                }
-              },
-              {
-                "if": "SQLSecurity.attack > 80",
-                "error": true,
-                "output": {
-                  "code": 403,
-                  "data": {
-                    "error": "hack attack!"
                   }
                 }
               },
