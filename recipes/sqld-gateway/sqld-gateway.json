@@ -70,7 +70,8 @@
                 "output": {
                   "code": 403,
                   "data": {
-                    "error": "hack attack!"
+                    "error": "hack attack!",
+                    "attackValues": "${SQLSecurity.attackValues}"
                   }
                 }
               }
@@ -119,7 +120,8 @@
                 "output": {
                   "code": 403,
                   "data": {
-                    "error": "hack attack!"
+                    "error": "hack attack!",
+                    "attackValues": "${SQLSecurity.attackValues}"
                   }
                 }
               },

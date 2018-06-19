@@ -54,6 +54,23 @@ curl http://localhost:9096/pets --upload-file attack-payload.json
 You should see the following response:
 ```json
 {
+ "attackValues": {
+  "content": {
+   "category": {
+    "name": 0
+   },
+   "name": 99.97982025146484,
+   "photoUrls": [
+    0
+   ],
+   "status": 0,
+   "tags": [
+    {
+     "name": 0
+    }
+   ]
+  }
+ },
  "error": "hack attack!"
 }
 ```
