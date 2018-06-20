@@ -99,14 +99,14 @@
                 }
               },
               {
-                "if": "PetStorePets.response.body.status == 'available'",
+                "if": "(SQLSecurity.attack < 80) && (PetStorePets.response.body.status == 'available')",
                 "service": "PetStoreInventory",
                 "input": {
                   "method": "GET"
                 }
               },
               {
-                "if": "PetStorePets.response.body.status == 'available'",
+                "if": "(SQLSecurity.attack < 80) && (PetStorePets.response.body.status == 'available')",
                 "service": "JSCalc",
                 "input": {
                   "parameters.num": "${PetStoreInventory.response.body.available}"
