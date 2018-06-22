@@ -126,16 +126,6 @@
                 }
               },
               {
-                "if": "payload.pathParams.petId == 13",
-                "error": true,
-                "output": {
-                  "code": 404,
-                  "data": {
-                    "error": "petId is invalid"
-                  }
-                }
-              },
-              {
                 "if": "PetStorePets.response.body.status != 'available'",
                 "error": true,
                 "output": {
