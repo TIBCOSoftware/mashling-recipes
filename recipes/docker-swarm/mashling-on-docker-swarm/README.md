@@ -6,10 +6,10 @@ For this scenario to work you'll need the following prerequisites installed:
 * Docker Engine 1.12 or later, Docker compose and Docker machine installed (and an account for Docker Hub)
 * Virtual box installed
 
-### Docker
-For this scenario we'll make use of [Docker Hub](https://hub.docker.com) to push the images to so that the docker swarm cluster can access them. To make sure you can push your images to Docker Hub you'll need to:
-* Register at [Docker Hub](https://hub.docker.com/), which is free
-* Log in from your terminal so the Docker client knows where to push images to using `docker login`
+* Docker :
+    For this scenario we'll make use of [Docker Hub](https://hub.docker.com) to push the images to so that the docker swarm cluster can access them. To make sure you can push your images to Docker Hub you'll need to:
+    * Register at [Docker Hub](https://hub.docker.com/), which is free
+    * Log in from your terminal so the Docker client knows where to push images to using `docker login`
 
 
 ### Preparing the gateway
