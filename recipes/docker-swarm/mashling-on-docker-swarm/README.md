@@ -53,7 +53,7 @@ Copy docker swarm join-token for worker command obtained for manager1 command, a
 
         docker-machine ssh worker1 "docker swarm join \
         --token <token> \
-        <ip>:2377"
+        <manager1 ip>:2377"
 
         This node joined a swarm as a worker.
         
@@ -73,7 +73,7 @@ output ![machine](docker_machine_ls.png)
 
 ### Deploy docker image to Docker Swarm
 ```
-cp ../docker-compose.yaml ./
+cp ../docker-compose.yml ./
 ```
 Add your docker user to the docker-compose.yaml file:
 ```
