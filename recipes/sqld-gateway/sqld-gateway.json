@@ -1,0 +1,195 @@
+{
+  "mashling_schema": "1.0",
+  "gateway": {
+    "name": "MySQLDProxy",
+    "version": "1.0.0",
+    "description": "This is a simple proxy with sql injection attack projection.",
+    "triggers": [
+      {
+        "name": "MyProxy",
+        "description": "Animals rest trigger",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "settings": {
+          "port": "9096"
+        },
+        "handlers": [
+          {
+            "dispatch": "PetsUpdate",
+            "settings": {
+              "autoIdReply": "false",
+              "method": "PUT",
+              "path": "/pets",
+              "useReplyHandler": "false"
+            }
+          },
+          {
+            "dispatch": "PetsGet",
+            "settings": {
+              "autoIdReply": "false",
+              "method": "GET",
+              "path": "/pets/{petId}",
+              "useReplyHandler": "false"
+            }
+          }
+        ]
+      }
+    ],
+    "dispatches": [
+      {
+        "name": "PetsUpdate",
+        "routes": [
+          {
+            "steps": [
+              {
+                "service": "SQLSecurity",
+                "input": {
+                  "payload": "${payload}"
+                }
+              },
+              {
+                "if": "SQLSecurity.attack < 80",
+                "service": "PetStorePetsUpdate",
+                "input": {
+                  "method": "PUT",
+                  "body": "${payload.content}"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "if": "SQLSecurity.attack < 80",
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "data": "${PetStorePetsUpdate.response.body}"
+                }
+              },
+              {
+                "if": "SQLSecurity.attack > 80",
+                "error": true,
+                "output": {
+                  "code": 403,
+                  "data": {
+                    "error": "hack attack!",
+                    "attackValues": "${SQLSecurity.attackValues}"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "PetsGet",
+        "routes": [
+          {
+            "steps": [
+              {
+                "service": "SQLSecurity",
+                "input": {
+                  "payload": "${payload}"
+                }
+              },
+              {
+                "if": "SQLSecurity.attack < 80",
+                "service": "PetStorePets",
+                "input": {
+                  "method": "GET",
+                  "pathParams.id": "${payload.pathParams.petId}"
+                }
+              },
+              {
+                "if": "(SQLSecurity.attack < 80) && (PetStorePets.response.body.status == 'available')",
+                "service": "PetStoreInventory",
+                "input": {
+                  "method": "GET"
+                }
+              },
+              {
+                "if": "(SQLSecurity.attack < 80) && (PetStorePets.response.body.status == 'available')",
+                "service": "JSCalc",
+                "input": {
+                  "parameters.num": "${PetStoreInventory.response.body.available}"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "if": "SQLSecurity.attack > 80",
+                "error": true,
+                "output": {
+                  "code": 403,
+                  "data": {
+                    "error": "hack attack!",
+                    "attackValues": "${SQLSecurity.attackValues}"
+                  }
+                }
+              },
+              {
+                "if": "PetStorePets.response.body.status != 'available'",
+                "error": true,
+                "output": {
+                  "code": 403,
+                  "data": {
+                    "error": "Pet is unavailable"
+                  }
+                }
+              },
+              {
+                "if": "PetStorePets.response.body.status == 'available'",
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "data": {
+                    "pet": "${PetStorePets.response.body}",
+                    "inventory": "${PetStoreInventory.response.body}",
+                    "availableTimesTwo": "${JSCalc.response.result.total}"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "SQLSecurity",
+        "description": "Look for sql injection attacks",
+        "type": "sqld"
+      },
+      {
+        "name": "PetStorePets",
+        "description": "Make calls to find pets",
+        "type": "http",
+        "settings": {
+          "url": "http://petstore.swagger.io/v2/pet/:id"
+        }
+      },
+      {
+        "name": "PetStorePetsUpdate",
+        "description": "Make calls to update pets",
+        "type": "http",
+        "settings": {
+          "url": "http://petstore.swagger.io/v2/pet"
+        }
+      },
+      {
+        "name": "PetStoreInventory",
+        "description": "Get pet store inventory.",
+        "type": "http",
+        "settings": {
+          "url": "http://petstore.swagger.io/v2/store/inventory"
+        }
+      },
+      {
+        "name": "JSCalc",
+        "description": "Make calls to a JS calculator",
+        "type": "js",
+        "settings": {
+          "script": "result.total = parameters.num * 2;"
+        }
+      }
+    ]
+  }
+}
