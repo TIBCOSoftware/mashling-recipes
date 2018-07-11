@@ -76,7 +76,8 @@
         "description": "Look for anomalies",
         "type": "anomaly",
         "settings": {
-          "context": "test"
+          "context": "test",
+          "depth": 3
         }
       },
       {
