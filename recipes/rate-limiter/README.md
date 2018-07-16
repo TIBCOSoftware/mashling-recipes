@@ -19,7 +19,7 @@ Start the gateway:
 
 Run the following command:
 ```
-curl http://localhost:9096/pets/1
+curl http://localhost:9096/pets/1 -H "Token:TOKEN1"
 ```
 
 You should see the following like response:
