@@ -1,5 +1,8 @@
 # Gateway with anomaly detection
-This recipe is a gateway with anomaly detection.
+This recipe is a gateway with anomaly detection using real time learning.
+
+## Description
+The anomaly detection algorithm in this recipe is based on a [statistical model](https://fgiesen.wordpress.com/2015/05/26/models-for-adaptive-arithmetic-coding/) for compression. The anomaly detection algorithm computes the relative [complexity](https://en.wikipedia.org/wiki/Kolmogorov_complexity) of a payload and then updates the statistical model. A running mean and standard deviation of the complexity is then computed using [this](https://dev.to/nestedsoftware/calculating-standard-deviation-on-streaming-data-253l) algorithm. If the complexity of a payload is some number of deviations from the mean then it is an anomaly. An anomaly is a payload that is statistically significant relative to previous payloads. The anomaly detection algorithm uses real time learning, so what is considered an anomaly can change over time. In the below scenario the Mashling is fed 1024 payloads to initialize the statistical model. A payload that is engineered to be an anomaly relative to the previous payloads is then fed into the Mashling.
 
 ## Installation
 * Install [Go](https://golang.org/)
