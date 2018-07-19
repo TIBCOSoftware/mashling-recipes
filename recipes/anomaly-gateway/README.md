@@ -23,12 +23,12 @@ Start the gateway:
 and test below scenario.
 
 ### Payload that is an anomaly
-Run the following command:
+Start an echo server for the Mashling to talk to by running the following command:
 ```
 go run main.go -server
 ```
 
-Then open a new terminal and run:
+Initialize the statistical model by opening a new terminal and running:
 ```
 go run main.go -client
 ```
@@ -38,8 +38,9 @@ You should see the following:
 number of anomalies 0
 average complexity NaN
 ```
+A 1024 payloads have been fed into the anomaly detection service, and zero anomalies have been found. If some anomalies had been found the average complexity would be a valid number.
 
-Now run the following:
+Now run the following to feed one more payload into the anomaly detection service:
 ```
 curl http://localhost:9096/test --upload-file anomaly-payload.json
 ```
@@ -51,3 +52,4 @@ You should see the following response:
  "error": "anomaly!"
 }
 ```
+The complexity is 9.124694 standard deviations from the mean. Because this is greater than the 3 standard deviation threshold the payload is considered an anomaly. In this scenario the standard deviation threshold was increased until only a small number of anomalies were detected.
