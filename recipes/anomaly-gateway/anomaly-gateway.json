@@ -1,0 +1,93 @@
+{
+  "mashling_schema": "1.0",
+  "gateway": {
+    "name": "MyAnomalyProxy",
+    "version": "1.0.0",
+    "description": "This is a simple proxy with anomaly detection.",
+    "triggers": [
+      {
+        "name": "MyProxy",
+        "description": "Rest trigger",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "settings": {
+          "port": "9096"
+        },
+        "handlers": [
+          {
+            "dispatch": "Update",
+            "settings": {
+              "autoIdReply": "false",
+              "method": "PUT",
+              "path": "/test",
+              "useReplyHandler": "false"
+            }
+          }
+        ]
+      }
+    ],
+    "dispatches": [
+      {
+        "name": "Update",
+        "routes": [
+          {
+            "steps": [
+              {
+                "service": "Anomaly",
+                "input": {
+                  "payload": "${payload}"
+                }
+              },
+              {
+                "if": "(Anomaly.count < 100) || (Anomaly.complexity < 3)",
+                "service": "Update",
+                "input": {
+                  "method": "PUT",
+                  "body": "${payload.content}"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "if": "(Anomaly.count < 100) || (Anomaly.complexity < 3)",
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "data": "${Update.response.body}"
+                }
+              },
+              {
+                "error": true,
+                "output": {
+                  "code": 403,
+                  "data": {
+                    "error": "anomaly!",
+                    "complexity": "${Anomaly.complexity}"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "Anomaly",
+        "description": "Look for anomalies",
+        "type": "anomaly",
+        "settings": {
+          "context": "test",
+          "depth": 3
+        }
+      },
+      {
+        "name": "Update",
+        "description": "Make calls to test",
+        "type": "http",
+        "settings": {
+          "url": "http://localhost:1234/test"
+        }
+      }
+    ]
+  }
+}

@@ -3,7 +3,7 @@
   "gateway": {
     "name": "MySQLDProxy",
     "version": "1.0.0",
-    "description": "This is a simple proxy with sql injection attack projection.",
+    "description": "This is a simple proxy with sql injection attack protection.",
     "triggers": [
       {
         "name": "MyProxy",
