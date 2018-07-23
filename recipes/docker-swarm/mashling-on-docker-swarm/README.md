@@ -112,7 +112,7 @@ $ curl http://<swarm node IP>:9096/pets/1
 Example curl request
 
 ```
-curl http://192.168.99.100/pets/1
+curl http://192.168.99.100:9096/pets/1
 ```
 Response
 ```
