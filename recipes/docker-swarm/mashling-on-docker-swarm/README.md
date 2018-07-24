@@ -71,6 +71,8 @@ Run "docker-machine ls" to verify that manager1 is now the active machine, as in
 
 output ![machine](docker_machine_ls.png)
 
+Docker swarm image ![image](docker-swarm.jpg)
+
 ### Deploy docker image to Docker Swarm
 ```
 cp ../docker-compose.yml ./
