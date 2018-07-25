@@ -88,6 +88,15 @@
                     "status": "${PetStorePets.response.body.status}"
                   }
                 }
+              },
+              {
+                "error": true,
+                "output": {
+                  "code": 403,
+                  "data": {
+                    "error": "connection failure"
+                  }
+                }
               }
             ]
           }
@@ -108,7 +117,8 @@
         "description": "Make calls to find pets",
         "type": "http",
         "settings": {
-          "url": "http://localhost:1234/pets"
+          "url": "http://localhost:1234/pets",
+          "netError": true
         }
       }
     ]
