@@ -37,7 +37,7 @@ go run main.go -server
 
 Run the client:
 ```bash
-go run main.go -client -name=CLIENT -url=ws:localhost:9096/ws
+go run main.go -client -name=CLIENT -url=ws://localhost:9096/ws
 ```
 
 Now you should see client is able to send & receive WebSocket messages from echo server through the proxy gateway.
