@@ -19,7 +19,7 @@ go get github.com/gorilla/websocket
 
 ```bash
 git clone https://github.com/TIBCOSoftware/mashling-recipes
-cd mashling-recipes/recipes/anomaly-gateway
+cd mashling-recipes/recipes/proxy-websocket
 ```
 
 ## Testing
