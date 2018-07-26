@@ -3,7 +3,7 @@ This recipe is a proxy gateway for WebSocket end points.
 
 ## Installation
 * Install [Go](https://golang.org/)
-* Download and build Mashling-Gateway
+* Download and build Mashling-Gateway from `feature-web-socket-support` branch
 
 ```bash
 git clone -b feature-web-socket-support --single-branch https://github.com/TIBCOSoftware/mashling.git $GOPATH/src/github.com/TIBCOSoftware/mashling
