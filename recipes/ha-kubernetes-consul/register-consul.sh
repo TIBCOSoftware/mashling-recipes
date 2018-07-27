@@ -37,7 +37,7 @@ for ((k=0; k<"${#SERVICENAME[@]}"; k++));
         IFS=' '        # space is set as delimiter
         read -ra NODEPORT <<< "$NODEPORTS"    # str is read into an array as tokens separated by IFS
         for ((j=0; j<"${#NODEPORT[@]}"; j++));
-            doecho curl -X PUT "http://$HOSTIP:8500/v1/agent/service/register" --header "X-Consul-Token: $CONSUL_TOKEN" -d '{"ID":"'"${SERVICE[$k]}-$j"'","Name":"'"${SERVICE[$k]}-$j"'","Tags":["primary","v1"],"Address":"'"$node"'","Port":'${NODEPORT[$j]}',"Meta":{"mashling_version":"0.4.0"},"EnableTagOverride":false,"Check":{"tcp":"'"$node"':'${NODEPORT[$j]}'","Interval":"10s"}}' --write-out '%{http_code}' --silent --output /dev/null
+            do
                 response=$(curl -X PUT "http://$HOSTIP:8500/v1/agent/service/register" --header "X-Consul-Token: $CONSUL_TOKEN" -d '{"ID":"'"${SERVICE[$k]}-$j"'","Name":"'"${SERVICE[$k]}-$j"'","Tags":["primary","v1"],"Address":"'"$node"'","Port":'${NODEPORT[$j]}',"Meta":{"mashling_version":"0.4.0"},"EnableTagOverride":false,"Check":{"tcp":"'"$node"':'${NODEPORT[$j]}'","Interval":"10s"}}' --write-out '%{http_code}' --silent --output /dev/null)
                 echo $response
             done    
