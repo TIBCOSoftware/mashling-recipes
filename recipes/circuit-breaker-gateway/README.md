@@ -104,4 +104,4 @@ You should see the following response:
  "status": "available"
 }
 ```
-The circuit breaker is no longer in the tripped state and the target service is working.
+The circuit breaker is no longer in the tripped state, and the target service is working.
