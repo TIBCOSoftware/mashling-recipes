@@ -109,6 +109,7 @@
         "description": "Circuit breaker service",
         "type": "circuitBreaker",
         "settings": {
+          "mode": "a",
           "context": "get"
         }
       },
