@@ -19,7 +19,7 @@ Generate a JWT token using the below information:
 ```
 {
      "signingMethod": "HMAC",
-     "key": "qwertyuiopasdfghjklzxcvbnm789101",
+     "username": "xxxxxxx",
      "audience": "www.mashling.io",
      "issuer": "Mashling"
 }
