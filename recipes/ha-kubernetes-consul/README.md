@@ -8,7 +8,7 @@ Pictorial representation of the recipe solution:
 Following prerequisites needs to be installed:
 * Docker (and an account for Docker Hub)
 * A Kubernetes environment [here](https://kubernetes.io/docs/setup/pick-right-solution/) (for example [minikube](https://github.com/kubernetes/minikube), [Kubeadm-dind](https://github.com/kubernetes-sigs/kubeadm-dind-cluster))
-* [Heapster](https://github.com/kubernetes/heapster) for grapical dashboard on Kubernetes
+* [Heapster](https://github.com/kubernetes/heapster) for graphical dashboard on Kubernetes
 * [metrics-server](https://github.com/kubernetes-incubator/metrics-server) for capturing metrics of HPA on Kubernetes 
 * Download [consul](https://www.consul.io/downloads.html) binary and update PATH environment variable to include consul binary.
 
@@ -16,15 +16,18 @@ Following prerequisites needs to be installed:
 * Download the Mashling-Gateway Linux Binary from [Mashling-releases](https://github.com/TIBCOSoftware/mashling/releases). 
 
 ### Creating a Docker image
-Create a folder mashling and place the downloaded mashling-gateway and mashling.json in the folder.
+Create a docker image for mashling gateway and push it to docker hub. Sample docker image for this scenario can be found [here](https://hub.docker.com/r/mashling/mashling-ha-kubernetes/)
 
+### Deployment using bash file
+Kubeadm-dind-cluster setup and deployment of mashling app on kubernetes can be done in one step using bash file.   
+
+Update the docker image name in deployment.yml file and execute below command. 
 ```
-$ cp Dockerfile mashling
-$ cd mashling
-$ docker login
-$ docker build -t <YOUR DOCKER USER>/mashling-kube .
-$ docker push <YOUR DOCKER USER>/mashling-kube
+chmod ugo+x *.sh
+./kubernetes-setup.sh <CONSUL-HOST-IP> <CONSUL-TOKEN>
 ```
+
+For detailed steps please follow below mentioned procedure.
 
 ### Create kubernetes cluster
 For creating multi node cluster on local machine, refer [here](https://kubernetes.io/docs/setup/pick-right-solution/). We will be creating kubeadm-dind cluster with 3 nodes. kubeadm-dind-cluster supports k8s versions 1.8.x, 1.9.x and 1.10.x. This may be convenient to use with projects that extend or use Kubernetes. For example, you can start Kubernetes 1.8 like this:
@@ -51,17 +54,10 @@ Replace 1.8 with 1.9 or 1.10 to use other Kubernetes versions.
 
 ### Kubernetes dashboard setup
 
-For accesing kubernetes dashboard with graphs, update below changes in heapster/deploy/kube-config/influxdb
-```
-grafana.yaml --> heapster-grafana-amd64:v5.0.4 to heapster-grafana-amd64:v4.4.3
-influxdb.yaml --> heapster-influxdb-amd64:v1.5.2 to heapster-influxdb-amd64:v1.3.3
-``` 
 Deploy heapster and metrics-server
 ```
 $ kubectl apply -f heapster/deploy/kube-config/rbac/heapster-rbac.yaml
-$ kubectl create -f heapster/deploy/kube-config/influxdb/influxdb.yaml
-$ kubectl create -f heapster/deploy/kube-config/influxdb/grafana.yaml
-$ kubectl create -f heapster/deploy/kube-config/influxdb/heapster.yaml
+$ kubectl apply -f heapster/deploy/kube-config/influxdb
 
 # Kubernetes 1.7
 $ kubectl create -f metrics-server/deploy/1.7/
@@ -203,5 +199,3 @@ $ kubectl cluster-info
 Grafana dashboard view
 
 ![dashborad](images/grafana-dashboard.jpg)
-
-
