@@ -1,24 +1,24 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyJWTValidator",
+    "name": "JWT_validator",
     "version": "1.0.0",
-    "description": "This is a simple gateway with JWT validation.",
+    "description": "This is a simple proxy with JWT validation.",
     "triggers": [
       {
         "name": "MyProxy",
-        "description": "Animals rest trigger",
+        "description": "Users rest trigger",
         "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
         "settings": {
           "port": "9096"
         },
         "handlers": [
           {
-            "dispatch": "PetsGet",
+            "dispatch": "UsersGet",
             "settings": {
               "autoIdReply": "false",
               "method": "GET",
-              "path": "/pets/{petId}",
+              "path": "/users",
               "useReplyHandler": "false"
             }
           }
@@ -27,7 +27,7 @@
     ],
     "dispatches": [
       {
-        "name": "PetsGet",
+        "name": "UsersGet",
         "routes": [
           {
             "steps": [
@@ -38,11 +38,10 @@
                 }
               },
               {
-                "if": "JWTValidator.response.valid == true",
-                "service": "PetStorePets",
+                "service": "PetStoreUsers",
                 "input": {
                   "method": "GET",
-                  "pathParams.id": "${payload.pathParams.petId}"
+                  "pathParams.username": "${JWTValidator.response.token.claims.username}"
                 }
               }
             ],
@@ -63,7 +62,8 @@
                 "output": {
                   "code": 200,
                   "data": {
-                    "pet": "${PetStorePets.response.body}"
+                    "user": "${PetStoreUsers.response.body}",
+                    "JWT": "JWT token is valid"
                   }
                 }
               }
@@ -85,11 +85,11 @@
         }
       },
       {
-        "name": "PetStorePets",
-        "description": "Make calls to find pets",
+        "name": "PetStoreUsers",
+        "description": "Make calls to get User Details",
         "type": "http",
         "settings": {
-          "url": "http://petstore.swagger.io/v2/pet/:id"
+          "url": "http://petstore.swagger.io/v2/user/:username"
         }
       }
     ]
