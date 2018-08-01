@@ -34,9 +34,9 @@ cd $GOPATH/src/github.com/TIBCOSoftware/mashling/gen/grpc
 ```
 
 ## Testing
-Go to grpc-to-grpc-gateway folder and run the mashling gateway
+Go to grpc-to-rest-gateway folder and run the mashling gateway
 ```bash
-./mashling-gateway -c grpc-to-grpc-gateway.json
+./mashling-gateway -c grpc-to-rest-gateway.json
 ```
 
 Run sample client to check the output
