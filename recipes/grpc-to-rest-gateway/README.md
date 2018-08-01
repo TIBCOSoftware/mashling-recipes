@@ -2,9 +2,9 @@
 This recipe demonstrates on receiving request from a gRPC client and routing to REST end point based on method names.
 
 ## Installation
-* Protoc [protoc](https://github.com/google/protobuf/releases), Download protoc binary and configure it in PATH
-* Download and install protoc-gen-go [here](https://github.com/golang/protobuf/protoc-gen-go)
-* Pull mashling source code and install from [here](https://github.com/TIBCOSoftware/mashling#using-go)
+* Download [protoc](https://github.com/google/protobuf/releases) binary and configure it in PATH
+* Download and install [protoc-gen-go](https://github.com/golang/protobuf#installation)
+* Download and install [mashling](https://github.com/TIBCOSoftware/mashling#using-go)
 
 ## Setup
 Get the grpc to grpc gateway files
