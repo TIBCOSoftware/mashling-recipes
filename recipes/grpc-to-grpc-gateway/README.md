@@ -1,35 +1,66 @@
-pre requisites:
+# gRPC to gRPC
+This recipe demonstrates on receiving request from a gRPC client and routing to gRPC end point based on method names.
 
-1) protoc
+## Installation
+* Protoc [protoc](https://github.com/google/protobuf/releases), Download protoc binary and configure it in PATH
+* Download and install protoc-gen-go [here](https://github.com/golang/protobuf/protoc-gen-go)
+* Pull mashling source code and install from [here](https://github.com/TIBCOSoftware/mashling#using-go)
 
-2) protogen-go files
+## Setup
+Get the grpc to grpc gateway files
+```bash
+git clone https://github.com/TIBCOSoftware/mashling-recipes
+cd mashling-recipes/recipes/grpc-to-grpc-gateway
+```
+Generate support files from proto file
+```bash
+./mashling-cli grpc generate -p petstore.proto
+```
 
-3) mashling gateway soursecode
-
-get mashling and mashling recipe code
-
-running :
-
-cd $GOPATH\src\github.com\TIBCOSoftware\mashling-recipes\recipes\grpc-to-grpc-gateway
-
+Build sample client and server provided here
+```bash
+cd samplegrpcserver
 go install ./...
+cd ../samplegrpcclient
+go install ./...
+```
 
-mashling-cli.exe grpc generate -p petstore.proto
-
-cd $GOPATH\src\github.com\TIBCOSoftware\mashling
-
+Build mashling gateway
+```bash
+cd $GOPATH/src/github.com/TIBCOSoftware/mashling
 go run build.go build
+```
 
+Generated code is available in below path
+```bash
+cd $GOPATH/src/github.com/TIBCOSoftware/mashling/gen/grpc
+```
 
+## Testing
+Run sample server on port 9000 and 9001 in different terminals
+```bash
+./samplegrpcserver -port 9000
+./samplegrpcserver -port 9001
+```
 
+Go to grpc-to-grpc-gateway folder and run the mashling gateway
+```bash
+./mashling-gateway -c grpc-to-grpc-gateway.json
+```
 
-go run grpcClient.go -o 2 -p 9096 -n u2
+Run sample client to check the output
+```bash
+./samplegrpcclient -p 9096 -o 1 -i 2
+```
 
-go run grpcClient.go -p 9096 -o 1 -i 8
+-p --> PORT value<br>
+-o --> 1 to invoke PetById method, 2 to invoke UserByName method<br>
+-i --> if -o is set to 1 this will take id value<br>
+-n --> if -o is set to 2 this will take name value<br>
 
-grpc-to-rest-gateway.exe -p 9096 -o 2 -n u2
-
-grpc-to-rest-gateway.exe -p 9096 -o 1 -i 3
-
-
-mashling-cli.exe grpc clean -p petstore.proto
+## Removing generated support files
+```bash
+./mashling-cli grpc clean -p petstore.proto
+```
+-p --> proto file path<br>
+-a --> bool flag to remove all the generated files

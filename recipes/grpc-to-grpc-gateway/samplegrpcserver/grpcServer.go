@@ -6,10 +6,9 @@ import (
 	"log"
 	"net"
 
-	pb "github.com/TIBCOSoftware/mashling-recipes/recipes/grpc-to-rest-gateway/petstore"
+	pb "github.com/TIBCOSoftware/mashling-recipes/recipes/grpc-to-grpc-gateway/petstore"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/metadata"
 )
 
 var addr string
@@ -47,9 +46,6 @@ func main() {
 func (t *ServerStrct) PetById(ctx context.Context, req *pb.PetByIdRequest) (*pb.PetResponse, error) {
 
 	fmt.Println("server PetById method called")
-	if md, ok := metadata.FromIncomingContext(ctx); ok {
-		fmt.Printf("metadata  received : %v\n", md)
-	}
 
 	petArr := []pb.Pet{
 		{
@@ -76,18 +72,13 @@ func (t *ServerStrct) PetById(ctx context.Context, req *pb.PetByIdRequest) (*pb.
 		Id:   1,
 		Name: "defcat",
 	}
-	fmt.Println("server GetPetById method END")
 	return &pb.PetResponse{Pet: &pet}, nil
 
 }
 
 func (t *ServerStrct) UserByName(ctx context.Context, req *pb.UserByNameRequest) (*pb.UserResponse, error) {
 
-	fmt.Println("server GetUserByName method called")
-	if md, ok := metadata.FromIncomingContext(ctx); ok {
-		fmt.Printf("metadata  received : %v\n", md)
-	}
-
+	fmt.Println("server UserByName method called")
 	userArr := []pb.User{
 		{
 			Id:       2,
@@ -121,7 +112,6 @@ func (t *ServerStrct) UserByName(ctx context.Context, req *pb.UserByNameRequest)
 		Email:    "defemail",
 		Phone:    "defphone",
 	}
-	fmt.Println("server GetUserByName method END")
 	return &pb.UserResponse{User: &user}, nil
 
 }

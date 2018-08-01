@@ -3,6 +3,8 @@
     "gateway": {
         "name": "grpc to rest gateway",
         "version": "1.0.0",
+        "display_name":"grpc to rest gateway",
+		"display_image":"displayImage.svg",
         "description": "This is a simple grpc to rest gateway server.",
         "triggers": [
             {

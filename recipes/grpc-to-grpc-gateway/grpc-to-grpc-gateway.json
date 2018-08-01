@@ -3,6 +3,8 @@
     "gateway": {
         "name": "grpc to grpc gateway",
         "version": "1.0.0",
+        "display_name":"grpc to grpc gateway",
+		"display_image":"displayImage.svg",
         "description": "This is a simple grpc to grpc gateway server.",
         "triggers": [
             {
@@ -29,13 +31,6 @@
                             "autoIdReply": "false",
                             "useReplyHandler": "false",
                             "methodName": "PetById"
-                        }
-                    },
-                    {
-                        "dispatch": "defDispatch",
-                        "settings": {
-                            "autoIdReply": "false",
-                            "useReplyHandler": "false"
                         }
                     }
                 ]
@@ -89,30 +84,6 @@
                         ]
                     }
                 ]
-            },
-            {
-                "name": "defDispatch",
-                "routes": [
-                    {
-                        "steps": [
-                            {
-                                "service": "PetStorePetsDef",
-                                "input": {
-                                    "grpcMthdParamtrs": "${payload.grpcData}"
-                                }
-                            }
-                        ],
-                        "responses": [
-                            {
-                                "error": false,
-                                "output": {
-                                    "code": 200,
-                                    "data": "${PetStorePetsDef.response.body}"
-                                }
-                            }
-                        ]
-                    }
-                ]
             }
         ],
         "services": [
@@ -130,14 +101,6 @@
                 "type": "grpc",
                 "settings": {
                     "hosturl": "localhost:9001"
-                }
-            },
-            {
-                "name": "PetStorePetsDef",
-                "description": "Make calls to grpc end point",
-                "type": "grpc",
-                "settings": {
-                    "hosturl": "localhost:9002"
                 }
             }
         ]
