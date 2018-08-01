@@ -100,7 +100,7 @@
                                 }
                             },
                             {
-                                "if": "PetStoreUsersByName.response.body.userStatus == '0'",
+                                "if": "PetStoreUsersByName.response.body.type != 'error'",
                                 "error": false,
                                 "output": {
                                     "code": 200,
