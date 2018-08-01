@@ -52,6 +52,17 @@
                         ],
                         "responses": [
                             {
+                                "if": "PetStorePets.response.body.type == 'error'",
+                                "error": true,
+                                "output": {
+                                  "code": 404,
+                                  "data": {
+                                    "error": "${PetStorePets.response.body.message}"
+                                  }
+                                }
+                            },
+                            {
+                                "if": "PetStorePets.response.body.type != 'error'",
                                 "error": false,
                                 "output": {
                                     "code": 200,
@@ -79,6 +90,17 @@
                         ],
                         "responses": [
                             {
+                                "if": "PetStoreUsersByName.response.body.type == 'error'",
+                                "error": true,
+                                "output": {
+                                    "code": 404,
+                                    "data": {
+                                        "error": "${PetStoreUsersByName.response.body.message}"
+                                    }
+                                }
+                            },
+                            {
+                                "if": "PetStoreUsersByName.response.body.userStatus == '0'",
                                 "error": false,
                                 "output": {
                                     "code": 200,
