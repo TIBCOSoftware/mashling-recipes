@@ -14,6 +14,7 @@ Place the Downloaded Mashling-Gateway binary in graphql-gateway folder.
 ## Testing
 Start the gateway:
 ```
+export BASIC_AUTH_FILE=<PATH MASHLING RECIPES IS IN>/mashling-recipes/recipes/graphql-gateway/passwd.txt
 ./mashling-gateway -c graphql-gateway.json
 ```
 and test below scenario.
@@ -21,7 +22,7 @@ and test below scenario.
 ### GraphQL request
 Run the following command:
 ```
-curl 'http://localhost:9096/graphql' -H 'Content-Type: application/json' --data-binary '{"query":"{\n  products: allProducts(count: 3) {\n    id\n    name\n    price\n  }\n}","operationName":null}'
+curl 'http://localhost:9096/graphql' -u foo:bar -H 'Content-Type: application/json' --data-binary '{"query":"{\n  products: allProducts(count: 3) {\n    id\n    name\n    price\n  }\n}","operationName":null}'
 ```
 
 You should see a response similar to:
