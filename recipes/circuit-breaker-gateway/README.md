@@ -27,7 +27,7 @@ go run main.go -server
 
 Now run the following in a new terminal:
 ```
-curl http//localhost:9096/pets/1
+curl http://localhost:9096/pets/1
 ```
 
 You should see the following response:
@@ -58,7 +58,7 @@ The target service is in a working state.
 
 Now simulate a service failure by stopping the target service, and then run the following command 6 times:
 ```
-curl http//localhost:9096/pets/1
+curl http://localhost:9096/pets/1
 ```
 
 You should see the below response 5 times:
@@ -77,7 +77,7 @@ The circuit breaker is now in the tripped state.
 
 Start the gateway target service back up and wait at least one minute. After waiting at least one minute run the following command:
 ```
-curl http//localhost:9096/pets/1
+curl http://localhost:9096/pets/1
 ```
 
 You should see the following response:
