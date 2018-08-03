@@ -1,0 +1,121 @@
+{
+  "mashling_schema": "1.0",
+  "gateway": {
+    "name": "MyProxy",
+    "version": "1.0.0",
+    "description": "This is a simple GraphQL proxy.",
+    "triggers": [
+      {
+        "name": "MyProxy",
+        "description": "GraphQL endpoint",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "settings": {
+          "port": "9096",
+          "basicAuthFile": "${env.BASIC_AUTH_FILE}"
+        },
+        "handlers": [
+          {
+            "dispatch": "GraphQL",
+            "settings": {
+              "autoIdReply": "false",
+              "method": "POST",
+              "path": "/graphql",
+              "useReplyHandler": "false"
+            }
+          }
+        ]
+      }
+    ],
+    "dispatches": [
+      {
+        "name": "GraphQL",
+        "routes": [
+          {
+            "steps": [
+              {
+                "service": "Product",
+                "input": {
+                  "method": "POST",
+                  "body": "${payload.content}",
+                  "headers": {
+                    "Content-Type": "application/json"
+                  }
+                }
+              },
+              {
+                "service": "User",
+                "input": {
+                  "method": "POST",
+                  "body": {
+                    "query": "{\n  user: User(id: \"wk0z1j1tzj7xc0116is3ckdrx\") {\n    id\n    firstName\n    lastName\n    email\n    avatar\n  }\n}",
+                    "operationName": null
+                  },
+                  "headers": {
+                    "Content-Type": "application/json"
+                  }
+                }
+              },
+              {
+                "if": "Product.response.statusCode == 200",
+                "service": "JSCalc",
+                "input": {
+                  "parameters.products": "${Product.response.body.data.products}"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "if": "Product.response.statusCode != 200 || User.response.statusCode != 200",
+                "error": true,
+                "output": {
+                  "code": 403,
+                  "data": {
+                    "error": "Request failed."
+                  }
+                }
+              },
+              {
+                "if": "Product.response.statusCode == 200 && User.response.statusCode == 200",
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "data": {
+                    "products": "${Product.response.body.data.products}",
+                    "user": "${User.response.body.data.user}",
+                    "total": "${JSCalc.response.result.total}"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "Product",
+        "description": "Make calls to find products",
+        "type": "http",
+        "settings": {
+          "url": "https://fakerql.com/graphql"
+        }
+      },
+      {
+        "name": "JSCalc",
+        "description": "Make calls to a JS calculator",
+        "type": "js",
+        "settings": {
+          "script": "result.total = 0; for (i = 0; i < parameters.products.length; i++) {result.total += parseFloat(parameters.products[i].price)}"
+        }
+      },
+      {
+        "name": "User",
+        "description": "Get users",
+        "type": "http",
+        "settings": {
+          "url": "https://fakerql.com/graphql"
+        }
+      }
+    ]
+  }
+}
