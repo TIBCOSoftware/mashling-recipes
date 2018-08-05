@@ -51,7 +51,8 @@
                 "description": "Web socket service",
                 "type": "ws",
                 "settings":{
-                    "url": "ws://localhost:8080/ws"
+                    "url": "ws://localhost:8080/ws",
+                    "maxConnections": 2
                 }
             }
         ]
