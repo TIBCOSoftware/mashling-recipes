@@ -3,13 +3,7 @@ This recipe is a proxy gateway for WebSocket end points.
 
 ## Installation
 * Install [Go](https://golang.org/)
-* Download and build Mashling-Gateway from `feature-web-socket-support` branch
-
-```bash
-git clone -b feature-web-socket-support --single-branch https://github.com/TIBCOSoftware/mashling.git $GOPATH/src/github.com/TIBCOSoftware/mashling
-cd $GOPATH/src/github.com/TIBCOSoftware/mashling
-go install ./...
-```
+* Download the mashling-gateway binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 * Install gorilla websocket `go` library
 ```bash
 go get github.com/gorilla/websocket
@@ -21,13 +15,14 @@ go get github.com/gorilla/websocket
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/proxy-websocket
 ```
+Place the downloaded mashling-gateway binary in proxy-websocket folder.
 
 ## Testing
 
 Start the gateway:
 
 ```bash
-mashling-gateway -c proxy-websocket.json
+.\mashling-gateway -c proxy-websocket.json
 ```
 
 Start the echo WebSocket server:
@@ -57,3 +52,5 @@ go run main.go -client -name=CLIENT3 -url=ws://localhost:9096/ws
 ```
 
 Now you should see that gateway rejecting 3rd client connection.
+
+Note: You can change maximum allowed concurrent connections using `maxConnections` service setting.
