@@ -7,7 +7,7 @@
     "triggers": [
       {
         "name": "MyProxy",
-        "description": "Users rest trigger",
+        "description": "Pets rest trigger",
         "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
         "settings": {
           "port": "9096"
@@ -86,7 +86,7 @@
       },
       {
         "name": "PetStorePets",
-        "description": "Make calls to get User Details",
+        "description": "Make calls to get Pet Details",
         "type": "http",
         "settings": {
           "url": "https://petstore.swagger.io/v2/pet/:petId"
