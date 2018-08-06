@@ -41,6 +41,6 @@ Place the generated JWT Token in the authorization header.
 Use below curl command to fetch the user details.
 
 ```
-curl --request GET http://localhost:9096/pets/9 -H "Authorization: Bearer <ACCESS_TOKEN>"
+curl --request GET http://localhost:9096/users -H "Authorization: Bearer <ACCESS_TOKEN>"
 
 ```
