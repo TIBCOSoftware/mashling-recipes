@@ -14,11 +14,11 @@
         },
         "handlers": [
           {
-            "dispatch": "UsersGet",
+            "dispatch": "PetsGet",
             "settings": {
               "autoIdReply": "false",
               "method": "GET",
-              "path": "/users",
+              "path": "/pets",
               "useReplyHandler": "false"
             }
           }
@@ -27,7 +27,7 @@
     ],
     "dispatches": [
       {
-        "name": "UsersGet",
+        "name": "PetsGet",
         "routes": [
           {
             "steps": [
@@ -38,10 +38,10 @@
                 }
               },
               {
-                "service": "PetStoreUsers",
+                "service": "PetStorePets",
                 "input": {
                   "method": "GET",
-                  "pathParams.username": "${JWTValidator.response.token.claims.username}"
+                  "pathParams.petId": "${JWTValidator.response.token.claims.id}"
                 }
               }
             ],
@@ -52,7 +52,7 @@
                 "output": {
                   "code": 401,
                   "data": {
-                    "error": "${JWTValidator.response.validationMessage}"
+                    "error": "${JWTValidator.response}"
                   }
                 }
               },
@@ -62,7 +62,7 @@
                 "output": {
                   "code": 200,
                   "data": {
-                    "user": "${PetStoreUsers.response.body}",
+                    "pet": "${PetStorePets.response.body}",
                     "JWT": "JWT token is valid"
                   }
                 }
@@ -80,16 +80,16 @@
         "settings": {
           "signingMethod": "HMAC",
           "key": "qwertyuiopasdfghjklzxcvbnm789101",
-          "audience": "www.mashling.io",
-          "issuer": "Mashling"
+          "aud": "www.mashling.io",
+          "iss": "Mashling"
         }
       },
       {
-        "name": "PetStoreUsers",
+        "name": "PetStorePets",
         "description": "Make calls to get User Details",
         "type": "http",
         "settings": {
-          "url": "http://petstore.swagger.io/v2/user/:username"
+          "url": "https://petstore.swagger.io/v2/pet/:petId"
         }
       }
     ]

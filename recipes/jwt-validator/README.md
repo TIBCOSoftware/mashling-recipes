@@ -19,7 +19,7 @@ Generate a JWT token using the below information:
 ```
 {
      "signingMethod": "HMAC",
-     "username": "xxxxxxx",
+     "id": "XX",
      "audience": "www.mashling.io",
      "issuer": "Mashling"
 }
@@ -27,7 +27,7 @@ Generate a JWT token using the below information:
      "key": "qwertyuiopasdfghjklzxcvbnm789101"
 }
 ```
-Note: Make sure that the user with the above given username is added in the petstore.swagger.io.
+Note: The id in the above payload is the pet Id.
 
 Start the gateway:
 ```
@@ -38,9 +38,9 @@ Start the gateway:
 
 Place the generated JWT Token in the authorization header.
 
-Use below curl command to fetch the user details.
+Use below curl command to fetch the pet details.
 
 ```
-curl --request GET http://localhost:9096/users -H "Authorization: Bearer <ACCESS_TOKEN>"
+curl --request GET http://localhost:9096/pets -H "Authorization: Bearer <ACCESS_TOKEN>"
 
 ```
