@@ -1,0 +1,60 @@
+{
+    "mashling_schema": "1.0",
+    "gateway": {
+        "name": "MyProxy",
+        "version": "1.0.0",
+        "description": "This is a simple websocket proxy.",
+        "triggers": [
+            {
+                "name": "MyProxy",
+                "description": "Websocket trigger",
+                "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+                "settings": {
+                    "port": "9096"
+                },
+                "handlers": [
+                    {
+                        "dispatch": "Stream",
+                        "settings": {
+                            "wsUpgradeRequired":"true",
+                            "autoIdReply": "false",
+                            "method": "GET",
+                            "path": "/ws",
+                            "useReplyHandler": "false"
+                        }
+                    }
+                ]
+            }
+        ],
+        "dispatches": [
+            {
+                "name": "Stream",
+                "routes": [
+                    {
+                        "steps": [
+                            {
+                                "service": "ProxyWebSocketService",
+                                "input": {
+                                    "wsconnection":"${payload.wsconnection}"
+                                }
+                            }
+                        ],
+                        "responses": [
+                        ]
+                    }
+                ]
+            }
+        ],
+        "services": [
+            {
+                "name": "ProxyWebSocketService",
+                "description": "Web socket service",
+                "type": "ws",
+                "settings":{
+                    "url": "ws://localhost:8080/ws",
+                    "maxConnections": 2
+                }
+            }
+        ]
+    }
+}
