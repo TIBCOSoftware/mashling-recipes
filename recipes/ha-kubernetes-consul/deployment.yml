@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gateway-router
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gateway-router
+    spec:
+      containers:
+      - name: gateway-router
+        image: <YOUR DOCKER USER>/mashling-kube
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9096
+        resources:
+          requests:
+            memory: 200M
+            cpu: "100m"
