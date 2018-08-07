@@ -1,0 +1,97 @@
+{
+  "mashling_schema": "1.0",
+  "gateway": {
+    "name": "JWT_validator",
+    "version": "1.0.0",
+    "description": "This is a simple proxy with JWT validation.",
+    "triggers": [
+      {
+        "name": "MyProxy",
+        "description": "Pets rest trigger",
+        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
+        "settings": {
+          "port": "9096"
+        },
+        "handlers": [
+          {
+            "dispatch": "PetsGet",
+            "settings": {
+              "autoIdReply": "false",
+              "method": "GET",
+              "path": "/pets",
+              "useReplyHandler": "false"
+            }
+          }
+        ]
+      }
+    ],
+    "dispatches": [
+      {
+        "name": "PetsGet",
+        "routes": [
+          {
+            "steps": [
+              {
+                "service": "JWTValidator",
+                "input": {
+                  "token": "${payload.header.Authorization}"
+                }
+              },
+              {
+                "service": "PetStorePets",
+                "input": {
+                  "method": "GET",
+                  "pathParams.petId": "${JWTValidator.response.token.claims.id}"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "if": "JWTValidator.response.valid == false",
+                "error": true,
+                "output": {
+                  "code": 401,
+                  "data": {
+                    "error": "${JWTValidator.response}"
+                  }
+                }
+              },
+              {
+                "if": "JWTValidator.response.valid == true",
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "data": {
+                    "pet": "${PetStorePets.response.body}",
+                    "JWT": "JWT token is valid"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "name": "JWTValidator",
+        "description": "Validate some tokens",
+        "type": "jwt",
+        "settings": {
+          "signingMethod": "HMAC",
+          "key": "qwertyuiopasdfghjklzxcvbnm789101",
+          "aud": "www.mashling.io",
+          "iss": "Mashling"
+        }
+      },
+      {
+        "name": "PetStorePets",
+        "description": "Make calls to get Pet Details",
+        "type": "http",
+        "settings": {
+          "url": "https://petstore.swagger.io/v2/pet/:petId"
+        }
+      }
+    ]
+  }
+}
