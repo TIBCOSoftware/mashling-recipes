@@ -7,14 +7,10 @@ This recipe demonstrates on receiving request from a gRPC client and routing to 
 * Download and install [mashling](https://github.com/TIBCOSoftware/mashling#using-go)
 
 ## Setup
-Get the grpc to grpc gateway files
+Get the grpc to rest gateway files
 ```bash
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/grpc-to-rest-gateway
-```
-Generate support files from proto file
-```bash
-./mashling-cli grpc generate -p petstore.proto
 ```
 
 Build sample client provided here
@@ -22,21 +18,20 @@ Build sample client provided here
 go install ./...
 ```
 
-Build mashling gateway
+Create custom gateway binary by passing gateway json and proto file
 ```bash
-cd $GOPATH/src/github.com/TIBCOSoftware/mashling
-go run build.go build
+./mashling-cli create -c grpc-to-rest-gateway.json -p petstore.proto -N -n <APPNAME>
 ```
 
-Generated code is available in below path
+Generated support files available in below path
 ```bash
-cd $GOPATH/src/github.com/TIBCOSoftware/mashling/gen/grpc
+cd <PATH TO APPNAME>/src/github.com/TIBCOSoftware/mashling/gen/grpc
 ```
 
 ## Testing
-Go to grpc-to-rest-gateway folder and run the mashling gateway
+Go to `<APPNAME>` folder and run the `<CUSTOM BINARY>` by passing gateway json provided here.
 ```bash
-./mashling-gateway -c grpc-to-rest-gateway.json
+./<CUSTOM BINARY> -c grpc-to-rest-gateway.json
 ```
 
 Run sample client to check the output
@@ -48,10 +43,3 @@ Run sample client to check the output
 -o --> 1 to invoke PetById method, 2 to invoke UserByName method<br>
 -i --> if -o is set to 1 this will take id value<br>
 -n --> if -o is set to 2 this will take name value<br>
-
-## Removing generated support files
-```bash
-./mashling-cli grpc clean -p petstore.proto
-```
--p --> proto file path<br>
--a --> bool flag to remove all the generated files
