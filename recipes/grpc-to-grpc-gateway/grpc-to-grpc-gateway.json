@@ -1,0 +1,108 @@
+{
+    "mashling_schema": "1.0",
+    "gateway": {
+        "name": "grpc to grpc gateway",
+        "version": "1.0.0",
+        "display_name":"grpc to grpc gateway",
+		"display_image":"displayImage.svg",
+        "description": "This is a simple grpc to grpc gateway server.",
+        "triggers": [
+            {
+                "name": "grpc_sample_trigger",
+                "description": "This is a simple grpc server.",
+                "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/grpc",
+                "settings": {
+                    "port": 9096,
+                    "protoname":"petstore",
+                    "servicename":"PetStoreService"
+                },
+                "handlers": [
+                    {
+                        "dispatch": "userByNameDispatch",
+                        "settings": {
+                            "autoIdReply": "false",
+                            "useReplyHandler": "false",
+                            "methodName": "UserByName"
+                        }
+                    },
+                    {
+                        "dispatch": "petByIdDispatch",
+                        "settings": {
+                            "autoIdReply": "false",
+                            "useReplyHandler": "false",
+                            "methodName": "PetById"
+                        }
+                    }
+                ]
+            }
+        ],
+        "dispatches": [
+            {
+                "name": "userByNameDispatch",
+                "routes": [
+                    {
+                        "steps": [
+                            {
+                                "service": "PetStoreUsers",
+                                "input": {
+                                    "grpcMthdParamtrs": "${payload.grpcData}"
+                                }
+                            }
+                        ],
+                        "responses": [
+                            {
+                                "error": false,
+                                "output": {
+                                    "code": 200,
+                                    "data": "${PetStoreUsers.response.body}"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "petByIdDispatch",
+                "routes": [
+                    {
+                        "steps": [
+                            {
+                                "service": "PetStorePets",
+                                "input": {
+                                    "grpcMthdParamtrs": "${payload.grpcData}"
+                                }
+                            }
+                        ],
+                        "responses": [
+                            {
+                                "error": false,
+                                "output": {
+                                    "code": 200,
+                                    "data": "${PetStorePets.response.body}"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "services": [
+            {
+                "name": "PetStoreUsers",
+                "description": "Make calls to grpc end point",
+                "type": "grpc",
+                "settings": {
+                    "hosturl": "localhost:9000"
+                }
+            },
+            {
+                "name": "PetStorePets",
+                "description": "Make calls to grpc end point",
+                "type": "grpc",
+                "settings": {
+                    "hosturl": "localhost:9001"
+                }
+            }
+        ]
+    }
+}

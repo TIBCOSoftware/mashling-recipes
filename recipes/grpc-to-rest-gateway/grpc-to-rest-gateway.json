@@ -1,0 +1,136 @@
+{
+    "mashling_schema": "1.0",
+    "gateway": {
+        "name": "grpc to rest gateway",
+        "version": "1.0.0",
+        "display_name":"grpc to rest gateway",
+		"display_image":"displayImage.svg",
+        "description": "This is a simple grpc to rest gateway server.",
+        "triggers": [
+            {
+                "name": "grpc sample trigger",
+                "description": "This is a simple grpc server.",
+                "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/grpc",
+                "settings": {
+                    "port": 9096,
+                    "protoname":"petstore",
+                    "servicename":"PetStoreService"
+                },
+                "handlers": [
+                    {
+                        "dispatch": "petByIdDispatch",
+                        "settings": {
+                            "autoIdReply": "false",
+                            "useReplyHandler": "false",
+                            "methodName": "PetById"
+                        }
+                    },
+                    {
+                        "dispatch": "userByNameDispatch",
+                        "settings": {
+                            "autoIdReply": "false",
+                            "useReplyHandler": "false",
+                            "methodName": "UserByName"
+                        }
+                    }
+                ]
+            }
+        ],
+        "dispatches": [
+            {
+                "name": "petByIdDispatch",
+                "routes": [
+                    {
+                        "steps": [
+                            {
+                                "service": "PetStorePets",
+                                "input": {
+                                    "method": "GET",
+                                    "pathParams.id": "${payload.params.Id}"
+                                }
+                            }
+                        ],
+                        "responses": [
+                            {
+                                "if": "PetStorePets.response.body.type == 'error'",
+                                "error": true,
+                                "output": {
+                                  "code": 404,
+                                  "data": {
+                                    "error": "${PetStorePets.response.body.message}"
+                                  }
+                                }
+                            },
+                            {
+                                "if": "PetStorePets.response.body.type != 'error'",
+                                "error": false,
+                                "output": {
+                                    "code": 200,
+                                    "data": {
+                                        "pet": "${PetStorePets.response.body}"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "userByNameDispatch",
+                "routes": [
+                    {
+                        "steps": [
+                            {
+                                "service": "PetStoreUsersByName",
+                                "input": {
+                                    "method": "GET",
+                                    "pathParams.username": "${payload.params.Username}"
+                                }
+                            }
+                        ],
+                        "responses": [
+                            {
+                                "if": "PetStoreUsersByName.response.body.type == 'error'",
+                                "error": true,
+                                "output": {
+                                    "code": 404,
+                                    "data": {
+                                        "error": "${PetStoreUsersByName.response.body.message}"
+                                    }
+                                }
+                            },
+                            {
+                                "if": "PetStoreUsersByName.response.body.type != 'error'",
+                                "error": false,
+                                "output": {
+                                    "code": 200,
+                                    "data": {
+                                        "user": "${PetStoreUsersByName.response.body}"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "services": [
+            {
+                "name": "PetStorePets",
+                "description": "Make calls to find pets",
+                "type": "http",
+                "settings": {
+                    "url": "http://petstore.swagger.io/v2/pet/:id"
+                }
+            },
+            {
+                "name": "PetStoreUsersByName",
+                "description": "Make calls to find users",
+                "type": "http",
+                "settings": {
+                    "url": "http://petstore.swagger.io/v2/user/:username"
+                }
+            }
+        ]
+    }
+}
