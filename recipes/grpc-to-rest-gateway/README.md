@@ -13,7 +13,7 @@ git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/grpc-to-rest-gateway
 ```
 
-Build sample client provided here
+Build sample client(grpcClient.go) provided here
 ```bash
 go install ./...
 ```
@@ -29,7 +29,7 @@ cd <PATH TO APPNAME>/src/github.com/TIBCOSoftware/mashling/gen/grpc
 ```
 
 ## Testing
-Go to `<APPNAME>` folder and run the `<CUSTOM BINARY>` by passing gateway json provided here.
+Copy grpc-to-rest-gateway.json to `<APPNAME>` folder and run the `<CUSTOM BINARY>`.
 ```bash
 ./<CUSTOM BINARY> -c grpc-to-rest-gateway.json
 ```

@@ -19,6 +19,7 @@ cd samplegrpcserver
 go install ./...
 cd ../samplegrpcclient
 go install ./...
+cd ..
 ```
 
 Create custom gateway binary by passing gateway json and proto file
@@ -38,7 +39,7 @@ Run sample server on port 9000 and 9001 in different terminals
 ./samplegrpcserver -port 9001
 ```
 
-Go to `<APPNAME>` folder and run the `<CUSTOM BINARY>` by passing gateway json provided here.
+Copy grpc-to-grpc-gateway.json to `<APPNAME>` folder and run the `<CUSTOM BINARY>`.
 ```bash
 ./<CUSTOM BINARY> -c grpc-to-grpc-gateway.json
 ```
