@@ -21,12 +21,19 @@ Create a docker image for mashling gateway and push it to docker hub. Sample doc
 ### Deployment using bash file
 Kubeadm-dind-cluster setup and deployment of mashling app on kubernetes can be done in one step using bash file.   
 
+
+Command to run consul agent with the directory containing configuration json file.
+```
+$ consul agent -dev -client <HOSTIP> -config-dir <CONFIG DIRECTORY PATH>
+```
+
 Update the docker image name in deployment.yml file and execute below command. 
+
 ```
 chmod ugo+x *.sh
 ./kubernetes-setup.sh <CONSUL-HOST-IP> <CONSUL-TOKEN>
 ```
-
+Now you can access the grafana dashboard. <br>
 For detailed steps please follow below mentioned procedure.
 
 ### Create kubernetes cluster
@@ -50,7 +57,7 @@ $ export PATH="$HOME/.kubeadm-dind-cluster:$PATH"
 ```
 ![Kubernetes nodes](images/nodes.jpg)
 
-Replace 1.8 with 1.9 or 1.10 to use other Kubernetes versions.
+Note: Replace 1.8 with 1.9 or 1.10 to use other Kubernetes versions.
 
 ### Kubernetes dashboard setup
 
@@ -58,9 +65,6 @@ Deploy heapster and metrics-server
 ```
 $ kubectl apply -f heapster/deploy/kube-config/rbac/heapster-rbac.yaml
 $ kubectl apply -f heapster/deploy/kube-config/influxdb
-
-# Kubernetes 1.7
-$ kubectl create -f metrics-server/deploy/1.7/
 
 # Kubernetes > 1.8
 $ kubectl create -f metrics-server/deploy/1.8+/
@@ -72,11 +76,7 @@ $ kubectl get pod <DASHBOARD-POD-NAME> -n kube-system -o yaml | kubectl replace 
 
 ### Consul setup
 
-Open new terminal and run consul agent using below command.
-```
-$ consul agent -dev -client <HOSTIP>
-```
-Note: Consul agent can be run in secure mode by providing authentication token in a configuration file while launching the agent.<br>
+Open new terminal and  Consul agent can be run in secure mode by providing authentication token in a configuration file while launching the agent.<br>
 Sample configuration json file content:
 ```json
 {
@@ -96,12 +96,6 @@ Note: For our usecase we will be using consul token
 
 ### Deploying app on Kubernetes
 To run the gateway on K8s with Horizontal Pod Autoscaler you need to create a deployment, service and hpa. 
-
-```
-$ cp ../deployment.yml ./
-$ cp ../service.yml ./
-$ cp ../autoscale.yml ./
-```
 
 Add your docker user and port number to the deployment.yaml file:
 
@@ -140,7 +134,6 @@ http://<HOSTIP>:8500/ui
 If kubernetes cluster is running on local machine. Run bash file
 
 ```
-$ cp ../register-consul.sh ./
 $ chmod ugo+x ./register-consul.sh
 $ ./register-consul.sh <HOSTIP> <CONSUL-TOKEN>
 ```
@@ -164,7 +157,7 @@ watch -n 10 ./register-consul.sh <HOSTIP> <CONSUL-TOKEN>
 ### Testing 
 You can now test the gateway app by simply executing a cURL command:
 ```
-$ curl http://<K8s external IP>:30061/hello/world
+$ curl http://<K8s external IP>:30061/pets/1
 ```
 
 If you're using kubeadm-dind-cluster you can get the cluster IP address by running
