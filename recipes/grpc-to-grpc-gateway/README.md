@@ -24,7 +24,7 @@ mashling-cli create -c grpc-to-grpc-gateway.json -p petstore.proto -N -n grpc-pr
 
 Copy created binary from grpc-proxy-gateway folder.
 ```bash
-cp /grpc-proxy-gateway/mashling-gateway* grpc-proxy-gateway.exe
+cp ./grpc-proxy-gateway/mashling-gateway* grpc-proxy-gateway.exe
 ```
 
 ## Testing

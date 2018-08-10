@@ -83,7 +83,7 @@ func PetById(client pb.PetStoreServiceClient, id int) {
 }
 
 func callServer() {
-	addr = ":9001"
+	addr = ":9000"
 	lis, err := net.Listen("tcp", addr)
 	if err != nil {
 		log.Fatal(err)
