@@ -22,18 +22,18 @@ Create mashling gateway.
 mashling-cli create -c grpc-to-grpc-gateway.json -p petstore.proto -N -n grpc-proxy-gateway
 ```
 
-Copy created binary from grpc-proxy-gateway folder.
+Copy created binary from grpc-proxy-gateway folder to current.
 ```bash
 cp ./grpc-proxy-gateway/mashling-gateway* grpc-proxy-gateway.exe
 ```
 
 ## Testing
-Open one terminal pointing to grpc-to-grpc-gateway and run below command to start proxy gateway
+Start proxy gateway.
 ```bash
 ./grpc-proxy-gateway.exe -c grpc-to-grpc-gateway.json
 ```
 
-Similarly open another terminal and run below command to start sample gRPC server on port 9000.
+Start sample gRPC server.
 ```bash
 go run main.go -server
 ```
@@ -48,7 +48,7 @@ Now you should see logs in proxy gateway terminal and sample gRPC server termina
 res : pet:<id:2 name:"cat2" >
 ```
 ### #2 Testing UserByName method
-Run below command to check user response.
+Run sample gRPC client.
 ```bash
 go run main.go -client -port 9096 -method user -param user2
 ```
