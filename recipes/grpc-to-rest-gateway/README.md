@@ -3,6 +3,10 @@ This recipe demonstrates receiving request from a gRPC client and routing to RES
 
 ## Installation
 * Install [Go](https://golang.org/)
+* Install `grpc`
+```bash
+go get -u google.golang.org/grpc
+```
 * Install `protoc-gen-go` library
 ```bash
 go get github.com/golang/protobuf/protoc-gen-go
@@ -20,25 +24,27 @@ cd mashling-recipes/recipes/grpc-to-rest-gateway
 ```
 Create mashling gateway.
 ```bash
-mashling-cli create -c grpc-to-rest-gateway.json -p petstore.proto -N -n grpc-rest-gateway
+mashling-cli create -c grpc-to-rest-gateway.json -p petstore.proto -N -n grpc-rest-gateway-app
 ```
 
-Copy created binary from grpc-rest-gateway folder to current.
+Copy created binary from grpc-rest-gateway-app folder to current.
 ```bash
-cp ./grpc-rest-gateway/mashling-gateway* grpc-rest-gateway.exe
+cp ./grpc-rest-gateway-app/mashling-gateway* .
 ```
+
+Rename mashling-gateway* to grpc-rest-gateway
 
 ## Testing
 Start proxy gateway.
 ```bash
-./grpc-rest-gateway.exe -c grpc-to-rest-gateway.json
+./grpc-rest-gateway -c grpc-to-rest-gateway.json
 ```
 ### #1 Testing PetById method
 Run sample gRPC client.
 ```bash
 go run main.go -client -port 9096 -method pet -param 2
 ```
-Now you should see logs in proxy gateway terminal and sample gRPC server terminal. Sample output in client terminal can be seen as below.
+Output can be seen as below.
 ```
 res : pet:<id:2 name:"cat2" >
 ```

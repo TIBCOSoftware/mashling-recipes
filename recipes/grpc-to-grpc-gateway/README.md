@@ -3,6 +3,10 @@ This recipe is a proxy gateway for gRPC end points.
 
 ## Installation
 * Install [Go](https://golang.org/)
+* Install `grpc`
+```bash
+go get -u google.golang.org/grpc
+```
 * Install `protoc-gen-go` library
 ```bash
 go get github.com/golang/protobuf/protoc-gen-go
@@ -19,18 +23,19 @@ cd mashling-recipes/recipes/grpc-to-grpc-gateway
 ```
 Create mashling gateway.
 ```bash
-mashling-cli create -c grpc-to-grpc-gateway.json -p petstore.proto -N -n grpc-proxy-gateway
+mashling-cli create -c grpc-to-grpc-gateway.json -p petstore.proto -N -n grpc-proxy-gateway-app
 ```
 
-Copy created binary from grpc-proxy-gateway folder to current.
+Copy created binary from grpc-proxy-gateway-app folder to current.
 ```bash
-cp ./grpc-proxy-gateway/mashling-gateway* grpc-proxy-gateway.exe
+cp ./grpc-proxy-gateway-app/mashling-gateway* .
 ```
+Rename mashling-gateway* to grpc-proxy-gateway.
 
 ## Testing
 Start proxy gateway.
 ```bash
-./grpc-proxy-gateway.exe -c grpc-to-grpc-gateway.json
+./grpc-proxy-gateway -c grpc-to-grpc-gateway.json
 ```
 
 Start sample gRPC server.
