@@ -1,14 +1,14 @@
 # gRPC to gRPC
-This recipe demonstrates receiving request from a gRPC client and routing to gRPC end point based on method names.
+This recipe demonstrates receiving request from a gRPC client and routing to gRPC server.
 
 ## Installation
-* Download the mashling-gateway binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
-* Download [protoc](https://github.com/google/protobuf/releases) binary for respective OS and update PATH environment variable to include protoc binary.
+* Install [Go](https://golang.org/)
 * Install `protoc-gen-go` library
-```
+```bash
 go get -u github.com/golang/protobuf/protoc-gen-go
 ```
-
+* Download protoc-$VERSION-$PLATFORM.zip for respective OS from [here](https://github.com/google/protobuf/releases).<br>Extract the zip file get the `protoc` binary from bin folder and configure it in PATH.
+* Download the Mashling-CLI Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 
 
 ## Setup
@@ -17,45 +17,74 @@ git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/grpc-to-grpc-gateway
 ```
 
-Build sample client and server provided here
+Place the Downloaded Mashling-CLI binary in grpc-to-grpc-gateway folder.
+
+Build sample gRPC client and server provided here.
 ```bash
-cd samplegrpcserver
+cd samplegRPCServer
 go install ./...
-cd ../samplegrpcclient
+cd ../samplegRPCClient
 go install ./...
 cd ..
 ```
 
-Create mashling custom gateway binary by passing gateway json along with proto file
+Create mashling gateway custom binary.
 ```bash
-./mashling-cli create -c grpc-to-grpc-gateway.json -p petstore.proto -N
+./mashling-cli create -c grpc-to-grpc-gateway.json -p petstore.proto -N -n MygRPCGateway
 ```
 
- Support files generated can be found in below path
+Copy grpc-to-grpc-gateway.json to MygRPCGateway folder.
 ```bash
-cd mashling-custom/src/github.com/TIBCOSoftware/mashling/gen/grpc
+cp grpc-to-grpc-gateway.json ./MygRPCGateway
 ```
+
+Go to MygRPCGateway folder rename mashling-gateway-$GOOS-$GOARCH.exe to mashling-gateway.exe
 
 ## Testing
-Run sample server on port 9000 and 9001 in different terminals
+Open one terminal run below command to start sample gRPC server on port 9000.
 ```bash
-./samplegrpcserver -port 9000
-./samplegrpcserver -port 9001
+samplegRPCServer
 ```
 
-Copy grpc-to-grpc-gateway.json to `mashling-custom` folder, rename the mashling custom binary to mashling-gateway.<br>
-Run the mashling-gateway binary with grpc-to-grpc-gateway.json
+Usage of sample gRPC Client:<br>
+-port --> PORT value<br>
+-option --> 1 to invoke PetById method, 2 to invoke UserByName method<br>
+-id --> if -option is set to 1 this will take id value<br>
+-name --> if -option is set to 2 this will take name value<br>
+
+Open another terminal run sample gRPC client.
+```bash
+samplegrpcclient -port 9000 -option 1 -id 2
+```
+
+Output can be seen as below.
+```
+res : pet:<id:2 name:"cat2" >
+```
+
+Run below command to check user response.
+```bash
+samplegrpcclient -port 9000 -option 2 -name user2
+```
+Output can be seen as below.
+```
+res : user:<id:2 username:"user2" email:"email2" phone:"phone2" >
+```
+
+### Testing grpc to grpc gateway
+
+Go to MygRPCGateway folder and run below command. Gateway server will start on port 9096.
 ```bash
 ./mashling-gateway -c grpc-to-grpc-gateway.json
 ```
-
-Run sample client to check the output
-
--p --> PORT value<br>
--o --> 1 to invoke PetById method, 2 to invoke UserByName method<br>
--i --> if -o is set to 1 this will take id value<br>
--n --> if -o is set to 2 this will take name value<br>
-
+Open another terminal run sample gRPC client.
 ```bash
-./samplegrpcclient -p 9096 -o 1 -i 2
+samplegrpcclient -port 9096 -option 1 -id 4
 ```
+Output can be seen as below.
+```
+res : pet:<id:4 name:"cat4" >
+```
+
+## Note
+Support files generated can be found in path MygRPCGateway/src/github.com/TIBCOSoftware/mashling/gen/grpc

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"log"
 	"net"
@@ -19,15 +18,7 @@ type ServerStrct struct {
 }
 
 func main() {
-	port = flag.String("port", "9000", "port value")
-	flag.Parse()
-
-	if len(*port) == 0 {
-		addr = ":9000"
-	}
-
-	addr = ":" + *port
-
+	addr = ":9000"
 	lis, err := net.Listen("tcp", addr)
 	if err != nil {
 		log.Fatal(err)

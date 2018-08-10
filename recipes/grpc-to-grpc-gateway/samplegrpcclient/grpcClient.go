@@ -16,18 +16,16 @@ var addr string
 
 func main() {
 
-	option := flag.Int("o", 1, "command to run")
-	id := flag.Int("i", 0, "id value")
-	name := flag.String("n", "", "name value")
-	port := flag.String("p", "", "port value")
+	option := flag.Int("option", 1, "command to run")
+	id := flag.Int("id", 0, "id value")
+	name := flag.String("name", "", "name value")
+	port := flag.String("port", "", "port value")
 	flag.Parse()
 	addr = *port
 	if len(*port) == 0 {
 		addr = ":9000"
 	}
 	addr = ":" + *port
-
-	fmt.Println("calling addr", addr)
 	conn, err := grpc.Dial("localhost"+addr, grpc.WithInsecure())
 	if err != nil {
 		log.Fatal(err)
