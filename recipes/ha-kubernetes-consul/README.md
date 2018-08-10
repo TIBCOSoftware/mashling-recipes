@@ -76,7 +76,7 @@ $ kubectl get pod <DASHBOARD-POD-NAME> -n kube-system -o yaml | kubectl replace 
 
 ### Consul setup
 
-Open new terminal and  Consul agent can be run in secure mode by providing authentication token in a configuration file while launching the agent.<br>
+Run Consul agent in secure mode by providing authentication token in a configuration file in new terminal<br>
 Sample configuration json file content:
 ```json
 {
@@ -124,7 +124,7 @@ $ kubectl apply -f autoscale.yml
 ```
 
 ### Register gateway app with consul
-Register the services running on kubernetes to consul dashboard using register-consul bash file. User need to pass consul hostIP and consul token as arguments to bash file.
+Register the services running on kubernetes to consul dashboard using register-consul bash file. User needs to pass consul hostIP and consul token as arguments to bash file.
 
 Access consul dashboard on browser
 ```
