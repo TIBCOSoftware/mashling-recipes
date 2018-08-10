@@ -37,15 +37,17 @@ Similarly open another terminal and run below command to start sample gRPC serve
 ```bash
 go run main.go -server
 ```
-Similarly open another terminal run sample gRPC client.
+
+### #1 Testing PetById method
+Run sample gRPC client.
 ```bash
 go run main.go -client -port 9096 -method pet -param 2
 ```
-Output can be seen as below.
+Now you should see logs in proxy gateway terminal and sample gRPC server terminal. Sample output in client terminal can be seen as below.
 ```
 res : pet:<id:2 name:"cat2" >
 ```
-
+### #2 Testing UserByName method
 Run below command to check user response.
 ```bash
 go run main.go -client -port 9096 -method user -param user2
