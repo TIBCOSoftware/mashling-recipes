@@ -2,35 +2,21 @@
 
 This is a recipe to publish HTTP triggers in the gateway.json into Consul.
 
-## Install
+## Installation
 Download [consul](https://www.consul.io/downloads.html) binary and update PATH environment variable to include consul binary.
 
 ## Setup
-
-Run consul agent using below command.
 ```
-consul agent -dev -client <HOSTIP>
-```
-Note: Consul agent can be run in secure mode by providing authentication token in a configuration file while launching the agent.<br>
-Sample configuration json file content:
-```json
-{
-  "acl_datacenter": "dc1",
-  "acl_master_token": "b1gs33cr3t",
-  "acl_default_policy": "deny",
-  "acl_down_policy": "extend-cache"
-}
-```
-Additional configuration details found [here](https://www.consul.io/docs/guides/acl.html)
-
-Command to run consul agent with the directory containing configuration json file.
-```
-consul agent -dev -client <HOSTIP> -config-dir <CONFIG DIRECTORY PATH>
+git clone https://github.com/TIBCOSoftware/mashling-recipes
+cd mashling-recipes/recipes/consul/mashling-consul-integration
 ```
 
 ## Testing
-
-### Register gateway services with consul:
+Run the consul agent in secure mode by passing configuration json file
+```
+consul agent -dev -client <HOSTIP> -config-dir <CONFIG DIRECTORY PATH>
+```
+### #1 Register gateway services with consul:
 
 Run below command to register gateway REST triggers with consul.
 ```
@@ -49,7 +35,7 @@ Run below command to de-register gateway REST triggers from consul.
 ./mashling-cli publish consul -d -c mashling-gateway-consul.json -t b1gs33cr3t -H 127.0.0.1:8500
 ```
 
-### Register gateway services with consul - using config directory option
+### #2 Register gateway services with consul - using config directory option
 
 To use this option consul agent should run on same host as mashling gateway is running. Also agent should be launched by providing configuration directory (i.e. -config-dir).
 
