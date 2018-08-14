@@ -43,6 +43,10 @@
         {
           "recipe":"tunable-rest-gateway",
           "featured":false
+        },
+        {
+          "recipe":"circuit-breaker-gateway",
+          "featured":false
         }
       ]
     },
