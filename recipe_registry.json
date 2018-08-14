@@ -37,6 +37,10 @@
           "featured":false
         },
         {
+          "recipe":"anomaly-gateway",
+          "featured":false
+        },   
+        {
           "recipe":"mqtt-producer",
           "featured":false
         },        
