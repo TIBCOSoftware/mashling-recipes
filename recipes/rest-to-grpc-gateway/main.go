@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"strconv"
+	"strings"
 
 	pb "github.com/TIBCOSoftware/mashling-recipes/recipes/grpc-to-grpc-gateway/petstore"
 	"golang.org/x/net/context"
@@ -12,22 +14,76 @@ import (
 )
 
 var addr string
-var port *string
+var clientAddr string
 
 // ServerStrct is a stub for your Trigger implementation
 type ServerStrct struct {
 }
 
 func main() {
-	port = flag.String("port", "9000", "port value")
+
+	clientMode := flag.Bool("client", false, "command to run client")
+	serverMode := flag.Bool("server", false, "command to run server")
+	methodName := flag.String("method", "pet", "method name")
+	paramVal := flag.String("param", "user2", "method param")
+	port := flag.String("port", "", "port value")
+
 	flag.Parse()
+	var id int
 
-	if len(*port) == 0 {
-		addr = ":9000"
+	if *clientMode {
+		if strings.Compare(*methodName, "pet") == 0 {
+			id, _ = strconv.Atoi(*paramVal)
+		}
+		callClient(port, methodName, id, *paramVal)
+	} else if *serverMode {
+		callServer()
+	} else {
+		fmt.Println("please choose server or client")
 	}
+}
 
-	addr = ":" + *port
+func callClient(port *string, option *string, id int, name string) {
+	clientAddr = *port
+	if len(*port) == 0 {
+		clientAddr = ":9000"
+	}
+	clientAddr = ":" + *port
+	conn, err := grpc.Dial("localhost"+clientAddr, grpc.WithInsecure())
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer conn.Close()
+	client := pb.NewPetStoreServiceClient(conn)
 
+	switch *option {
+	case "pet":
+		PetById(client, id)
+	case "user":
+		UserByName(client, name)
+	}
+}
+
+//UserByName comments
+func UserByName(client pb.PetStoreServiceClient, name string) {
+	res, err := client.UserByName(context.Background(), &pb.UserByNameRequest{Username: name})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("res :", res)
+}
+
+//PetById comments
+func PetById(client pb.PetStoreServiceClient, id int) {
+	res, err := client.PetById(context.Background(), &pb.PetByIdRequest{Id: int32(id)})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("res :", res)
+}
+
+func callServer() {
+	addr = ":9000"
 	lis, err := net.Listen("tcp", addr)
 	if err != nil {
 		log.Fatal(err)
@@ -40,7 +96,6 @@ func main() {
 	log.Println("Starting server on port: ", addr)
 
 	s.Serve(lis)
-
 }
 
 func (t *ServerStrct) PetById(ctx context.Context, req *pb.PetByIdRequest) (*pb.PetResponse, error) {

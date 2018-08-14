@@ -2,54 +2,110 @@
 This recipe demonstrates on receiving request from a Rest client and routing to gRPC server.
 
 ## Installation
-* Download [protoc](https://github.com/google/protobuf/releases) binary and configure it in PATH
-* Download and install [protoc-gen-go](https://github.com/golang/protobuf#installation)
-* Download and install [mashling](https://github.com/TIBCOSoftware/mashling#using-go)
-
+* Install [Go](https://golang.org/)
+* Install `grpc`
+```bash
+go get -u google.golang.org/grpc
+```
+* Install `protoc-gen-go` library
+```bash
+go get github.com/golang/protobuf/protoc-gen-go
+```
+* Download protoc for your respective OS from [here](https://github.com/google/protobuf/releases).<br>Extract protoc-$VERSION-$PLATFORM.zip file get the `protoc` binary from bin folder and configure it in PATH.
+* Install mashling
+```bash
+go get github.com/TIBCOSoftware/mashling/...
+```
 ## Setup
-Get the grpc to grpc gateway files
 ```bash
 git clone https://github.com/TIBCOSoftware/mashling-recipes
-cd mashling-recipes/recipes/grpc-to-grpc-gateway
+cd mashling-recipes/recipes/rest-to-grpc-gateway
+```
+Create mashling gateway.
+```bash
+mashling-cli create -c rest-to-grpc-gateway.json -p petstore.proto -N -n rest-grpc-gateway-app
 ```
 
-Build sample client and server provided here
+Copy created binary from rest-grpc-gateway-app folder to current.
 ```bash
-cd samplegrpcserver
-go install ./...
-cd ../samplegrpcclient
-go install ./...
-cd ..
+cp ./rest-grpc-gateway-app/mashling-gateway* .
 ```
-
-Create custom gateway binary by passing gateway json and proto file
-```bash
-./mashling-cli create -c grpc-to-grpc-gateway.json -p petstore.proto -N -n <APPNAME>
-```
-
-Generated support files available in below path
-```bash
-cd <PATH TO APPNAME>/src/github.com/TIBCOSoftware/mashling/gen/grpc
-```
+Rename mashling-gateway* to rest-grpc-gateway.
 
 ## Testing
-Run sample server on port 9000 and 9001 in different terminals
+Start gateway.
 ```bash
-./samplegrpcserver -port 9000
-./samplegrpcserver -port 9001
+./rest-grpc-gateway -c rest-to-grpc-gateway.json
 ```
 
-Copy grpc-to-grpc-gateway.json to `<APPNAME>` folder and run the `<CUSTOM BINARY>`.
+Start sample gRPC server.
 ```bash
-./<CUSTOM BINARY> -c grpc-to-grpc-gateway.json
+go run main.go -server
 ```
 
-Run sample client to check the output
-```bash
-./samplegrpcclient -p 9096 -o 1 -i 2
+### #1 Testing PetById method with GET request
+Sample GET request.
+```curl
+curl --request GET http://localhost:9096/pets/PetById/2
 ```
-
--p --> PORT value<br>
--o --> 1 to invoke PetById method, 2 to invoke UserByName method<br>
--i --> if -o is set to 1 this will take id value<br>
--n --> if -o is set to 2 this will take name value<br>
+Now you should see logs in gateway terminal and sample gRPC server terminal. Output in curl request terminal can be seen as below.
+```json
+{
+ "pet": {
+  "id": 2,
+  "name": "cat2"
+ }
+}
+```
+### #2 Testing UserByName method with GET request
+Sample GET request.
+```curl
+curl --request GET http://localhost:9096/users/UserByName/user2
+```
+Output can be seen as below.
+```json
+{
+ "user": {
+  "email": "email2",
+  "id": 2,
+  "phone": "phone2",
+  "username": "user2"
+ }
+}
+```
+### #3 Testing PetById method with PUT request
+Payload
+```json
+{
+    "id":2
+}
+```
+Curl command
+```curl
+curl -X PUT "http://localhost:9096/pets/PetById" -H "accept: application/xml" -H "Content-Type: application/json" -d '{"id":3}'
+```
+Output can be seen as below.
+```json
+{
+ "pet": {
+  "id": 3,
+  "name": "cat3"
+ }
+}
+```
+### #4 Testing UserByName method with GET request and query params
+Sample GET request with query params.
+```curl
+curl --request GET http://localhost:9096/users/UserByName?username=user3
+```
+Output can be seen as below.
+```json
+{
+ "user": {
+  "email": "email3",
+  "id": 3,
+  "phone": "phone3",
+  "username": "user3"
+ }
+}
+```

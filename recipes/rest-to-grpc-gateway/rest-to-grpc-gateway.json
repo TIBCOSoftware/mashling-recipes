@@ -16,7 +16,7 @@
                 },
                 "handlers": [
                   {
-                    "dispatch": "PetsGET",
+                    "dispatch": "PetStoreDispatch",
                     "settings": {
                       "autoIdReply": "false",
                       "method": "GET",
@@ -25,7 +25,7 @@
                     }
                   },
                   {
-                    "dispatch": "UsersGET",
+                    "dispatch": "PetStoreDispatch",
                     "settings": {
                       "autoIdReply": "false",
                       "method": "GET",
@@ -34,7 +34,7 @@
                     }
                   },
                   {
-                    "dispatch": "PetsPUT",
+                    "dispatch": "PetStoreDispatch",
                     "settings": {
                       "autoIdReply": "false",
                       "method": "PUT",
@@ -43,11 +43,11 @@
                     }
                   },
                   {
-                    "dispatch": "UsersGETQuery",
+                    "dispatch": "PetStoreDispatch",
                     "settings": {
                       "autoIdReply": "false",
                       "method": "GET",
-                      "path": "/pets/{grpcMethodName}",
+                      "path": "/users/{grpcMethodName}",
                       "useReplyHandler": "false"
                     }
                   }
@@ -56,7 +56,7 @@
         ],
         "dispatches": [
             {
-                "name": "UsersGET",
+                "name": "PetStoreDispatch",
                 "routes": [
                     {
                         "steps": [
@@ -65,109 +65,10 @@
                                 "input": {
                                     "headers": "${payload.header}",
                                     "pathParams": "${payload.pathParams}",
-                                    "methodName": "${payload.pathParams.grpcMethodName}"
-                                }
-                            }
-                        ],
-                        "responses": [
-                            {
-                                "if": "PetStore.response.body.error == 'true'",
-                                "error": true,
-                                "output": {
-                                    "code": 404,
-                                    "data": "${PetStore.response.body.details}"
-                                }
-                            },
-                            {
-                                "error": false,
-                                "output": {
-                                    "code": 200,
-                                    "data": "${PetStore.response.body}"
-                                }
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "name": "PetsGET",
-                "routes": [
-                    {
-                        "steps": [
-                            {
-                                "service": "PetStore",
-                                "input": {
-                                    "headers": "${payload.header}",
-                                    "pathParams": "${payload.pathParams}",
-                                    "methodName": "${payload.pathParams.grpcMethodName}"
-                                }
-                            }
-                        ],
-                        "responses": [
-                            {
-                                "if": "PetStore.response.body.error == 'true'",
-                                "error": true,
-                                "output": {
-                                    "code": 404,
-                                    "data": "${PetStore.response.body.details}"
-                                }
-                            },
-                            {
-                                "error": false,
-                                "output": {
-                                    "code": 200,
-                                    "data": "${PetStore.response.body}"
-                                }
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "name": "UsersGETQuery",
-                "routes": [
-                    {
-                        "steps": [
-                            {
-                                "service": "PetStore",
-                                "input": {
-                                    "headers": "${payload.header}",
-                                    "pathParams": "${payload.pathParams}",
-                                    "queryParams": "${payload.queryParams}"
-                                }
-                            }
-                        ],
-                        "responses": [
-                            {
-                                "if": "PetStore.response.body.error == 'true'",
-                                "error": true,
-                                "output": {
-                                    "code": 404,
-                                    "data": "${PetStore.response.body.details}"
-                                }
-                            },
-                            {
-                                "error": false,
-                                "output": {
-                                    "code": 200,
-                                    "data": "${PetStore.response.body}"
-                                }
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "name": "PetsPUT",
-                "routes": [
-                    {
-                        "steps": [
-                            {
-                                "service": "PetStore",
-                                "input": {
-                                    "headers": "${payload.header}",
-                                    "pathParams": "${payload.pathParams}",
+                                    "methodName": "${payload.pathParams.grpcMethodName}",
+                                    "queryParams": "${payload.queryParams}",
                                     "content": "${payload.content}"
+
                                 }
                             }
                         ],
