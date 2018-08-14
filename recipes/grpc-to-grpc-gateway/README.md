@@ -1,55 +1,63 @@
 # gRPC to gRPC
-This recipe demonstrates on receiving request from a gRPC client and routing to gRPC end point based on method names.
+This recipe is a proxy gateway for gRPC end points.
 
 ## Installation
-* Download [protoc](https://github.com/google/protobuf/releases) binary and configure it in PATH
-* Download and install [protoc-gen-go](https://github.com/golang/protobuf#installation)
-* Download and install [mashling](https://github.com/TIBCOSoftware/mashling#using-go)
-
+* Install [Go](https://golang.org/)
+* Install `grpc`
+```bash
+go get -u google.golang.org/grpc
+```
+* Install `protoc-gen-go` library
+```bash
+go get github.com/golang/protobuf/protoc-gen-go
+```
+* Download protoc for your respective OS from [here](https://github.com/google/protobuf/releases).<br>Extract protoc-$VERSION-$PLATFORM.zip file get the `protoc` binary from bin folder and configure it in PATH.
+* Install mashling
+```bash
+go get github.com/TIBCOSoftware/mashling/...
+```
 ## Setup
-Get the grpc to grpc gateway files
 ```bash
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/grpc-to-grpc-gateway
 ```
-
-Build sample client and server provided here
+Create mashling gateway.
 ```bash
-cd samplegrpcserver
-go install ./...
-cd ../samplegrpcclient
-go install ./...
-cd ..
+mashling-cli create -c grpc-to-grpc-gateway.json -p petstore.proto -N -n grpc-proxy-gateway-app
 ```
 
-Create custom gateway binary by passing gateway json and proto file
+Copy created binary from grpc-proxy-gateway-app folder to current.
 ```bash
-./mashling-cli create -c grpc-to-grpc-gateway.json -p petstore.proto -N -n <APPNAME>
+cp ./grpc-proxy-gateway-app/mashling-gateway* .
 ```
-
-Generated support files available in below path
-```bash
-cd <PATH TO APPNAME>/src/github.com/TIBCOSoftware/mashling/gen/grpc
-```
+Rename mashling-gateway* to grpc-proxy-gateway.
 
 ## Testing
-Run sample server on port 9000 and 9001 in different terminals
+Start proxy gateway.
 ```bash
-./samplegrpcserver -port 9000
-./samplegrpcserver -port 9001
+./grpc-proxy-gateway -c grpc-to-grpc-gateway.json
 ```
 
-Copy grpc-to-grpc-gateway.json to `<APPNAME>` folder and run the `<CUSTOM BINARY>`.
+Start sample gRPC server.
 ```bash
-./<CUSTOM BINARY> -c grpc-to-grpc-gateway.json
+go run main.go -server
 ```
 
-Run sample client to check the output
+### #1 Testing PetById method
+Run sample gRPC client.
 ```bash
-./samplegrpcclient -p 9096 -o 1 -i 2
+go run main.go -client -port 9096 -method pet -param 2
 ```
-
--p --> PORT value<br>
--o --> 1 to invoke PetById method, 2 to invoke UserByName method<br>
--i --> if -o is set to 1 this will take id value<br>
--n --> if -o is set to 2 this will take name value<br>
+Now you should see logs in proxy gateway terminal and sample gRPC server terminal. Sample output in client terminal can be seen as below.
+```
+res : pet:<id:2 name:"cat2" >
+```
+### #2 Testing UserByName method
+Run sample gRPC client.
+```bash
+go run main.go -client -port 9096 -method user -param user2
+```
+Output can be seen as below.
+```
+res : user:<id:2 username:"user2" email:"email2" phone:"phone2" >
+```

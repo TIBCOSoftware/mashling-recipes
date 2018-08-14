@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/base64"
 	"flag"
 	"fmt"
 	"log"
@@ -21,8 +22,9 @@ var (
 	server = flag.Bool("server", false, "run the echo websocket server")
 	client = flag.Bool("client", false, "run the client")
 
-	name = flag.String("name", "CLIENTNAME", "instance name")
-	url  = flag.String("url", "ws://localhost:8080/ws", "server url to connect")
+	name      = flag.String("name", "CLIENTNAME", "instance name")
+	url       = flag.String("url", "ws://localhost:8080/ws", "server url to connect")
+	basicauth = flag.String("basicauth", "", "username:password")
 )
 
 func main() {
@@ -31,15 +33,19 @@ func main() {
 		startServer()
 	}
 	if *client {
-		runClient(*name, *url)
+		runClient(*name, *url, *basicauth)
 	}
 }
 
 // runClient connects to websocket server,
 // sends message every 2 secs and listens to server connection.
-func runClient(name string, serverURL string) {
+func runClient(name string, serverURL string, basicauth string) {
 	fmt.Println("Dialing", serverURL)
-	conn, _, err := websocket.DefaultDialer.Dial(serverURL, nil)
+	bauthEncoded := base64.StdEncoding.EncodeToString([]byte(basicauth))
+	h := http.Header{
+		"Authorization": {"Basic " + bauthEncoded},
+	}
+	conn, _, err := websocket.DefaultDialer.Dial(serverURL, h)
 	if err != nil {
 		fmt.Println("conn err", err)
 		return
