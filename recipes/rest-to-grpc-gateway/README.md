@@ -1,5 +1,5 @@
-# gRPC to gRPC
-This recipe demonstrates on receiving request from a gRPC client and routing to gRPC end point based on method names.
+# REST to gRPC
+This recipe demonstrates on receiving request from a Rest client and routing to gRPC server.
 
 ## Installation
 * Download [protoc](https://github.com/google/protobuf/releases) binary and configure it in PATH
