@@ -3,9 +3,9 @@
   "gateway": {
     "name": "newrestconditional",
     "version": "1.0.0",
-    "display_name": "Rest Conditional Gateway",
+    "display_name": "Publish to Consul",
     "display_image": "displayImage.svg",
-    "description": "This is a recipe to publish HTTP triggers into consul",
+    "description": "Publish HTTP triggers into Consul",
     "triggers": [
       {
         "name": "restConfig",
