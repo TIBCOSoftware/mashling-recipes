@@ -57,11 +57,11 @@
           "featured":false
         },
         {
-          "recipe":"kubernetes",
+          "recipe":"mashling-consul-integration",
           "featured":false
         },
         {
-          "recipe":"docker-swarm",
+          "recipe":"graphql-gateway",
           "featured":false
         },
         {
