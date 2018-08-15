@@ -4,6 +4,7 @@
     "name": "MyAnomalyProxy",
     "version": "1.0.0",
     "display_name":"Anomaly Detection",
+    "display_image":"mashlings-troubleshooting.svg",
     "description": "A microgateway with anomaly detection using real-time learning",
     "triggers": [
       {

@@ -3,7 +3,9 @@
     "gateway": {
         "name": "MyProxy",
         "version": "1.0.0",
-        "description": "This is a simple websocket proxy.",
+        "display_name":"Websocket Proxy",
+        "display_image":"mashlings-fast.svg",
+        "description": "Support for websocket streams, including concurrency and basic auth protection",
         "triggers": [
             {
                 "name": "MyProxy",
