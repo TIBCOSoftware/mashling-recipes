@@ -3,7 +3,9 @@
   "gateway": {
     "name": "MyAnomalyProxy",
     "version": "1.0.0",
-    "description": "This is a simple proxy with anomaly detection.",
+    "display_name":"Anomaly Detection",
+    "display_image":"mashlings-troubleshooting.svg",
+    "description": "A microgateway with anomaly detection using real-time learning",
     "triggers": [
       {
         "name": "MyProxy",

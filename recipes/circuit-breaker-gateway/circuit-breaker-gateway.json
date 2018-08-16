@@ -3,7 +3,8 @@
   "gateway": {
     "name": "MyCircuitBreakerProxy",
     "version": "1.0.0",
-    "description": "This is a simple proxy with a circuit breaker.",
+    "display_name":"Circuit Breaker",
+    "description": "Protect services with circuit breaker pattern",
     "triggers": [
       {
         "name": "MyProxy",
