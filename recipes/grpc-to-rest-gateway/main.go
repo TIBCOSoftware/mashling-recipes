@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	pb "github.com/TIBCOSoftware/mashling-recipes/recipes/grpc-to-grpc-gateway/petstore"
+	pb "github.com/TIBCOSoftware/mashling-recipes/recipes/grpc-to-rest-gateway/petstore"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )

@@ -35,7 +35,7 @@ func (m *Pet) Reset()         { *m = Pet{} }
 func (m *Pet) String() string { return proto.CompactTextString(m) }
 func (*Pet) ProtoMessage()    {}
 func (*Pet) Descriptor() ([]byte, []int) {
-	return fileDescriptor_petstore_54710b06adbd21e0, []int{0}
+	return fileDescriptor_petstore_d7652916161304d4, []int{0}
 }
 func (m *Pet) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Pet.Unmarshal(m, b)
@@ -83,7 +83,7 @@ func (m *User) Reset()         { *m = User{} }
 func (m *User) String() string { return proto.CompactTextString(m) }
 func (*User) ProtoMessage()    {}
 func (*User) Descriptor() ([]byte, []int) {
-	return fileDescriptor_petstore_54710b06adbd21e0, []int{1}
+	return fileDescriptor_petstore_d7652916161304d4, []int{1}
 }
 func (m *User) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_User.Unmarshal(m, b)
@@ -142,7 +142,7 @@ func (m *PetByIdRequest) Reset()         { *m = PetByIdRequest{} }
 func (m *PetByIdRequest) String() string { return proto.CompactTextString(m) }
 func (*PetByIdRequest) ProtoMessage()    {}
 func (*PetByIdRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_petstore_54710b06adbd21e0, []int{2}
+	return fileDescriptor_petstore_d7652916161304d4, []int{2}
 }
 func (m *PetByIdRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PetByIdRequest.Unmarshal(m, b)
@@ -180,7 +180,7 @@ func (m *UserByNameRequest) Reset()         { *m = UserByNameRequest{} }
 func (m *UserByNameRequest) String() string { return proto.CompactTextString(m) }
 func (*UserByNameRequest) ProtoMessage()    {}
 func (*UserByNameRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_petstore_54710b06adbd21e0, []int{3}
+	return fileDescriptor_petstore_d7652916161304d4, []int{3}
 }
 func (m *UserByNameRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UserByNameRequest.Unmarshal(m, b)
@@ -218,7 +218,7 @@ func (m *PetResponse) Reset()         { *m = PetResponse{} }
 func (m *PetResponse) String() string { return proto.CompactTextString(m) }
 func (*PetResponse) ProtoMessage()    {}
 func (*PetResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_petstore_54710b06adbd21e0, []int{4}
+	return fileDescriptor_petstore_d7652916161304d4, []int{4}
 }
 func (m *PetResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_PetResponse.Unmarshal(m, b)
@@ -256,7 +256,7 @@ func (m *UserResponse) Reset()         { *m = UserResponse{} }
 func (m *UserResponse) String() string { return proto.CompactTextString(m) }
 func (*UserResponse) ProtoMessage()    {}
 func (*UserResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_petstore_54710b06adbd21e0, []int{5}
+	return fileDescriptor_petstore_d7652916161304d4, []int{5}
 }
 func (m *UserResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UserResponse.Unmarshal(m, b)
@@ -283,6 +283,82 @@ func (m *UserResponse) GetUser() *User {
 	return nil
 }
 
+type PetRequest struct {
+	Pet                  *Pet     `protobuf:"bytes,1,opt,name=pet,proto3" json:"pet,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *PetRequest) Reset()         { *m = PetRequest{} }
+func (m *PetRequest) String() string { return proto.CompactTextString(m) }
+func (*PetRequest) ProtoMessage()    {}
+func (*PetRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_petstore_d7652916161304d4, []int{6}
+}
+func (m *PetRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PetRequest.Unmarshal(m, b)
+}
+func (m *PetRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PetRequest.Marshal(b, m, deterministic)
+}
+func (dst *PetRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PetRequest.Merge(dst, src)
+}
+func (m *PetRequest) XXX_Size() int {
+	return xxx_messageInfo_PetRequest.Size(m)
+}
+func (m *PetRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_PetRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PetRequest proto.InternalMessageInfo
+
+func (m *PetRequest) GetPet() *Pet {
+	if m != nil {
+		return m.Pet
+	}
+	return nil
+}
+
+type UserRequest struct {
+	User                 *User    `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *UserRequest) Reset()         { *m = UserRequest{} }
+func (m *UserRequest) String() string { return proto.CompactTextString(m) }
+func (*UserRequest) ProtoMessage()    {}
+func (*UserRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_petstore_d7652916161304d4, []int{7}
+}
+func (m *UserRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UserRequest.Unmarshal(m, b)
+}
+func (m *UserRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UserRequest.Marshal(b, m, deterministic)
+}
+func (dst *UserRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UserRequest.Merge(dst, src)
+}
+func (m *UserRequest) XXX_Size() int {
+	return xxx_messageInfo_UserRequest.Size(m)
+}
+func (m *UserRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UserRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UserRequest proto.InternalMessageInfo
+
+func (m *UserRequest) GetUser() *User {
+	if m != nil {
+		return m.User
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*Pet)(nil), "Pet")
 	proto.RegisterType((*User)(nil), "User")
@@ -290,6 +366,8 @@ func init() {
 	proto.RegisterType((*UserByNameRequest)(nil), "UserByNameRequest")
 	proto.RegisterType((*PetResponse)(nil), "PetResponse")
 	proto.RegisterType((*UserResponse)(nil), "UserResponse")
+	proto.RegisterType((*PetRequest)(nil), "PetRequest")
+	proto.RegisterType((*UserRequest)(nil), "UserRequest")
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -306,6 +384,8 @@ const _ = grpc.SupportPackageIsVersion4
 type PetStoreServiceClient interface {
 	PetById(ctx context.Context, in *PetByIdRequest, opts ...grpc.CallOption) (*PetResponse, error)
 	UserByName(ctx context.Context, in *UserByNameRequest, opts ...grpc.CallOption) (*UserResponse, error)
+	PetPUT(ctx context.Context, in *PetRequest, opts ...grpc.CallOption) (*PetResponse, error)
+	UserPUT(ctx context.Context, in *UserRequest, opts ...grpc.CallOption) (*UserResponse, error)
 }
 
 type petStoreServiceClient struct {
@@ -334,10 +414,30 @@ func (c *petStoreServiceClient) UserByName(ctx context.Context, in *UserByNameRe
 	return out, nil
 }
 
+func (c *petStoreServiceClient) PetPUT(ctx context.Context, in *PetRequest, opts ...grpc.CallOption) (*PetResponse, error) {
+	out := new(PetResponse)
+	err := c.cc.Invoke(ctx, "/PetStoreService/PetPUT", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *petStoreServiceClient) UserPUT(ctx context.Context, in *UserRequest, opts ...grpc.CallOption) (*UserResponse, error) {
+	out := new(UserResponse)
+	err := c.cc.Invoke(ctx, "/PetStoreService/UserPUT", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PetStoreServiceServer is the server API for PetStoreService service.
 type PetStoreServiceServer interface {
 	PetById(context.Context, *PetByIdRequest) (*PetResponse, error)
 	UserByName(context.Context, *UserByNameRequest) (*UserResponse, error)
+	PetPUT(context.Context, *PetRequest) (*PetResponse, error)
+	UserPUT(context.Context, *UserRequest) (*UserResponse, error)
 }
 
 func RegisterPetStoreServiceServer(s *grpc.Server, srv PetStoreServiceServer) {
@@ -380,6 +480,42 @@ func _PetStoreService_UserByName_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PetStoreService_PetPUT_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PetStoreServiceServer).PetPUT(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/PetStoreService/PetPUT",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PetStoreServiceServer).PetPUT(ctx, req.(*PetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PetStoreService_UserPUT_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PetStoreServiceServer).UserPUT(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/PetStoreService/UserPUT",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PetStoreServiceServer).UserPUT(ctx, req.(*UserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _PetStoreService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "PetStoreService",
 	HandlerType: (*PetStoreServiceServer)(nil),
@@ -392,30 +528,41 @@ var _PetStoreService_serviceDesc = grpc.ServiceDesc{
 			MethodName: "UserByName",
 			Handler:    _PetStoreService_UserByName_Handler,
 		},
+		{
+			MethodName: "PetPUT",
+			Handler:    _PetStoreService_PetPUT_Handler,
+		},
+		{
+			MethodName: "UserPUT",
+			Handler:    _PetStoreService_UserPUT_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "petstore.proto",
 }
 
-func init() { proto.RegisterFile("petstore.proto", fileDescriptor_petstore_54710b06adbd21e0) }
+func init() { proto.RegisterFile("petstore.proto", fileDescriptor_petstore_d7652916161304d4) }
 
-var fileDescriptor_petstore_54710b06adbd21e0 = []byte{
-	// 263 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x64, 0x91, 0xcf, 0x4a, 0xf3, 0x40,
-	0x14, 0xc5, 0xc9, 0xbf, 0xef, 0xd3, 0xdb, 0x9a, 0xe2, 0x20, 0x12, 0xb3, 0x0a, 0x03, 0x42, 0xba,
-	0x99, 0x42, 0x7d, 0x83, 0xee, 0xdc, 0x48, 0x48, 0x71, 0x2b, 0x44, 0x73, 0xc0, 0x40, 0x93, 0x19,
-	0x67, 0xa6, 0x42, 0xdf, 0x5e, 0x66, 0x5a, 0x6b, 0x4a, 0x76, 0xb9, 0xe7, 0xfc, 0xb8, 0xe7, 0xdc,
-	0x0c, 0xa5, 0x0a, 0xd6, 0x58, 0xa9, 0x21, 0x94, 0x96, 0x56, 0xf2, 0x25, 0x45, 0x15, 0x2c, 0x4b,
-	0x29, 0xec, 0xda, 0x2c, 0x28, 0x82, 0x32, 0xa9, 0xc3, 0xae, 0x65, 0x8c, 0xe2, 0xa1, 0xe9, 0x91,
-	0x85, 0x45, 0x50, 0x5e, 0xd7, 0xfe, 0x9b, 0xbf, 0x51, 0xfc, 0x6a, 0xa0, 0x27, 0x6c, 0x4e, 0x57,
-	0x7b, 0x03, 0x3d, 0xe2, 0xcf, 0x33, 0xbb, 0xa3, 0x04, 0x7d, 0xd3, 0xed, 0xb2, 0xc8, 0x1b, 0xc7,
-	0xc1, 0xa9, 0xea, 0x53, 0x0e, 0xc8, 0xe2, 0xa3, 0xea, 0x07, 0x5e, 0x50, 0x5a, 0xc1, 0x6e, 0x0e,
-	0xcf, 0x6d, 0x8d, 0xaf, 0x3d, 0xcc, 0xa4, 0x15, 0x5f, 0xd1, 0xad, 0x6b, 0xb0, 0x39, 0xbc, 0x34,
-	0x3d, 0x7e, 0xa1, 0x71, 0x7c, 0x70, 0x19, 0xcf, 0x1f, 0x69, 0x56, 0xc1, 0xd6, 0x30, 0x4a, 0x0e,
-	0x06, 0xec, 0x9e, 0x22, 0x05, 0xeb, 0xa9, 0xd9, 0x3a, 0x16, 0xce, 0x72, 0x02, 0x5f, 0xd2, 0xdc,
-	0xed, 0x3d, 0x73, 0x0f, 0x14, 0xbb, 0x15, 0x27, 0x30, 0x11, 0xde, 0xf4, 0xd2, 0x7a, 0x47, 0x8b,
-	0x0a, 0x76, 0xeb, 0xfe, 0xe0, 0x16, 0xfa, 0xbb, 0xfb, 0x00, 0x2b, 0xe9, 0xff, 0xa9, 0x37, 0x5b,
-	0x88, 0xcb, 0x0b, 0xf2, 0xb9, 0x18, 0xe7, 0xaf, 0x88, 0xfe, 0xfa, 0x33, 0x26, 0x26, 0xc7, 0xe4,
-	0x37, 0x62, 0x5c, 0xe4, 0xfd, 0x9f, 0x7f, 0xa4, 0xa7, 0x9f, 0x00, 0x00, 0x00, 0xff, 0xff, 0x8a,
-	0x14, 0x06, 0x50, 0xb6, 0x01, 0x00, 0x00,
+var fileDescriptor_petstore_d7652916161304d4 = []byte{
+	// 308 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x92, 0xcb, 0x6a, 0xb3, 0x40,
+	0x14, 0x80, 0xf1, 0x96, 0xfc, 0xff, 0xd1, 0x1a, 0x3a, 0x94, 0x62, 0x5d, 0xc9, 0xf4, 0x82, 0xd9,
+	0x4c, 0x20, 0x7d, 0x83, 0xec, 0xba, 0x29, 0x83, 0x69, 0xb6, 0x05, 0x5b, 0x0f, 0x54, 0xa8, 0x97,
+	0x3a, 0x93, 0x42, 0x1e, 0xad, 0x6f, 0x57, 0x66, 0x26, 0x4d, 0x34, 0x92, 0x9d, 0xe7, 0x9c, 0xcf,
+	0xef, 0x5c, 0x14, 0xc2, 0x16, 0xa5, 0x90, 0x4d, 0x87, 0xac, 0xed, 0x1a, 0xd9, 0xd0, 0x39, 0x38,
+	0x1c, 0x25, 0x09, 0xc1, 0x2e, 0x8b, 0xc8, 0x4a, 0xac, 0xd4, 0xcb, 0xec, 0xb2, 0x20, 0x04, 0xdc,
+	0x3a, 0xaf, 0x30, 0xb2, 0x13, 0x2b, 0xfd, 0x9f, 0xe9, 0x67, 0xfa, 0x0a, 0xee, 0x46, 0x60, 0x37,
+	0x62, 0x63, 0xf8, 0xb7, 0x15, 0xd8, 0xf5, 0xf8, 0x43, 0x4c, 0xae, 0xc0, 0xc3, 0x2a, 0x2f, 0x3f,
+	0x23, 0x47, 0x17, 0x4c, 0xa0, 0xb2, 0xed, 0x47, 0x53, 0x63, 0xe4, 0x9a, 0xac, 0x0e, 0x68, 0x02,
+	0x21, 0x47, 0xb9, 0xda, 0x3d, 0x15, 0x19, 0x7e, 0x6d, 0x51, 0x8c, 0xa6, 0xa2, 0x0b, 0xb8, 0x54,
+	0x13, 0xac, 0x76, 0xcf, 0x79, 0x85, 0x7f, 0x50, 0xbf, 0xbd, 0x35, 0x6c, 0x4f, 0xef, 0xc1, 0xe7,
+	0x28, 0x33, 0x14, 0x6d, 0x53, 0x0b, 0x24, 0xd7, 0xe0, 0xb4, 0x28, 0x35, 0xe5, 0x2f, 0x5d, 0xa6,
+	0x4a, 0x2a, 0x41, 0xe7, 0x10, 0x28, 0xef, 0x81, 0xbb, 0x01, 0x57, 0x29, 0xf6, 0xa0, 0xc7, 0x74,
+	0x51, 0xa7, 0xe8, 0x1d, 0x80, 0x36, 0x9a, 0xde, 0xe7, 0x84, 0x29, 0xf8, 0x46, 0x68, 0xb0, 0xf3,
+	0xbe, 0xe5, 0x8f, 0x05, 0x33, 0x8e, 0x72, 0xad, 0x3e, 0xc9, 0x1a, 0xbb, 0xef, 0xf2, 0x1d, 0x49,
+	0x0a, 0xd3, 0xfd, 0x21, 0xc8, 0x8c, 0x0d, 0x4f, 0x12, 0x07, 0xac, 0xbf, 0xd0, 0x02, 0xe0, 0x78,
+	0x10, 0x42, 0xd8, 0xe8, 0x3a, 0xf1, 0x05, 0x1b, 0x6c, 0x76, 0x0b, 0x13, 0x8e, 0x92, 0x6f, 0x5e,
+	0x88, 0xcf, 0x8e, 0x7b, 0x9c, 0x58, 0x1f, 0x60, 0xaa, 0x5e, 0x52, 0x54, 0xc0, 0x7a, 0x7b, 0x9c,
+	0xc8, 0xde, 0x26, 0xfa, 0x17, 0x7a, 0xfc, 0x0d, 0x00, 0x00, 0xff, 0xff, 0x63, 0xf2, 0x52, 0xd8,
+	0x54, 0x02, 0x00, 0x00,
 }

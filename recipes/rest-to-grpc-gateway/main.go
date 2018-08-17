@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	pb "github.com/TIBCOSoftware/mashling-recipes/recipes/grpc-to-grpc-gateway/petstore"
+	pb "github.com/TIBCOSoftware/mashling-recipes/recipes/rest-to-grpc-gateway/petstore"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
@@ -20,7 +20,53 @@ var clientAddr string
 type ServerStrct struct {
 }
 
+var petMapArr = make(map[int32]pb.Pet)
+var userMapArr = make(map[string]pb.User)
+
+var petArr = []pb.Pet{
+	{
+		Id:   2,
+		Name: "cat2",
+	},
+	{
+		Id:   3,
+		Name: "cat3",
+	},
+	{
+		Id:   4,
+		Name: "cat4",
+	},
+}
+var userArr = []pb.User{
+	{
+		Id:       2,
+		Username: "user2",
+		Email:    "email2",
+		Phone:    "phone2",
+	},
+	{
+		Id:       3,
+		Username: "user3",
+		Email:    "email3",
+		Phone:    "phone3",
+	},
+	{
+		Id:       4,
+		Username: "user4",
+		Email:    "email4",
+		Phone:    "phone4",
+	},
+}
+
 func main() {
+
+	for _, pet := range petArr {
+		petMapArr[pet.GetId()] = pet
+	}
+
+	for _, user := range userArr {
+		userMapArr[user.GetUsername()] = user
+	}
 
 	clientMode := flag.Bool("client", false, "command to run client")
 	serverMode := flag.Bool("server", false, "command to run server")
@@ -102,22 +148,7 @@ func (t *ServerStrct) PetById(ctx context.Context, req *pb.PetByIdRequest) (*pb.
 
 	fmt.Println("server PetById method called")
 
-	petArr := []pb.Pet{
-		{
-			Id:   2,
-			Name: "cat2",
-		},
-		{
-			Id:   3,
-			Name: "cat3",
-		},
-		{
-			Id:   4,
-			Name: "cat4",
-		},
-	}
-
-	for _, pet := range petArr {
+	for _, pet := range petMapArr {
 		if pet.Id == req.Id {
 			return &pb.PetResponse{Pet: &pet}, nil
 		}
@@ -134,28 +165,8 @@ func (t *ServerStrct) PetById(ctx context.Context, req *pb.PetByIdRequest) (*pb.
 func (t *ServerStrct) UserByName(ctx context.Context, req *pb.UserByNameRequest) (*pb.UserResponse, error) {
 
 	fmt.Println("server UserByName method called")
-	userArr := []pb.User{
-		{
-			Id:       2,
-			Username: "user2",
-			Email:    "email2",
-			Phone:    "phone2",
-		},
-		{
-			Id:       3,
-			Username: "user3",
-			Email:    "email3",
-			Phone:    "phone3",
-		},
-		{
-			Id:       4,
-			Username: "user4",
-			Email:    "email4",
-			Phone:    "phone4",
-		},
-	}
 
-	for _, user := range userArr {
+	for _, user := range userMapArr {
 		if req.Username == user.Username {
 			return &pb.UserResponse{User: &user}, nil
 		}
@@ -169,4 +180,33 @@ func (t *ServerStrct) UserByName(ctx context.Context, req *pb.UserByNameRequest)
 	}
 	return &pb.UserResponse{User: &user}, nil
 
+}
+
+func (t *ServerStrct) PetPUT(ctx context.Context, req *pb.PetRequest) (*pb.PetResponse, error) {
+
+	fmt.Println("server PetPUT method called")
+	for id := range petMapArr {
+		if id == req.Pet.GetId() {
+			petMapArr[id] = *req.GetPet()
+		} else {
+			petMapArr[req.GetPet().GetId()] = *req.GetPet()
+		}
+	}
+
+	var pet = petMapArr[req.GetPet().GetId()]
+	return &pb.PetResponse{Pet: &pet}, nil
+}
+
+func (t *ServerStrct) UserPUT(ctx context.Context, req *pb.UserRequest) (*pb.UserResponse, error) {
+	fmt.Println("server UserPUT method called")
+	for name := range userMapArr {
+		if strings.Compare(name, req.User.GetUsername()) == 0 {
+			userMapArr[name] = *req.GetUser()
+		} else {
+			userMapArr[req.GetUser().GetUsername()] = *req.GetUser()
+		}
+	}
+
+	var user = userMapArr[req.GetUser().GetUsername()]
+	return &pb.UserResponse{User: &user}, nil
 }
