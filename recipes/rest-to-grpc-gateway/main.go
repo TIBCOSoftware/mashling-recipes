@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"log"
@@ -8,7 +9,8 @@ import (
 	"strconv"
 	"strings"
 
-	pb "github.com/TIBCOSoftware/mashling-recipes/recipes/rest-to-grpc-gateway/petstore"
+	pb "rest-to-grpc-gateway/petstore"
+
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
@@ -154,11 +156,7 @@ func (t *ServerStrct) PetById(ctx context.Context, req *pb.PetByIdRequest) (*pb.
 		}
 	}
 
-	var pet = pb.Pet{
-		Id:   1,
-		Name: "defcat",
-	}
-	return &pb.PetResponse{Pet: &pet}, nil
+	return nil, errors.New("Pet not found")
 
 }
 
@@ -172,19 +170,18 @@ func (t *ServerStrct) UserByName(ctx context.Context, req *pb.UserByNameRequest)
 		}
 	}
 
-	var user = pb.User{
-		Id:       1,
-		Username: "defuser",
-		Email:    "defemail",
-		Phone:    "defphone",
-	}
-	return &pb.UserResponse{User: &user}, nil
+	return nil, errors.New("User not found")
 
 }
 
 func (t *ServerStrct) PetPUT(ctx context.Context, req *pb.PetRequest) (*pb.PetResponse, error) {
 
 	fmt.Println("server PetPUT method called")
+	fmt.Println(req.Pet.Id)
+	if req.Pet.Id == 0 {
+		return nil, errors.New("Invalid id provided")
+	}
+
 	for id := range petMapArr {
 		if id == req.Pet.GetId() {
 			petMapArr[id] = *req.GetPet()
@@ -198,6 +195,9 @@ func (t *ServerStrct) PetPUT(ctx context.Context, req *pb.PetRequest) (*pb.PetRe
 }
 
 func (t *ServerStrct) UserPUT(ctx context.Context, req *pb.UserRequest) (*pb.UserResponse, error) {
+	if len(req.User.Username) == 0 {
+		return nil, errors.New("Invalid Username provided")
+	}
 	fmt.Println("server UserPUT method called")
 	for name := range userMapArr {
 		if strings.Compare(name, req.User.GetUsername()) == 0 {
