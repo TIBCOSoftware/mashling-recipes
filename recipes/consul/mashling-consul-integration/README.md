@@ -3,13 +3,15 @@
 This is a recipe to publish HTTP triggers in the gateway.json into Consul.
 
 ## Installation
-Download [consul](https://www.consul.io/downloads.html) binary and update PATH environment variable to include consul binary.
+* Download [consul](https://www.consul.io/downloads.html) binary and update PATH environment variable to include consul binary.
+* Download the Mashling-cli Linux Binary from [Mashling-releases](https://github.com/TIBCOSoftware/mashling/releases).
 
 ## Setup
 ```
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/consul/mashling-consul-integration
 ```
+Place the downloaded mashling-cli binary in mashling-consul-integration folder
 
 ## Testing
 Run the consul agent in secure mode by passing configuration json file
@@ -76,20 +78,13 @@ Run below command to de-register gateway REST triggers from consul.
 
 To use this option consul agent should run on same host as mashling gateway is running. Also agent should be launched by providing configuration directory (i.e. -config-dir).
 
-service defination directory - Provide full path to config-dir
+
 
 Run below command to register gateway REST triggers with consul. <br>
 ```
-./mashling-cli publish consul -r -c mashling-gateway-consul.json -t b1gs33cr3t -D <service defination directory>
+./mashling-cli publish consul -r -c mashling-gateway-consul.json -t b1gs33cr3t -D <Service definition directory>
 ```
-
-### De-Register gateway services with consul - using config directory option
-
-Run below command to de-register gateway REST triggers from consul.
-```
-./mashling-cli publish consul -d -c mashling-gateway-consul.json -t b1gs33cr3t -D <service defination directory>
-```
-
+Service definition directory - Provide full path to config-dir
 ### Health check
 
 Registered services health status can be listed by using below curl command.
@@ -129,6 +124,13 @@ Response
     }
 }
 ```
+### De-Register gateway services with consul - using config directory option
+
+Run below command to de-register gateway REST triggers from consul.
+```
+./mashling-cli publish consul -d -c mashling-gateway-consul.json -t b1gs33cr3t -D <Service definition directory>
+```
+
 ### Consul dashboard
 
 Consul dashboard can be accessed on browser - http://127.0.0.1:8500/ui
