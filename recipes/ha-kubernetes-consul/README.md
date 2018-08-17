@@ -15,6 +15,10 @@ Following prerequisites needs to be installed:
 * Download [consul](https://www.consul.io/downloads.html) binary and update PATH environment variable to include consul binary.
 
 ### Preparing the gateway
+```
+git clone https://github.com/TIBCOSoftware/mashling-recipes
+cd mashling-recipes/recipes/ha-kubernetes-consul
+```
 * Download the Mashling-Gateway Linux Binary from [Mashling-releases](https://github.com/TIBCOSoftware/mashling/releases). 
 
 ### Creating a Docker image
@@ -51,8 +55,11 @@ Update the docker image name in deployment.yml file and execute below command by
 chmod ugo+x *.sh
 ./kubernetes-setup.sh <CONSUL-HOST-IP> <CONSUL-TOKEN>
 ```
+CONSUL-HOST-IP: Provide HOST IP used for starting consul agent
+CONSUL-TOKEN : Consul token is the acl_master_token in the above config-files/configuration.json file <br>
+
 Note: Replace 1.8 with 1.9 or 1.10 to use other Kubernetes versions for kubeadm dind cluster in kubernetes-setup bash file.<br>
-If kubernetes cluster is running on cloud or on-prem, Update the content in register-consul bash file
+If kubernetes cluster is running on cloud or on-prem, replace the content in register-consul bash file
 ```
 "$(kubectl get nodes -o jsonpath='{ $.items[*].status.addresses[?(@.type=="InternalIP")].address }')" 
 with 
