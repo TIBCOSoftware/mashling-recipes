@@ -13,8 +13,8 @@
                 "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/grpc",
                 "settings": {
                     "port": 9096,
-                    "protoname":"petstore",
-                    "servicename":"PetStoreService"
+                    "protoName":"petstore",
+                    "serviceName":"PetStoreService"
                 },
                 "handlers": [
                     {
