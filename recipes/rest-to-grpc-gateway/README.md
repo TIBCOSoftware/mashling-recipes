@@ -32,7 +32,7 @@ cp ./rest-grpc-gateway-app/mashling-gateway* .
 ```
 Rename mashling-gateway* to rest-grpc-gateway.
 
-Create grpc stub files for sample server.
+Create grpc stub file for sample server.
 ```bash
 mkdir -p $GOPATH/src/rest-to-grpc-gateway/petstore
 protoc -I . petstore.proto --go_out=plugins=grpc:$GOPATH/src/rest-to-grpc-gateway/petstore/

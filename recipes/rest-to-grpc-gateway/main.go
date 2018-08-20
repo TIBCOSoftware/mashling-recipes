@@ -177,9 +177,13 @@ func (t *ServerStrct) UserByName(ctx context.Context, req *pb.UserByNameRequest)
 func (t *ServerStrct) PetPUT(ctx context.Context, req *pb.PetRequest) (*pb.PetResponse, error) {
 
 	fmt.Println("server PetPUT method called")
-	fmt.Println(req.Pet.Id)
+	if req.Pet == nil {
+		return nil, errors.New("Content not found. Invalid Request")
+	}
 	if req.Pet.Id == 0 {
 		return nil, errors.New("Invalid id provided")
+	} else {
+		fmt.Println("Request recieved for id:", req.Pet.Id)
 	}
 
 	for id := range petMapArr {
@@ -195,10 +199,18 @@ func (t *ServerStrct) PetPUT(ctx context.Context, req *pb.PetRequest) (*pb.PetRe
 }
 
 func (t *ServerStrct) UserPUT(ctx context.Context, req *pb.UserRequest) (*pb.UserResponse, error) {
+
+	fmt.Println("server UserPUT method called")
+	if req.User == nil {
+		return nil, errors.New("Content not found. Invalid Request")
+	}
+
 	if len(req.User.Username) == 0 {
 		return nil, errors.New("Invalid Username provided")
+	} else {
+		fmt.Println("Request recieved for username:", req.User.Username)
 	}
-	fmt.Println("server UserPUT method called")
+
 	for name := range userMapArr {
 		if strings.Compare(name, req.User.GetUsername()) == 0 {
 			userMapArr[name] = *req.GetUser()
