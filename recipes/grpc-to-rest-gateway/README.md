@@ -32,8 +32,13 @@ Copy created binary from grpc-rest-gateway-app folder to current.
 cp ./grpc-rest-gateway-app/mashling-gateway* .
 ```
 
-Rename mashling-gateway* to grpc-rest-gateway
+Rename mashling-gateway* to grpc-rest-gateway.
 
+Create grpc stub file for sample server.
+```bash
+mkdir -p $GOPATH/src/grpc-to-rest-gateway/petstore
+protoc -I . petstore.proto --go_out=plugins=grpc:$GOPATH/src/grpc-to-rest-gateway/petstore/
+```
 ## Testing
 Start proxy gateway.
 ```bash
