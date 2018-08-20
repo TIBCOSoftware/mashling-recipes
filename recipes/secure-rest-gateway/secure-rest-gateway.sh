@@ -58,7 +58,10 @@ function testcase1 {
 	popd
 	
 	rm -f /tmp/client.log /tmp/gw.log
-	kill -9 $pId
+	# kill -9 $pId
+	var=$(ps --ppid $pId)
+	pId7=$(echo $var | awk '{print $5}')
+	kill -9 $pId7
 	kill -9 $pId2
 	
 }
