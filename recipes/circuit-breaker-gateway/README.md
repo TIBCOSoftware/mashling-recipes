@@ -7,7 +7,7 @@ This recipe is a gateway with a service protected by a circuit breaker.
 
 ## Setup
 ```
-git clone https://github.com/TIBCOSoftware/circuit-breaker-gateway
+git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/circuit-breaker-gateway
 ```
 Place the Downloaded Mashling-Gateway binary in circuit-breaker-gateway folder.

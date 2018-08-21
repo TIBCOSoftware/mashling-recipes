@@ -1,7 +1,7 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "newrestconditional",
+    "name": "rest-conditional-gateway",
     "version": "1.0.0",
     "display_name": "Publish to Consul",
     "display_image": "displayImage.svg",
@@ -34,30 +34,6 @@
             }
           }
         ]
-      },
-      {
-        "name": "secureConfig",
-        "description": "Animals rest trigger - PUT animal details",
-        "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
-        "settings": {
-          "port": "9098",
-          "enableTLS": "true",
-          "serverCert":"${env.SERVER_CERT}",
-          "serverKey":"${env.SERVER_KEY}",
-          "enableClientAuth": "true",
-          "trustStore": "${env.TRUST_STORE}"
-        },
-        "handlers": [
-          {
-            "dispatch": "Pets2",
-            "settings": {
-              "autoIdReply": "false",
-              "method": "GET",
-              "path": "/pets/{petId}",
-              "useReplyHandler": "false"
-            }
-          }
-        ]
       }
     ],
     "dispatches": [
@@ -67,7 +43,7 @@
           {
             "steps": [
               {
-                "service": "animals_get_handler",
+                "service": "FlogoRestGetFlow",
                 "input": {
                   "inputs.pathParams": "${payload.pathParams}"
                 }
@@ -100,41 +76,10 @@
         "name": "Pets1",
         "routes": [
           {
-            "if": "payload.content.name == 'ELEPHANT' || payload.content.name == 'CAT'",
-            "steps": [
-              {
-                "service": "mammals_handler",
-                "input": {
-                  "inputs.content": "${payload.content}"
-                }
-              }
-            ],
-            "responses": [
-              {
-                "if": "mammals_handler.response.outputs.code != 200",
-                "error": true,
-                "output": {
-                  "code": 403,
-                  "data": {
-                    "error": "Pet is not available."
-                  }
-                }
-              },
-              {
-                "if": "mammals_handler.response.outputs.code == 200",
-                "error": false,
-                "output": {
-                  "code": 200,
-                  "data": "${mammals_handler.response.outputs.data}"
-                }
-              }
-            ]
-          },
-          {
             "if": "payload.content.name == 'SPARROW'",
             "steps": [
               {
-                "service": "birds_handler",
+                "service": "birds_put",
                 "input": {
                   "inputs.content": "${payload.content}"
                 }
@@ -142,21 +87,52 @@
             ],
             "responses": [
               {
-                "if": "birds_handler.response.outputs.code != 200",
+                "if": "birds_put.response.outputs.code != 200",
                 "error": true,
                 "output": {
                   "code": 403,
                   "data": {
-                    "error": "Pet is not available."
+                    "error": "Pet is not added."
                   }
                 }
               },
               {
-                "if": "birds_handler.response.outputs.code == 200",
+                "if": "birds_put.response.outputs.code == 200",
                 "error": false,
                 "output": {
                   "code": 200,
-                  "data": "${birds_handler.response.outputs.data}"
+                  "data": "${birds_put.response.outputs.data}"
+                }
+              }
+            ]
+          },
+          {
+            "if": "payload.content.name == 'ELEPHANT' || payload.content.name == 'CAT'",
+            "steps": [
+              {
+                "service": "mammals_put",
+                "input": {
+                  "inputs.content": "${payload.content}"
+                }
+              }
+            ],
+            "responses": [
+              {
+                "if": "mammals_put.response.outputs.code != 200",
+                "error": true,
+                "output": {
+                  "code": 403,
+                  "data": {
+                    "error": "Pet is not added."
+                  }
+                }
+              },
+              {
+                "if": "mammals_put.response.outputs.code == 200",
+                "error": false,
+                "output": {
+                  "code": 200,
+                  "data": "${mammals_put.response.outputs.data}"
                 }
               }
             ]
@@ -164,7 +140,7 @@
           {
             "steps": [
               {
-                "service": "animals_handler",
+                "service": "animals_put",
                 "input": {
                   "inputs.content": "${payload.content}"
                 }
@@ -172,56 +148,21 @@
             ],
             "responses": [
               {
-                "if": "animals_handler.response.outputs.code != 200",
+                "if": "animals_put.response.outputs.code != 200",
                 "error": true,
                 "output": {
                   "code": 403,
                   "data": {
-                    "error": "Pet is not available."
+                    "error": "Pet is not added."
                   }
                 }
               },
               {
-                "if": "animals_handler.response.outputs.code == 200",
+                "if": "animals_put.response.outputs.code == 200",
                 "error": false,
                 "output": {
                   "code": 200,
-                  "data": "${animals_handler.response.outputs.data}"
-                }
-              }
-            ]
-          }
-                  ]
-      },
-      {
-        "name": "Pets2",
-        "routes": [
-          {
-            "steps": [
-              {
-                "service": "animals_get_handler1",
-                "input": {
-                  "inputs.pathParams": "${payload.pathParams}"
-                }
-              }
-            ],
-            "responses": [
-              {
-                "if": "animals_get_handler1.response.outputs.code != 200",
-                "error": true,
-                "output": {
-                  "code": 403,
-                  "data": {
-                    "error": "Pet is not available."
-                  }
-                }
-              },
-              {
-                "if": "animals_get_handler1.response.outputs.code == 200",
-                "error": false,
-                "output": {
-                  "code": 200,
-                  "data": "${animals_get_handler1.response.outputs.data}"
+                  "data": "${animals_put.response.outputs.data}"
                 }
               }
             ]
@@ -231,31 +172,7 @@
     ],
     "services": [
       {
-        "name": "mammals_handler",
-        "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
-        "type": "flogoFlow",
-        "settings": {
-          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/RestTriggerToRestPutActivity.json"
-        }
-      },
-      {
-        "name": "birds_handler",
-        "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
-        "type": "flogoFlow",
-        "settings": {
-          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/RestTriggerToRestPutActivity.json"
-        }
-      },
-      {
-        "name": "animals_handler",
-        "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
-        "type": "flogoFlow",
-        "settings": {
-          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/RestTriggerToRestPutActivity.json"
-        }
-      },
-      {
-        "name": "animals_get_handler",
+        "name": "FlogoRestGetFlow",
         "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
         "type": "flogoFlow",
         "settings": {
@@ -263,11 +180,27 @@
         }
       },
       {
-        "name": "animals_get_handler1",
-        "description": "Make GET calls against a remote HTTP service using a Flogo flow.",
+        "name": "birds_put",
+        "description": "Make PUT calls against a remote HTTP service using a Flogo flow.",
         "type": "flogoFlow",
         "settings": {
-          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/SecureRestInvoker.json"
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/RestTriggerToRestPutActivity.json"
+        }
+      },
+      {
+        "name": "mammals_put",
+        "description": "Make PUT calls against a remote HTTP service using a Flogo flow.",
+        "type": "flogoFlow",
+        "settings": {
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/RestTriggerToRestPutActivity.json"
+        }
+      },
+      {
+        "name": "animals_put",
+        "description": "Make PUT calls against a remote HTTP service using a Flogo flow.",
+        "type": "flogoFlow",
+        "settings": {
+          "reference": "github.com/TIBCOSoftware/mashling/lib/flow/RestTriggerToRestPutActivity.json"
         }
       }
     ]

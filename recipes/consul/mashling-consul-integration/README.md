@@ -2,18 +2,26 @@
 
 This is a recipe to publish HTTP triggers in the gateway.json into Consul.
 
-## Install
-Download [consul](https://www.consul.io/downloads.html) binary and update PATH environment variable to include consul binary.
+## Installation
+* Download [consul](https://www.consul.io/downloads.html) binary and update PATH environment variable to include consul binary.
+* Download the Mashling-cli Linux Binary from [Mashling-releases](https://github.com/TIBCOSoftware/mashling/releases).
 
 ## Setup
+```
+git clone https://github.com/TIBCOSoftware/mashling-recipes
+cd mashling-recipes/recipes/consul/mashling-consul-integration
+```
+Place the downloaded mashling-cli and mashling-gateway binary in mashling-consul-integration folder
 
-Run consul agent using below command.
+## Testing
+Run the consul agent in secure mode by passing configuration json file
 ```
-consul agent -dev -client <HOSTIP>
+consul agent -dev -config-dir config-files
 ```
-Note: Consul agent can be run in secure mode by providing authentication token in a configuration file while launching the agent.<br>
+config-dir - provide path to directory of configuration files to load <br>
+
 Sample configuration json file content:
-```json
+```
 {
   "acl_datacenter": "dc1",
   "acl_master_token": "b1gs33cr3t",
@@ -21,26 +29,39 @@ Sample configuration json file content:
   "acl_down_policy": "extend-cache"
 }
 ```
-Additional configuration details found [here](https://www.consul.io/docs/guides/acl.html)
-
-Command to run consul agent with the directory containing configuration json file.
-```
-consul agent -dev -client <HOSTIP> -config-dir <CONFIG DIRECTORY PATH>
-```
-
-## Testing
-
-### Register gateway services with consul:
+### #1 Register gateway services with consul:
 
 Run below command to register gateway REST triggers with consul.
 ```
 ./mashling-cli publish consul -r -c mashling-gateway-consul.json -t b1gs33cr3t -H 127.0.0.1:8500
+```
+Run the mashling-gateway using below command
+```
+./mashling-gateway -c mashling-gateway-consul.json
 ```
 
 Registered services can be listed using curl command.
 ```
 curl  --header  "X-Consul-Token: b1gs33cr3t"   http://localhost:8500/v1/agent/services
 ```
+Response :
+```
+{
+    "restConfig": {
+        "ID": "restConfig",
+        "Service": "restConfig",
+        "Tags": [],
+        "Address": "<LOCAL MACHINE IP>",
+        "Meta": {},
+        "Port": 9096,
+        "EnableTagOverride": false,
+        "CreateIndex": 0,
+        "ModifyIndex": 0
+    }
+}
+```
+Note : Registered services can be accessed from consul dashboard - http://127.0.0.1:8500/ui <br>
+Update consul token in dashboard settings page
 
 ### De-Register gateway services from consul:
 
@@ -49,32 +70,49 @@ Run below command to de-register gateway REST triggers from consul.
 ./mashling-cli publish consul -d -c mashling-gateway-consul.json -t b1gs33cr3t -H 127.0.0.1:8500
 ```
 
-### Register gateway services with consul - using config directory option
+### #2 Register gateway services with consul - using config directory option
 
-To use this option consul agent should run on same host as mashling gateway is running. Also agent should be launched by providing configuration directory (i.e. -config-dir).
-
-Run below command to register gateway REST triggers with consul.
+Run below command to register gateway REST triggers with consul using config directory option. <br>
 ```
-./mashling-cli publish consul -r -c mashling-gateway-consul.json -t b1gs33cr3t -D <service defination directory>
+./mashling-cli publish consul -r -c mashling-gateway-consul.json -t b1gs33cr3t -D <Service definition directory>
 ```
+Service definition directory - Provide full path to config-dir
 
-
-### De-Register gateway services with consul - using config directory option
-
-Run below command to de-register gateway REST triggers from consul.
+Run the mashling-gateway using below command
 ```
-./mashling-cli publish consul -d -c mashling-gateway-consul.json -t b1gs33cr3t -D <service defination directory>
+./mashling-gateway -c mashling-gateway-consul.json
 ```
-
+Note : After starting gateway wait for 30 secs and perform health check
 ### Health check
 
 Registered services health status can be listed by using below curl command.
 ```
 curl  --header  "X-Consul-Token: b1gs33cr3t"   http://localhost:8500/v1/agent/checks
 ```
+Response
+```
+{
+    "service:restConfig": {
+        "Node": "<HOSTNAME>",
+        "CheckID": "service:restConfig",
+        "Name": "Service 'restConfig' check",
+        "Status": "passing",
+        "Notes": "",
+        "Output": "TCP connect <LOCAL MACHINE IP>:9096: Success",
+        "ServiceID": "restConfig",
+        "ServiceName": "restConfig",
+        "ServiceTags": [],
+        "Definition": {},
+        "CreateIndex": 0,
+        "ModifyIndex": 0
+    }
+}
+```
+### De-Register gateway services with consul - using config directory option
 
-### Consul dashboard
-
-Consul dashboard can be accessed on browser - http://127.0.0.1:8500/ui
+Run below command to de-register gateway REST triggers from consul.
+```
+./mashling-cli publish consul -d -c mashling-gateway-consul.json -t b1gs33cr3t -D <Service definition directory>
+```
 
 
