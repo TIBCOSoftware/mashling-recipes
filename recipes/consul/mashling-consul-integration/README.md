@@ -60,7 +60,8 @@ Response :
     }
 }
 ```
-Note : Registered services can be accessed from consul dashboard - http://127.0.0.1:8500/ui
+Note : Registered services can be accessed from consul dashboard - http://127.0.0.1:8500/ui <br>
+Update consul token in dashboard settings page
 
 ### De-Register gateway services from consul:
 
@@ -81,7 +82,7 @@ Run the mashling-gateway using below command
 ```
 ./mashling-gateway -c mashling-gateway-consul.json
 ```
-
+Note : After starting gateway wait for 30 secs and perform health check
 ### Health check
 
 Registered services health status can be listed by using below curl command.
