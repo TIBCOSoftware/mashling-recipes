@@ -29,7 +29,17 @@ message UserResponse {
     User user = 1;
 }
 
+message PetRequest {
+    Pet pet = 1;
+}
+
+message UserRequest {
+    User user = 1;
+}
+
 service PetStoreService {
     rpc PetById (PetByIdRequest) returns (PetResponse);
     rpc UserByName (UserByNameRequest) returns (UserResponse);
+    rpc PetPUT (PetRequest) returns (PetResponse);
+    rpc UserPUT (UserRequest) returns (UserResponse);
 }

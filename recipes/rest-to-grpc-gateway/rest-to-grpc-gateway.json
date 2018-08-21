@@ -16,38 +16,20 @@
                 },
                 "handlers": [
                   {
-                    "dispatch": "PetStoreDispatch",
+                    "dispatch": "PetStoreGETDispatch",
                     "settings": {
                       "autoIdReply": "false",
                       "method": "GET",
-                      "path": "/pets/{grpcMethodName}/{id}",
+                      "path": "/petstore/{grpcMethodName}",
                       "useReplyHandler": "false"
                     }
                   },
                   {
-                    "dispatch": "PetStoreDispatch",
-                    "settings": {
-                      "autoIdReply": "false",
-                      "method": "GET",
-                      "path": "/users/{grpcMethodName}/{username}",
-                      "useReplyHandler": "false"
-                    }
-                  },
-                  {
-                    "dispatch": "PetStoreDispatch",
+                    "dispatch": "PetStorePUTDispatch",
                     "settings": {
                       "autoIdReply": "false",
                       "method": "PUT",
-                      "path": "/pets/{grpcMethodName}",
-                      "useReplyHandler": "false"
-                    }
-                  },
-                  {
-                    "dispatch": "PetStoreDispatch",
-                    "settings": {
-                      "autoIdReply": "false",
-                      "method": "GET",
-                      "path": "/users/{grpcMethodName}",
+                      "path": "/petstore/PetPUT",
                       "useReplyHandler": "false"
                     }
                   }
@@ -56,19 +38,48 @@
         ],
         "dispatches": [
             {
-                "name": "PetStoreDispatch",
+                "name": "PetStoreGETDispatch",
                 "routes": [
                     {
                         "steps": [
                             {
                                 "service": "PetStore",
                                 "input": {
-                                    "headers": "${payload.header}",
-                                    "pathParams": "${payload.pathParams}",
                                     "methodName": "${payload.pathParams.grpcMethodName}",
-                                    "queryParams": "${payload.queryParams}",
+                                    "queryParams": "${payload.queryParams}"
+                                }
+                            }
+                        ],
+                        "responses": [
+                            {
+                                "if": "PetStore.response.body.error == 'true'",
+                                "error": true,
+                                "output": {
+                                    "code": 404,
+                                    "data": "${PetStore.response.body.details}"
+                                }
+                            },
+                            {
+                                "error": false,
+                                "output": {
+                                    "code": 200,
+                                    "data": "${PetStore.response.body}"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "PetStorePUTDispatch",
+                "routes": [
+                    {
+                        "steps": [
+                            {
+                                "service": "PetStore",
+                                "input": {
+                                    "methodName": "PetPUT",
                                     "content": "${payload.content}"
-
                                 }
                             }
                         ],

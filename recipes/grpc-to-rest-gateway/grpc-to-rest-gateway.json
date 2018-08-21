@@ -13,8 +13,8 @@
                 "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/grpc",
                 "settings": {
                     "port": 9096,
-                    "protoname":"petstore",
-                    "servicename":"PetStoreService"
+                    "protoName":"petstore",
+                    "serviceName":"PetStoreService"
                 },
                 "handlers": [
                     {
@@ -31,6 +31,14 @@
                             "autoIdReply": "false",
                             "useReplyHandler": "false",
                             "methodName": "UserByName"
+                        }
+                    },
+                    {
+                        "dispatch": "petPutDispatch",
+                        "settings": {
+                            "autoIdReply": "false",
+                            "useReplyHandler": "false",
+                            "methodName": "PetPUT"
                         }
                     }
                 ]
@@ -75,6 +83,47 @@
                     }
                 ]
             },
+            {
+                "name": "petPutDispatch",
+                "routes": [
+                    {
+                        "steps": [
+                            {
+                                "service": "PetStorePetsPUT",
+                                "input": {
+                                    "method": "PUT",
+                                    "body": "${payload.content}",
+                                    "headers": {
+                                        "Content-Type":"application/json"
+                                      }
+                                }
+                            }
+                        ],
+                        "responses": [
+                            {
+                                "if": "PetStorePetsPUT.response.body.type == 'error'",
+                                "error": true,
+                                "output": {
+                                  "code": 404,
+                                  "data": {
+                                    "error": "${PetStorePetsPUT.response.body.message}"
+                                  }
+                                }
+                            },
+                            {
+                                "if": "PetStorePetsPUT.response.body.type != 'error'",
+                                "error": false,
+                                "output": {
+                                    "code": 200,
+                                    "data": {
+                                        "pet": "${PetStorePetsPUT.response.body}"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },            
             {
                 "name": "userByNameDispatch",
                 "routes": [
@@ -129,6 +178,14 @@
                 "type": "http",
                 "settings": {
                     "url": "http://petstore.swagger.io/v2/user/:username"
+                }
+            },
+            {
+                "name": "PetStorePetsPUT",
+                "description": "Make calls to petstore",
+                "type": "http",
+                "settings": {
+                    "url": "http://petstore.swagger.io/v2/pet"
                 }
             }
         ]

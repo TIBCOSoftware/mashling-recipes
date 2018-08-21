@@ -4,11 +4,11 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"net"
 	"strconv"
 	"strings"
 
-	pb "github.com/TIBCOSoftware/mashling-recipes/recipes/grpc-to-grpc-gateway/petstore"
+	pb "grpc-to-rest-gateway/petstore"
+
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
@@ -16,14 +16,9 @@ import (
 var addr string
 var clientAddr string
 
-// ServerStrct is a stub for your Trigger implementation
-type ServerStrct struct {
-}
-
 func main() {
 
 	clientMode := flag.Bool("client", false, "command to run client")
-	serverMode := flag.Bool("server", false, "command to run server")
 	methodName := flag.String("method", "pet", "method name")
 	paramVal := flag.String("param", "user2", "method param")
 	port := flag.String("port", "", "port value")
@@ -36,10 +31,8 @@ func main() {
 			id, _ = strconv.Atoi(*paramVal)
 		}
 		callClient(port, methodName, id, *paramVal)
-	} else if *serverMode {
-		callServer()
 	} else {
-		fmt.Println("please choose server or client")
+		fmt.Println("please choose client")
 	}
 }
 
@@ -61,6 +54,9 @@ func callClient(port *string, option *string, id int, name string) {
 		PetById(client, id)
 	case "user":
 		UserByName(client, name)
+	case "petput":
+		PetPUT(client, name)
+
 	}
 }
 
@@ -82,91 +78,19 @@ func PetById(client pb.PetStoreServiceClient, id int) {
 	fmt.Println("res :", res)
 }
 
-func callServer() {
-	addr = ":9000"
-	lis, err := net.Listen("tcp", addr)
+func PetPUT(client pb.PetStoreServiceClient, payload string) {
+
+	name := strings.Split(payload, ",")[1]
+	id, _ := strconv.ParseInt(strings.Split(payload, ",")[0], 0, 64)
+	if id == 0 {
+		log.Fatal("please provide valid id")
+	}
+	petReq := &pb.PetRequest{Id: int32(id), Name: name}
+	fmt.Println("requesting pay load", petReq)
+	res, err := client.PetPUT(context.Background(), petReq)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	s := grpc.NewServer()
-
-	pb.RegisterPetStoreServiceServer(s, new(ServerStrct))
-
-	log.Println("Starting server on port: ", addr)
-
-	s.Serve(lis)
-}
-
-func (t *ServerStrct) PetById(ctx context.Context, req *pb.PetByIdRequest) (*pb.PetResponse, error) {
-
-	fmt.Println("server PetById method called")
-
-	petArr := []pb.Pet{
-		{
-			Id:   2,
-			Name: "cat2",
-		},
-		{
-			Id:   3,
-			Name: "cat3",
-		},
-		{
-			Id:   4,
-			Name: "cat4",
-		},
-	}
-
-	for _, pet := range petArr {
-		if pet.Id == req.Id {
-			return &pb.PetResponse{Pet: &pet}, nil
-		}
-	}
-
-	var pet = pb.Pet{
-		Id:   1,
-		Name: "defcat",
-	}
-	return &pb.PetResponse{Pet: &pet}, nil
-
-}
-
-func (t *ServerStrct) UserByName(ctx context.Context, req *pb.UserByNameRequest) (*pb.UserResponse, error) {
-
-	fmt.Println("server UserByName method called")
-	userArr := []pb.User{
-		{
-			Id:       2,
-			Username: "user2",
-			Email:    "email2",
-			Phone:    "phone2",
-		},
-		{
-			Id:       3,
-			Username: "user3",
-			Email:    "email3",
-			Phone:    "phone3",
-		},
-		{
-			Id:       4,
-			Username: "user4",
-			Email:    "email4",
-			Phone:    "phone4",
-		},
-	}
-
-	for _, user := range userArr {
-		if req.Username == user.Username {
-			return &pb.UserResponse{User: &user}, nil
-		}
-	}
-
-	var user = pb.User{
-		Id:       1,
-		Username: "defuser",
-		Email:    "defemail",
-		Phone:    "defphone",
-	}
-	return &pb.UserResponse{User: &user}, nil
+	fmt.Println("res :", res)
 
 }

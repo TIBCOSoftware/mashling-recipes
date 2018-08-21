@@ -27,13 +27,15 @@ Create mashling gateway.
 mashling-cli create -c grpc-to-rest-gateway.json -p petstore.proto -N -n grpc-rest-gateway-app
 ```
 
-Copy created binary from grpc-rest-gateway-app folder to current.
+Move created binary from grpc-rest-gateway-app folder to current.
 ```bash
-cp ./grpc-rest-gateway-app/mashling-gateway* .
+mv ./grpc-rest-gateway-app/mashling-gateway* grpc-rest-gateway
 ```
-
-Rename mashling-gateway* to grpc-rest-gateway
-
+Create grpc stub file for sample client.
+```bash
+mkdir -p $GOPATH/src/grpc-to-rest-gateway/petstore
+protoc -I . petstore.proto --go_out=plugins=grpc:$GOPATH/src/grpc-to-rest-gateway/petstore/
+```
 ## Testing
 Start proxy gateway.
 ```bash
@@ -52,6 +54,15 @@ res : pet:<id:2 name:"cat2" >
 Run sample gRPC client.
 ```bash
 go run main.go -client -port 9096 -method user -param user1
+```
+Output can be seen as below.
+```
+res : user:<id:1 username:"user1" email:"email1@test.com" phone:"123-456-7890" >
+```
+### #3 Testing PetPUT method
+Run sample gRPC client.
+```bash
+go run main.go -client -port 9096 -method petput -param 2,testpet
 ```
 Output can be seen as below.
 ```

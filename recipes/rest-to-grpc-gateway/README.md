@@ -26,11 +26,15 @@ Create mashling gateway.
 mashling-cli create -c rest-to-grpc-gateway.json -p petstore.proto -N -n rest-grpc-gateway-app
 ```
 
-Copy created binary from rest-grpc-gateway-app folder to current.
+Move created binary from rest-grpc-gateway-app folder to current.
 ```bash
-cp ./rest-grpc-gateway-app/mashling-gateway* .
+cp ./rest-grpc-gateway-app/mashling-gateway* rest-grpc-gateway
 ```
-Rename mashling-gateway* to rest-grpc-gateway.
+Create grpc stub file for sample server.
+```bash
+mkdir -p $GOPATH/src/rest-to-grpc-gateway/petstore
+protoc -I . petstore.proto --go_out=plugins=grpc:$GOPATH/src/rest-to-grpc-gateway/petstore/
+```
 
 ## Testing
 Start gateway.
@@ -46,7 +50,7 @@ go run main.go -server
 ### #1 Testing PetById method with GET request
 Sample GET request.
 ```curl
-curl --request GET http://localhost:9096/pets/PetById/2
+curl --request GET http://localhost:9096/petstore/PetById?id=2
 ```
 Now you should see logs in gateway terminal and sample gRPC server terminal. Output in curl request terminal can be seen as below.
 ```json
@@ -60,7 +64,7 @@ Now you should see logs in gateway terminal and sample gRPC server terminal. Out
 ### #2 Testing UserByName method with GET request
 Sample GET request.
 ```curl
-curl --request GET http://localhost:9096/users/UserByName/user2
+curl --request GET http://localhost:9096/petstore/UserByName?username=user2
 ```
 Output can be seen as below.
 ```json
@@ -73,39 +77,26 @@ Output can be seen as below.
  }
 }
 ```
-### #3 Testing PetById method with PUT request
+### #3 Testing PetPUT method with PUT request
 Payload
 ```json
 {
-    "id":2
+ "pet": {
+  "id": 12,
+  "name": "mycat12"
+ }
 }
 ```
 Curl command
 ```curl
-curl -X PUT "http://localhost:9096/pets/PetById" -H "accept: application/xml" -H "Content-Type: application/json" -d '{"id":3}'
+curl -X PUT "http://localhost:9096/petstore/PetPUT" -H "accept: application/xml" -H "Content-Type: application/json" -d '{"pet": {"id": 12,"name": "mycat12"}}'
 ```
 Output can be seen as below.
 ```json
 {
  "pet": {
-  "id": 3,
-  "name": "cat3"
- }
-}
-```
-### #4 Testing UserByName method with GET request and query params
-Sample GET request with query params.
-```curl
-curl --request GET http://localhost:9096/users/UserByName?username=user3
-```
-Output can be seen as below.
-```json
-{
- "user": {
-  "email": "email3",
-  "id": 3,
-  "phone": "phone3",
-  "username": "user3"
+  "id": 12,
+  "name": "mycat12"
  }
 }
 ```

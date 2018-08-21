@@ -26,11 +26,15 @@ Create mashling gateway.
 mashling-cli create -c grpc-to-grpc-gateway.json -p petstore.proto -N -n grpc-proxy-gateway-app
 ```
 
-Copy created binary from grpc-proxy-gateway-app folder to current.
+Move created binary from grpc-proxy-gateway-app folder to current.
 ```bash
-cp ./grpc-proxy-gateway-app/mashling-gateway* .
+mv ./grpc-proxy-gateway-app/mashling-gateway* grpc-proxy-gateway
 ```
-Rename mashling-gateway* to grpc-proxy-gateway.
+Create grpc stub file for sample client and server.
+```bash
+mkdir -p $GOPATH/src/grpc-to-grpc-gateway/petstore
+protoc -I . petstore.proto --go_out=plugins=grpc:$GOPATH/src/grpc-to-grpc-gateway/petstore/
+```
 
 ## Testing
 Start proxy gateway.
