@@ -44,3 +44,45 @@ Use below curl command to fetch the pet details.
 curl --request GET http://localhost:9096/pets -H "Authorization: Bearer <ACCESS_TOKEN>"
 
 ```
+Sample JWT Valid Response:
+```json
+{
+ "JWT": "JWT token is valid",
+ "pet": {
+  "category": {
+   "id": 15,
+   "name": "string"
+  },
+  "id": 15,
+  "name": "DavidsDog- Growl",
+  "photoUrls": [
+   "string"
+  ],
+  "status": "Dead",
+  "tags": [
+   {
+    "id": 15,
+    "name": "string"
+   }
+  ]
+ }
+}
+```
+The below response is seen when we pass the Invalid Access Token.
+
+```json
+{
+ "error": {
+  "valid": false,
+  "token": {
+   "claims": null,
+   "signature": "",
+   "signingMethod": "",
+   "header": null
+  },
+  "validationMessage": "ERROR_MESSAGE",
+  "error": false,
+  "errorMessage": ""
+ }
+}
+```
