@@ -35,6 +35,10 @@ Run below command to register gateway REST triggers with consul.
 ```
 ./mashling-cli publish consul -r -c mashling-gateway-consul.json -t b1gs33cr3t -H 127.0.0.1:8500
 ```
+Run the mashling-gateway using below command
+```
+./mashling-gateway -c mashling-gateway-consul.json
+```
 
 Registered services can be listed using curl command.
 ```
@@ -56,6 +60,8 @@ Response :
     }
 }
 ```
+Note : Registered services can be accessed from consul dashboard - http://127.0.0.1:8500/ui
+
 ### De-Register gateway services from consul:
 
 Run below command to de-register gateway REST triggers from consul.
@@ -107,9 +113,5 @@ Run below command to de-register gateway REST triggers from consul.
 ```
 ./mashling-cli publish consul -d -c mashling-gateway-consul.json -t b1gs33cr3t -D <Service definition directory>
 ```
-
-### Consul dashboard
-
-Consul dashboard can be accessed on browser - http://127.0.0.1:8500/ui
 
 
