@@ -64,6 +64,11 @@ chmod ugo+x *.sh
 ```
 CONSUL-HOST-IP: Provide HOST IP used for starting consul agent.
 
+Note : Once the setup is complete restart kubernetes dashboard by running below command <br>
+```
+kubectl get pods -n kube-system
+kubectl delete pod -n kube-system <Kubernetes-dashboard-podname>
+```
 Note: Replace 1.8 with 1.9 or 1.10 to use other Kubernetes versions for kubeadm dind cluster in kubernetes-setup bash file.<br>
 If kubernetes cluster is running on cloud or on-prem, replace the content in register-consul bash file
 ```
