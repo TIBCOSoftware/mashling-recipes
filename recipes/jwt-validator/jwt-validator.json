@@ -3,7 +3,9 @@
   "gateway": {
     "name": "JWT_validator",
     "version": "1.0.0",
-    "description": "This is a simple proxy with JWT validation.",
+    "display_name":"JWT Token Validation",
+    "description": "This recipe adds JWT token validation to the HTTP service",
+    "display_image":"displayImage.svg",
     "triggers": [
       {
         "name": "MyProxy",

@@ -3,9 +3,9 @@
   "gateway": {
     "name": "rest-conditional-gateway",
     "version": "1.0.0",
-    "display_name":"Content-based HTTP Router",
-		"display_image":"displayImage.svg",
-    "description": "A conditional HTTP router that routes requests based on content",
+    "display_name": "Publish to Consul",
+    "display_image": "displayImage.svg",
+    "description": "Publish HTTP triggers into Consul",
     "triggers": [
       {
         "name": "restConfig",

@@ -37,11 +37,35 @@
           "featured":false
         },
         {
+          "recipe":"anomaly-gateway",
+          "featured":false
+        },   
+        {
           "recipe":"mqtt-producer",
           "featured":false
         },        
         {
           "recipe":"tunable-rest-gateway",
+          "featured":false
+        },
+        {
+          "recipe":"jwt-validator",
+          "featured":false
+        },
+        {
+          "recipe":"proxy-websocket",
+          "featured":false
+        },
+        {
+          "recipe":"mashling-consul-integration",
+          "featured":false
+        },
+        {
+          "recipe":"graphql-gateway",
+          "featured":false
+        },
+        {
+          "recipe":"circuit-breaker-gateway",
           "featured":false
         }
       ]

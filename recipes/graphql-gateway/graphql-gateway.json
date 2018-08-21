@@ -3,7 +3,9 @@
   "gateway": {
     "name": "MyProxy",
     "version": "1.0.0",
-    "description": "This is a simple GraphQL proxy.",
+    "display_name":"GraphQL Proxy",
+		"display_image":"mashlings-atourguide.svg",
+    "description": "This is a simple GraphQL proxy",
     "triggers": [
       {
         "name": "MyProxy",
