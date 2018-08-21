@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: gateway-router
-        image: <YOUR DOCKER USER>/mashling-kube
+        image: <YOUR DOCKER USER>/<IMAGE NAME>
         imagePullPolicy: Always
         ports:
         - containerPort: 9096

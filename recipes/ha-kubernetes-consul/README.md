@@ -58,13 +58,11 @@ Kubeadm-dind-cluster setup and deployment of mashling app on kubernetes can be d
 
 Update the docker image name in deployment.yml file and execute below command by passing consul host ip and consul token.
 
-
 ```
 chmod ugo+x *.sh
 ./kubernetes-setup.sh <CONSUL-HOST-IP> b1gs33cr3t
 ```
-CONSUL-HOST-IP: Provide HOST IP used for starting consul agent
-CONSUL-TOKEN : Consul token is the acl_master_token in the above config-files/configuration.json file <br>
+CONSUL-HOST-IP: Provide HOST IP used for starting consul agent.
 
 Note: Replace 1.8 with 1.9 or 1.10 to use other Kubernetes versions for kubeadm dind cluster in kubernetes-setup bash file.<br>
 If kubernetes cluster is running on cloud or on-prem, replace the content in register-consul bash file
@@ -87,10 +85,15 @@ Consul dashboard view
 ![view](images/consul.jpg)
 
 ### Testing 
-#1 You can now test the gateway app by simply executing a cURL command:
+#1 You can now test the gateway app by simply executing a cURL command: <br>
+
 ```
 $ curl http://<K8s external IP>:30061/pets/1
 ```
+Note: To get Kuberentes cluster IP address run below command and choose any of the obtained IP's.
+```
+kubectl get nodes -o jsonpath='{ $.items[*].status.addresses[?(@.type=="InternalIP")].address }'
+``` 
 Response 
 ```
 {
