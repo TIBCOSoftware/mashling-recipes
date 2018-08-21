@@ -31,6 +31,18 @@
                                 "input": {
                                     "inputs.message": "DETECTED 404, NOTIFY ADMIN"
                                 }
+                            },
+                            {
+                                "if": "payload.content.data[0].http_status_code == 404",
+                                "service": "NotifyByMail",
+                                "input": {
+                                    "method": "POST",
+                                    "body": {"personalizations": [{"to": [{"email": "<EMAIL_ADDRESS>"}]}],"from": {"email": "mashling-recipes@sendgrid.net"},"subject": "[Status] Websocket Eventing Gateway","content": [{"type": "text/plain", "value": "Backend service is down"}]},
+                                    "headers": {
+                                        "Content-Type": "application/json",
+                                        "Authorization": "Bearer <YOUR_SENDGRID_API_KEY>"
+                                    }
+                                }
                             }
                         ],
                         "responses": []
@@ -45,6 +57,14 @@
                 "type": "flogoActivity",
                 "settings": {
                     "ref": "github.com/TIBCOSoftware/flogo-contrib/activity/log"
+                }
+            },
+            {
+                "name": "NotifyByMail",
+                "description": "Invokes specified url to send mail",
+                "type": "http",
+                "settings": {
+                    "url": "https://api.sendgrid.com/v3/mail/send"
                 }
             }
         ]

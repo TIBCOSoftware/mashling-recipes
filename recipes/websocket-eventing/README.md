@@ -23,7 +23,14 @@ Note: logs streaming url can be found in your Mashery admin console.
 
 ![Screenshot for reference](mashery.png)
 
-
+* Create sendgrid account from [here](https://signup.sendgrid.com/). Login to your sendgrid account and get the [API-KEY](https://app.sendgrid.com/settings/api_keys) and place it in gateway config file.
+```json
+"Authorization": "Bearer <YOUR_SENDGRID_API_KEY>"
+```
+* Update gateway config file with your email address.
+```json
+"email": "<EMAIL_ADDRESS>"
+```
 ## Testing
 
 Start the gateway:
