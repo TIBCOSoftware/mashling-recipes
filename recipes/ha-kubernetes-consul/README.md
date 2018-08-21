@@ -5,14 +5,22 @@ Pictorial representation of the recipe solution:
 ![Screenshot](images/HA-RECIPE.jpg)
 
 ### Description
-We will be creating kubeadm-dind cluster with 3 nodes. kubeadm-dind-cluster supports k8s versions 1.8.x, 1.9.x and 1.10.x.<br>
+We will be creating kubernetes enviroment using kubeadm-dind cluster with 3 nodes. kubeadm-dind-cluster supports k8s versions 1.8.x, 1.9.x and 1.10.x.<br>
 ![Kubernetes nodes](images/nodes.jpg)
 
 ### Prerequisites
 Following prerequisites needs to be installed:
 * Docker (and an account for Docker Hub)
-* A Kubernetes environment [Kubeadm-dind-cluster](https://github.com/kubernetes-sigs/kubeadm-dind-cluster)
 * Download [consul](https://www.consul.io/downloads.html) binary and update PATH environment variable to include consul binary.
+* Install wget and watch
+```
+# linux
+$ sudo apt-get install wget
+$ sudo apt-get install watch
+# mac
+$ brew install wget --with-libressl
+$ brew install watch
+```
 
 ### Preparing the gateway
 ```
@@ -53,7 +61,7 @@ Update the docker image name in deployment.yml file and execute below command by
 
 ```
 chmod ugo+x *.sh
-./kubernetes-setup.sh <CONSUL-HOST-IP> <CONSUL-TOKEN>
+./kubernetes-setup.sh <CONSUL-HOST-IP> b1gs33cr3t
 ```
 CONSUL-HOST-IP: Provide HOST IP used for starting consul agent
 CONSUL-TOKEN : Consul token is the acl_master_token in the above config-files/configuration.json file <br>
