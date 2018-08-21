@@ -12,6 +12,10 @@ git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/websocket-eventing
 ```
 * Place the downloaded mashling-gateway binary in websocket-eventing folder
+* Mashery -> Create an api definition with petstore end point, package and IO docs . <br>
+```
+https://petstore.swagger.io/v2/pet/{petId}
+```
 * Configure Mashery log streaming service url in the gateway config file [websocket-eventing -> triggers -> settings].
 
 ```json
