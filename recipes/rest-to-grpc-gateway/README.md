@@ -26,12 +26,10 @@ Create mashling gateway.
 mashling-cli create -c rest-to-grpc-gateway.json -p petstore.proto -N -n rest-grpc-gateway-app
 ```
 
-Copy created binary from rest-grpc-gateway-app folder to current.
+Move created binary from rest-grpc-gateway-app folder to current.
 ```bash
-cp ./rest-grpc-gateway-app/mashling-gateway* .
+cp ./rest-grpc-gateway-app/mashling-gateway* rest-grpc-gateway
 ```
-Rename mashling-gateway* to rest-grpc-gateway.
-
 Create grpc stub file for sample server.
 ```bash
 mkdir -p $GOPATH/src/rest-to-grpc-gateway/petstore
