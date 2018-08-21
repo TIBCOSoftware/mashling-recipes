@@ -55,7 +55,7 @@ Note: You can change maximum allowed concurrent connections using `maxConnection
 
 ### #3 Secure websocket proxy gateway with `Basic Authentication`
 
-Note that gateway can be secured with `basicauth`using the trigger setting:
+Note that the gateway can be secured by adding the below `basicauth` setting in gateway->triggers->settings section.
 
 ```json
 "basicAuthFile": "${env.BASIC_AUTH_FILE}"

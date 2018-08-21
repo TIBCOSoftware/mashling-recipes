@@ -12,8 +12,7 @@
                 "description": "Websocket trigger",
                 "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
                 "settings": {
-                    "port": "9096",
-                    "basicAuthFile": "${env.BASIC_AUTH_FILE}"
+                    "port": "9096"
                 },
                 "handlers": [
                     {
