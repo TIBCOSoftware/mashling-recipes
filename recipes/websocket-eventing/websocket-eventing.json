@@ -10,7 +10,7 @@
                 "description": "Listens to websocket endpoint",
                 "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/wssub",
                 "settings": {
-                    "url": "<MASHERY_LOG_STREAM_URL>"
+                    "url": "<MASHERY_LOGS_STREAMING_URL>"
                 },
                 "handlers": [
                     {
@@ -29,7 +29,7 @@
                                 "if": "payload.content.data[0].http_status_code == 404",
                                 "service": "LogService",
                                 "input": {
-                                    "inputs.message": "DETECTED 404, NOTIFY ADMIN"
+                                    "inputs.message": "DETECTED 404"
                                 }
                             },
                             {
@@ -40,7 +40,7 @@
                                     "body": {"personalizations": [{"to": [{"email": "<EMAIL_ADDRESS>"}]}],"from": {"email": "mashling-recipes@sendgrid.net"},"subject": "[Status] Websocket Eventing Gateway","content": [{"type": "text/plain", "value": "Backend service is down"}]},
                                     "headers": {
                                         "Content-Type": "application/json",
-                                        "Authorization": "Bearer <YOUR_SENDGRID_API_KEY>"
+                                        "Authorization": "Bearer <SENDGRID_API_KEY>"
                                     }
                                 }
                             }

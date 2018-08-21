@@ -1,37 +1,45 @@
 # Mashery websocket log events analyzer
-This recipe is a gateway opens a websocket connection to Mashery log streaming service, parse each log message and creates an event in case of an error log.
+This recipe is a gateway opens a websocket connection to Mashery logs streaming service, parse each log message and triggers an email notification using [sendgrid.com](https://sendgrid.com) in case of an error log.
 
 ## Installation
 * Download the mashling-gateway binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 
 ## Setup
 
-* Download the recipe
+1. Download the recipe
 ```bash
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/websocket-eventing
 ```
-* Place the downloaded mashling-gateway binary in websocket-eventing folder
-* From Mashery admin console, create an api definition, package and publish for the below petstore endpoint
+2. Place the downloaded mashling-gateway binary in websocket-eventing folder
+3. From Mashery admin console, create an api definition, package and publish for the below petstore endpoint
 ```
 https://petstore.swagger.io/v2/pet/{petId}
 ```
-* Configure Mashery log streaming service url in the gateway config file [websocket-eventing -> triggers -> settings].
+
+Note: Created Mashery API can be consumed by using below like curl command:
+```bash
+curl http://XXXX.api.mashery.com/v1/petStore?petId=12&api_key=XXXXXXXXX
+```
+
+4. Update Mashery log streaming service url in the gateway config file [triggers -> settings].
 
 ```json
 "settings": {
-    "url": "wss://<MASHERY_LOG_STREAM_URL>"
+    "url": "<MASHERY_LOGS_STREAMING_URL>"
 }
 ```
-Note: logs streaming url can be found in your Mashery admin console.
+Note: logs streaming url can be found in your Mashery admin console. Below is the screenshot for reference:
 
-![Screenshot for reference](mashery.png)
+![Screenshot of Mashery admin console](mashery.png)
 
-* Create sendgrid account from [here](https://signup.sendgrid.com/). Login to your sendgrid account and get the [API-KEY](https://app.sendgrid.com/settings/api_keys) and place it in gateway config file.
+5. Create a free tier email service account with [sendgrid.com](https://signup.sendgrid.com), obtain [SENDGRID_API_KEY](https://app.sendgrid.com/settings/api_keys) and update it in the gateway config file.
+
 ```json
-"Authorization": "Bearer <YOUR_SENDGRID_API_KEY>"
+"Authorization": "Bearer <SENDGRID_API_KEY>"
 ```
-* Update gateway config file with your email address.
+
+Update gateway config file with your email address.
 ```json
 "email": "<EMAIL_ADDRESS>"
 ```
@@ -43,4 +51,9 @@ Start the gateway:
 ./mashling-gateway -c websocket-eventing.json
 ```
 
-Consume Mashery hosted APIs when backend services are not available, you should observe from the gateway logs that `LogService` has been called.
+Consume created Mashery APIs with different petId values
+```bash
+curl http://XXXX.api.mashery.com/v1/petStore?petId=12&api_key=XXXXXXXXX
+```
+
+You should observe `DETECTED 404` message in the gateway logs when pet is not available and also should receive an email.
