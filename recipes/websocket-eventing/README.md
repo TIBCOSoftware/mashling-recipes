@@ -12,7 +12,7 @@ git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/websocket-eventing
 ```
 * Place the downloaded mashling-gateway binary in websocket-eventing folder
-* Mashery -> Create an api definition with petstore end point, package and IO docs . <br>
+* From Mashery admin console, create an api definition, package and publish for the below petstore endpoint
 ```
 https://petstore.swagger.io/v2/pet/{petId}
 ```
