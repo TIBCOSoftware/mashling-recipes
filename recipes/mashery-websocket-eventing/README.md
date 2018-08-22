@@ -2,16 +2,16 @@
 This recipe is a gateway opens a websocket connection to Mashery logs streaming service, parse each log message and triggers an email notification using [sendgrid.com](https://sendgrid.com) in case of an error log.
 
 ## Installation
-* Download the mashling-gateway binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
+* Download or build the mashling-gateway binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 
 ## Setup
 
 1. Download the recipe
 ```bash
 git clone https://github.com/TIBCOSoftware/mashling-recipes
-cd mashling-recipes/recipes/websocket-eventing
+cd mashling-recipes/recipes/mashery-websocket-eventing
 ```
-2. Place the downloaded mashling-gateway binary in websocket-eventing folder
+2. Place the downloaded mashling-gateway binary in mashery-websocket-eventing folder
 3. From Mashery admin console, create an api definition, package and publish for the below petstore endpoint
 ```
 https://petstore.swagger.io/v2/pet/{petId}
