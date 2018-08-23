@@ -1,0 +1,90 @@
+{
+    "mashling_schema": "1.0",
+    "gateway": {
+        "name": "Gateway",
+        "version": "1.0.0",
+        "description": "This is a simple gateway opens a websocket connection to Mashery logs stream, parse each log message and creates an event in case of error/failure log.",
+        "triggers": [
+            {
+                "name": "LogsListener",
+                "description": "Listens to websocket endpoint",
+                "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/wssub",
+                "settings": {
+                    "url": "<MASHERY_LOGS_STREAMING_URL>"
+                },
+                "handlers": [
+                    {
+                        "dispatch": "ProcessLog"
+                    }
+                ]
+            }
+        ],
+        "dispatches": [
+            {
+                "name": "ProcessLog",
+                "routes": [
+                    {
+                        "steps": [
+                            {
+                                "if": "payload.content.data[0].http_status_code == 404",
+                                "service": "LogService",
+                                "input": {
+                                    "inputs.message": "DETECTED 404"
+                                }
+                            },
+                            {
+                                "if": "payload.content.data[0].http_status_code == 404",
+                                "service": "SendNotificationEMail"
+                            }
+                        ],
+                        "responses": []
+                    }
+                ]
+            }
+        ],
+        "services": [
+            {
+                "name": "LogService",
+                "description": "Log on error",
+                "type": "flogoActivity",
+                "settings": {
+                    "ref": "github.com/TIBCOSoftware/flogo-contrib/activity/log"
+                }
+            },
+            {
+                "name": "SendNotificationEMail",
+                "description": "Invokes specified url to send mail",
+                "type": "http",
+                "settings": {
+                    "url": "https://api.sendgrid.com/v3/mail/send",
+                    "method": "POST",
+                    "body": {
+                        "personalizations": [
+                            {
+                                "to": [
+                                    {
+                                        "email": "<EMAIL_ADDRESS>"
+                                    }
+                                ]
+                            }
+                        ],
+                        "from": {
+                            "email": "mashling-recipes@sendgrid.net"
+                        },
+                        "subject": "[Status] Websocket Eventing Gateway",
+                        "content": [
+                            {
+                                "type": "text/plain",
+                                "value": "Mashling gateway backend service is down"
+                            }
+                        ]
+                    },
+                    "headers": {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer <SENDGRID_API_KEY>"
+                    }
+                }
+            }
+        ]
+    }
+}
