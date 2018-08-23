@@ -1,10 +1,10 @@
 {
   "mashling_schema": "1.0",
   "gateway": {
-    "name": "MyCircuitBreakerProxy",
+    "name": "MySmartCircuitBreakerProxy",
     "version": "1.0.0",
-    "display_name":"Circuit Breaker",
-    "description": "Protect services with circuit breaker pattern",
+    "display_name":"Smart Circuit Breaker",
+    "description": "Protect services with smart circuit breaker pattern",
     "triggers": [
       {
         "name": "MyProxy",
