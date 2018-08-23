@@ -10,7 +10,7 @@
                 "description": "Listens to websocket endpoint",
                 "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/wssub",
                 "settings": {
-                    "url": "wss://logstream-api.mashery.com/ecls/subscribe/9c824242-ac7e-4b40-8010-64fed84eac6e/49562fb6-0d19-403b-8096-70d35ce4ea5a?key=XXygjRKoTzVJYZceNrfKoBplFstqDbRTKAt"
+                    "url": "<MASHERY_LOGS_STREAMING_URL>"
                 },
                 "handlers": [
                     {
@@ -63,7 +63,7 @@
                             {
                                 "to": [
                                     {
-                                        "email": "rpolishe@tibco.com"
+                                        "email": "<EMAIL_ADDRESS>"
                                     }
                                 ]
                             }
@@ -81,7 +81,7 @@
                     },
                     "headers": {
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer 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"
+                        "Authorization": "Bearer <SENDGRID_API_KEY>"
                     }
                 }
             }
