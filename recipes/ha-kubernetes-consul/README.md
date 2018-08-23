@@ -1,22 +1,29 @@
 # HA Kubernetes recipe with consul service discovery
-This recipe will walk you through creating the files needed to deploy to Highly Available Kubernetes and registering services running on kubernetes with Consul
+This recipe deployes Mashling gateway application into Kubernetes cluster, ensures high availability & registres services with Consul for service discovery
 
 Pictorial representation of the recipe solution:
 ![Screenshot](images/HA-RECIPE.jpg)
 
-### Description
-We will be creating kubernetes enviroment using kubeadm-dind cluster with 3 nodes. kubeadm-dind-cluster supports k8s versions 1.8.x, 1.9.x and 1.10.x.<br>
+Note: kubernetes environment is simulated using kubeadm-dind cluster with 3 nodes. kubeadm-dind-cluster supports k8s versions 1.8.x, 1.9.x and 1.10.x.<br>
+
+
 ![Kubernetes nodes](images/nodes.jpg)
 
 ### Prerequisites
 Following prerequisites needs to be installed:
-* Docker (and an account for Docker Hub)
+* Docker 
+* Install [kubernetes](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-binary-using-native-package-management)
 * Download [consul](https://www.consul.io/downloads.html) binary and update PATH environment variable to include consul binary.
+* Install md5sha1sum for mac
+```
+brew install md5sha1sum
+```
 * Install wget and watch
 ```
 # linux
 $ sudo apt-get install wget
 $ sudo apt-get install watch
+
 # mac
 $ brew install wget --with-libressl
 $ brew install watch
@@ -29,34 +36,16 @@ cd mashling-recipes/recipes/ha-kubernetes-consul
 ```
 * Download the Mashling-Gateway Linux Binary from [Mashling-releases](https://github.com/TIBCOSoftware/mashling/releases). 
 
-### Creating a Docker image
-Create a docker image for mashling gateway and push it to docker hub. Sample docker image for this scenario can be found [here](https://hub.docker.com/r/mashling/mashling-ha-kubernetes/)
-
-
 ### Setup
-#### Consul setup
+#### 1. Consul setup
 Command to run consul agent with the directory containing configuration json file.
 ```
 $ consul agent -dev -client <HOSTIP> -config-dir config-files
 ```
 HOSTIP : Provide IP of the local machine <br>
 
-Sample configuration json file content:
-```json
-{
-  "acl_datacenter": "dc1",
-  "acl_master_token": "b1gs33cr3t",
-  "acl_default_policy": "deny",
-  "acl_down_policy": "extend-cache"
-}
-```
-Additional configuration details can be found [here](https://www.consul.io/docs/guides/acl.html) <br>
-
- 
-#### Kubernetes cluster Setup and mashling app deployment
-Kubeadm-dind-cluster setup and deployment of mashling app on kubernetes can be done in one step using bash file.
-
-Update the docker image name in deployment.yml file and execute below command by passing consul host ip and consul token.
+#### 2. mashling app deployment on kubernetes
+Deployment of mashling app on kubernetes cluster can be done in one step using bash file.
 
 ```
 chmod ugo+x *.sh
