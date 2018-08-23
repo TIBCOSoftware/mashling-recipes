@@ -20,12 +20,13 @@ do
   curl http://localhost:9096/pets/1 > /tmp/test.log 2>&1 
   echo $i 
 done
+response2=$(curl --request GET http://localhost:9096/pets/1 --write-out '%{http_code}' --silent --output /dev/null)
 sleep 80
 go run main.go -server &
 pId3=$!
 sleep 5
 response1=$(curl --request GET http://localhost:9096/pets/1 --write-out '%{http_code}' --silent --output /dev/null)
-if [ $response -eq 200 ] && [ $response1 -eq 200  ] && [[ "echo $(cat /tmp/circuit1.log)" =~ "Completed" ]] && [[ "echo $(cat /tmp/test.log)" =~ "circuit breaker tripped" ]]
+if [ $response -eq 200 ] && [ $response1 -eq 200  ] && [ $response2 -eq 403 ] &&  [[ "echo $(cat /tmp/circuit1.log)" =~ "Completed" ]] && [[ "echo $(cat /tmp/test.log)" =~ "circuit breaker tripped" ]]
     then 
         echo "PASS"
     else

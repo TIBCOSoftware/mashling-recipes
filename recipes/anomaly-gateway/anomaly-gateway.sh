@@ -15,8 +15,8 @@ sleep 5
 go run main.go -client > /tmp/client.log 2>&1 
 sleep 20
 response=$(curl http://localhost:9096/test --upload-file anomaly-payload.json --write-out '%{http_code}' --silent --output /dev/null)
-response=$(curl http://localhost:9096/test --upload-file anomaly-payload.json --write-out '%{http_code}' --silent --output /dev/null)
-if [ $response -eq 200 ] && [[ "echo $(cat /tmp/client.log)" =~ "number of anomalies 0" ]] 
+response1=$(curl http://localhost:9096/test --upload-file anomaly-payload.json --write-out '%{http_code}' --silent --output /dev/null)
+if [ $response -eq 200 ] && [ $response -eq 403 ] && [[ "echo $(cat /tmp/client.log)" =~ "number of anomalies 0" ]] 
     then
         echo "PASS"
     else
