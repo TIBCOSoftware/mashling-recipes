@@ -19,7 +19,6 @@ export SERVER_CERT=$HOME/gatewaycerts/gateway.crt
 export SERVER_KEY=$HOME/gatewaycerts/gateway.key
 export TRUST_STORE=$HOME/truststore
 export ENDPOINT_URL=https://localhost:8080
-cd secure-rest-gateway
 ./mashling-gateway -c secure-rest-gateway.json
 ```
 

@@ -10,8 +10,11 @@ For this scenario to work you'll need the following prerequisites installed:
     For this scenario we'll make use of [Docker Hub](https://hub.docker.com) to push the images to so that the docker swarm cluster can access them. To make sure you can push your images to Docker Hub you'll need to:
     * Register at [Docker Hub](https://hub.docker.com/), which is free
     * Log in from your terminal so the Docker client knows where to push images to using `docker login`
-
-
+### Setup
+```
+git clone https://github.com/TIBCOSoftware/mashling-recipes
+cd mashling-recipes/recipes/docker-swarm
+```
 ### Preparing the gateway
 * Download the Mashling-Gateway Binary for linux OS from [Mashling-releases](https://github.com/TIBCOSoftware/mashling/releases). 
 
@@ -50,15 +53,17 @@ You can send commands to your VMs using docker-machine ssh. Instruct manager1 to
 output: ![docker_swarm_token](docker_swarm_token.png)
 
 Copy docker swarm join-token for worker command obtained for manager1 command, and send it via docker-machine ssh to join your new swarm as a worker:
-
-        docker-machine ssh worker1 "docker swarm join \
-        --token <token> \
-        <manager1 ip>:2377"
-
-        This node joined a swarm as a worker.
-        
+```
+docker-machine ssh worker1 "docker swarm join \
+--token <token> \
+<manager1 ip>:2377"
+```        
 Congratulations, you have created your first swarm! We can add required number of managers or workers. 
-
+```
+docker-machine ssh worker2 "docker swarm join \
+--token <token> \
+<manager1 ip>:2377"
+```   
 For our use case, will be using one manager and 2 workers.
 
 
