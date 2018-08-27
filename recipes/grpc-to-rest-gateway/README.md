@@ -66,5 +66,5 @@ go run main.go -client -port 9096 -method petput -param 2,testpet
 ```
 Output can be seen as below.
 ```
-res : user:<id:1 username:"user1" email:"email1@test.com" phone:"123-456-7890" >
+pet:<id:2 name:"testpet" >
 ```
