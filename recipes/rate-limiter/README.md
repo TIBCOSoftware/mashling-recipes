@@ -3,9 +3,9 @@ This recipe is a gateway which applies rate limit on specified dispatches.
 
 ## Installation
 * Install [Go](https://golang.org/)
-* Download and build Mashling-Gateway from `feature-basic-rate-limiter-service` branch
+* Download and build Mashling-Gateway from `feature-basic-ratelimiter-service` branch
  ```bash	
-git clone -b feature-basic-rate-limiter-service --single-branch https://github.com/TIBCOSoftware/mashling.git $GOPATH/src/github.com/TIBCOSoftware/mashling	
+git clone -b feature-basic-ratelimiter-service --single-branch https://github.com/TIBCOSoftware/mashling.git $GOPATH/src/github.com/TIBCOSoftware/mashling	
 cd $GOPATH/src/github.com/TIBCOSoftware/mashling	
 go install ./...	
 ```

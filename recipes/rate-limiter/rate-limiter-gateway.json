@@ -54,7 +54,7 @@
                                 "output": {
                                     "code": 403,
                                     "data": {
-                                        "status":"Rate Limit Exceeded - The service you have requested is over-capacity."
+                                        "status":"Rate Limit Exceeded - The service you have requested is over-allowed limit."
                                     }
                                 }
                             },
