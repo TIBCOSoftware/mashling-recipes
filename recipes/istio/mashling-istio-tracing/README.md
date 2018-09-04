@@ -6,42 +6,31 @@ The mashling has distributed tracing enabled and uses the Istio distributed trac
 ## Installation
 * Docker [docker](https://www.docker.com)
 * Minikube [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+* Istio [istio](https://istio.io/docs/setup/kubernetes/download-release/)
 * Download the Mashling-Gateway Binary for Linux from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 
 ## Setup
 ### Install Istio on Kubernetes (minikube)
-Follow [these instructions](https://istio.io/docs/setup/kubernetes/quick-start.html) with one slight change. After extracting Istio, edit install/kubernetes/istio.yaml. Uncomment the nodePort directive in the istio-ingress service controller:
 
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: istio-ingress
-  labels:
-    istio: ingress
-spec:
-  type: LoadBalancer
-  ports:
-  - port: 80
-#   nodePort: 32000
-    name: http
-  - port: 443
-    name: https
-  selector:
-    istio: ingress
+Start minikube:
+```
+minikube start --memory=8192 --cpus=4 --kubernetes-version=v1.10.0
 ```
 
-This will allow us to access our mashling service. If you haven't already, run:
+Follow [these instructions](https://istio.io/docs/setup/kubernetes/quick-start/) to install Istio. Use install 'Option 2'.
+
+Verify everything is in the 'Running' or 'Completed' state. This may take some time:
 
 ```
-minikube start
+kubectl get pods --all-namespaces
 ```
-
-Continue with the Istio installation.
 
 ### Setup distributed tracing for Istio
 
-Follow these [instructions](https://istio.io/docs/tasks/telemetry/distributed-tracing.html) to setup Zipkin distributed tracing.
+Run the following to access Jaeger distributed tracing dashboard:
+```
+kubectl port-forward -n istio-system $(kubectl get pod -n istio-system -l app=jaeger -o jsonpath='{.items[0].metadata.name}') 16686:16686 &
+```
 
 ### Create a mashling
 
@@ -93,7 +82,8 @@ spec:
 Deploy to Kubernetes/Istio:
 
 ```
-kubectl create -f <(istioctl kube-inject -f deployment.yaml)
+kubectl label namespace default istio-injection=enabled
+kubectl create -f deployment.yaml
 ```
 
 Verify everything is in the 'Running' state. This may take some time:
@@ -111,10 +101,10 @@ Get the minikube ip address:
 minikube ip
 ```
 
-Wait ~5 minutes, and then execute the bellow with the address:
+Wait ~5 minutes, and then execute the below with the address:
 
 ```
-curl http://<minikube IP address>:32000/pets/1
+curl http://<minikube IP address>:31380/pets/1
 ```
 
-Open your browser at http://localhost:9411 to see tracing.
+Open your browser at http://localhost:16686 to see tracing.

@@ -6,13 +6,13 @@
     "description": "This is a microgateway with distributed istio tracing",
     "triggers": [
       {
-        "name": "MyProxy",
-        "description": "Animals rest trigger - PUT animal details",
+        "name": "PetsProxy",
+        "description": "Animals rest trigger - GET animal details",
         "type": "github.com/TIBCOSoftware/mashling/ext/flogo/trigger/gorillamuxtrigger",
         "settings": {
           "port": "9096",
-          "tracer": "zipkin",
-          "tracerEndpoint": "http://zipkin.istio-system:9411/api/v1/spans"
+          "tracer": "jaeger",
+          "tracerEndpoint": "jaeger-agent.istio-system:6831"
         },
         "handlers": [
           {

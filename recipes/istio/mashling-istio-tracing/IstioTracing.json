@@ -107,7 +107,7 @@
                   },
                   {
                     "name": "uri",
-                    "value": "http://petstore/v2/pet/:petId",
+                    "value": "http://petstore.swagger.io/v2/pet/:petId",
                     "type": "string"
                   },
                   {
