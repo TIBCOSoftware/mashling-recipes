@@ -49,12 +49,22 @@
                         ],
                         "responses": [
                             {
-                                "if": "RateLimiter.quotaExceeded == true",
+                                "if": "RateLimiter.error == true",
                                 "error": true,
                                 "output": {
                                     "code": 403,
                                     "data": {
-                                        "status":"Rate Limit Exceeded - The service you have requested is over-allowed limit."
+                                        "status":"${RateLimiter.errorMessage}"
+                                    }
+                                }
+                            },
+                            {
+                                "if": "RateLimiter.limitReached == true",
+                                "error": true,
+                                "output": {
+                                    "code": 403,
+                                    "data": {
+                                        "status":"Rate Limit Exceeded - The service you have requested is over the allowed limit."
                                     }
                                 }
                             },
@@ -76,7 +86,7 @@
                 "description": "Rate limiter",
                 "type": "ratelimiter",
                 "settings": {
-                    "limit": "5-M"
+                    "limit": "3-M"
                 }
             },
             {

@@ -3,23 +3,19 @@ This recipe is a gateway which applies rate limit on specified dispatches.
 
 ## Installation
 * Install [Go](https://golang.org/)
-* Download and build Mashling-Gateway from `feature-basic-ratelimiter-service` branch
- ```bash	
-git clone -b feature-basic-ratelimiter-service --single-branch https://github.com/TIBCOSoftware/mashling.git $GOPATH/src/github.com/TIBCOSoftware/mashling	
-cd $GOPATH/src/github.com/TIBCOSoftware/mashling	
-go install ./...	
-```
+* Download the Mashling-Gateway Binary for respective OS from [Mashling](https://github.com/TIBCOSoftware/mashling/tree/master#installation-and-usage)
 
 ## Setup
 ```
 git clone https://github.com/TIBCOSoftware/mashling-recipes
 cd mashling-recipes/recipes/rate-limiter
 ```
+Place the downloaded mashling-gateway binary in proxy-websocket folder.
 
 ## Testing
 Start the gateway:
 ```
-mashling-gateway -c rate-limiter-gateway.json
+./mashling-gateway -c rate-limiter-gateway.json
 ```
 
 Run the following command:
@@ -49,7 +45,7 @@ You should see the following like response:
 }
 ```
 
-Run the same curl command more than 5 times in a minute, 6th time onwards you should see the following response indicating that gateway not allowing further calls.
+Run the same curl command more than 3 times in a minute, 6th time onwards you should see the following response indicating that gateway not allowing further calls.
 
 ```json
 {
