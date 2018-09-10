@@ -45,10 +45,11 @@ You should see the following like response:
 }
 ```
 
-Run the same curl command more than 3 times in a minute, 6th time onwards you should see the following response indicating that gateway not allowing further calls.
+Run the same curl command more than 3 times in a minute, 4th time onwards you should see the following response indicating that gateway not allowing further calls.
 
 ```json
 {
-    "status": "Rate Limit Exceeded - The service you have requested is over-capacity."
+    "status": "Rate Limit Exceeded - The service you have requested is over the allowed limit."
 }
 ```
+Note: You may wish to change the rate limit and try, please refer [Mashling docs](https://github.com/TIBCOSoftware/mashling/tree/master/docs/gateway#services-rate-limiter) for more information.

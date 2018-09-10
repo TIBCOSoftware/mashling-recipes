@@ -91,7 +91,7 @@
             },
             {
                 "name": "call_pet_store",
-                "description": "Animals rest trigger - PUT animal details",
+                "description": "Animals rest trigger - GET animal details",
                 "type": "http",
                 "settings": {
                     "url": "http://petstore.swagger.io/v2/pet/:id"
