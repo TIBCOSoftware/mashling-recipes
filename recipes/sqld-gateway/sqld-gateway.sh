@@ -11,7 +11,7 @@ mashling-gateway -c sqld-gateway.json > /tmp/sqld1.log 2>&1 &
 pId=$!
 sleep 5
 response=$(curl http://localhost:9096/pets --upload-file payload.json --write-out '%{http_code}' --silent --output /dev/null)
-if [ $response -eq 200  ] && [[ "echo $(cat /tmp/sqld1.log)" =~ "Completed" ]]
+if [ $response -eq 200  ] && [[ "echo $(cat /tmp/sqld1.log)" =~ "Code identified in response output: 200" ]]
     then 
         echo "PASS"
     else
@@ -26,7 +26,7 @@ mashling-gateway -c sqld-gateway.json > /tmp/sqld2.log 2>&1 &
 pId=$!
 sleep 5
 response=$(curl http://localhost:9096/pets --upload-file attack-payload.json --write-out '%{http_code}' --silent --output /dev/null)
-if [ $response -eq 403  ] && [[ "echo $(cat /tmp/sqld2.log)" =~ "Completed" ]]
+if [ $response -eq 403  ] && [[ "echo $(cat /tmp/sqld2.log)" =~ "Code identified in response output: 403" ]]
     then 
         echo "PASS"
     else

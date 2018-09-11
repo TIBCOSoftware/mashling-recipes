@@ -57,7 +57,7 @@ function testcase1 {
     fi	
 	popd
 	
-	rm -f /tmp/client.log /tmp/gw.log
+	# rm -f /tmp/client.log /tmp/gw.log
 	# kill -9 $pId
 	var=$(ps --ppid $pId)
 	pId7=$(echo $var | awk '{print $5}')

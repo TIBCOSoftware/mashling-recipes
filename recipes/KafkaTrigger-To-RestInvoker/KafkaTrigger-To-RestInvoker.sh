@@ -35,7 +35,7 @@ function testcase1 {
     echo "{\"category\":{\"id\":10,\"name\":\"string\"},\"id\":10,\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"status\":\"available\",\"tags\":[{\"id\":0,\"name\":\"string\"}]}" | bin/kafka-console-producer.sh --broker-list localhost:9092 --topic syslog &  pId3=$!    
     sleep 2    
     curl --request GET http://petstore.swagger.io/v2/pet/10 > /tmp/kafkagw.log
-    if [[ "echo $(cat /tmp/kafka1.log)" =~ "Completed" ]] && [[ "echo $(cat /tmp/kafkagw.log)" =~ "{\"id\":10,\"category\":{\"id\":10,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}" ]] 
+    if [[ "echo $(cat /tmp/kafka1.log)" =~ "Code identified in response output: 200" ]] && [[ "echo $(cat /tmp/kafkagw.log)" =~ "{\"id\":10,\"category\":{\"id\":10,\"name\":\"string\"},\"name\":\"doggie\",\"photoUrls\":[\"string\"],\"tags\":[{\"id\":0,\"name\":\"string\"}],\"status\":\"available\"}" ]] 
         then 
             echo "PASS"   
         else

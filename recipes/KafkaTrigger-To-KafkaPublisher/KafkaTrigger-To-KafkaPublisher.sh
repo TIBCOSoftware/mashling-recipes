@@ -25,7 +25,7 @@ function testcase1 {
     popd
 
     #executing the gateway binary
-    mashling-gateway -c kafkatrigger-to-kafkapublisher.json > /tmp/kafka1.log &
+    mashling-gateway -c KafkaTrigger-To-KafkaPublisher.json > /tmp/kafka1.log 2>&1 &
     pId4=$!
     sleep 20
 
@@ -39,7 +39,6 @@ function testcase1 {
     # starting kafka consumer in background and capturing logged messages into tmp/test file
     bin/kafka-console-consumer.sh --topic subscribepet --bootstrap-server localhost:9092 --from-beginning > /tmp/test.log & pId5=$!
     sleep 10
-	echo "kafka message value : [$(cat /tmp/test.log)]"	
     kafkaMessage=$(cat /tmp/test.log)
 
    echo $kafkaMessage;
@@ -47,16 +46,15 @@ function testcase1 {
     sleep 5
     kill -SIGINT $pId
     sleep 5
-    kill -SIGINT $pId4
+    kill -9 $pId4
     sleep 5
     kill -SIGINT $pId5
-    echo "{\"country\":\"USA\",\"Current Time\" :\"$current_time\"}"
 
-    if [ "$kafkaMessage" == "{\"country\":\"USA\",\"Current Time\" :\"$current_time\"}" ] 
+    if [[ "echo $(cat /tmp/test.log)" =~ "{\"country\":\"USA\",\"Current Time\" :\"$current_time\"}" ]] && [[ "echo $(cat /tmp/kafka1.log)" =~ "Code identified in response output: 200" ]]
         then 
             echo "PASS"   
         else
             echo "FAIL"
     fi
-    rm -f /tmp/test.log /tmp/kafka.log
+    # rm -f /tmp/test.log /tmp/kafka.log
 }

@@ -13,7 +13,7 @@ response=$(curl 'http://localhost:9096/graphql' -u foo:bar -H 'Content-Type: app
 
 kill -9 $pId
 
-if [[ $response -eq 200 ]] && [[ "echo $(cat /tmp/graphql.log)" =~ "Completed" ]]
+if [[ $response -eq 200 ]] && [[ "echo $(cat /tmp/graphql.log)" =~ "200" ]]
     then 
         echo "PASS"
     else
