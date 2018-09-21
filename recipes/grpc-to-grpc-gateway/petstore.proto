@@ -29,7 +29,17 @@ message UserResponse {
     User user = 1;
 }
 
+message EmptyReq{
+    string msg = 1;
+}
+message EmptyRes{
+    string msg = 1;
+}
+
 service PetStoreService {
     rpc PetById (PetByIdRequest) returns (PetResponse);
     rpc UserByName (UserByNameRequest) returns (UserResponse);
+    rpc ListUsers (EmptyReq) returns (stream User);
+    rpc StoreUsers (stream User)returns (EmptyRes);
+    rpc BulkUsers (stream User) returns (stream User);
 }
