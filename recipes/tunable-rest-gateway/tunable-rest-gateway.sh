@@ -11,7 +11,7 @@ pId=$!
 sleep 15;
 response=$(curl --request GET http://localhost:9096/id/1 --write-out '%{http_code}' --silent --output /dev/null)
 kill -9 $pId
-if [ $response -eq 200  ] && [[ "echo $(cat /tmp/tunable1.log)" =~ "Completed" ]]
+if [ $response -eq 200  ] && [[ "echo $(cat /tmp/tunable1.log)" =~ "Code identified in response output" ]]
     then 
         echo "PASS"
     else
@@ -25,7 +25,7 @@ pId=$!
 sleep 15
 response=$(curl --request GET http://localhost:9096/id/1 --write-out '%{http_code}' --silent --output /dev/null)
 kill -9 $pId
-if [ $response -eq 200  ] && [[ "echo $(cat /tmp/tunable2.log)" =~ "Completed" ]]
+if [ $response -eq 200  ] && [[ "echo $(cat /tmp/tunable2.log)" =~ "Code identified in response output" ]]
     then 
         echo "PASS"
     else

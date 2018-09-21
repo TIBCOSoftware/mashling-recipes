@@ -18,10 +18,11 @@ sleep 5
 pushd target
 go run main.go > /tmp/test.log 2>&1 &
 pId1=$!
+sleep 5
 popd 
 pushd proxy-with-ldap
 response=$(curl -E cert/cert.pem -k --key key.pem -u john:johnldap -H "SOAPAction: test" -d '<xml>test</xml>'  https://localhost:9096/ --write-out '%{http_code}' --silent --output /dev/null)
-if [ $response -eq 200  ] && [[ "echo $(cat /tmp/proxy1.log)" =~ "Completed" ]]
+if [ $response -eq 200  ] && [[ "echo $(cat /tmp/proxy1.log)" =~ "Code identified in response output: 200" ]]
     then 
         echo "PASS"
     else
@@ -36,16 +37,17 @@ docker kill $(docker ps -q)
 #pass JSON as payload data
 function testcase2 {
 docker run -d -p 1234:389 pointlander/ldap
-mashling-gateway -c proxy-with-ldap.json > /tmp/proxy1.log 2>&1 &
+mashling-gateway -c proxy-with-ldap.json > /tmp/proxy2.log 2>&1 &
 pId=$!
 sleep 5
 pushd target
 go run main.go > /tmp/test.log 2>&1 &
 pId1=$!
+sleep 5
 popd 
 pushd proxy-with-ldap
 response=$(curl -E cert/cert.pem -k --key key.pem -u john:johnldap -H "SOAPAction: test" -d '{"name":"test"}'  https://localhost:9096/ --write-out '%{http_code}' --silent --output /dev/null)
-if [ $response -eq 200  ] && [[ "echo $(cat /tmp/proxy1.log)" =~ "Completed" ]]
+if [ $response -eq 200  ] && [[ "echo $(cat /tmp/proxy2.log)" =~ "Code identified in response output: 200" ]]
     then 
         echo "PASS"
     else
