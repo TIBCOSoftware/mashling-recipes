@@ -17,7 +17,7 @@ pId=$!
 sleep 5
 go run main.go -client -port 9096 -method pet -param 2 > /tmp/client1.log 2>&1 
 sleep 5
-if [[ "echo $(cat /tmp/client1.log)" =~ "res : pet:<id:2" ]] && [[ "echo $(cat /tmp/grpc1.log)" =~ "Completed" ]]
+if [[ "echo $(cat /tmp/client1.log)" =~ "res : pet:<id:2" ]] && [[ "echo $(cat /tmp/grpc1.log)" =~ "Code identified in response output:" ]]
     then
         echo "PASS"
     else
@@ -41,7 +41,7 @@ pId=$!
 sleep 5
 go run main.go -client -port 9096 -method user -param user2 > /tmp/client2.log 2>&1 
 sleep 5
-if [[ "echo $(cat /tmp/client2.log)" =~ "res : user:<id:2 username" ]] && [[ "echo $(cat /tmp/grpc2.log)" =~ "Completed" ]]
+if [[ "echo $(cat /tmp/client2.log)" =~ "res : user:<id:2 username" ]] && [[ "echo $(cat /tmp/grpc2.log)" =~ "Code identified in response output:" ]]
     then
         echo "PASS"
     else
@@ -65,7 +65,7 @@ pId=$!
 sleep 5
 go run main.go -client -port 9096 -method pet -param 21 > /tmp/client3.log 2>&1 
 sleep 5
-if [[ "echo $(cat /tmp/client3.log)" =~ "rpc error: code = Unknown desc = Pet not found" ]] && [[ "echo $(cat /tmp/grpc3.log)" =~ "Completed" ]]
+if [[ "echo $(cat /tmp/client3.log)" =~ "rpc error: code = Unknown desc = Pet not found" ]] && [[ "echo $(cat /tmp/grpc3.log)" =~ "Code identified in response output:" ]]
     then
         echo "PASS"
     else
@@ -89,7 +89,7 @@ pId=$!
 sleep 5
 go run main.go -client -port 9096 -method user -param user21 > /tmp/client4.log 2>&1
 sleep 5
-if [[ "echo $(cat /tmp/client4.log)" =~ "rpc error: code = Unknown desc = User not found" ]] && [[ "echo $(cat /tmp/grpc4.log)" =~ "Completed" ]]
+if [[ "echo $(cat /tmp/client4.log)" =~ "rpc error: code = Unknown desc = User not found" ]] && [[ "echo $(cat /tmp/grpc4.log)" =~ "Code identified in response output:" ]]
     then
         echo "PASS"
     else
@@ -114,7 +114,7 @@ pId=$!
 sleep 5
 go run main.go -client -port 9096 -method pet > /tmp/client5.log 2>&1
 sleep 5
-if [[ "echo $(cat /tmp/client5.log)" =~ "rpc error: code = Unknown desc = Pet not found" ]] && [[ "echo $(cat /tmp/grpc5.log)" =~ "Completed" ]]
+if [[ "echo $(cat /tmp/client5.log)" =~ "rpc error: code = Unknown desc = Pet not found" ]] && [[ "echo $(cat /tmp/grpc5.log)" =~ "Code identified in response output:" ]]
     then
         echo "PASS"
     else
@@ -138,7 +138,7 @@ pId=$!
 sleep 5
 go run main.go -client -port 9096 -method user > /tmp/client6.log 2>&1
 sleep 5
-if [[ "echo $(cat /tmp/client6.log)" =~ "res : user:<id:2 username" ]] && [[ "echo $(cat /tmp/grpc6.log)" =~ "Completed" ]]
+if [[ "echo $(cat /tmp/client6.log)" =~ "res : user:<id:2 username" ]] && [[ "echo $(cat /tmp/grpc6.log)" =~ "Code identified in response output:" ]]
     then
         echo "PASS"
     else
