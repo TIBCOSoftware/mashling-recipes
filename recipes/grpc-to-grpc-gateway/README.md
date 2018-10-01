@@ -65,3 +65,23 @@ Output can be seen as below.
 ```
 res : user:<id:2 username:"user2" email:"email2" phone:"phone2" >
 ```
+### #3 Testing ListUsers(Server Streaming) method
+Run sample gRPC client.
+```bash
+go run main.go -client -port 9096 -method listusers
+```
+Streaming data can be observed at client side. Interrupt the sample server to stop streaming.
+
+### #4 Testing StoreUsers(Client Streaming) method
+Run sample gRPC client.
+```bash
+go run main.go -client -port 9096 -method storeusers
+```
+Streaming data can be observed at server side. Interrupt the client to stop streaming.
+
+### #5 Testing BulkUsers(Bidirectional Streaming) method
+Run sample gRPC client.
+```bash
+go run main.go -client -port 9096 -method bulkusers
+```
+Streaming data can be observed at both client and server side. One second delay is kept for veiwing purpose.

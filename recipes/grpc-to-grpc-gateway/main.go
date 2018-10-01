@@ -7,8 +7,11 @@ import (
 	"io"
 	"log"
 	"net"
+	"os"
+	"os/signal"
 	"strconv"
 	"strings"
+	"time"
 
 	pb "grpc-to-grpc-gateway/petstore"
 
@@ -155,7 +158,7 @@ func callClient(port *string, option *string, id int, name string) {
 		PetById(client, id)
 	case "user":
 		UserByName(client, name)
-	case "userstream":
+	case "listusers":
 		ListUsers(client)
 	case "storeusers":
 		StoreUsers(client)
@@ -183,7 +186,7 @@ func PetById(client pb.PetStoreServiceClient, id int) {
 }
 
 func ListUsers(client pb.PetStoreServiceClient) {
-	stream, err := client.ListUsers(context.Background(), &pb.EmptyReq{Msg: "hi gimme list of users"})
+	stream, err := client.ListUsers(context.Background(), &pb.EmptyReq{Msg: "list of users"})
 	if err != nil {
 		fmt.Println("erorr occured in ListUsers", err)
 	}
@@ -195,7 +198,7 @@ func ListUsers(client pb.PetStoreServiceClient) {
 		if err != nil {
 			fmt.Println("erorr occured while recieving ", err)
 		}
-		fmt.Println("streamed data:", users)
+		fmt.Println("RECEIVED: ", users.GetUsername())
 	}
 }
 
@@ -204,16 +207,40 @@ func StoreUsers(client pb.PetStoreServiceClient) {
 	if err != nil {
 		fmt.Println("erorr occured in StoreUsers", err)
 	}
-	for _, user := range sendUserDataClient {
-		if err := stream.Send(&user); err != nil {
-			fmt.Println("error while sending user", user, err)
+	var i = 0
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt)
+
+	waitc := make(chan struct{})
+	go func() {
+		for {
+			select {
+			case <-c:
+				close(waitc)
+				i = 0
+				return
+			default:
+				i++
+				user := pb.User{
+					Username: "cuser" + strconv.Itoa(i),
+					Id:       int32(i),
+					Email:    "cemail" + strconv.Itoa(i),
+				}
+				fmt.Println("SEND: ", user.Username)
+				if err := stream.Send(&user); err != nil {
+					fmt.Println("error while sending user", user, err)
+				}
+
+			}
 		}
-	}
+	}()
+	<-waitc
 	reply, err := stream.CloseAndRecv()
 	if err != nil {
 		fmt.Println("erorr occured in StoreUsers response", err)
 	}
 	fmt.Println("response received from server:", reply)
+
 }
 
 func BulkUsers(client pb.PetStoreServiceClient) {
@@ -221,13 +248,15 @@ func BulkUsers(client pb.PetStoreServiceClient) {
 	if err != nil {
 		fmt.Println("error in streaming of bulk users", err)
 	}
+	var rc = 0
 	waitc := make(chan struct{})
 	go func() {
 		for {
+			time.Sleep(time.Second)
 			user, err := stream.Recv()
 			if err == io.EOF {
 				// read done.
-				fmt.Println("@@@@@@@@@@received total@@@@@@@@@", len(recUserArrClient), "[", recUserArrClient, "]")
+				fmt.Println("received total: ", strconv.Itoa(rc))
 				recUserArrClient = nil
 				close(waitc)
 				return
@@ -235,13 +264,24 @@ func BulkUsers(client pb.PetStoreServiceClient) {
 			if err != nil {
 				log.Fatalf("Failed to receive a user : %v", err)
 			}
-			recUserArrClient = append(recUserArrClient, *user)
+			if user != nil {
+				rc++
+				fmt.Println("RECEIVED:  ", user.GetUsername())
+			}
+
 		}
 	}()
-	for _, user := range sendUserDataClient {
-		if err := stream.Send(&user); err != nil {
-			log.Fatalf("Failed to send a user: %v", err)
+	for i := 0; i < 10; i++ {
+		user := pb.User{
+			Username: "cuser" + strconv.Itoa(i),
+			Id:       int32(i),
+			Email:    "cemail" + strconv.Itoa(i),
 		}
+		fmt.Println("SEND: ", user.Username)
+		if err := stream.Send(&user); err != nil {
+			fmt.Println("error while sending user", user, err)
+		}
+		time.Sleep(time.Second)
 	}
 	stream.CloseSend()
 	<-waitc
@@ -293,11 +333,29 @@ func (t *ServerStrct) UserByName(ctx context.Context, req *pb.UserByNameRequest)
 
 func (t *ServerStrct) ListUsers(req *pb.EmptyReq, sReq pb.PetStoreService_ListUsersServer) error {
 	fmt.Println("server ListUsers method called")
-	fmt.Println("request recieved from client ", req)
-	for _, user := range userMapArr {
-		sReq.Send(&user)
+	fmt.Println("request received from client ", req)
+	var i = 0
+
+	exit := make(chan os.Signal, 1)
+	signal.Notify(exit, os.Interrupt)
+
+	for {
+		select {
+		case <-exit:
+			fmt.Println("total users sent:", strconv.Itoa(i))
+			close(exit)
+			return nil
+		default:
+			i++
+			user := pb.User{
+				Username: "suser" + strconv.Itoa(i),
+				Id:       int32(i),
+				Email:    "semail" + strconv.Itoa(i),
+			}
+			fmt.Println("SEND: ", user.Username)
+			sReq.Send(&user)
+		}
 	}
-	return nil
 }
 func (t *ServerStrct) StoreUsers(cReq pb.PetStoreService_StoreUsersServer) error {
 	fmt.Println("server StoreUsers method called")
@@ -306,10 +364,10 @@ func (t *ServerStrct) StoreUsers(cReq pb.PetStoreService_StoreUsersServer) error
 		userData, err := cReq.Recv()
 		if userData != nil {
 			i++
-			userMapArr[userData.GetUsername()] = *userData
+			fmt.Println("RECEIVED: ", userData.GetUsername())
 		}
 		if err == io.EOF {
-			return cReq.SendAndClose(&pb.EmptyRes{Msg: "recieved total users:" + strconv.Itoa(i)})
+			return cReq.SendAndClose(&pb.EmptyRes{Msg: "received total users:" + strconv.Itoa(i)})
 		}
 		if err != nil {
 			return err
@@ -318,16 +376,18 @@ func (t *ServerStrct) StoreUsers(cReq pb.PetStoreService_StoreUsersServer) error
 }
 func (t *ServerStrct) BulkUsers(bReq pb.PetStoreService_BulkUsersServer) error {
 	fmt.Println("server BulkUsers method called")
+	var rc = 0
 	waits := make(chan struct{})
 	go func() {
 		for {
+			time.Sleep(time.Second)
 			userData, err := bReq.Recv()
 			if userData != nil {
-				recUserArrServer = append(recUserArrServer, *userData)
+				rc++
+				fmt.Println("RECEIVED: ", userData.GetUsername())
 			}
 			if err == io.EOF {
-				fmt.Println("@@@@@@ total records received @@@@@", len(recUserArrServer), "data:", recUserArrServer)
-				recUserArrServer = nil
+				fmt.Println("total records received: ", strconv.Itoa(rc))
 				close(waits)
 				return
 			}
@@ -337,11 +397,17 @@ func (t *ServerStrct) BulkUsers(bReq pb.PetStoreService_BulkUsersServer) error {
 			}
 		}
 	}()
-	for _, user := range sendUserDataServer {
-		err := bReq.Send(&user)
-		if err != nil {
-			fmt.Println("error occured in sending data", err)
+	for i := 0; i < 10; i++ {
+		user := pb.User{
+			Username: "suser" + strconv.Itoa(i),
+			Id:       int32(i),
+			Email:    "semail" + strconv.Itoa(i),
 		}
+		fmt.Println("SEND: ", user.Username)
+		if err := bReq.Send(&user); err != nil {
+			fmt.Println("error while sending user", user, err)
+		}
+		time.Sleep(time.Second)
 	}
 	<-waits
 	return nil
