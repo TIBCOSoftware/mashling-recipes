@@ -229,6 +229,8 @@ func StoreUsers(client pb.PetStoreServiceClient) {
 				fmt.Println("SEND: ", user.Username)
 				if err := stream.Send(&user); err != nil {
 					fmt.Println("error while sending user", user, err)
+					close(waitc)
+					return
 				}
 
 			}
@@ -238,8 +240,9 @@ func StoreUsers(client pb.PetStoreServiceClient) {
 	reply, err := stream.CloseAndRecv()
 	if err != nil {
 		fmt.Println("erorr occured in StoreUsers response", err)
+	} else {
+		fmt.Println("response received from server:", reply)
 	}
-	fmt.Println("response received from server:", reply)
 
 }
 
@@ -263,6 +266,8 @@ func BulkUsers(client pb.PetStoreServiceClient) {
 			}
 			if err != nil {
 				log.Fatalf("Failed to receive a user : %v", err)
+				close(waitc)
+				return
 			}
 			if user != nil {
 				rc++
@@ -280,6 +285,7 @@ func BulkUsers(client pb.PetStoreServiceClient) {
 		fmt.Println("SEND: ", user.Username)
 		if err := stream.Send(&user); err != nil {
 			fmt.Println("error while sending user", user, err)
+			os.Exit(0)
 		}
 		time.Sleep(time.Second)
 	}
@@ -353,7 +359,11 @@ func (t *ServerStrct) ListUsers(req *pb.EmptyReq, sReq pb.PetStoreService_ListUs
 				Email:    "semail" + strconv.Itoa(i),
 			}
 			fmt.Println("SEND: ", user.Username)
-			sReq.Send(&user)
+			err := sReq.Send(&user)
+			if err != nil {
+				fmt.Println("unable to send:", err)
+				os.Exit(0)
+			}
 		}
 	}
 }
@@ -393,6 +403,7 @@ func (t *ServerStrct) BulkUsers(bReq pb.PetStoreService_BulkUsersServer) error {
 			}
 			if err != nil {
 				fmt.Println("error occured while receiving", err)
+				close(waits)
 				return
 			}
 		}
@@ -406,6 +417,7 @@ func (t *ServerStrct) BulkUsers(bReq pb.PetStoreService_BulkUsersServer) error {
 		fmt.Println("SEND: ", user.Username)
 		if err := bReq.Send(&user); err != nil {
 			fmt.Println("error while sending user", user, err)
+			return err
 		}
 		time.Sleep(time.Second)
 	}
