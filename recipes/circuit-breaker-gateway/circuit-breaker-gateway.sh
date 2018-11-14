@@ -37,4 +37,40 @@ var=$(ps --ppid $pId3)
 pId4=$(echo $var | awk '{print $5}')
 kill -9 $pId4
 sleep 10
+rm -rf /tmp/test.log /tmp/circuit1.log
+}
+
+function testcase2 {
+mashling-gateway -c circuit-breaker-gateway.json > /tmp/circuit2.log 2>&1 &
+pId=$!
+sleep 5
+go run main.go -server &
+pId1=$!
+sleep 5
+response=$(curl --request GET http://localhost:9096/pets/1 --write-out '%{http_code}' --silent --output /dev/null)
+var=$(ps --ppid $pId1)
+pId2=$(echo $var | awk '{print $5}')
+kill -9 $pId2
+for (( i=0; i<4;i++ ))
+do
+  curl http://localhost:9096/pets/1 > /tmp/test1.log 2>&1 
+  echo $i 
+done
+# response2=$(curl --request GET http://localhost:9096/pets/1 --write-out '%{http_code}' --silent --output /dev/null)
+go run main.go -server &
+pId3=$!
+sleep 5
+response1=$(curl --request GET http://localhost:9096/pets/1 --write-out '%{http_code}' --silent --output /dev/null)
+if [ $response -eq 200 ] && [ $response1 -eq 200  ] &&  [[ "echo $(cat /tmp/circuit2.log)" =~ "Completed" ]] && [[ "echo $(cat /tmp/test1.log)" =~ "connection failure" ]]
+    then 
+        echo "PASS"
+    else
+        echo "FAIL"
+fi
+kill -9 $pId
+var=$(ps --ppid $pId3)
+pId4=$(echo $var | awk '{print $5}')
+kill -9 $pId4
+sleep 10
+rm -rf /tmp/test1.log /tmp/circuit2.log
 }
