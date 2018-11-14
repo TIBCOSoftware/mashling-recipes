@@ -42,6 +42,14 @@
                         ],
                         "responses": [
                             {
+                                "if": "PetStoregRPCServer.response.body.error == 'true'",
+                                "error": true,
+                                "output": {
+                                    "code": 404,
+                                    "data": "${PetStoregRPCServer.response.body.details}"
+                                }
+                            },
+                            {
                                 "error": false,
                                 "output": {
                                     "code": 200,
