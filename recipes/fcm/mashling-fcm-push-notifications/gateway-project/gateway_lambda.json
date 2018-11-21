@@ -37,6 +37,8 @@
               {
                 "service": "invoke_aws_lambda",
                 "input": {
+		"inputs.content": "${payload.content}",
+		"inputs.tracing": "${payload.tracing}"
                 }
               }
             ],
