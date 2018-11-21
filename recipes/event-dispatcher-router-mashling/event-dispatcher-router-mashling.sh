@@ -1,7 +1,7 @@
 #!/bin/babat
 
 function get_test_cases {
-    local my_list=( testcase1 )
+    local my_list=(  )
     echo "${my_list[@]}"
 }
 function testcase1 {
