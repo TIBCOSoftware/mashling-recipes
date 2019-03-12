@@ -1,3 +1,5 @@
+## This project has moved. Find more details at https://github.com/project-flogo/microgateway.
+
 # Recipes for Project Mashling<sup>TM</sup> 
 
 [![Build Status](https://travis-ci.org/TIBCOSoftware/mashling-recipes.svg?branch=master)](https://travis-ci.org/TIBCOSoftware/mashling-recipes)
